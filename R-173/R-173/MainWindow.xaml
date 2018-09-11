@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173"
+        xmlns:radio="clr-namespace:R_173.Radio"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1024"
         Title="Р-173" WindowState="Maximized">
     <TabControl>
@@ -60,7 +61,9 @@
                 3. Работа на радиостанции
             </TabItem.Header>
             <TabItem.Content>
-                <TextBlock>3. Работа на радиостанции</TextBlock>
+                <Viewbox Stretch="Fill">
+                    <radio:View HorizontalAlignment="Stretch"/>
+                </Viewbox>
             </TabItem.Content>
         </TabItem>
         <TabItem>
