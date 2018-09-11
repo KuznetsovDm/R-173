@@ -36,7 +36,8 @@
     </UserControl.Resources>
     <Canvas Width="3988" Height="2388">
         <Canvas.Resources>
-            <Style x:Key="Switcher" TargetType="Button">
+            <local:StateToBoolConverter x:Key="StateToBoolConverter"/>
+            <Style x:Key="Switcher" TargetType="CheckBox">
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -75,22 +76,22 @@
                    Width="563" Height="133"
                    FontSize="100" TextAlignment="Right"
                    Text="{Binding Path=Frequency}"/>
-        <Button Canvas.Left="1568" Canvas.Top="1208" Cursor="Hand"
-                Style="{StaticResource Switcher}"
-                Command="{Binding Path=InterferenceClickCommand}"/>
-        <Button Canvas.Left="1910" Canvas.Top="1209"
+        <CheckBox Canvas.Left="1568" Canvas.Top="1208" Cursor="Hand"
+                  Style="{StaticResource Switcher}"
+                  Command="{Binding Path=InterferenceClickCommand}"/>
+        <CheckBox Canvas.Left="1910" Canvas.Top="1209"
                 Height="132" Width="72"
                 Style="{StaticResource Switcher}"
                 Command="{Binding Path=InterferenceClickCommand}"/>
-        <Button Canvas.Left="1910" Canvas.Top="1537"
+        <CheckBox Canvas.Left="1910" Canvas.Top="1537"
+                Height="132" Width="72"
+                Style="{StaticResource Switcher}"
+                IsChecked="{Binding Path=Power, Converter={StaticResource StateToBoolConverter}}"/>
+        <CheckBox Canvas.Left="1818" Canvas.Top="1731"
                 Height="132" Width="72"
                 Style="{StaticResource Switcher}"
                 Command="{Binding Path=InterferenceClickCommand}"/>
-        <Button Canvas.Left="1818" Canvas.Top="1731"
-                Height="132" Width="72"
-                Style="{StaticResource Switcher}"
-                Command="{Binding Path=InterferenceClickCommand}"/>
-        <Button Canvas.Left="1637" Canvas.Top="1741"
+        <CheckBox Canvas.Left="1637" Canvas.Top="1741"
                 Height="139" Width="84"
                 Style="{StaticResource Switcher}"
                 Command="{Binding Path=InterferenceClickCommand}"/>

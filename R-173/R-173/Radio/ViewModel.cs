@@ -11,18 +11,29 @@ namespace R_173.Radio
         private double _volume;
         private bool _interference;
         private string _frequency;
+        private Model _model;
 
         public ViewModel()
         {
+            _model = new Model();
+            _model.Power.ValueChanged += (s, e) => OnPropertyChanged(nameof(Power));
+
             InterferenceClickCommand = new SimpleCommand(() => Interference = !Interference);
             ChangeFrequencyCommand = new SimpleCommand<string>(a => Frequency += a);
             ClearFrequencyCommand = new SimpleCommand(() => Frequency = "");
         }
 
 
+        public ICommand PowerClickCommand { get; }
         public ICommand InterferenceClickCommand { get; }
         public ICommand ChangeFrequencyCommand { get; }
         public ICommand ClearFrequencyCommand { get; }
+
+        public State Power
+        {
+            get => _model.Power.Value;
+            set => _model.Power.Value = value;
+        }
 
         public double Volume
         {
@@ -60,6 +71,11 @@ namespace R_173.Radio
             }
         }
 
+
+        public void Subscribe()
+        {
+
+        }
 
         public void OnPropertyChanged(string prop = "")
         {

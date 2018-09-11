@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -23,7 +24,21 @@ namespace R_173.Radio
         {
             InitializeComponent();
 
-            DataContext = new ViewModel();
+            var viewModel = new ViewModel();
+            DataContext = viewModel;
+        }
+    }
+
+    public class StateToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (State)value == State.Enable;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)value ? State.Enable : State.Disable;
         }
     }
 }
