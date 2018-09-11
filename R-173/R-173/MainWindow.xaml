@@ -4,9 +4,72 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1024"
+        Title="Р-173" WindowState="Maximized">
+    <TabControl>
+        <TabControl.Resources>
+            <local:TabSizeConverter x:Key="tabSizeConverter" />
+            <Style TargetType="TabItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Border x:Name="border" CornerRadius="3, 3, 0, 0" Background="WhiteSmoke">
+                                <Border.Width>
+                                    <MultiBinding Converter="{StaticResource tabSizeConverter}">
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" />
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" Path="ActualWidth" />
+                                    </MultiBinding>
+                                </Border.Width>
+                                <TextBlock Margin="3" 
+                                           Text="{TemplateBinding Header}"
+                                           FontSize="18" FontFamily="Times New Roman" FontWeight="Bold" 
+                                           TextAlignment="Center"
+                                           Cursor="Hand"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Khaki"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="OliveDrab"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </TabControl.Resources>
+        <TabItem>
+            <TabItem.Header>
+                1. Назначение, ТТХ, комплект
+            </TabItem.Header>
+            <TabItem.Content>
+                <TextBlock>1. Назначение, ТТХ, комплект</TextBlock>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                2. Обучение
+            </TabItem.Header>
+            <TabItem.Content>
+                <TextBlock>2. Обучение</TextBlock>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                3. Работа на радиостанции
+            </TabItem.Header>
+            <TabItem.Content>
+                <TextBlock>3. Работа на радиостанции</TextBlock>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                4. Задачи
+            </TabItem.Header>
+            <TabItem.Content>
+                <TextBlock>4. Задачи</TextBlock>
+            </TabItem.Content>
+        </TabItem>
+    </TabControl>
 </Window>
