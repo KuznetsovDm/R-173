@@ -13,6 +13,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,6 +60,7 @@
     </Compile>
     <Compile Include="Radio\ViewModel.cs" />
     <Compile Include="ScharedResources\SimpleCommand.cs" />
+    <Compile Include="RadioManager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,6 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -104,6 +107,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Radio\switcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\P2PMulticastNetwork\P2PMulticastNetwork.csproj">
+      <Project>{dc232498-6fb2-4562-b888-e32fec97bbf5}</Project>
+      <Name>P2PMulticastNetwork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RadioPipeline\RadioPipeline.csproj">
+      <Project>{62bd5b17-25b1-4024-891c-5398644b6dfc}</Project>
+      <Name>RadioPipeline</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

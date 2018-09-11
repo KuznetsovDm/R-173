@@ -62,7 +62,7 @@
             </TabItem.Header>
             <TabItem.Content>
                 <Viewbox Stretch="Fill">
-                    <radio:View HorizontalAlignment="Stretch"/>
+                    <radio:View/>
                 </Viewbox>
             </TabItem.Content>
         </TabItem>
