@@ -35,6 +35,9 @@ namespace R_173
         private void BuildDataPipeline()
         {
             var builder = ServiceCollection.Resolve<DataProcessingBuilder<DataModel>>();
+            builder.Use((model, next) =>
+            {
+            });
         }
 
         private void ConfigureIOC()
@@ -47,7 +50,6 @@ namespace R_173
             container.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
             container.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             container.RegisterType<DataProcessingBuilder<DataModel>>();
-
             ServiceCollection = container;
         }
     }

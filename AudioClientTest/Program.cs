@@ -37,11 +37,7 @@ namespace AudioClientTest
             if(args.Length > 0)
                 path = args[0];
 
-            var options = new MulticastConnectionOptions
-            {
-                ExclusiveAddressUse = false,
-                UseBind = false,
-            };
+            var options = MulticastConnectionOptions.Create(useBind: false, exclusiveAddressUse: false);
 
             var guid = Guid.NewGuid();
             var converter = new DataModelConverter();

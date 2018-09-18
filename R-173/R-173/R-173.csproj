@@ -69,13 +69,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Radio\Model.cs" />
-    <Compile Include="Radio\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Radio\ViewModel.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\RadioModel.cs" />
     <Compile Include="ScharedResources\SimpleCommand.cs" />
     <Compile Include="RadioManager.cs" />
+    <Compile Include="ScharedResources\ValueChangedEventArgs.cs" />
+    <Compile Include="ViewModels\RadioViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,9 +91,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Radio\View.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\View.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
