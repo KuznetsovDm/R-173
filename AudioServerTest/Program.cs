@@ -35,12 +35,7 @@ namespace AudioServerTest
                 });
                 buffer.AddSamples(obj.RawAudioSample, 0, obj.RawAudioSample.Length);
             });
-            MulticastConnectionOptions options = new MulticastConnectionOptions
-            {
-                ExclusiveAddressUse = false,
-                MulticastLoopback = true,
-                UseBind = true,
-            };
+            MulticastConnectionOptions options = MulticastConnectionOptions.Create(exclusiveAddressUse: false);
             var reader = new UdpMulticastConnection(options);
             miner1.ReloadDataReceiver(reader);
 
