@@ -38,52 +38,52 @@ namespace R_173.BL
             throw new System.NotImplementedException();
         }
 
-        private void Volume_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<int> e)
+        private void Volume_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void TurningOn_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void Tone_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void RightPuOa_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void RecordWork_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void Power_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void Power_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void Noise_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void Noise_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void LeftPuOa_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void LeftPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void Interference_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<SwitcherState> e)
+        private void Interference_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             throw new System.NotImplementedException();
         }
 
-        private void Frequency_ValueChanged(object sender, SharedResources.ValueChangedEventArgs<int> e)
+        private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
             _sender.SetFilter(GetSendableRadioModelFromRadioModel(_radioModel));
             _receiver.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));

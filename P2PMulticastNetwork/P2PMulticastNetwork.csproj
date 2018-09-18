@@ -75,6 +75,8 @@
     <Compile Include="Interfaces\IDataReceiver.cs" />
     <Compile Include="Interfaces\IDataTransmitter.cs" />
     <Compile Include="Interfaces\IPipeline.cs" />
+    <Compile Include="Network\IDependencyResolver.cs" />
+    <Compile Include="Network\IPiplineProcessingInput.cs" />
     <Compile Include="Network\MulticastConnectionOptions.cs" />
     <Compile Include="Network\P2PMulticastNetwork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

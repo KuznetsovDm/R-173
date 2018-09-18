@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using P2PMulticastNetwork.Model;
 using RadioPipeline;
 using System;
 using System.Collections.Generic;
@@ -118,6 +119,30 @@ namespace P2PMulticastNetwork
         }
     }
 
+    public class PipelineDataModelProcessingBeginPoint
+    {
+        private IPiplineProcessingInput _pipline;
+
+        private IDataMiner _miner;
+
+        public PipelineDataModelProcessingBeginPoint(IDataMiner miner, IPiplineProcessingInput pipline)
+        {
+            _miner = miner;
+            _pipline = pipline;
+        }
+
+        public void Start()
+        {
+            _miner.Start();
+        }
+
+        public void Stot()
+        {
+            _miner.Stop();
+        }
+
+    }
+
     public class DataProcessingBuilder<T> : IDisposable
     {
         private IDataProvider _dataProvider;
@@ -125,11 +150,14 @@ namespace P2PMulticastNetwork
         private PipelineDelegate<T> _pipeline;
         private PipelineBuilder<T> _builder;
 
-        public DataProcessingBuilder(IDataAsByteConverter<T> converter, IDataProvider provider)
+        public DataProcessingBuilder(IDataAsByteConverter<T> converter, IDataProvider provider, PipelineBuilder<T> builder)
         {
             if(provider == null
-                || converter == null)
+                || converter == null
+                || builder == null)
                 throw new ArgumentNullException();
+
+            _builder = new PipelineBuilder<T>();
 
             _dataProvider = provider;
             _converter = converter;
@@ -145,7 +173,7 @@ namespace P2PMulticastNetwork
             });
         }
 
-        public DataProcessingBuilder<T> Use(Action<T, PipelineDelegate<T>> action)
+        public DataProcessingBuilder<T> Use(Func<T, PipelineDelegate<T>, Task> action)
         {
             _builder.Use(action);
             return this;
