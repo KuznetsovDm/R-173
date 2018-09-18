@@ -35,9 +35,7 @@ namespace R_173
         private void BuildDataPipeline()
         {
             var builder = ServiceCollection.Resolve<DataProcessingBuilder<DataModel>>();
-            builder.Use((model, next) =>
-            {
-            });
+            
         }
 
         private void ConfigureIOC()

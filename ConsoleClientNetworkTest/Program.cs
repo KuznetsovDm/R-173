@@ -10,11 +10,7 @@ namespace ConsoleClientNetworkTest
     {
         static void Main(string[] args)
         {
-            var options= new MulticastConnectionOptions
-            {
-                ExclusiveAddressUse = false,
-                UseBind = false
-            };
+            var options= new MulticastConnectionOptions.Create(exclusiveAddressUse: false,useBind: false);
             IDataTransmitter transmitter = new UdpMulticastConnection(options);
             var bytesToSend= Encoding.UTF8.GetBytes("Hello server");
             while(true)
