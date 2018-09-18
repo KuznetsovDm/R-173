@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using R_173.ScharedResources;
+using System;
 
 namespace R_173.Models
 {
