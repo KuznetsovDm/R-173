@@ -7,19 +7,17 @@ namespace R_173.BL
     public class RadioManager
     {
         private RadioModel _radioModel;
-        private IAudioReaderAndSender<SendableRadioModel> _sender;
-        private IAudioReceiverAndPlayer<ReceivableRadioModel> _receiver;
+        private IAudioReaderAndSender<SendableRadioModel> _reader;
+        private IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
 
-        public RadioManager(RadioModel radioModel, IAudioReaderAndSender<SendableRadioModel> sender,
-            IAudioReceiverAndPlayer<ReceivableRadioModel> receiver)
+        public RadioManager(RadioModel radioModel, IAudioReaderAndSender<SendableRadioModel> reader,
+            IAudioReceiverAndPlayer<ReceivableRadioModel> player)
         {
             _radioModel = radioModel;
-            _sender = sender;
-            _receiver = receiver;
+            _reader = reader;
+            _player = player;
 
-            _sender.Start();
-            _receiver.Start();
-
+            #region Events
             _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
             _radioModel.Interference.ValueChanged += Interference_ValueChanged;
             _radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
@@ -31,63 +29,77 @@ namespace R_173.BL
             _radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
             _radioModel.Volume.ValueChanged += Volume_ValueChanged;
             _radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
+            #endregion
         }
 
+        #region Events
         private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
-            throw new System.NotImplementedException();
+            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+            if (e.NewValue == SwitcherState.Enabled)
+            {
+                _reader.Start();
+            }
+            else
+            {
+                _reader.Stop();
+                _player.Stop();
+            }
         }
 
         private void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+            if(e.NewValue == SwitcherState.Enabled) // работа
+            {
+
+            }
         }
 
         private void Power_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void Noise_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void LeftPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void Interference_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            throw new System.NotImplementedException();
+
         }
 
         private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
-            _sender.SetFilter(GetSendableRadioModelFromRadioModel(_radioModel));
-            _receiver.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
+            _reader.SetFilter(GetSendableRadioModelFromRadioModel(_radioModel));
+            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
+        #endregion
 
         private static SendableRadioModel GetSendableRadioModelFromRadioModel(RadioModel radioModel)
         {
