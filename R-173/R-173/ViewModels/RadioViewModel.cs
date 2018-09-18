@@ -1,22 +1,20 @@
-﻿using System.ComponentModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using R_173.ScharedResources;
+using R_173.Models;
 
-namespace R_173.Radio
+namespace R_173.ViewModels
 {
-    public class ViewModel : INotifyPropertyChanged
+    public class RadioViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private double _volume;
         private bool _interference;
         private SwitcherState _power;
         private string _frequency;
-        private readonly Model _model;
+        private readonly RadioModel _model;
 
-        public ViewModel()
+        public RadioViewModel()
         {
-            _model = new Model();
+            _model = new RadioModel();
             _model.Power.ValueChanged += (s, e) => OnPropertyChanged(nameof(Power));
 
             InterferenceClickCommand = new SimpleCommand(() => Interference = !Interference);
@@ -70,18 +68,6 @@ namespace R_173.Radio
                 _frequency = value;
                 OnPropertyChanged(nameof(Frequency));
             }
-        }
-
-
-        public void Subscribe()
-        {
-
-        }
-
-        public void OnPropertyChanged(string prop = "")
-        {
-            var c = PropertyChanged;
-            c?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

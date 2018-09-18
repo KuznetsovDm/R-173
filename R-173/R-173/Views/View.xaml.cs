@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using R_173.ViewModels;
+using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using R_173.Models;
 
-namespace R_173.Radio
+namespace R_173.Views
 {
     /// <summary>
     /// Логика взаимодействия для View.xaml
     /// </summary>
-    public partial class View : UserControl
+    public partial class RadioView : UserControl
     {
-        public View()
+        public RadioView()
         {
             InitializeComponent();
 
-            var viewModel = new ViewModel();
+            var viewModel = new RadioViewModel();
             DataContext = viewModel;
         }
     }
