@@ -10,8 +10,9 @@ namespace R_173.Radio
 
         private double _volume;
         private bool _interference;
+        private SwitcherState _power;
         private string _frequency;
-        private Model _model;
+        private readonly Model _model;
 
         public ViewModel()
         {
@@ -19,7 +20,7 @@ namespace R_173.Radio
             _model.Power.ValueChanged += (s, e) => OnPropertyChanged(nameof(Power));
 
             InterferenceClickCommand = new SimpleCommand(() => Interference = !Interference);
-            ChangeFrequencyCommand = new SimpleCommand<string>(a => Frequency += a);
+            ChangeFrequencyCommand = new SimpleCommand<char>(a => Frequency += a);
             ClearFrequencyCommand = new SimpleCommand(() => Frequency = "");
         }
 
@@ -29,7 +30,7 @@ namespace R_173.Radio
         public ICommand ChangeFrequencyCommand { get; }
         public ICommand ClearFrequencyCommand { get; }
 
-        public State Power
+        public SwitcherState Power
         {
             get => _model.Power.Value;
             set => _model.Power.Value = value;

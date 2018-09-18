@@ -33,12 +33,12 @@ namespace R_173.Radio
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (State)value == State.Enable;
+            return (SwitcherState)value == SwitcherState.Enable;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? State.Enable : State.Disable;
+            return (bool)value ? SwitcherState.Enable : SwitcherState.Disable;
         }
     }
 }

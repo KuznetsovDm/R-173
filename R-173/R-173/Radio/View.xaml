@@ -72,25 +72,31 @@
             </Style>
         </Canvas.Resources>
         <Image Source="radio.png" Width="3988" Height="2388"/>
+        <!-- Текущая частота -->
         <TextBlock Canvas.Left="911" Canvas.Top="509"
                    Width="563" Height="133"
                    FontSize="100" TextAlignment="Right"
                    Text="{Binding Path=Frequency}"/>
+        <!-- Подавитель помех -->
         <CheckBox Canvas.Left="1568" Canvas.Top="1208" Cursor="Hand"
                   Style="{StaticResource Switcher}"
                   Command="{Binding Path=InterferenceClickCommand}"/>
+        <!-- Подавитель шумов -->
         <CheckBox Canvas.Left="1910" Canvas.Top="1209"
                 Height="132" Width="72"
                 Style="{StaticResource Switcher}"
                 Command="{Binding Path=InterferenceClickCommand}"/>
+        <!-- Питание -->
         <CheckBox Canvas.Left="1910" Canvas.Top="1537"
                 Height="132" Width="72"
                 Style="{StaticResource Switcher}"
                 IsChecked="{Binding Path=Power, Converter={StaticResource StateToBoolConverter}}"/>
+        <!-- ПуОа -->
         <CheckBox Canvas.Left="1818" Canvas.Top="1731"
                 Height="132" Width="72"
                 Style="{StaticResource Switcher}"
                 Command="{Binding Path=InterferenceClickCommand}"/>
+        <!-- ПуОа -->
         <CheckBox Canvas.Left="1637" Canvas.Top="1741"
                 Height="139" Width="84"
                 Style="{StaticResource Switcher}"
