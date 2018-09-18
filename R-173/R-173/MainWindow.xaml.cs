@@ -11,6 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using P2PMulticastNetwork;
+using P2PMulticastNetwork.Model;
+using Unity;
+using Unity.Lifetime;
 
 namespace R_173
 {
@@ -19,9 +23,32 @@ namespace R_173
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static IUnityContainer ServiceCollection;
+
         public MainWindow()
         {
             InitializeComponent();
+            ConfigureIOC();
+            BuildDataPipeline();
+        }
+
+        private void BuildDataPipeline()
+        {
+            var builder = ServiceCollection.Resolve<DataProcessingBuilder<DataModel>>();
+        }
+
+        private void ConfigureIOC()
+        {
+            IUnityContainer container = new UnityContainer();
+            container.RegisterType<IDataMiner, DataEngineMiner>();
+
+            IDataMiner miner = new DataEngineMiner();
+            container.RegisterInstance<IDataMiner>(miner, new SingletonLifetimeManager());
+            container.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
+            container.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
+            container.RegisterType<DataProcessingBuilder<DataModel>>();
+
+            ServiceCollection = container;
         }
     }
 

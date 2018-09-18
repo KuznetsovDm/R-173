@@ -132,7 +132,7 @@ namespace P2PMulticastNetwork
         public void Start(Func<CancellationToken, Task> action)
         {
             _cancellToken = new CancellationTokenSource();
-            _task = TaskEx.Run(()=> action(_cancellToken.Token), _cancellToken.Token);
+            _task = TaskEx.Run(() => action(_cancellToken.Token), _cancellToken.Token);
             IsWork = true;
         }
 
@@ -152,18 +152,14 @@ namespace P2PMulticastNetwork
         private PipelineDelegate<T> _pipeline;
         private PipelineBuilder<T> _builder;
 
-        public DataProcessingBuilder(PipelineDelegate<T> pipeline,
-            IDataAsByteConverter<T> converter,
-            IDataProvider provider)
+        public DataProcessingBuilder(IDataAsByteConverter<T> converter, IDataProvider provider)
         {
-            if(_dataProvider == null
-                || _converter == null
-                || _pipeline == null)
+            if(provider == null
+                || converter == null)
                 throw new ArgumentNullException();
 
             _dataProvider = provider;
             _converter = converter;
-            _pipeline = pipeline;
             BindOnDataAvaliable();
         }
 
@@ -174,6 +170,17 @@ namespace P2PMulticastNetwork
                 T data = _converter.ConvertFrom(bytes);
                 _pipeline.Invoke(data);
             });
+        }
+
+        public DataProcessingBuilder<T> Use(Action<T, PipelineDelegate<T>> action)
+        {
+            _builder.Use(action);
+            return this;
+        }
+
+        public void Build()
+        {
+            _pipeline = _builder.Build();
         }
 
         public void Dispose()

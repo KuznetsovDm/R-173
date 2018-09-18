@@ -4,20 +4,32 @@ namespace P2PMulticastNetwork
 {
     public class MulticastConnectionOptions
     {
-        const int DefaultPort = 10000;
-        const bool DefaultExclusiveAddressUse = true;
-        const bool DefaultMulticastLoopback = true;
-        const bool DefaultUseBind = true;
-        static readonly IPAddress DefaultIPAddress = IPAddress.Parse("239.0.0.0");
+        public int Port { get; set; }
 
-        public int Port { get; set; } = DefaultPort;
+        public IPAddress MulticastAddress { get; set; }
 
-        public IPAddress MulticastAddress { get; set; } = DefaultIPAddress;
+        public bool ExclusiveAddressUse { get; set; }
 
-        public bool ExclusiveAddressUse { get; set; } = DefaultExclusiveAddressUse;
+        public bool UseBind { get; set; }
 
-        public bool UseBind { get; set; } = DefaultUseBind;
+        public bool MulticastLoopback { get; set; }
 
-        public bool MulticastLoopback { get; set; } = DefaultMulticastLoopback;
+        private MulticastConnectionOptions()
+        {
+
+        }
+
+        public static MulticastConnectionOptions Create(int port = 10000, bool exclusiveAddressUse = true, bool multicastLoopback=true, 
+            bool useBind=true, string ipAddress = "239.0.0.0")
+        {
+            return new MulticastConnectionOptions
+            {
+                Port = port,
+                ExclusiveAddressUse = exclusiveAddressUse,
+                MulticastAddress = IPAddress.Parse(ipAddress),
+                UseBind = useBind,
+                MulticastLoopback = multicastLoopback
+            };
+        }
     }
 }
