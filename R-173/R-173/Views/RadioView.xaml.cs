@@ -25,12 +25,12 @@ namespace R_173.Views
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (SwitcherState)value == SwitcherState.Enable;
+            return (SwitcherState)value == SwitcherState.Enabled;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? SwitcherState.Enable : SwitcherState.Disable;
+            return (bool)value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
     }
 }

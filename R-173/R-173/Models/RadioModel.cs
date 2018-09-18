@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace R_173.Models
+﻿namespace R_173.Models
 {
-    public enum SwitcherState { Enable, Disable }
+    public enum SwitcherState { Enabled, Disabled }
 
     public class RadioModel
     {

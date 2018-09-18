@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Threading;
 using CSharpFunctionalExtensions;
 using System.Diagnostics;
+using P2PMulticastNetwork.Interfaces;
 
 namespace P2PMulticastNetwork
 {

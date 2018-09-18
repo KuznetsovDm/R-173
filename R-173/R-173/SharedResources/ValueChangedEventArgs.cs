@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace R_173.ScharedResources
+namespace R_173.SharedResources
 {
     public class ValueChangedEventArgs<T> : EventArgs
     {

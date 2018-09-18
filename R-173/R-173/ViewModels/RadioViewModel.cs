@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using R_173.ScharedResources;
+using R_173.SharedResources;
 using R_173.Models;
 
 namespace R_173.ViewModels

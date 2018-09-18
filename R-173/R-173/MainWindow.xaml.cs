@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using P2PMulticastNetwork;
 using P2PMulticastNetwork.Model;
+using P2PMulticastNetwork.Interfaces;
 using Unity;
 using Unity.Lifetime;
 

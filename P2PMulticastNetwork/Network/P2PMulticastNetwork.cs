@@ -9,38 +9,11 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using P2PMulticastNetwork.Interfaces;
 
 //It's should be faultless network
 namespace P2PMulticastNetwork
 {
-    public interface IDataProvider : IDisposable
-    {
-        void OnDataAwaliable(Action<byte[]> action);
-    }
-
-    public interface IDataReceiver : IDisposable
-    {
-        Task<Result<byte[]>> Receive();
-    }
-
-    public interface IDataTransmitter : IDisposable
-    {
-        Result Write(byte[] data);
-    }
-
-    public interface IDataMiner : IDataProvider, IDisposable
-    {
-        void ReloadDataReceiver(IDataReceiver dataReceiver);
-        void Start();
-        void Stop();
-    }
-
-    public interface IDataAsByteConverter<T>
-    {
-        T ConvertFrom(byte[] bytes);
-        byte[] ConvertToBytes(T data);
-    }
-
     public class DataEngineMiner : IDataMiner
     {
         private List<Action<byte[]>> _actions;
