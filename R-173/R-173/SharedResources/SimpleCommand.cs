@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace R_173.ScharedResources
+namespace R_173.SharedResources
 {
-    class SimpleCommand<T> : ICommand
+    public class SimpleCommand<T> : ICommand
     {
-        readonly Action<T> onExecute;
+        private readonly Action<T> onExecute;
         public SimpleCommand(Action<T> onExecute) { this.onExecute = onExecute; }
 
         public event EventHandler CanExecuteChanged;
@@ -26,9 +26,9 @@ namespace R_173.ScharedResources
         public void Execute(object parameter) => onExecute((T)parameter);
     }
 
-    class SimpleCommand : ICommand
+    public class SimpleCommand : ICommand
     {
-        readonly Action onExecute;
+        private readonly Action onExecute;
         public SimpleCommand(Action onExecute) { this.onExecute = onExecute; }
 
         public event EventHandler CanExecuteChanged;

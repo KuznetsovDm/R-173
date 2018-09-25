@@ -1,11 +1,15 @@
-﻿using System;
-
-namespace R_173.Models
+﻿namespace R_173.Models
 {
     public enum SwitcherState { Disabled = 0, Enabled = 1 }
+    public enum RecordWorkState { Record, Work }
+    public enum NoiseState { Minimum, Maximum }
 
     public class RadioModel
     {
+        /// <summary>
+        /// Количество рабочих частот
+        /// </summary>
+        public const int WorkingFrequenciesCount = 10;
         /// <summary>
         /// Частота
         /// </summary>
@@ -25,7 +29,7 @@ namespace R_173.Models
         /// <summary>
         /// Тумблер "Подавитель шумов"
         /// </summary>
-        public readonly Property<SwitcherState> Noise;
+        public readonly Property<NoiseState> Noise;
         /// <summary>
         /// Ручка "Громкость ПРМ"
         /// </summary>
@@ -49,21 +53,26 @@ namespace R_173.Models
         /// <summary>
         /// Тумблер "Запись - работа"
         /// </summary>
-        public readonly Property<SwitcherState> RecordWork;
+        public readonly Property<RecordWorkState> RecordWork;
+        /// <summary>
+        /// Список рабочих частот
+        /// </summary>
+        public readonly int[] WorkingFrequencies;
 
         public RadioModel()
         {
-            Frequency = new Property<int>(nameof(Frequency));
-            Interference = new Property<SwitcherState>(nameof(Interference));
-            Power = new Property<SwitcherState>(nameof(Power));
-            Tone = new Property<SwitcherState>(nameof(Tone));
-            Noise = new Property<SwitcherState>(nameof(Noise));
-            VolumePRM = new Property<int>(nameof(VolumePRM));
-            TurningOn = new Property<SwitcherState>(nameof(TurningOn));
-            LeftPuOa = new Property<SwitcherState>(nameof(LeftPuOa));
-            RightPuOa = new Property<SwitcherState>(nameof(RightPuOa));
-            Volume = new Property<int>(nameof(Volume));
-            RecordWork = new Property<SwitcherState>(nameof(RecordWork));
+            Frequency = new Property<int>();
+            Interference = new Property<SwitcherState>();
+            Power = new Property<SwitcherState>();
+            Tone = new Property<SwitcherState>();
+            Noise = new Property<NoiseState>();
+            VolumePRM = new Property<int>();
+            TurningOn = new Property<SwitcherState>();
+            LeftPuOa = new Property<SwitcherState>();
+            RightPuOa = new Property<SwitcherState>();
+            Volume = new Property<int>();
+            RecordWork = new Property<RecordWorkState>();
+            WorkingFrequencies = new int[WorkingFrequenciesCount];
         }
     }
 }

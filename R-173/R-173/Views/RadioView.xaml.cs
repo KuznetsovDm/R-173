@@ -14,8 +14,6 @@ namespace R_173.Views
 
             var viewModel = new RadioViewModel();
             DataContext = viewModel;
-
-            //IsVisibleChanged += (s, e) => 
         }
     }
 }

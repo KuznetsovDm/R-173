@@ -6,33 +6,33 @@ using System.Threading.Tasks;
 
 namespace RadioPipeline
 {
-    public delegate void PipelineDelegate<T>(T context);
+    public delegate Task PipelineDelegate<T>(T context);
 
     public class PipelineBuilder<T>
     {
-        private LinkedList<Action<T, PipelineDelegate<T>>> _actions;
+        private LinkedList<Func<T, PipelineDelegate<T>, Task>> _actions;
 
         public PipelineBuilder()
         {
-            _actions = new LinkedList<Action<T, PipelineDelegate<T>>>();            
+            _actions = new LinkedList<Func<T, PipelineDelegate<T>, Task>>();
         }
 
-        public PipelineDelegate<T> Build()
+        public virtual PipelineDelegate<T> Build()
         {
-            PipelineDelegate<T> currentDelegate = delegate { };
-            foreach (var action in _actions)
+            PipelineDelegate<T> currentDelegate = delegate {return TaskEx.FromResult(0); };
+            foreach(var action in _actions)
             {
                 var prevDelegate = currentDelegate;
-                currentDelegate = context =>
+                currentDelegate = async context =>
                 {
-                    action(context,prevDelegate);
+                    await action(context, prevDelegate);
                 };
             }
 
             return currentDelegate;
         }
 
-        public PipelineBuilder<T> Use(Action<T,PipelineDelegate<T>> action)
+        public virtual PipelineBuilder<T> Use(Func<T, PipelineDelegate<T>, Task> action)
         {
             _actions.AddFirst(action);
             return this;

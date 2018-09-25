@@ -1,4 +1,4 @@
-﻿using R_173.ScharedResources;
+﻿using R_173.SharedResources;
 using System;
 
 namespace R_173.Models

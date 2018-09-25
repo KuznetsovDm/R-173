@@ -2,53 +2,23 @@
 using RadioPipeline;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using P2PMulticastNetwork.Interfaces;
 
 //It's should be faultless network
 namespace P2PMulticastNetwork
 {
-    public interface IDataProvider : IDisposable
-    {
-        void OnDataAwaliable(Action<byte[]> action);
-    }
-
-    public interface IDataReceiver : IDisposable
-    {
-        Task<Result<byte[]>> Receive();
-    }
-
-    public interface IDataTransmitter : IDisposable
-    {
-        Result Write(byte[] data);
-    }
-
-    public interface IDataMiner : IDataProvider, IDisposable
-    {
-        void ReloadDataReceiver(IDataReceiver dataReceiver);
-        void Start();
-        void Stop();
-    }
-
-    public interface IDataAsByteConverter<T>
-    {
-        T ConvertFrom(byte[] bytes);
-        byte[] ConvertToBytes(T data);
-    }
-
     public class DataEngineMiner : IDataMiner
     {
         private List<Action<byte[]>> _actions;
         private IDataReceiver _dataReceiver;
         private ActionEngine _engine;
 
-        public DataEngineMiner()
+        public DataEngineMiner(IDataReceiver receiver)
         {
+            _dataReceiver = receiver;
             _actions = new List<Action<byte[]>>();
             _engine = new ActionEngine();
         }
@@ -66,17 +36,6 @@ namespace P2PMulticastNetwork
         public void OnDataAwaliable(Action<byte[]> action)
         {
             _actions.Add(action);
-        }
-
-        public void ReloadDataReceiver(IDataReceiver dataReceiver)
-        {
-            _dataReceiver = dataReceiver;
-            //reload actionEngine
-            if(_engine.IsWork)
-            {
-                _engine.Stop();
-                _engine.Start(ReceiveCycle);
-            }
         }
 
         public void Start()
@@ -145,50 +104,27 @@ namespace P2PMulticastNetwork
         }
     }
 
-    public class DataProcessingBuilder<T> : IDisposable
+    public class PipelineDataModelProcessingBeginPoint
     {
-        private IDataProvider _dataProvider;
-        private IDataAsByteConverter<T> _converter;
-        private PipelineDelegate<T> _pipeline;
-        private PipelineBuilder<T> _builder;
+        private IPiplineProcessingInput _pipline;
 
-        public DataProcessingBuilder(IDataAsByteConverter<T> converter, IDataProvider provider)
+        private IDataMiner _miner;
+
+        public PipelineDataModelProcessingBeginPoint(IDataMiner miner, IPiplineProcessingInput pipline)
         {
-            if(provider == null
-                || converter == null)
-                throw new ArgumentNullException();
-
-            _dataProvider = provider;
-            _converter = converter;
-            BindOnDataAvaliable();
+            _miner = miner;
+            _pipline = pipline;
         }
 
-        private void BindOnDataAvaliable()
+        public void Start()
         {
-            _dataProvider.OnDataAwaliable((bytes) =>
-            {
-                T data = _converter.ConvertFrom(bytes);
-                _pipeline.Invoke(data);
-            });
+            _miner.Start();
         }
 
-        public DataProcessingBuilder<T> Use(Action<T, PipelineDelegate<T>> action)
+        public void Stot()
         {
-            _builder.Use(action);
-            return this;
+            _miner.Stop();
         }
 
-        public void Build()
-        {
-            _pipeline = _builder.Build();
-        }
-
-        public void Dispose()
-        {
-            _dataProvider?.Dispose();
-            _dataProvider = null;
-            _converter = null;
-            _pipeline = null;
-        }
     }
 }
