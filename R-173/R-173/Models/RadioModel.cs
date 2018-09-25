@@ -33,7 +33,7 @@
         /// <summary>
         /// Ручка "Громкость ПРМ"
         /// </summary>
-        public readonly Property<int> VolumePRM;
+        public readonly Property<double> VolumePRM;
         /// <summary>
         /// Тумблер включения питания радиостанции
         /// </summary>
@@ -49,7 +49,7 @@
         /// <summary>
         /// Ручка регулятора громкости
         /// </summary>
-        public readonly Property<int> Volume;
+        public readonly Property<double> Volume;
         /// <summary>
         /// Тумблер "Запись - работа"
         /// </summary>
@@ -66,11 +66,11 @@
             Power = new Property<SwitcherState>();
             Tone = new Property<SwitcherState>();
             Noise = new Property<NoiseState>();
-            VolumePRM = new Property<int>();
+            VolumePRM = new Property<double>();
             TurningOn = new Property<SwitcherState>();
             LeftPuOa = new Property<SwitcherState>();
             RightPuOa = new Property<SwitcherState>();
-            Volume = new Property<int>();
+            Volume = new Property<double>();
             RecordWork = new Property<RecordWorkState>();
             WorkingFrequencies = new int[WorkingFrequenciesCount];
         }

@@ -54,12 +54,12 @@ namespace R_173.BL
         }
 
         #region Events
-        private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<int> e)
+        private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
 
         }
 
-        private void Volume_ValueChanged(object sender, ValueChangedEventArgs<int> e)
+        private void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
