@@ -16,10 +16,6 @@ namespace R_173
     {
         public static IUnityContainer ServiceCollection;
 
-        public static ISamplePlayer Player;
-
-        public static IDataProvider Server;
-
         protected override void OnStartup(StartupEventArgs e)
         {
             ConfigureIOC();
@@ -28,8 +24,6 @@ namespace R_173
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Player.Dispose();
-            Server.Dispose();
             base.OnExit(e);
         }
 
