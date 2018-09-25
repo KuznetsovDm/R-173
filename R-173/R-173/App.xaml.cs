@@ -63,7 +63,9 @@ namespace R_173
             .Build();
 
             var builderOutput = ServiceCollection.Resolve<IDataProcessingBuilder>();
-            //var outputPipeline = builderOutput.
+            var outputPipeline = builderOutput.Use(async (data, next)=>
+            {
+            });
 
             Server = ServiceCollection.Resolve<IDataMiner>();
             var converter = ServiceCollection.Resolve<IDataAsByteConverter<DataModel>>();

@@ -23,8 +23,8 @@ namespace R_173.Handlers
         public AudioMixerHandler(WaveFormat format, MixingSampleProvider mixer)
         {
             _mixer = mixer;
-            //todo: check guid comparation speed
             if(_buffers == null)
+                //todo: check guid comparation speed
                 _buffers = new ConcurrentDictionary<Guid, BufferedWaveProvider>();
             _format = format;
         }
