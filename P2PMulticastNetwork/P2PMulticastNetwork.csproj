@@ -71,7 +71,6 @@
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Interfaces\IDataAsByteConverter.cs" />
     <Compile Include="Interfaces\IDataMiner.cs" />
-    <Compile Include="Interfaces\IDataProvider.cs" />
     <Compile Include="Interfaces\IDataReceiver.cs" />
     <Compile Include="Interfaces\IDataTransmitter.cs" />
     <Compile Include="Interfaces\IPipeline.cs" />

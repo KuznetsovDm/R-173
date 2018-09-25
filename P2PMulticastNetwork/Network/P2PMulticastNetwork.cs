@@ -16,8 +16,9 @@ namespace P2PMulticastNetwork
         private IDataReceiver _dataReceiver;
         private ActionEngine _engine;
 
-        public DataEngineMiner()
+        public DataEngineMiner(IDataReceiver receiver)
         {
+            _dataReceiver = receiver;
             _actions = new List<Action<byte[]>>();
             _engine = new ActionEngine();
         }
@@ -35,17 +36,6 @@ namespace P2PMulticastNetwork
         public void OnDataAwaliable(Action<byte[]> action)
         {
             _actions.Add(action);
-        }
-
-        public void ReloadDataReceiver(IDataReceiver dataReceiver)
-        {
-            _dataReceiver = dataReceiver;
-            //reload actionEngine
-            if(_engine.IsWork)
-            {
-                _engine.Stop();
-                _engine.Start(ReceiveCycle);
-            }
         }
 
         public void Start()
@@ -136,55 +126,5 @@ namespace P2PMulticastNetwork
             _miner.Stop();
         }
 
-    }
-
-    public class DataProcessingBuilder<T> : IDisposable
-    {
-        private IDataProvider _dataProvider;
-        private IDataAsByteConverter<T> _converter;
-        private PipelineDelegate<T> _pipeline;
-        private PipelineBuilder<T> _builder;
-
-        public DataProcessingBuilder(IDataAsByteConverter<T> converter, IDataProvider provider, PipelineBuilder<T> builder)
-        {
-            if(provider == null
-                || converter == null
-                || builder == null)
-                throw new ArgumentNullException();
-
-            _builder = new PipelineBuilder<T>();
-
-            _dataProvider = provider;
-            _converter = converter;
-            BindOnDataAvaliable();
-        }
-
-        private void BindOnDataAvaliable()
-        {
-            _dataProvider.OnDataAwaliable((bytes) =>
-            {
-                T data = _converter.ConvertFrom(bytes);
-                _pipeline.Invoke(data);
-            });
-        }
-
-        public DataProcessingBuilder<T> Use(Func<T, PipelineDelegate<T>, Task> action)
-        {
-            _builder.Use(action);
-            return this;
-        }
-
-        public void Build()
-        {
-            _pipeline = _builder.Build();
-        }
-
-        public void Dispose()
-        {
-            _dataProvider?.Dispose();
-            _dataProvider = null;
-            _converter = null;
-            _pipeline = null;
-        }
     }
 }

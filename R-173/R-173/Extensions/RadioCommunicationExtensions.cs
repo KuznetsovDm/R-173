@@ -4,6 +4,10 @@ using P2PMulticastNetwork.Model;
 using P2PMulticastNetwork.Interfaces;
 using Unity;
 using Unity.Lifetime;
+using R_173.Handlers;
+using NAudio.Wave.SampleProviders;
+using R_173.Interfaces;
+using R_173.BL;
 
 namespace R_173.Extensions
 {
@@ -11,10 +15,11 @@ namespace R_173.Extensions
     {
         public static IUnityContainer AddCommunicationServices(this IUnityContainer services)
         {
-            services.RegisterType<IDataMiner, DataEngineMiner>();
-            IDataMiner miner = new DataEngineMiner();
+            services.RegisterInstance<IDataReceiver>(
+                new UdpMulticastConnection(
+                MulticastConnectionOptions.Create(exclusiveAddressUse: false, multicastLoopback: true, useBind: true)));
+            IDataMiner miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
             services.RegisterInstance<IDataMiner>(miner, new SingletonLifetimeManager());
-            services.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
             return services;
@@ -23,6 +28,14 @@ namespace R_173.Extensions
         public static IUnityContainer AddAudioServices(this IUnityContainer services)
         {
             services.RegisterInstance(WaveFormat.CreateIeeeFloatWaveFormat(44100, 2));
+            var format = services.Resolve<WaveFormat>();
+            var mixer = new MixingSampleProvider(format);
+            //it's meant that mixer will receive samples continuous.
+            mixer.ReadFully = true;
+            services.RegisterInstance<MixingSampleProvider>(mixer, new SingletonLifetimeManager());
+            var player = new SamplePlayer(format);
+            player.Add(mixer);
+            services.RegisterInstance<ISamplePlayer>(player, new SingletonLifetimeManager());
             return services;
         }
     }
