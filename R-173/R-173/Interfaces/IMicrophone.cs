@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using NAudio.Wave;
+using P2PMulticastNetwork.Model;
+using R_173.SharedResources;
+using System;
 
 namespace R_173.Interfaces
 {
-    interface IMicrophone : IDisposable
+    public interface IMicrophone : IDisposable
     {
-        event EventHandler<EventArgs> OnDataAvailable;
+        event EventHandler<DataEventArgs> OnDataAvailable;
         void StartListen();
         void StopListen();
     }

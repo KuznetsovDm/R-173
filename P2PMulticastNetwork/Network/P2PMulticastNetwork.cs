@@ -6,11 +6,12 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using P2PMulticastNetwork.Interfaces;
+using P2PMulticastNetwork.Model;
 
 //It's should be faultless network
 namespace P2PMulticastNetwork
 {
-    public class DataEngineMiner : IDataMiner
+    public class DataEngineMiner : IDataProvider
     {
         private List<Action<byte[]>> _actions;
         private IDataReceiver _dataReceiver;
@@ -23,6 +24,8 @@ namespace P2PMulticastNetwork
             _engine = new ActionEngine();
         }
 
+        public event EventHandler<DataEventArgs> OnDataAvaliable;
+
         public void Dispose()
         {
             _actions?.Clear();
@@ -31,11 +34,6 @@ namespace P2PMulticastNetwork
             _actions = null;
             _engine = null;
             _dataReceiver = null;
-        }
-
-        public void OnDataAwaliable(Action<byte[]> action)
-        {
-            _actions.Add(action);
         }
 
         public void Start()
@@ -52,17 +50,17 @@ namespace P2PMulticastNetwork
         {
             try
             {
-                while(true)
+                while (true)
                 {
                     token.ThrowIfCancellationRequested();
                     Result<byte[]> resut = await _dataReceiver.Receive();
-                    if(resut.IsFailure)
+                    if (resut.IsFailure)
                         Debug.WriteLine(resut.Error);
                     else
-                        _actions.ForEach(action => action(resut.Value));
+                        OnDataAvaliable?.Invoke(this, new DataEventArgs() { Data = resut.Value });
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine($"Error in ReceiveCycle {ex.ToString()}");
             }
@@ -78,11 +76,11 @@ namespace P2PMulticastNetwork
 
         public void Dispose()
         {
-            if(IsWork)
+            if (IsWork)
             {
                 Stop();
             }
-            else if(_cancellToken != null)
+            else if (_cancellToken != null)
             {
                 Stop();
             }
@@ -108,9 +106,9 @@ namespace P2PMulticastNetwork
     {
         private IPiplineProcessingInput _pipline;
 
-        private IDataMiner _miner;
+        private IDataProvider _miner;
 
-        public PipelineDataModelProcessingBeginPoint(IDataMiner miner, IPiplineProcessingInput pipline)
+        public PipelineDataModelProcessingBeginPoint(IDataProvider miner, IPiplineProcessingInput pipline)
         {
             _miner = miner;
             _pipline = pipline;

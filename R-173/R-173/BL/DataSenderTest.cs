@@ -8,6 +8,11 @@ namespace R_173.BL
 {
     public class DataSenderTest<T> : IAudioReaderAndSender<T>
     {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetModel(T filter)
         {
             throw new NotImplementedException();

@@ -68,7 +68,7 @@ namespace R_173.BL
         {
             if (e.NewValue == SwitcherState.Enabled)
             {
-                _reader.Start();
+                _player.Start();
             }
             else
             {
