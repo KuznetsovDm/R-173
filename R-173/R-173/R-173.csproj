@@ -97,7 +97,6 @@
     <Compile Include="Extensions\ISamplePlayer.cs" />
     <Compile Include="Handlers\IDataProcessingBuilder.cs" />
     <Compile Include="BL\RadioModelManager.cs" />
-    <Compile Include="Extensions\IDataProcessingBuilder.cs" />
     <Compile Include="Extensions\RadioCommunicationExtensions.cs" />
     <Compile Include="Extensions\RadioHandlingExtensions.cs" />
     <Compile Include="Handlers\AudioMixerHandler.cs" />
