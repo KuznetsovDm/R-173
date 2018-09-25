@@ -23,15 +23,15 @@ namespace AudioClientTest
                 Frequency = 1000,
             };
 
-            using(var wo = new WaveOutEvent())
-            {
-                wo.Init(noise);
-                wo.Play();
-                while(wo.PlaybackState == PlaybackState.Playing)
-                {
-                    Thread.Sleep(500);
-                }
-            }
+            //using(var wo = new WaveOutEvent())
+            //{
+            //    wo.Init(noise);
+            //    wo.Play();
+            //    while(wo.PlaybackState == PlaybackState.Playing)
+            //    {
+            //        Thread.Sleep(500);
+            //    }
+            //}
 
             var path = "../../../../music/1.mp3";
             if(args.Length > 0)

@@ -2,9 +2,9 @@
 
 namespace P2PMulticastNetwork.Interfaces
 {
-    public interface IDataMiner : IDataProvider, IDisposable
+    public interface IDataMiner : IDisposable
     {
-        void ReloadDataReceiver(IDataReceiver dataReceiver);
+        void OnDataAwaliable(Action<byte[]> action);
         void Start();
         void Stop();
     }

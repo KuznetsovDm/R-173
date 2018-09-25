@@ -17,7 +17,7 @@ namespace RadioPipeline
             _actions = new LinkedList<Func<T, PipelineDelegate<T>, Task>>();
         }
 
-        public PipelineDelegate<T> Build()
+        public virtual PipelineDelegate<T> Build()
         {
             PipelineDelegate<T> currentDelegate = delegate {return TaskEx.FromResult(0); };
             foreach(var action in _actions)
@@ -32,7 +32,7 @@ namespace RadioPipeline
             return currentDelegate;
         }
 
-        public PipelineBuilder<T> Use(Func<T, PipelineDelegate<T>, Task> action)
+        public virtual PipelineBuilder<T> Use(Func<T, PipelineDelegate<T>, Task> action)
         {
             _actions.AddFirst(action);
             return this;
