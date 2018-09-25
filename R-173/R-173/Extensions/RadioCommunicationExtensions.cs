@@ -18,8 +18,8 @@ namespace R_173.Extensions
             services.RegisterInstance<IDataReceiver>(
                 new UdpMulticastConnection(
                 MulticastConnectionOptions.Create(exclusiveAddressUse: false, multicastLoopback: true, useBind: true)));
-            IDataMiner miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
-            services.RegisterInstance<IDataMiner>(miner, new SingletonLifetimeManager());
+            IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
+            services.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
             services.RegisterInstance<IDataTransmitter>(new UdpMulticastConnection(

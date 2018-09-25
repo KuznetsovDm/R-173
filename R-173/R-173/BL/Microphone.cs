@@ -1,9 +1,8 @@
 ﻿using NAudio.Wave;
+using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
+using R_173.SharedResources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace R_173.BL
 {
@@ -14,10 +13,17 @@ namespace R_173.BL
         public Microphone()
         {
             _audioListener = new WaveIn();
-            _audioListener.DataAvailable += (obj, args) => OnDataAvailable?.Invoke(this, args);
+            _audioListener.DataAvailable += (obj, args) =>
+            {
+                var bytes = new byte[args.BytesRecorded];
+                Array.Copy(args.Buffer, bytes, args.BytesRecorded);
+                OnDataAvailable?.Invoke(this, new DataEventArgs() {
+                    Data = bytes
+                });
+            };
         }
 
-        public event EventHandler<WaveInEventArgs> OnDataAvailable;
+        public event EventHandler<DataEventArgs> OnDataAvailable;
 
         public void Dispose()
         {
