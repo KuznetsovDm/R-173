@@ -29,6 +29,62 @@ namespace R_173.ViewModels
             ButtonCommand = new SimpleCommand<bool>(s => Tone = s);
             VolumeCommand = new SimpleCommand<double>(s => Volume += s);
             VolumePRMCommand = new SimpleCommand<double>(s => VolumePRM += s);
+            
+            Model.Frequency.ValueChanged += (s, e) => 
+            {
+                _frequency = e.NewValue;
+                OnPropertyChanged(nameof(Frequency));
+            };
+            Model.Interference.ValueChanged += (s, e) => 
+            {
+                _interference = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(Interference));
+            };
+            Model.LeftPuOa.ValueChanged += (s, e) =>
+            {
+                _leftPuOa = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(LeftPuOa));
+            };
+            Model.Noise.ValueChanged += (s, e) =>
+            {
+                _noise = e.NewValue == NoiseState.Maximum;
+                OnPropertyChanged(nameof(Noise));
+            };
+            Model.Power.ValueChanged += (s, e) =>
+            {
+                _power = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(Power));
+            };
+            Model.RecordWork.ValueChanged += (s, e) =>
+            {
+                _recordWork = e.NewValue == RecordWorkState.Work;
+                OnPropertyChanged(nameof(RecordWork));
+            };
+            Model.RightPuOa.ValueChanged += (s, e) =>
+            {
+                _rightPuOa = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(RightPuOa));
+            };
+            Model.Tone.ValueChanged += (s, e) =>
+            {
+                _tone = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(Tone));
+            };
+            Model.TurningOn.ValueChanged += (s, e) =>
+            {
+                _turningOn = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(TurningOn));
+            };
+            Model.Volume.ValueChanged += (s, e) =>
+            {
+                _volume = e.NewValue;
+                OnPropertyChanged(nameof(Volume));
+            };
+            Model.VolumePRM.ValueChanged += (s, e) =>
+            {
+                _volumePRM = e.NewValue;
+                OnPropertyChanged(nameof(VolumePRM));
+            };
         }
 
         public ICommand ChangeFrequencyCommand { get; }
@@ -43,10 +99,7 @@ namespace R_173.ViewModels
             get => _frequency;
             set
             {
-                if (value == _frequency)
-                    return;
-                _frequency = value;
-                OnPropertyChanged(nameof(Frequency));
+                Model.Frequency.Value = value;
             }
         }
 
@@ -55,10 +108,7 @@ namespace R_173.ViewModels
             get => _interference;
             set
             {
-                if (value == _interference)
-                    return;
-                _interference = value;
-                OnPropertyChanged(nameof(Interference));
+                Model.Interference.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
 
@@ -67,10 +117,7 @@ namespace R_173.ViewModels
             get => _power;
             set
             {
-                if (value == _power)
-                    return;
-                _power = value;
-                OnPropertyChanged(nameof(Power));
+                Model.Power.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
 
@@ -79,10 +126,7 @@ namespace R_173.ViewModels
             get => _tone;
             set
             {
-                if (value == _tone)
-                    return;
-                _tone = value;
-                OnPropertyChanged(nameof(Tone));
+                Model.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
 
@@ -91,10 +135,7 @@ namespace R_173.ViewModels
             get => _noise;
             set
             {
-                if (value == _noise)
-                    return;
-                _noise = value;
-                OnPropertyChanged(nameof(Noise));
+                Model.Noise.Value = value ? NoiseState.Maximum : NoiseState.Minimum;
             }
         }
 
@@ -103,10 +144,7 @@ namespace R_173.ViewModels
             get => _volumePRM;
             set
             {
-                if (value == _volumePRM)
-                    return;
-                _volumePRM = value;
-                OnPropertyChanged(nameof(VolumePRM));
+                Model.VolumePRM.Value = value;
             }
         }
 
@@ -115,10 +153,7 @@ namespace R_173.ViewModels
             get => _turningOn;
             set
             {
-                if (value == _turningOn)
-                    return;
-                _turningOn = value;
-                OnPropertyChanged(nameof(TurningOn));
+                Model.TurningOn.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
 
@@ -127,10 +162,7 @@ namespace R_173.ViewModels
             get => _leftPuOa;
             set
             {
-                if (value == _leftPuOa)
-                    return;
-                _leftPuOa = value;
-                OnPropertyChanged(nameof(LeftPuOa));
+                Model.LeftPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
 
@@ -139,10 +171,7 @@ namespace R_173.ViewModels
             get => _rightPuOa;
             set
             {
-                if (value == _rightPuOa)
-                    return;
-                _rightPuOa = value;
-                OnPropertyChanged(nameof(RightPuOa));
+                Model.RightPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
 
@@ -151,10 +180,7 @@ namespace R_173.ViewModels
             get => _volume;
             set
             {
-                if (value == _volume)
-                    return;
-                _volume = value;
-                OnPropertyChanged(nameof(Volume));
+                Model.Volume.Value = value;
             }
         }
 
@@ -163,10 +189,7 @@ namespace R_173.ViewModels
             get => _recordWork;
             set
             {
-                if (value == _recordWork)
-                    return;
-                _recordWork = value;
-                OnPropertyChanged(nameof(RecordWork));
+                Model.RecordWork.Value = value ? RecordWorkState.Record : RecordWorkState.Work;
             }
         }
     }
