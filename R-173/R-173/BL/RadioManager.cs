@@ -61,7 +61,7 @@ namespace R_173.BL
 
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
-            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -108,7 +108,7 @@ namespace R_173.BL
 
         private void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
-            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void LeftPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -123,8 +123,8 @@ namespace R_173.BL
 
         private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
-            _reader.SetFilter(GetSendableRadioModelFromRadioModel(_radioModel));
-            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
+            _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
         #endregion
 

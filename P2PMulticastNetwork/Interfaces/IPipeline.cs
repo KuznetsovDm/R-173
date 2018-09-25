@@ -2,6 +2,6 @@
 {
     public interface IPipeline<T>
     {
-        void SetFilter(T filter);
+        void SetModel(T filter);
     }
 }
