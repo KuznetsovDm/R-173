@@ -38,19 +38,27 @@ namespace R_173.BL
 
             _radioModel = radioModel;
 
-            #region Events
-            _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
-            _radioModel.Interference.ValueChanged += Interference_ValueChanged;
-            _radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
-            _radioModel.Noise.ValueChanged += Noise_ValueChanged;
-            _radioModel.Power.ValueChanged += Power_ValueChanged;
-            _radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
-            _radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
-            _radioModel.Tone.ValueChanged += Tone_ValueChanged;
-            _radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
-            _radioModel.Volume.ValueChanged += Volume_ValueChanged;
-            _radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
-            #endregion
+            if(_radioModel != null)
+            {
+                #region Events
+                _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
+                _radioModel.Interference.ValueChanged += Interference_ValueChanged;
+                _radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
+                _radioModel.Noise.ValueChanged += Noise_ValueChanged;
+                _radioModel.Power.ValueChanged += Power_ValueChanged;
+                _radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
+                _radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
+                _radioModel.Tone.ValueChanged += Tone_ValueChanged;
+                _radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
+                _radioModel.Volume.ValueChanged += Volume_ValueChanged;
+                _radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
+                #endregion
+            }
+            else
+            {
+                _reader.Stop();
+                _player.Stop();
+            }
         }
 
         #region Events
