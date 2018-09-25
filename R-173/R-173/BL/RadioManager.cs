@@ -87,9 +87,9 @@ namespace R_173.BL
 
         }
 
-        private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-            if(e.NewValue == SwitcherState.Enabled) // работа
+            if(e.NewValue == RecordWorkState.Record) // запись
             {
 
             }
@@ -100,9 +100,9 @@ namespace R_173.BL
 
         }
 
-        private void Noise_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        private void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
-
+            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void LeftPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -135,7 +135,7 @@ namespace R_173.BL
             return new ReceivableRadioModel
             {
                 Frequency = radioModel.Frequency.Value,
-                Noise = radioModel.Noise.Value == SwitcherState.Enabled,
+                Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
                 Volume = radioModel.Volume.Value
             };
         }
