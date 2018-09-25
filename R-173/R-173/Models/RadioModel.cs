@@ -1,9 +1,8 @@
 ﻿namespace R_173.Models
 {
-    public enum SwitcherState { Enabled, Disabled }
+    public enum SwitcherState { Disabled = 0, Enabled = 1 }
     public enum RecordWorkState { Record, Work }
     public enum NoiseState { Minimum, Maximum }
-
 
     public class RadioModel
     {

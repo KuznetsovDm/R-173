@@ -6,43 +6,47 @@ namespace R_173.ViewModels
 {
     public class RadioViewModel : ViewModelBase
     {
-        private double _volume;
+        public readonly RadioModel Model;
+
+        private int _frequency;
         private bool _interference;
-        private SwitcherState _power;
-        private string _frequency;
-        private readonly RadioModel _model;
+        private bool _power;
+        private bool _tone;
+        private bool _noise;
+        private double _volumePRM;
+        private bool _turningOn;
+        private bool _leftPuOa;
+        private bool _rightPuOa;
+        private double _volume;
+        private bool _recordWork;
 
         public RadioViewModel()
         {
-            _model = new RadioModel();
-            _model.Power.ValueChanged += (s, e) => OnPropertyChanged(nameof(Power));
+            Model = new RadioModel();
 
-            InterferenceClickCommand = new SimpleCommand(() => Interference = !Interference);
-            ChangeFrequencyCommand = new SimpleCommand<char>(a => Frequency += a);
-            ClearFrequencyCommand = new SimpleCommand(() => Frequency = "");
+            ChangeFrequencyCommand = new SimpleCommand<string>(s => Frequency = Frequency * 10 + int.Parse(s));
+            ClearFrequencyCommand = new SimpleCommand(() => Frequency = 0);
+            ButtonCommand = new SimpleCommand<bool>(s => Tone = s);
+            VolumeCommand = new SimpleCommand<double>(s => Volume += s);
+            VolumePRMCommand = new SimpleCommand<double>(s => VolumePRM += s);
         }
 
-
-        public ICommand PowerClickCommand { get; }
-        public ICommand InterferenceClickCommand { get; }
         public ICommand ChangeFrequencyCommand { get; }
         public ICommand ClearFrequencyCommand { get; }
+        public ICommand ButtonCommand { get; }
+        public ICommand VolumeCommand { get; }
+        public ICommand VolumePRMCommand { get; }
 
-        public SwitcherState Power
-        {
-            get => _model.Power.Value;
-            set => _model.Power.Value = value;
-        }
 
-        public double Volume
+        public int Frequency
         {
-            get => _volume;
+            get => _frequency;
             set
             {
-                if (value == _volume)
+                if (value == _frequency)
                     return;
-                _volume = value;
-                OnPropertyChanged(nameof(Volume));
+                _frequency = value;
+                OnPropertyChanged(nameof(Frequency));
             }
         }
 
@@ -58,15 +62,111 @@ namespace R_173.ViewModels
             }
         }
 
-        public string Frequency
+        public bool Power
         {
-            get => _frequency;
+            get => _power;
             set
             {
-                if (value == _frequency)
+                if (value == _power)
                     return;
-                _frequency = value;
-                OnPropertyChanged(nameof(Frequency));
+                _power = value;
+                OnPropertyChanged(nameof(Power));
+            }
+        }
+
+        public bool Tone
+        {
+            get => _tone;
+            set
+            {
+                if (value == _tone)
+                    return;
+                _tone = value;
+                OnPropertyChanged(nameof(Tone));
+            }
+        }
+
+        public bool Noise
+        {
+            get => _noise;
+            set
+            {
+                if (value == _noise)
+                    return;
+                _noise = value;
+                OnPropertyChanged(nameof(Noise));
+            }
+        }
+
+        public double VolumePRM
+        {
+            get => _volumePRM;
+            set
+            {
+                if (value == _volumePRM)
+                    return;
+                _volumePRM = value;
+                OnPropertyChanged(nameof(VolumePRM));
+            }
+        }
+
+        public bool TurningOn
+        {
+            get => _turningOn;
+            set
+            {
+                if (value == _turningOn)
+                    return;
+                _turningOn = value;
+                OnPropertyChanged(nameof(TurningOn));
+            }
+        }
+
+        public bool LeftPuOa
+        {
+            get => _leftPuOa;
+            set
+            {
+                if (value == _leftPuOa)
+                    return;
+                _leftPuOa = value;
+                OnPropertyChanged(nameof(LeftPuOa));
+            }
+        }
+
+        public bool RightPuOa
+        {
+            get => _rightPuOa;
+            set
+            {
+                if (value == _rightPuOa)
+                    return;
+                _rightPuOa = value;
+                OnPropertyChanged(nameof(RightPuOa));
+            }
+        }
+
+        public double Volume
+        {
+            get => _volume;
+            set
+            {
+                if (value == _volume)
+                    return;
+                _volume = value;
+                OnPropertyChanged(nameof(Volume));
+            }
+        }
+
+        public bool RecordWork
+        {
+            get => _recordWork;
+            set
+            {
+                if (value == _recordWork)
+                    return;
+                _recordWork = value;
+                OnPropertyChanged(nameof(RecordWork));
             }
         }
     }

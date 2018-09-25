@@ -118,6 +118,7 @@
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
+    <Compile Include="Views\ClickedImage.cs" />
     <Compile Include="Views\RadioView.xaml.cs">
       <DependentUpon>RadioView.xaml</DependentUpon>
     </Compile>
@@ -125,6 +126,7 @@
     <Compile Include="SharedResources\ValueChangedEventArgs.cs" />
     <Compile Include="ViewModels\RadioViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\RotatedImage.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,10 +171,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Radio\radio.png" />
+    <Resource Include="Files\radio.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Radio\switcher.png" />
+    <Resource Include="Files\switcher.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\P2PMulticastNetwork\P2PMulticastNetwork.csproj">
@@ -186,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

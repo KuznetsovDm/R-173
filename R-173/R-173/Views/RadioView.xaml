@@ -3,62 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:models="clr-namespace:R_173.ViewModels"
              xmlns:local="clr-namespace:R_173.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignData Type=local:ViewModel}">
-    <UserControl.Resources>
-        <Style x:Key="Switcher" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Grid Background="White" >
-                            <Image Source="Switcher.png" RenderTransformOrigin="0.5, 0.5">
-                                <Image.Style>
-                                    <Style TargetType="{x:Type Image}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Interference}" Value="True">
-                                                <Setter Property="RenderTransform">
-                                                    <Setter.Value>
-                                                        <RotateTransform Angle="180"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
+             d:DataContext="{d:DesignInstance {x:Type models:RadioViewModel}}">
     <Canvas Width="3988" Height="2388">
         <Canvas.Resources>
-            <local:StateToBoolConverter x:Key="StateToBoolConverter"/>
             <Style x:Key="Switcher" TargetType="CheckBox">
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate>
-                            <Grid Background="White" >
-                                <Image Source="switcher.png" RenderTransformOrigin="0.5, 0.5">
-                                    <Image.Style>
-                                        <Style TargetType="Image">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Interference}" Value="True">
-                                                    <Setter Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <RotateTransform Angle="180"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Grid Background="White">
+                                <Image x:Name="image" Source="/Files/switcher.png" RenderTransformOrigin="0.5, 0.5"/>
                             </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="image" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="180"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -70,37 +38,70 @@
                 <Setter Property="Width" Value="136"/>
                 <Setter Property="Height" Value="130"/>
             </Style>
+            <Style x:Key="Button" TargetType="local:ClickedImage">
+                <Setter Property="Source" Value="/Files/button.png"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Style.Triggers>
+                    <Trigger Property="IsDown" Value="True">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="local:Encoder">
+                <Setter Property="Source" Value="/Files/switcher.png"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
         </Canvas.Resources>
-        <Image Source="radio.png" Width="3988" Height="2388"/>
+        <!-- Радиостанция -->
+        <Image Source="/Files/radio.png" Width="3988" Height="2388"/>
         <!-- Текущая частота -->
         <TextBlock Canvas.Left="911" Canvas.Top="509"
                    Width="563" Height="133"
                    FontSize="100" TextAlignment="Right"
                    Text="{Binding Path=Frequency}"/>
         <!-- Подавитель помех -->
-        <CheckBox Canvas.Left="1568" Canvas.Top="1208" Cursor="Hand"
-                  Style="{StaticResource Switcher}"
-                  Command="{Binding Path=InterferenceClickCommand}"/>
+        <CheckBox Canvas.Left="1568" Canvas.Top="1208"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=Interference}"/>
+        <!-- Мощность -->
+        <CheckBox Canvas.Left="1737" Canvas.Top="884"
+                  Height="132" Width="72"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=Power}"/>
+        <!-- Тон -->
+        <local:ClickedImage Canvas.Left="1882" Canvas.Top="914"
+                            Style="{StaticResource Button}"
+                            IsDown="{Binding Path=Tone}"
+                            Click="{Binding Path=ButtonCommand}"/>
         <!-- Подавитель шумов -->
-        <CheckBox Canvas.Left="1910" Canvas.Top="1209"
-                Height="132" Width="72"
-                Style="{StaticResource Switcher}"
-                Command="{Binding Path=InterferenceClickCommand}"/>
+        <CheckBox Canvas.Left="1914" Canvas.Top="1214"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=Noise}" Width="66"/>
         <!-- Питание -->
         <CheckBox Canvas.Left="1910" Canvas.Top="1537"
-                Height="132" Width="72"
-                Style="{StaticResource Switcher}"
-                IsChecked="{Binding Path=Power, Converter={StaticResource StateToBoolConverter}}"/>
-        <!-- ПуОа -->
-        <CheckBox Canvas.Left="1818" Canvas.Top="1731"
-                Height="132" Width="72"
-                Style="{StaticResource Switcher}"
-                Command="{Binding Path=InterferenceClickCommand}"/>
+                  Height="132" Width="72"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=TurningOn}"/>
         <!-- ПуОа -->
         <CheckBox Canvas.Left="1637" Canvas.Top="1741"
-                Height="139" Width="84"
-                Style="{StaticResource Switcher}"
-                Command="{Binding Path=InterferenceClickCommand}"/>
+                  Height="139" Width="84"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=LeftPuOa}"/>
+        <!-- ПуОа -->
+        <CheckBox Canvas.Left="1818" Canvas.Top="1731"
+                  Height="132" Width="72"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=RightPuOa}"/>
+        <!-- Запись - Работа -->
+        <CheckBox Canvas.Left="1203" Canvas.Top="1676"
+                  Height="132" Width="72"
+                  Style="{StaticResource Switcher}" IsChecked="{Binding Path=RecordWork}"/>
+        <!-- Громкость -->
+        <local:Encoder Canvas.Left="1620" Canvas.Top="1502" Width="100"
+                       Rotate="{Binding Path=VolumeCommand}" Angle="{Binding Path=Volume}"/>
+        <!-- Громкость ПРМ -->
+        <local:Encoder Canvas.Left="1713" Canvas.Top="1163" Width="100"
+                       Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM}"/>
         <Button Canvas.Left="1014" Canvas.Top="981" 
                 Style="{StaticResource Number}" CommandParameter="1"/>
         <Button Canvas.Left="1172" Canvas.Top="983" 
