@@ -1,21 +1,42 @@
 ﻿using P2PMulticastNetwork.Interfaces;
+using P2PMulticastNetwork.Model;
+using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
 
 namespace R_173.BL
 {
-    public class RadioManager
+    public class RadioManager : IRadioManager
     {
         private RadioModel _radioModel;
         private IAudioReaderAndSender<SendableRadioModel> _reader;
         private IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
 
-        public RadioManager(RadioModel radioModel, IAudioReaderAndSender<SendableRadioModel> reader,
+        public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
             IAudioReceiverAndPlayer<ReceivableRadioModel> player)
         {
-            _radioModel = radioModel;
             _reader = reader;
             _player = player;
+        }
+
+        public void SetModel(RadioModel radioModel)
+        {
+            if(_radioModel != null)
+            {
+                _radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
+                _radioModel.Interference.ValueChanged -= Interference_ValueChanged;
+                _radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
+                _radioModel.Noise.ValueChanged -= Noise_ValueChanged;
+                _radioModel.Power.ValueChanged -= Power_ValueChanged;
+                _radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
+                _radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
+                _radioModel.Tone.ValueChanged -= Tone_ValueChanged;
+                _radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
+                _radioModel.Volume.ValueChanged -= Volume_ValueChanged;
+                _radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+            }
+
+            _radioModel = radioModel;
 
             #region Events
             _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;

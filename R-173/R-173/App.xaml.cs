@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
-using P2PMulticastNetwork;
+﻿using System.Windows;
+using R_173.BL;
 using R_173.Extensions;
+using R_173.Interfaces;
 using Unity;
+using Unity.Lifetime;
 
 namespace R_173
 {
@@ -45,6 +42,8 @@ namespace R_173
             IUnityContainer container = new UnityContainer();
             container.AddCommunicationServices()
                      .AddAudioServices();
+
+            container.RegisterType<IRadioManager, RadioManager>(new SingletonLifetimeManager());
 
             ServiceCollection = container;
         }

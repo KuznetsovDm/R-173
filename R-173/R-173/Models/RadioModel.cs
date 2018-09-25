@@ -5,6 +5,10 @@
     public class RadioModel
     {
         /// <summary>
+        /// Количество фиксированных частот
+        /// </summary>
+        public const int FixedFrequenciesCount = 10;
+        /// <summary>
         /// Частота
         /// </summary>
         public readonly Property<int> Frequency;
@@ -48,6 +52,10 @@
         /// Тумблер "Запись - работа"
         /// </summary>
         public readonly Property<SwitcherState> RecordWork;
+        /// <summary>
+        /// Список фиксированных частот
+        /// </summary>
+        public readonly int[] FixedFrequencies;
 
         public RadioModel()
         {
@@ -62,6 +70,7 @@
             RightPuOa = new Property<SwitcherState>();
             Volume = new Property<int>();
             RecordWork = new Property<SwitcherState>();
+            FixedFrequencies = new int[FixedFrequenciesCount];
         }
     }
 }
