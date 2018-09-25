@@ -1,19 +1,10 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using R_173.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace R_173.Extensions
+namespace R_173.BL
 {
-    public interface ISamplePlayer : IDisposable
-    {
-        void Add(ISampleProvider provider);
-        void Play();
-        void Stop();
-    }
-
     public class SamplePlayer : ISamplePlayer
     {
         private WaveOut _player;

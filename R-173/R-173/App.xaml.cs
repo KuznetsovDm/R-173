@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,25 +47,30 @@ namespace R_173
         private void BuildDataPipeline()
         {
 
-            var builder = ServiceCollection.Resolve<IDataProcessingBuilder>();
-            var pipelineDelegate = builder.Use(async (data, next) =>
+            var builderInput = ServiceCollection.Resolve<IDataProcessingBuilder>();
+            var inputPipeline = builderInput.Use(async (data, next) =>
             {
-                await next.Invoke(data);
+                try
+                {
+                    await next.Invoke(data);
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
             })
             .UseMiddleware<AudioMixerHandler>()
-            .Use(async (data, next) =>
-            {
-                Console.WriteLine("InsideMethod");
-                //data...
-            })
             .Build();
+
+            var builderOutput = ServiceCollection.Resolve<IDataProcessingBuilder>();
+            //var outputPipeline = builderOutput.
 
             Server = ServiceCollection.Resolve<IDataMiner>();
             var converter = ServiceCollection.Resolve<IDataAsByteConverter<DataModel>>();
             Server.OnDataAwaliable(async (bytes) =>
             {
                 var model = converter.ConvertFrom(bytes);
-                await pipelineDelegate.Invoke(model);
+                await inputPipeline.Invoke(model);
             });
 
             Server.Start();

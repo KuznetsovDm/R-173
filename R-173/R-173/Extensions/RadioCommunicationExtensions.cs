@@ -6,6 +6,8 @@ using Unity;
 using Unity.Lifetime;
 using R_173.Handlers;
 using NAudio.Wave.SampleProviders;
+using R_173.Interfaces;
+using R_173.BL;
 
 namespace R_173.Extensions
 {

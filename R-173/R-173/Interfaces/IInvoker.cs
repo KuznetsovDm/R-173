@@ -2,7 +2,7 @@
 using P2PMulticastNetwork.Model;
 using RadioPipeline;
 
-namespace R_173.Handlers
+namespace R_173.Interfaces
 {
     public interface IInvoker
     {

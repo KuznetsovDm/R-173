@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using NAudio;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using R_173.Interfaces;
 
 namespace R_173.Handlers
 {
