@@ -8,6 +8,13 @@ namespace R_173.Models
         public event EventHandler<ValueChangedEventArgs<T>> ValueChanged;
 
         private T _value;
+        private readonly string _name;
+
+        public Property(string name = "")
+        {
+            _name = name;
+        }
+
 
         public T Value
         {
@@ -17,6 +24,7 @@ namespace R_173.Models
                 if (value.Equals(_value))
                     return;
                 _value = value;
+                System.Diagnostics.Trace.WriteLine($"{_name} = {value}");
                 ValueChanged?.Invoke(this, new ValueChangedEventArgs<T>(value));
             }
         }

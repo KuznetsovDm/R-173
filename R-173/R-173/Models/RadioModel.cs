@@ -2,7 +2,7 @@
 
 namespace R_173.Models
 {
-    public enum SwitcherState { Enable, Disable }
+    public enum SwitcherState { Disabled = 0, Enabled = 1 }
 
     public class RadioModel
     {
@@ -53,17 +53,17 @@ namespace R_173.Models
 
         public RadioModel()
         {
-            Frequency = new Property<int>();
-            Interference = new Property<SwitcherState>();
-            Power = new Property<SwitcherState>();
-            Tone = new Property<SwitcherState>();
-            Noise = new Property<SwitcherState>();
-            VolumePRM = new Property<int>();
-            TurningOn = new Property<SwitcherState>();
-            LeftPuOa = new Property<SwitcherState>();
-            RightPuOa = new Property<SwitcherState>();
-            Volume = new Property<int>();
-            RecordWork = new Property<SwitcherState>();
+            Frequency = new Property<int>(nameof(Frequency));
+            Interference = new Property<SwitcherState>(nameof(Interference));
+            Power = new Property<SwitcherState>(nameof(Power));
+            Tone = new Property<SwitcherState>(nameof(Tone));
+            Noise = new Property<SwitcherState>(nameof(Noise));
+            VolumePRM = new Property<int>(nameof(VolumePRM));
+            TurningOn = new Property<SwitcherState>(nameof(TurningOn));
+            LeftPuOa = new Property<SwitcherState>(nameof(LeftPuOa));
+            RightPuOa = new Property<SwitcherState>(nameof(RightPuOa));
+            Volume = new Property<int>(nameof(Volume));
+            RecordWork = new Property<SwitcherState>(nameof(RecordWork));
         }
     }
 }
