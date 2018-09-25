@@ -14,7 +14,7 @@ namespace R_173
     /// </summary>
     public partial class App : Application
     {
-        public static IUnityContainer ServiceCollection;
+        public static UnityContainer ServiceCollection;
 
         public static ISamplePlayer Player;
 
@@ -42,7 +42,12 @@ namespace R_173
             container.RegisterType<IRadioManager, RadioManager>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReaderAndSender<SendableRadioModel>, AudioReaderAndSender>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
+            container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
 
+            var manager = container.Resolve<IRadioManager>();
+            var model = new Models.RadioModel();
+            manager.SetModel(model);
+            model.Power = ModelS
             ServiceCollection = container;
         }
     }
