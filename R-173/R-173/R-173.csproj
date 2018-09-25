@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\DataSenderTest.cs" />
     <Compile Include="BL\RadioManager.cs" />
     <Compile Include="BL\RadioModelManager.cs" />
     <Compile Include="Extensions\IDataProcessingBuilder.cs" />

@@ -91,7 +91,13 @@ namespace R_173.BL
         {
             if(e.NewValue == RecordWorkState.Record) // запись
             {
-
+                _reader.Start();
+                _player.Stop();
+            }
+            else
+            {
+                _reader.Stop();
+                _player.Start();
             }
         }
 

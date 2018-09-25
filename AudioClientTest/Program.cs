@@ -55,7 +55,7 @@ namespace AudioClientTest
                     {
                         Guid = guid,
                         RawAudioSample = buffer,
-                        RadioModel = new RadioModel{ Frequency = 100 }
+                        RadioModel = new SendableRadioModel{ Frequency = 100 }
                     };
 
                     transmitter.Write(converter.ConvertToBytes(data));
