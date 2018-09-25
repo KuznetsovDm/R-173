@@ -99,7 +99,9 @@
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\DataSenderTest.cs" />
+    <Compile Include="Interfaces\IGlobalNoiseController.cs" />
     <Compile Include="BL\Microphone.cs" />
+    <Compile Include="BL\NoiseProvider.cs" />
     <Compile Include="BL\RadioManager.cs" />
     <Compile Include="BL\DataModelProcessingBuilder.cs" />
     <Compile Include="Interfaces\ISamplePlayer.cs" />
