@@ -1,21 +1,42 @@
 ﻿using P2PMulticastNetwork.Interfaces;
+using P2PMulticastNetwork.Model;
+using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
 
 namespace R_173.BL
 {
-    public class RadioManager
+    public class RadioManager : IRadioManager
     {
         private RadioModel _radioModel;
         private IAudioReaderAndSender<SendableRadioModel> _reader;
         private IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
 
-        public RadioManager(RadioModel radioModel, IAudioReaderAndSender<SendableRadioModel> reader,
+        public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
             IAudioReceiverAndPlayer<ReceivableRadioModel> player)
         {
-            _radioModel = radioModel;
             _reader = reader;
             _player = player;
+        }
+
+        public void SetModel(RadioModel radioModel)
+        {
+            if(_radioModel != null)
+            {
+                _radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
+                _radioModel.Interference.ValueChanged -= Interference_ValueChanged;
+                _radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
+                _radioModel.Noise.ValueChanged -= Noise_ValueChanged;
+                _radioModel.Power.ValueChanged -= Power_ValueChanged;
+                _radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
+                _radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
+                _radioModel.Tone.ValueChanged -= Tone_ValueChanged;
+                _radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
+                _radioModel.Volume.ValueChanged -= Volume_ValueChanged;
+                _radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+            }
+
+            _radioModel = radioModel;
 
             #region Events
             _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
@@ -66,9 +87,9 @@ namespace R_173.BL
 
         }
 
-        private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-            if(e.NewValue == SwitcherState.Enabled) // работа
+            if(e.NewValue == RecordWorkState.Record) // запись
             {
 
             }
@@ -79,9 +100,9 @@ namespace R_173.BL
 
         }
 
-        private void Noise_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        private void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
-
+            _player.SetFilter(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void LeftPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -114,7 +135,7 @@ namespace R_173.BL
             return new ReceivableRadioModel
             {
                 Frequency = radioModel.Frequency.Value,
-                Noise = radioModel.Noise.Value == SwitcherState.Enabled,
+                Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
                 Volume = radioModel.Volume.Value
             };
         }

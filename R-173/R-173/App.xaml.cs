@@ -12,6 +12,7 @@ using R_173.Extensions;
 using R_173.Handlers;
 using RadioPipeline;
 using Unity;
+using Unity.Lifetime;
 
 namespace R_173
 {
@@ -76,6 +77,8 @@ namespace R_173
             IUnityContainer container = new UnityContainer();
             container.AddCommunicationServices()
                      .AddAudioServices();
+
+            container.RegisterType<IRadioManager, RadioManager>(new SingletonLifetimeManager());
 
             ServiceCollection = container;
         }

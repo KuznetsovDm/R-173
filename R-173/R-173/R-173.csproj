@@ -96,14 +96,16 @@
     <Compile Include="BL\RadioManager.cs" />
     <Compile Include="Extensions\ISamplePlayer.cs" />
     <Compile Include="Handlers\IDataProcessingBuilder.cs" />
+    <Compile Include="BL\RadioModelManager.cs" />
+    <Compile Include="Extensions\IDataProcessingBuilder.cs" />
     <Compile Include="Extensions\RadioCommunicationExtensions.cs" />
     <Compile Include="Extensions\RadioHandlingExtensions.cs" />
     <Compile Include="Handlers\AudioMixerHandler.cs" />
     <Compile Include="Handlers\IInvoker.cs" />
+    <Compile Include="Interfaces\IRadioManager.cs" />
+    <Compile Include="Interfaces\IRadioModelManager.cs" />
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
-    <Compile Include="Models\ReceivableRadioModel.cs" />
-    <Compile Include="Models\SendableRadioModel.cs" />
     <Compile Include="Views\RadioView.xaml.cs">
       <DependentUpon>RadioView.xaml</DependentUpon>
     </Compile>

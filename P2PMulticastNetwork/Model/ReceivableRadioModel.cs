@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace R_173.Models
+namespace P2PMulticastNetwork.Model
 {
     [Serializable]
     public struct ReceivableRadioModel

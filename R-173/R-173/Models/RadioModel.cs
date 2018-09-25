@@ -1,9 +1,16 @@
 ﻿namespace R_173.Models
 {
     public enum SwitcherState { Enabled, Disabled }
+    public enum RecordWorkState { Record, Work }
+    public enum NoiseState { Minimum, Maximum }
+
 
     public class RadioModel
     {
+        /// <summary>
+        /// Количество рабочих частот
+        /// </summary>
+        public const int WorkingFrequenciesCount = 10;
         /// <summary>
         /// Частота
         /// </summary>
@@ -23,7 +30,7 @@
         /// <summary>
         /// Тумблер "Подавитель шумов"
         /// </summary>
-        public readonly Property<SwitcherState> Noise;
+        public readonly Property<NoiseState> Noise;
         /// <summary>
         /// Ручка "Громкость ПРМ"
         /// </summary>
@@ -47,7 +54,11 @@
         /// <summary>
         /// Тумблер "Запись - работа"
         /// </summary>
-        public readonly Property<SwitcherState> RecordWork;
+        public readonly Property<RecordWorkState> RecordWork;
+        /// <summary>
+        /// Список рабочих частот
+        /// </summary>
+        public readonly int[] WorkingFrequencies;
 
         public RadioModel()
         {
@@ -55,13 +66,14 @@
             Interference = new Property<SwitcherState>();
             Power = new Property<SwitcherState>();
             Tone = new Property<SwitcherState>();
-            Noise = new Property<SwitcherState>();
+            Noise = new Property<NoiseState>();
             VolumePRM = new Property<int>();
             TurningOn = new Property<SwitcherState>();
             LeftPuOa = new Property<SwitcherState>();
             RightPuOa = new Property<SwitcherState>();
             Volume = new Property<int>();
-            RecordWork = new Property<SwitcherState>();
+            RecordWork = new Property<RecordWorkState>();
+            WorkingFrequencies = new int[WorkingFrequenciesCount];
         }
     }
 }

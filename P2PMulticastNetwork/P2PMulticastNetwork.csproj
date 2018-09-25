@@ -74,6 +74,8 @@
     <Compile Include="Interfaces\IDataReceiver.cs" />
     <Compile Include="Interfaces\IDataTransmitter.cs" />
     <Compile Include="Interfaces\IPipeline.cs" />
+    <Compile Include="Model\ReceivableRadioModel.cs" />
+    <Compile Include="Model\SendableRadioModel.cs" />
     <Compile Include="Network\IDependencyResolver.cs" />
     <Compile Include="Network\IPiplineProcessingInput.cs" />
     <Compile Include="Network\MulticastConnectionOptions.cs" />
