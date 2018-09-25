@@ -62,11 +62,6 @@ namespace R_173
             .UseMiddleware<AudioMixerHandler>()
             .Build();
 
-            var builderOutput = ServiceCollection.Resolve<IDataProcessingBuilder>();
-            var outputPipeline = builderOutput.Use(async (data, next)=>
-            {
-            });
-
             Server = ServiceCollection.Resolve<IDataMiner>();
             var converter = ServiceCollection.Resolve<IDataAsByteConverter<DataModel>>();
             Server.OnDataAwaliable(async (bytes) =>

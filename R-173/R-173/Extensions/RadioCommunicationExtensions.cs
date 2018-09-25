@@ -22,6 +22,8 @@ namespace R_173.Extensions
             services.RegisterInstance<IDataMiner>(miner, new SingletonLifetimeManager());
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
+            services.RegisterInstance<IDataTransmitter>(new UdpMulticastConnection(
+                MulticastConnectionOptions.Create(exclusiveAddressUse: false, useBind: false)));
             return services;
         }
 
@@ -35,6 +37,7 @@ namespace R_173.Extensions
             services.RegisterInstance<MixingSampleProvider>(mixer, new SingletonLifetimeManager());
             var player = new SamplePlayer(format);
             player.Add(mixer);
+            player.Add(new NoiseProvider());
             services.RegisterInstance<ISamplePlayer>(player, new SingletonLifetimeManager());
             return services;
         }
