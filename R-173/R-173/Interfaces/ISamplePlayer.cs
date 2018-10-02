@@ -11,5 +11,6 @@ namespace R_173.Interfaces
         void Add(ISampleProvider provider);
         void Play();
         void Stop();
+        float Volume { get; set; }
     }
 }

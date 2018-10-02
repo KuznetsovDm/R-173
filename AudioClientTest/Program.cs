@@ -20,7 +20,7 @@ namespace AudioClientTest
             {
                 Type = SignalGeneratorType.White,
                 Gain = 0.1,
-                Frequency = 1000,
+                Frequency = 123132,
             };
 
             //using(var wo = new WaveOutEvent())
@@ -55,7 +55,7 @@ namespace AudioClientTest
                     {
                         Guid = guid,
                         RawAudioSample = buffer,
-                        RadioModel = new SendableRadioModel{ Frequency = 100 }
+                        RadioModel = new SendableRadioModel{ Frequency = 123132 }
                     };
 
                     transmitter.Write(converter.ConvertToBytes(data));
