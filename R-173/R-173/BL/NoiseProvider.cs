@@ -21,14 +21,14 @@ namespace R_173.BL
 
         public int Read(float[] buffer, int offset, int count)
         {
-            if(_useRead)
+            if (_useRead)
                 return _signalrGenerator.Read(buffer, offset, count);
             return 0;
         }
 
         public void Play()
         {
-            _useRead = false;
+            _useRead = true;
         }
 
         public void Stop()

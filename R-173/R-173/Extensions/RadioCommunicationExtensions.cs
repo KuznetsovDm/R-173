@@ -37,7 +37,9 @@ namespace R_173.Extensions
             services.RegisterInstance<MixingSampleProvider>(mixer, new SingletonLifetimeManager());
             var player = new SamplePlayer(format);
             player.Add(mixer);
-            player.Add(new NoiseProvider());
+            var noise = new NoiseProvider();
+            player.Add(noise);
+            services.RegisterInstance<IGlobalNoiseController>(noise);
             services.RegisterInstance<ISamplePlayer>(player, new SingletonLifetimeManager());
             return services;
         }
