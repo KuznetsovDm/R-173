@@ -87,7 +87,6 @@ namespace R_173.BL
 
         private void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-
         }
 
         private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)

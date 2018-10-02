@@ -10,9 +10,10 @@ namespace R_173.BL
     {
         private WaveIn _audioListener;
 
-        public Microphone()
+        public Microphone(WaveFormat format)
         {
             _audioListener = new WaveIn();
+            _audioListener.WaveFormat = format;
             _audioListener.DataAvailable += (obj, args) =>
             {
                 var bytes = new byte[args.BytesRecorded];
