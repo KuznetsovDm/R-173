@@ -22,7 +22,7 @@ namespace R_173.BL
             _player.Init(_volumeFilter);
         }
 
-        public float Volume { get => _volumeFilter.Volume; set => _volumeFilter.Volume = (float)Math.Pow(value * 10, 2f); }
+        public float Volume { get => _volumeFilter.Volume; set => _volumeFilter.Volume = (float)Math.Pow(value, Math.E); }
 
         public void Add(ISampleProvider provider)
         {
