@@ -3,6 +3,7 @@ using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BL;
 using R_173.Extensions;
+using R_173.Handlers;
 using R_173.Interfaces;
 using Unity;
 using Unity.Lifetime;
@@ -20,6 +21,8 @@ namespace R_173
         {
             ConfigureIOC();
             base.OnStartup(e);
+            var obj = ServiceCollection.Resolve<MainWindow>();
+            obj.Show();
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -37,8 +40,10 @@ namespace R_173
             container.RegisterType<IAudioReaderAndSender<SendableRadioModel>, AudioReaderAndSender>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
             container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
-
+            container.RegisterType<MainWindow>(new SingletonLifetimeManager());
+            container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
             ServiceCollection = container;
+
         }
     }
 }
