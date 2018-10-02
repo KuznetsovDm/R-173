@@ -20,6 +20,8 @@ namespace R_173.Views.Radio
             IsVisibleChanged += (s, e) =>
                 App.ServiceCollection.Resolve<IRadioManager>().
                 SetModel((bool)e.NewValue ? viewModel.Model : null);
+
+
         }
     }
 }

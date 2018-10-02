@@ -1,5 +1,6 @@
 ﻿using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
+using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
@@ -11,16 +12,19 @@ namespace R_173.BL
         private RadioModel _radioModel;
         private IAudioReaderAndSender<SendableRadioModel> _reader;
         private IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
+        private readonly KeyboardHandler _keyboardHandler;
 
         public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
-            IAudioReceiverAndPlayer<ReceivableRadioModel> player)
+            IAudioReceiverAndPlayer<ReceivableRadioModel> player, KeyboardHandler keyboardHandler)
         {
             _reader = reader;
             _player = player;
+            this._keyboardHandler = keyboardHandler;
         }
 
         public void SetModel(RadioModel radioModel)
         {
+            _keyboardHandler.ActivateRadio(radioModel);
             if(_radioModel != null)
             {
                 _radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;

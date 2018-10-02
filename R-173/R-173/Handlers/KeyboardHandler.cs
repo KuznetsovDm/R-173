@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace R_173.Handlers
 {
-    class KeyboardHandler
+    public class KeyboardHandler
     {
         private readonly Dictionary<Key, Action> _onKeyDownActions;
         private readonly Dictionary<Key, Action> _onKeyUpActions;
