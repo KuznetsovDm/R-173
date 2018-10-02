@@ -25,8 +25,6 @@ namespace R_173
                 { nameof(Training), new Training() },
                 { nameof(Work), new Work() }
             };
-
-            KeyDown += (s, e) => System.Diagnostics.Trace.WriteLine(e.Key);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
