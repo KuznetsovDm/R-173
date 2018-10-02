@@ -14,12 +14,12 @@ namespace R_173.Views.Radio
         {
             InitializeComponent();
 
-            var viewModel = new RadioViewModel();
-            DataContext = viewModel;
+            var radioViewModel = new RadioViewModel();
+            DataContext = radioViewModel;
 
             IsVisibleChanged += (s, e) =>
                 App.ServiceCollection.Resolve<IRadioManager>().
-                SetModel((bool)e.NewValue ? viewModel.Model : null);
+                SetModel((bool)e.NewValue ? radioViewModel.Model : null);
         }
     }
 }

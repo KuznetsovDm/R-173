@@ -55,6 +55,10 @@
         /// </summary>
         public readonly Property<RecordWorkState> RecordWork;
         /// <summary>
+        /// Тумблер "ПРД"
+        /// </summary>
+        public readonly Property<SwitcherState> Sending;
+        /// <summary>
         /// Список рабочих частот
         /// </summary>
         public readonly int[] WorkingFrequencies;
@@ -72,6 +76,7 @@
             RightPuOa = new Property<SwitcherState>(p => p, nameof(RightPuOa));
             Volume = new Property<double>(p => p < 0 ? 0 : p > 1 ? 1 : p, nameof(Volume));
             RecordWork = new Property<RecordWorkState>(p => p, nameof(RecordWork));
+            Sending = new Property<SwitcherState>(p => p, nameof(Sending));
             WorkingFrequencies = new int[WorkingFrequenciesCount];
         }
     }
