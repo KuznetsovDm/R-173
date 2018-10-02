@@ -1,5 +1,6 @@
 ﻿using R_173.SharedResources;
 using System;
+using System.Windows.Input;
 
 namespace R_173.Models
 {
@@ -8,10 +9,12 @@ namespace R_173.Models
         public event EventHandler<ValueChangedEventArgs<T>> ValueChanged;
 
         private T _value;
+        private readonly Func<T, T> _checkValue;
         private readonly string _name;
 
-        public Property(string name = "")
+        public Property(Func<T, T> checkValue, string name = "")
         {
+            _checkValue = checkValue;
             _name = name;
         }
 
@@ -21,11 +24,12 @@ namespace R_173.Models
             get => _value;
             set
             {
-                if (value.Equals(_value))
+                var newValue = _checkValue(value);
+                if (newValue.Equals(_value))
                     return;
-                _value = value;
-                System.Diagnostics.Trace.WriteLine($"{_name} = {value}");
-                ValueChanged?.Invoke(this, new ValueChangedEventArgs<T>(value));
+                _value = newValue;
+                System.Diagnostics.Trace.WriteLine($"{_name} = {newValue}");
+                ValueChanged?.Invoke(this, new ValueChangedEventArgs<T>(newValue));
             }
         }
     }

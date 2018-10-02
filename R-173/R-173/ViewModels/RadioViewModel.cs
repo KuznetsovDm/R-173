@@ -77,12 +77,12 @@ namespace R_173.ViewModels
             };
             Model.Volume.ValueChanged += (s, e) =>
             {
-                _volume = e.NewValue;
+                _volume = e.NewValue * 360;
                 OnPropertyChanged(nameof(Volume));
             };
             Model.VolumePRM.ValueChanged += (s, e) =>
             {
-                _volumePRM = e.NewValue;
+                _volumePRM = e.NewValue * 360;
                 OnPropertyChanged(nameof(VolumePRM));
             };
         }
@@ -144,7 +144,7 @@ namespace R_173.ViewModels
             get => _volumePRM;
             set
             {
-                Model.VolumePRM.Value = value;
+                Model.VolumePRM.Value = value / 360;
             }
         }
 
@@ -180,7 +180,7 @@ namespace R_173.ViewModels
             get => _volume;
             set
             {
-                Model.Volume.Value = value;
+                Model.Volume.Value = value / 360;
             }
         }
 

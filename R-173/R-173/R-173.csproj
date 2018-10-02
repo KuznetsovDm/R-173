@@ -118,15 +118,27 @@
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
-    <Compile Include="Views\ClickedImage.cs" />
-    <Compile Include="Views\RadioView.xaml.cs">
+    <Compile Include="Views\Appointment.xaml.cs">
+      <DependentUpon>Appointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Radio\ClickedImage.cs" />
+    <Compile Include="Views\Radio\RadioView.xaml.cs">
       <DependentUpon>RadioView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SharedResources\SimpleCommand.cs" />
     <Compile Include="SharedResources\ValueChangedEventArgs.cs" />
     <Compile Include="ViewModels\RadioViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\RotatedImage.cs" />
+    <Compile Include="Views\Radio\RotatedImage.cs" />
+    <Compile Include="Views\Tasks.xaml.cs">
+      <DependentUpon>Tasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Training.xaml.cs">
+      <DependentUpon>Training.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Work.xaml.cs">
+      <DependentUpon>Work.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,10 +151,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\RadioView.xaml">
+    <Page Include="Views\Appointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Radio\RadioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Training.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Work.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

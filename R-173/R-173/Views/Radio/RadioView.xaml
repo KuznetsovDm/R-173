@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="R_173.Views.RadioView"
+﻿<UserControl x:Class="R_173.Views.Radio.RadioView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:models="clr-namespace:R_173.ViewModels"
-             xmlns:local="clr-namespace:R_173.Views"
+             xmlns:radio="clr-namespace:R_173.Views.Radio"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type models:RadioViewModel}}">
@@ -38,7 +38,7 @@
                 <Setter Property="Width" Value="136"/>
                 <Setter Property="Height" Value="130"/>
             </Style>
-            <Style x:Key="Button" TargetType="local:ClickedImage">
+            <Style x:Key="Button" TargetType="radio:ClickedImage">
                 <Setter Property="Source" Value="/Files/button.png"/>
                 <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
                 <Setter Property="Cursor" Value="Hand"/>
@@ -52,7 +52,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <Style TargetType="local:Encoder">
+            <Style TargetType="radio:Encoder">
                 <Setter Property="Source" Value="/Files/switcher.png"/>
                 <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
                 <Setter Property="Cursor" Value="Hand"/>
@@ -73,7 +73,7 @@
                   Height="132" Width="72"
                   Style="{StaticResource Switcher}" IsChecked="{Binding Path=Power}"/>
         <!-- Тон -->
-        <local:ClickedImage Canvas.Left="1882" Canvas.Top="914"
+        <radio:ClickedImage Canvas.Left="1882" Canvas.Top="914"
                             Style="{StaticResource Button}"
                             IsDown="{Binding Path=Tone}"
                             Click="{Binding Path=ButtonCommand}"/>
@@ -97,10 +97,10 @@
                   Height="132" Width="72"
                   Style="{StaticResource Switcher}" IsChecked="{Binding Path=RecordWork}"/>
         <!-- Громкость -->
-        <local:Encoder Canvas.Left="1620" Canvas.Top="1502" Width="100"
+        <radio:Encoder Canvas.Left="1620" Canvas.Top="1502" Width="100"
                        Rotate="{Binding Path=VolumeCommand}" Angle="{Binding Path=Volume}"/>
         <!-- Громкость ПРМ -->
-        <local:Encoder Canvas.Left="1713" Canvas.Top="1163" Width="100"
+        <radio:Encoder Canvas.Left="1713" Canvas.Top="1163" Width="100"
                        Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM}"/>
         <Button Canvas.Left="1014" Canvas.Top="981" 
                 Style="{StaticResource Number}" CommandParameter="1"/>

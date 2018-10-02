@@ -3,7 +3,7 @@ using R_173.ViewModels;
 using System.Windows.Controls;
 using Unity;
 
-namespace R_173.Views
+namespace R_173.Views.Radio
 {
     /// <summary>
     /// Логика взаимодействия для View.xaml

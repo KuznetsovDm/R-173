@@ -61,17 +61,17 @@
 
         public RadioModel()
         {
-            Frequency = new Property<int>();
-            Interference = new Property<SwitcherState>();
-            Power = new Property<SwitcherState>();
-            Tone = new Property<SwitcherState>();
-            Noise = new Property<NoiseState>();
-            VolumePRM = new Property<double>();
-            TurningOn = new Property<SwitcherState>();
-            LeftPuOa = new Property<SwitcherState>();
-            RightPuOa = new Property<SwitcherState>();
-            Volume = new Property<double>();
-            RecordWork = new Property<RecordWorkState>();
+            Frequency = new Property<int>(p => p, nameof(Frequency));
+            Interference = new Property<SwitcherState>(p => p, nameof(Interference));
+            Power = new Property<SwitcherState>(p => p, nameof(Power));
+            Tone = new Property<SwitcherState>(p => p, nameof(Tone));
+            Noise = new Property<NoiseState>(p => p, nameof(Noise));
+            VolumePRM = new Property<double>(p => p < 0 ? 0 : p > 1 ? 1 : p, nameof(VolumePRM));
+            TurningOn = new Property<SwitcherState>(p => p, nameof(TurningOn));
+            LeftPuOa = new Property<SwitcherState>(p => p, nameof(LeftPuOa));
+            RightPuOa = new Property<SwitcherState>(p => p, nameof(RightPuOa));
+            Volume = new Property<double>(p => p < 0 ? 0 : p > 1 ? 1 : p, nameof(Volume));
+            RecordWork = new Property<RecordWorkState>(p => p, nameof(RecordWork));
             WorkingFrequencies = new int[WorkingFrequenciesCount];
         }
     }

@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace R_173.Views
+namespace R_173.Views.Radio
 {
     public class Encoder : Image
     {

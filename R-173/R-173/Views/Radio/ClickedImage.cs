@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace R_173.Views
+namespace R_173.Views.Radio
 {
     public class ClickedImage : Image
     {

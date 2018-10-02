@@ -4,75 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173"
-        xmlns:views="clr-namespace:R_173.Views"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1024"
-        Title="Р-173" WindowState="Maximized">
-    <TabControl>
-        <TabControl.Resources>
-            <local:TabSizeConverter x:Key="tabSizeConverter" />
-            <Style TargetType="TabItem">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Border x:Name="border" CornerRadius="3, 3, 0, 0" Background="WhiteSmoke">
-                                <Border.Width>
-                                    <MultiBinding Converter="{StaticResource tabSizeConverter}">
-                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" />
-                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" Path="ActualWidth" />
-                                    </MultiBinding>
-                                </Border.Width>
-                                <TextBlock Margin="3" 
-                                           Text="{TemplateBinding Header}"
+        Title="Р-173" WindowState="Maximized" FontFamily="Times New Roman">
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Top" Columns="4">
+            <UniformGrid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Margin="2" CornerRadius="3, 3, 0, 0" Background="WhiteSmoke">
+                                    <TextBlock Margin="3" 
+                                           Text="{TemplateBinding Content}"
                                            FontSize="18" FontFamily="Times New Roman" FontWeight="Bold" 
                                            TextAlignment="Center"
                                            Cursor="Hand"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="border" Property="Background" Value="Khaki"/>
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="border" Property="Background" Value="OliveDrab"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </TabControl.Resources>
-        <TabItem>
-            <TabItem.Header>
-                1. Назначение, ТТХ, комплект
-            </TabItem.Header>
-            <TabItem.Content>
-                <TextBlock>1. Назначение, ТТХ, комплект</TextBlock>
-            </TabItem.Content>
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                2. Обучение
-            </TabItem.Header>
-            <TabItem.Content>
-                <TextBlock>2. Обучение</TextBlock>
-            </TabItem.Content>
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                3. Работа на радиостанции
-            </TabItem.Header>
-            <TabItem.Content>
-                <Viewbox Stretch="Fill">
-                    <views:RadioView/>
-                </Viewbox>
-            </TabItem.Content>
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                4. Задачи
-            </TabItem.Header>
-            <TabItem.Content>
-                <TextBlock>4. Задачи</TextBlock>
-            </TabItem.Content>
-        </TabItem>
-    </TabControl>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </UniformGrid.Resources>
+
+            <Button Grid.Column="0" Content="1. Назначение, ТТХ, комплект" Click="Button_Click" CommandParameter="Appointment"/>
+            <Button Grid.Column="1" Content="2. Обучение" Click="Button_Click" CommandParameter="Training"/>
+            <Button Grid.Column="2" Content="3. Работа на радиостанции" Click="Button_Click" CommandParameter="Work"/>
+            <Button Grid.Column="3" Content="4. Задачи" Click="Button_Click" CommandParameter="Tasks"/>
+        </UniformGrid>
+
+        <Frame x:Name="Main_Frame" NavigationUIVisibility="Hidden"/>
+    </DockPanel>
 </Window>

@@ -1,24 +1,9 @@
-﻿using System;
+﻿using R_173.Views;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using P2PMulticastNetwork;
-using P2PMulticastNetwork.Model;
-using P2PMulticastNetwork.Interfaces;
-using R_173.Extensions;
-using RadioPipeline;
-using Unity;
-using Unity.Lifetime;
 
 namespace R_173
 {
@@ -27,10 +12,27 @@ namespace R_173
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly Dictionary<string, Page> _pages;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _pages = new Dictionary<string, Page>
+            {
+                { nameof(Tasks), new Tasks() },
+                { nameof(Appointment), new Appointment() },
+                { nameof(Training), new Training() },
+                { nameof(Work), new Work() }
+            };
+
+            KeyDown += (s, e) => System.Diagnostics.Trace.WriteLine(e.Key);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var pageName = (sender as Button).CommandParameter.ToString();
+            Main_Frame.Content = _pages[pageName];
         }
     }
 
