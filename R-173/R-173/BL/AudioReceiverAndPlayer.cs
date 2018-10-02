@@ -54,6 +54,7 @@ namespace R_173.BL
         public void SetModel(ReceivableRadioModel model)
         {
             _model = model;
+            _noise.Volume = model.Noise ? 0.1f : 0.01f;
         }
 
         public void Start()
