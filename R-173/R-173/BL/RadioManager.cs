@@ -19,13 +19,13 @@ namespace R_173.BL
         {
             _reader = reader;
             _player = player;
-            this._keyboardHandler = keyboardHandler;
+            _keyboardHandler = keyboardHandler;
         }
 
         public void SetModel(RadioModel radioModel)
         {
             _keyboardHandler.ActivateRadio(radioModel);
-            if(_radioModel != null)
+            if (_radioModel != null)
             {
                 _radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
                 _radioModel.Interference.ValueChanged -= Interference_ValueChanged;
@@ -42,7 +42,7 @@ namespace R_173.BL
 
             _radioModel = radioModel;
 
-            if(_radioModel != null)
+            if (_radioModel != null)
             {
                 #region Events
                 _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
@@ -100,7 +100,7 @@ namespace R_173.BL
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-            if(e.NewValue == RecordWorkState.Record) // запись
+            if (e.NewValue == RecordWorkState.Record) // запись
             {
                 _reader.Start();
                 _player.Stop();

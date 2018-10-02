@@ -13,7 +13,7 @@ namespace R_173.Handlers
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
 
-        public KeyboardHandler(Window _mainWindow)
+        public KeyboardHandler(MainWindow _mainWindow)
         {
             _onKeyDownActions = new Dictionary<Key, Action>
             {
