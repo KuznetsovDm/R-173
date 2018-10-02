@@ -17,7 +17,7 @@ namespace R_173.Views.Radio
             var viewModel = new RadioViewModel();
             DataContext = viewModel;
 
-            IsVisibleChanged += (s, e) => 
+            IsVisibleChanged += (s, e) =>
                 App.ServiceCollection.Resolve<IRadioManager>().
                 SetModel((bool)e.NewValue ? viewModel.Model : null);
         }

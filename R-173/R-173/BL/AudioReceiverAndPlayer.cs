@@ -18,9 +18,11 @@ namespace R_173.BL
         private IDataProcessingBuilder _builder;
         private PipelineDelegate<DataModel> _pipeline;
         private bool IsPlayerStarted = false;
+        private IGlobalNoiseController _noise;
 
         public AudioReceiverAndPlayer(IDataProvider provider, ISamplePlayer player,
-            IDataAsByteConverter<DataModel> converter, IDataProcessingBuilder builder)
+            IDataAsByteConverter<DataModel> converter, IDataProcessingBuilder builder,
+            IGlobalNoiseController globalNoise)
         {
             _provider = provider;
             _player = player;
@@ -28,6 +30,7 @@ namespace R_173.BL
             _builder = builder;
             Build();
             _provider.OnDataAvaliable += Provider_OnDataAvaliable;
+            _noise = globalNoise;
         }
 
         private void Provider_OnDataAvaliable(object sender, DataEventArgs e)
@@ -40,8 +43,9 @@ namespace R_173.BL
         {
             _pipeline = _builder.Use(async (model, next) =>
                                 {
-                                    if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
-                                        await next.Invoke(model);
+                                    //todo:
+                                    //if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                    await next.Invoke(model);
                                 })
                                 .UseMiddleware<AudioMixerHandler>()
                                 .Build();
@@ -50,6 +54,7 @@ namespace R_173.BL
         public void SetModel(ReceivableRadioModel model)
         {
             _model = model;
+            _noise.Volume = model.Noise ? 0.1f : 0.01f;
         }
 
         public void Start()
@@ -59,7 +64,8 @@ namespace R_173.BL
 
             IsPlayerStarted = true;
             _provider.Start();
-            _player.Play(); 
+            _noise.Play();
+            _player.Play();
             // TODO: noises start
         }
 
@@ -72,6 +78,7 @@ namespace R_173.BL
             _provider.Stop();
             _player.Stop();
             // TODO: noises stop
+            _noise.Stop();
         }
 
         public void Dispose()
