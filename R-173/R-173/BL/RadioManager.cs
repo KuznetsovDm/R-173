@@ -4,6 +4,7 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
+using R_173.ViewModels;
 
 namespace R_173.BL
 {
@@ -132,7 +133,7 @@ namespace R_173.BL
 
         }
 
-        private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<int> e)
+        private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<string> e)
         {
             _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
@@ -143,7 +144,7 @@ namespace R_173.BL
         {
             return new SendableRadioModel
             {
-                Frequency = radioModel.Frequency.Value
+                Frequency = int.Parse(radioModel.Frequency.Value)
             };
         }
 
@@ -151,7 +152,7 @@ namespace R_173.BL
         {
             return new ReceivableRadioModel
             {
-                Frequency = radioModel.Frequency.Value,
+                Frequency = int.Parse(radioModel.Frequency.Value),
                 Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
                 Volume = radioModel.Volume.Value
             };

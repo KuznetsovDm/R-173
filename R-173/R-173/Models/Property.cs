@@ -1,20 +1,21 @@
 ﻿using R_173.SharedResources;
 using System;
-using System.Windows.Input;
 
 namespace R_173.Models
 {
-    public class Property<T> where T : struct
+    public class Property<T>
     {
         public event EventHandler<ValueChangedEventArgs<T>> ValueChanged;
 
         private T _value;
-        private readonly Func<T, T> _checkValue;
+        private readonly Func<T, T, T> _checkValue;
+        private readonly Action _onValueChange;
         private readonly string _name;
 
-        public Property(Func<T, T> checkValue, string name = "")
+        public Property(Func<T, T, T> checkValue, Action onValueChange, string name = "")
         {
             _checkValue = checkValue;
+            _onValueChange = onValueChange;
             _name = name;
         }
 
@@ -24,12 +25,13 @@ namespace R_173.Models
             get => _value;
             set
             {
-                var newValue = _checkValue(value);
+                var newValue = _checkValue(_value, value);
                 if (newValue.Equals(_value))
                     return;
                 _value = newValue;
                 System.Diagnostics.Trace.WriteLine($"{_name} = {newValue}");
                 ValueChanged?.Invoke(this, new ValueChangedEventArgs<T>(newValue));
+                _onValueChange();
             }
         }
     }
