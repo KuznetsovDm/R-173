@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace R_173.BL.Handlers
+namespace R_173.BL.Utils
 {
-    public static class AudioVolumeSamplesHelper
+    public static class VolumeSamplesHelper
     {
         public static void SetVolume(byte[] buffer, float volume)
         {
@@ -16,6 +16,11 @@ namespace R_173.BL.Handlers
             {
                 floatBuffer[i] *= 4;
             }
+        }
+
+        public static float LogVolumeApproximation(float value)
+        {
+            return (float)Math.Pow(value, Math.E);
         }
     }
 }
