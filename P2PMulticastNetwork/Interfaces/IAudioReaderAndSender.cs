@@ -4,7 +4,9 @@ namespace P2PMulticastNetwork.Interfaces
 {
     public interface IAudioReaderAndSender<T> : IPipeline<T>, IDisposable
     {
-        void Start();
-        void Stop();
+        void StartListenMicrophone();
+        void StopListenMicrophone();
+        void StartListenTone();
+        void StopListenTone();
     }
 }

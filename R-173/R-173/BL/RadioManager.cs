@@ -61,8 +61,6 @@ namespace R_173.BL
             }
             else
             {
-                _reader.Stop();
-                _player.Stop();
             }
         }
 
@@ -85,13 +83,18 @@ namespace R_173.BL
             }
             else
             {
-                _reader.Stop();
+                _reader.StopListenMicrophone();
                 _player.Stop();
             }
         }
 
         private void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            if (e.NewValue == SwitcherState.Enabled)
+                _reader.StartListenTone();
+            else
+                _reader.StopListenTone();
+            System.Diagnostics.Trace.Write($"Tone: {e.NewValue}");
         }
 
         private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -103,12 +106,12 @@ namespace R_173.BL
         {
             if (e.NewValue == RecordWorkState.Record) // запись
             {
-                _reader.Start();
+                _reader.StartListenMicrophone();
                 _player.Stop();
             }
             else
             {
-                _reader.Stop();
+                _reader.StopListenMicrophone();
                 _player.Start();
             }
         }

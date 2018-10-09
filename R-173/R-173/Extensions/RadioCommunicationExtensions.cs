@@ -41,7 +41,7 @@ namespace R_173.Extensions
             player.Add(noise);
             services.RegisterInstance<IGlobalNoiseController>(noise);
             services.RegisterInstance<ISamplePlayer>(player, new SingletonLifetimeManager());
-            services.RegisterSingleton<KeyboardHandler>();
+            services.RegisterSingleton<ToneProvider>();
             return services;
         }
     }

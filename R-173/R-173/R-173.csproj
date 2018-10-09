@@ -98,7 +98,7 @@
     </ApplicationDefinition>
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
-    <Compile Include="BL\DataSenderTest.cs" />
+    <Compile Include="BL\ToneProvider.cs" />
     <Compile Include="Handlers\KeyboardHandler.cs" />
     <Compile Include="Interfaces\IGlobalNoiseController.cs" />
     <Compile Include="BL\Microphone.cs" />
