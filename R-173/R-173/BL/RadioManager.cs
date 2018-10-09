@@ -32,12 +32,12 @@ namespace R_173.BL
                 UnsubscribeEvents(_radioModel);
             }
 
-            if (radioModel != null)
-            {
-                SubscribeEvents(radioModel);
-            }
-
             _radioModel = radioModel;
+
+            if (radioModel == null)
+                return;
+
+            SubscribeEvents(radioModel);
 
             InitRadioManager(_radioModel);
         }
