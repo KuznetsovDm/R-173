@@ -99,6 +99,7 @@
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\BufferedWaveCompressor.cs" />
+    <Compile Include="BL\Handlers\AudioVolumeSamplesHelper.cs" />
     <Compile Include="BL\ToneProvider.cs" />
     <Compile Include="Handlers\KeyboardHandler.cs" />
     <Compile Include="Interfaces\IGlobalNoiseController.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="BL\RadioModelManager.cs" />
     <Compile Include="Extensions\RadioCommunicationExtensions.cs" />
     <Compile Include="Extensions\RadioHandlingExtensions.cs" />
-    <Compile Include="Handlers\AudioMixerHandler.cs" />
+    <Compile Include="BL\Handlers\AudioMixerHandler.cs" />
     <Compile Include="Interfaces\IInvoker.cs" />
     <Compile Include="Interfaces\IMicrophone.cs" />
     <Compile Include="Interfaces\IRadioManager.cs" />

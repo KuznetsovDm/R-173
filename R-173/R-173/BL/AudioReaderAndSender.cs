@@ -18,19 +18,22 @@ namespace R_173.BL
         private ToneProvider _tone;
         private Guid _SenderId = Guid.NewGuid();
 
-        public AudioReaderAndSender(IMicrophone microphone, IDataTransmitter transmitter,
-            IDataAsByteConverter<DataModel> converter, ToneProvider tone, BufferedWaveCompressor compressor)
+        public AudioReaderAndSender(IMicrophone microphone,
+            IDataTransmitter transmitter,
+            IDataAsByteConverter<DataModel> converter,
+            ToneProvider tone,
+            BufferedWaveCompressor compressor)
         {
             _tone = tone;
-            _tone.OnDataAvailable += Microphone_OnDataAvailable;
+            _tone.OnDataAvailable += OnSendDataAvailable;
             _microphone = microphone;
-            _microphone.OnDataAvailable += Microphone_OnDataAvailable;
+            _microphone.OnDataAvailable += OnSendDataAvailable;
             _transmitter = transmitter;
             _converter = converter;
             _compressor = compressor;
         }
 
-        private void Microphone_OnDataAvailable(object sender, DataEventArgs e)
+        private void OnSendDataAvailable(object sender, DataEventArgs e)
         {
             //var rawAudio = _compressor.Encode(e.Data, 0, e.Data.Length);
 

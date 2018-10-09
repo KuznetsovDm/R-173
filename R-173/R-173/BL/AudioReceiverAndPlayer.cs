@@ -1,5 +1,6 @@
 ﻿using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
+using R_173.BL.Handlers;
 using R_173.Handlers;
 using R_173.Interfaces;
 using RadioPipeline;
@@ -47,7 +48,13 @@ namespace R_173.BL
             _pipeline = _builder.Use(async (model, next) =>
                                 {
                                     //todo:
-                                    //if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                    if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                        await next.Invoke(model);
+                                })
+                                .Use(async (model, next) =>
+                                {
+                                    //float volume = 0.4f;
+                                    //AudioVolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
                                     await next.Invoke(model);
                                 })
                                 .UseMiddleware<AudioMixerHandler>()

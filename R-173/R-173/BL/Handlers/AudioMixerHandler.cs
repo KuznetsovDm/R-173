@@ -12,7 +12,7 @@ using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using R_173.Interfaces;
 
-namespace R_173.Handlers
+namespace R_173.BL.Handlers
 {
     public class AudioMixerHandler : IInvoker
     {
