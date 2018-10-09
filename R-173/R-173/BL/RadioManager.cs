@@ -38,10 +38,7 @@ namespace R_173.BL
             }
 
             _radioModel = radioModel;
-
-
         }
-
 
         #region Events
         private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
@@ -83,16 +80,7 @@ namespace R_173.BL
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-            if (e.NewValue == RecordWorkState.Record) // запись
-            {
-                _reader.StartListenMicrophone();
-                _player.Stop();
-            }
-            else
-            {
-                _reader.StopListenMicrophone();
-                _player.Start();
-            }
+
         }
 
         private void Power_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -153,6 +141,15 @@ namespace R_173.BL
             radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
             radioModel.Volume.ValueChanged += Volume_ValueChanged;
             radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
+            radioModel.Sending.ValueChanged += Sending_ValueChanged;
+        }
+
+        private void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if(e.NewValue == SwitcherState.Enabled)
+                _reader.StartListenMicrophone();
+            else
+                _reader.StopListenMicrophone();
         }
 
         private void UnsubscribeEvents(RadioModel radioModel)
@@ -168,6 +165,23 @@ namespace R_173.BL
             radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
             radioModel.Volume.ValueChanged -= Volume_ValueChanged;
             radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+            radioModel.Sending.ValueChanged -= Sending_ValueChanged;
+        }
+
+        private void InitRadioManager(RadioModel model)
+        {
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(model));
+            _reader.SetModel(GetSendableRadioModelFromRadioModel(model));
+
+            if(model.TurningOn.Value == SwitcherState.Enabled)
+            {
+                _player.Start();
+            }
+            else
+            {
+                _reader.StopListenMicrophone();
+                _player.Stop();
+            }
         }
     }
 }
