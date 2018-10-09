@@ -17,7 +17,7 @@ namespace R_173.Views
     /// <summary>
     /// Interaction logic for Appointment.xaml
     /// </summary>
-    public partial class Appointment : Page
+    public partial class Appointment : UserControl, ITabView
     {
         public Appointment()
         {

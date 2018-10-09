@@ -21,6 +21,8 @@ namespace R_173.ViewModels
         private double _volume;
         private bool _recordWork;
         private bool _sending;
+        private bool _board;
+        private bool _reset;
         private bool[] _numpad;
 
         public RadioViewModel()
@@ -43,7 +45,8 @@ namespace R_173.ViewModels
             Numpad7Command = new SimpleCommand<bool>(value => Numpad7 = value);
             Numpad8Command = new SimpleCommand<bool>(value => Numpad8 = value);
             Numpad9Command = new SimpleCommand<bool>(value => Numpad9 = value);
-
+            BoardCommand = new SimpleCommand<bool>(value => Board = value);
+            ResetCommand = new SimpleCommand<bool>(value => Reset = value);
 
             Model.FrequencyNumber.ValueChanged += (s, e) =>
             {
@@ -72,7 +75,7 @@ namespace R_173.ViewModels
             };
             Model.Power.ValueChanged += (s, e) =>
             {
-                _power = e.NewValue == SwitcherState.Enabled;
+                _power = e.NewValue == PowerState.Full;
                 OnPropertyChanged(nameof(Power));
             };
             Model.RecordWork.ValueChanged += (s, e) =>
@@ -110,6 +113,16 @@ namespace R_173.ViewModels
                 _sending = e.NewValue == SwitcherState.Enabled;
                 //OnPropertyChanged(nameof(VolumePRM));
             };
+            Model.Board.ValueChanged += (s, e) =>
+            {
+                _board = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(Board));
+            };
+            Model.Reset.ValueChanged += (s, e) =>
+            {
+                _reset = e.NewValue == SwitcherState.Enabled;
+                OnPropertyChanged(nameof(Reset));
+            };
 
             for (var i = 0; i < 10; i++)
             {
@@ -121,6 +134,8 @@ namespace R_173.ViewModels
                     OnPropertyChanged(propName);
                 };
             }
+
+            _recordWork = Model.RecordWork.Value == RecordWorkState.Work;
         }
 
         public ICommand ChangeFrequencyCommand { get; }
@@ -138,6 +153,8 @@ namespace R_173.ViewModels
         public ICommand Numpad7Command { get; }
         public ICommand Numpad8Command { get; }
         public ICommand Numpad9Command { get; }
+        public ICommand BoardCommand { get; }
+        public ICommand ResetCommand { get; }
 
 
         public int FrequencyNumber
@@ -161,190 +178,139 @@ namespace R_173.ViewModels
         public bool Interference
         {
             get => _interference;
-            set
-            {
-                Model.Interference.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Interference.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Power
         {
             get => _power;
-            set
-            {
-                Model.Power.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Power.Value = value ? PowerState.Full : PowerState.Small;
         }
 
         public bool Tone
         {
             get => _tone;
-            set
-            {
-                Model.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Noise
         {
             get => _noise;
-            set
-            {
-                Model.Noise.Value = value ? NoiseState.Maximum : NoiseState.Minimum;
-            }
+            set => Model.Noise.Value = value ? NoiseState.Maximum : NoiseState.Minimum;
         }
 
         public double VolumePRM
         {
             get => _volumePRM;
-            set
-            {
-                Model.VolumePRM.Value = value / 360;
-            }
+            set => Model.VolumePRM.Value = value / 360;
         }
 
         public bool TurningOn
         {
             get => _turningOn;
-            set
-            {
-                Model.TurningOn.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.TurningOn.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool LeftPuOa
         {
             get => _leftPuOa;
-            set
-            {
-                Model.LeftPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.LeftPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool RightPuOa
         {
             get => _rightPuOa;
-            set
-            {
-                Model.RightPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.RightPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public double Volume
         {
             get => _volume;
-            set
-            {
-                Model.Volume.Value = value / 360;
-            }
+            set => Model.Volume.Value = value / 360;
         }
 
         public bool RecordWork
         {
             get => _recordWork;
-            set
-            {
-                Model.RecordWork.Value = value ? RecordWorkState.Work : RecordWorkState.Record;
-            }
+            set => Model.RecordWork.Value = value ? RecordWorkState.Work : RecordWorkState.Record;
         }
 
         public bool SendingIsPressed
         {
             get => _sending;
-            set
-            {
-                Model.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad0
         {
             get => _numpad[0];
-            set
-            {
-                Model.Numpad[0].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[0].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad1
         {
             get => _numpad[1];
-            set
-            {
-                Model.Numpad[1].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[1].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad2
         {
             get => _numpad[2];
-            set
-            {
-                Model.Numpad[2].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[2].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad3
         {
             get => _numpad[3];
-            set
-            {
-                Model.Numpad[3].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[3].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad4
         {
             get => _numpad[4];
-            set
-            {
-                Model.Numpad[4].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[4].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad5
         {
             get => _numpad[5];
-            set
-            {
-                Model.Numpad[5].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[5].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad6
         {
             get => _numpad[6];
-            set
-            {
-                Model.Numpad[6].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[6].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad7
         {
             get => _numpad[7];
-            set
-            {
-                Model.Numpad[7].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[7].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad8
         {
             get => _numpad[8];
-            set
-            {
-                Model.Numpad[8].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[8].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public bool Numpad9
         {
             get => _numpad[9];
-            set
-            {
-                Model.Numpad[9].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-            }
+            set => Model.Numpad[9].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+        }
+
+        public bool Board
+        {
+            get => _board;
+            set => Model.Board.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+        }
+
+        public bool Reset
+        {
+            get => _reset;
+            set => Model.Reset.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
     }
 }

@@ -8,6 +8,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type models:RadioViewModel}}">
+    <UserControl.Resources>
+        <Style x:Key="Button" TargetType="{x:Type radio:ClickedImage}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Source" Value="/Files/button.png"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+            <Style.Triggers>
+                <Trigger Property="radio:ClickedImage.IsDown" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="Numpad" TargetType="{x:Type radio:ClickedImage}" BasedOn="{StaticResource Button}">
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
+    </UserControl.Resources>
     <Canvas Width="3988" Height="2388">
         <Canvas.Resources>
             <Style x:Name="ClickableElement" TargetType="FrameworkElement">
@@ -109,7 +128,7 @@
         <radio:ClickedImage Canvas.Left="1882" Canvas.Top="914"
                             Style="{StaticResource Button}"
                             IsDown="{Binding Path=Tone}"
-                            Click="{Binding Path=ButtonCommand}"/>
+                            Click="{Binding Path=ToneCommand}"/>
         <!-- Подавитель шумов -->
         <CheckBox Canvas.Left="1914" Canvas.Top="1214"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Noise}" Width="66"/>
@@ -165,7 +184,18 @@
         <radio:ClickedImage Canvas.Left="1324" Canvas.Top="1481" 
                             Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad0}"
                             Click="{Binding Path=Numpad0Command}"/>
-        <!--<Button Canvas.Left="1008" Canvas.Top="1475" 
-                Style="{StaticResource Number}" Command="{Binding Path=ClearFrequencyCommand}"/>-->
+        <radio:ClickedImage Canvas.Left="1170" Canvas.Top="1481" 
+                            Style="{StaticResource Numpad}" IsDown="{Binding Board}"
+                            Click="{Binding BoardCommand}"/>
+        <radio:ClickedImage Canvas.Left="1009" Canvas.Top="1477" 
+                            Style="{StaticResource Numpad}" IsDown="{Binding Reset}"
+                            Click="{Binding ResetCommand}"/>
+        <Canvas Name="DrawingTarget" ClipToBounds="True"
+                Canvas.Left="1612" Canvas.Top="408"
+                Background="Transparent"
+                Width="424" Height="328"
+                MouseLeftButtonDown="DrawingMouseDown"
+                MouseLeftButtonUp="DrawingMouseUp"
+                MouseMove="DrawingMouseMove"/>
     </Canvas>
 </UserControl>

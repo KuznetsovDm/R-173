@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173"
+        xmlns:views="clr-namespace:R_173.Views"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1024"
         Title="Р-173" WindowState="Maximized" FontFamily="Times New Roman">
     <DockPanel>
@@ -26,12 +27,12 @@
                 </Style>
             </UniformGrid.Resources>
 
-            <Button Grid.Column="0" Content="1. Назначение, ТТХ, комплект" Click="Button_Click" CommandParameter="Appointment"/>
-            <Button Grid.Column="1" Content="2. Обучение" Click="Button_Click" CommandParameter="Training"/>
-            <Button Grid.Column="2" Content="3. Работа на радиостанции" Click="Button_Click" CommandParameter="Work"/>
-            <Button Grid.Column="3" Content="4. Задачи" Click="Button_Click" CommandParameter="Tasks"/>
+            <Button Grid.Column="0" Content="1. Назначение, ТТХ, комплект" Click="Button_Click" CommandParameter="{x:Type views:Appointment}"/>
+            <Button Grid.Column="1" Content="2. Обучение" Click="Button_Click" CommandParameter="{x:Type views:Training}"/>
+            <Button Grid.Column="2" Content="3. Работа на радиостанции" Click="Button_Click" CommandParameter="{x:Type views:Work}"/>
+            <Button Grid.Column="3" Content="4. Задачи" Click="Button_Click" CommandParameter="{x:Type views:Tasks}"/>
         </UniformGrid>
 
-        <Frame x:Name="Main_Frame" NavigationUIVisibility="Hidden"/>
+        <ContentControl x:Name="MainContent"/>
     </DockPanel>
 </Window>
