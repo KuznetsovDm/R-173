@@ -122,6 +122,7 @@
     <Compile Include="Views\Appointment.xaml.cs">
       <DependentUpon>Appointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ITabView.cs" />
     <Compile Include="Views\Radio\ClickedImage.cs" />
     <Compile Include="Views\Radio\RadioView.xaml.cs">
       <DependentUpon>RadioView.xaml</DependentUpon>
@@ -136,6 +137,9 @@
     </Compile>
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\Preparation.xaml.cs">
+      <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Work.xaml.cs">
       <DependentUpon>Work.xaml</DependentUpon>
@@ -166,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Training.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\Preparation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

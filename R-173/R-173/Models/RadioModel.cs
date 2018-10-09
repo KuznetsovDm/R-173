@@ -1,8 +1,11 @@
-﻿namespace R_173.Models
+﻿using System;
+
+namespace R_173.Models
 {
     public enum SwitcherState { Disabled = 0, Enabled = 1 }
     public enum RecordWorkState { Record, Work }
     public enum NoiseState { Minimum, Maximum }
+    public enum PowerState { Small, Full }
 
     public class RadioModel
     {
@@ -25,7 +28,7 @@
         /// <summary>
         /// Тумблер "Мощность"
         /// </summary>
-        public readonly Property<SwitcherState> Power;
+        public readonly Property<PowerState> Power;
         /// <summary>
         /// Кнопка "Тон"
         /// </summary>
@@ -71,6 +74,10 @@
         /// </summary>
         public readonly Property<SwitcherState> Reset;
         /// <summary>
+        /// Кнопка "Табло"
+        /// </summary>
+        public readonly Property<SwitcherState> Board;
+        /// <summary>
         /// Кнопки циферблата
         /// </summary>
         public readonly Property<SwitcherState>[] Numpad;
@@ -84,7 +91,7 @@
             FrequencyNumber = new Property<int>((oldValue, newValue) => newValue, OnFrequnecyNumberChange, nameof(FrequencyNumber));
             Frequency = new Property<string>((oldValue, newValue) => newValue, OnFrequencyChange, nameof(Frequency));
             Interference = new Property<SwitcherState>((oldValue, newValue) => newValue, OnInterferenceChange, nameof(Interference));
-            Power = new Property<SwitcherState>((oldValue, newValue) => newValue, OnPowerChange, nameof(Power));
+            Power = new Property<PowerState>((oldValue, newValue) => newValue, OnPowerChange, nameof(Power));
             Tone = new Property<SwitcherState>((oldValue, newValue) => newValue, OnToneChange, nameof(Tone));
             Noise = new Property<NoiseState>((oldValue, newValue) => newValue, OnNoiseChange, nameof(Noise));
             VolumePRM = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, OnVolumePRMChange, nameof(VolumePRM));
@@ -94,118 +101,137 @@
             Volume = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, OnVolumeChange, nameof(Volume));
             RecordWork = new Property<RecordWorkState>((oldValue, newValue) => newValue, OnRecordWorkChange, nameof(RecordWork));
             Sending = new Property<SwitcherState>((oldValue, newValue) => newValue, OnSendingChange, nameof(Sending));
-
-            Scoreboard = new Property<SwitcherState>(
-                (oldValue, newValue) => RecordWork.Value == RecordWorkState.Record ? oldValue : newValue, 
-                OnScoreboardChange, 
-                nameof(Scoreboard));
-
             Reset = new Property<SwitcherState>((oldValue, newValue) => newValue, OnResetChange, nameof(Reset));
+            Board = new Property<SwitcherState>((oldValue, newValue) => newValue, OnBoardChange, nameof(Board));
             Numpad = new Property<SwitcherState>[10];
             for (var i = 0; i < 10; i++)
             {
                 var num = i;
-                Numpad[i] = new Property<SwitcherState>((oldValue, newValue) => newValue, () => OnNumpadChange(num), nameof(Numpad) + num.ToString());
+                Numpad[i] = new Property<SwitcherState>((oldValue, newValue) => newValue, value =>
+                {
+                    if (value == SwitcherState.Enabled)
+                        OnNumpadChange(num);
+                }, nameof(Numpad) + num.ToString());
             }
 
             WorkingFrequencies = new int[WorkingFrequenciesCount];
+            for (var i = 0; i < WorkingFrequenciesCount; i++)
+                WorkingFrequencies[i] = i * i;
 
-            Frequency.Value = "0";
+            OnFrequnecyNumberChange(0);
+            RecordWork.Value = RecordWorkState.Work;
         }
 
+        #region OnChange
+        private void OnFrequnecyNumberChange(int state)
+        {
+            if (TurningOn.Value == SwitcherState.Enabled && Board.Value == SwitcherState.Enabled)
+            Frequency.Value = WorkingFrequencies[state].ToString();
+        }
 
-        private void OnFrequnecyNumberChange()
+        private void OnFrequencyChange(string state)
         {
 
         }
 
-        private void OnFrequencyChange()
+        private void OnInterferenceChange(SwitcherState state)
         {
 
         }
 
-        private void OnInterferenceChange()
+        private void OnPowerChange(PowerState state)
         {
 
         }
 
-        private void OnPowerChange()
+        private void OnToneChange(SwitcherState state)
         {
 
         }
 
-        private void OnToneChange()
+        private void OnNoiseChange(NoiseState state)
         {
 
         }
 
-        private void OnNoiseChange()
+        private void OnVolumePRMChange(double value)
+        {
+
+        }
+        private void OnTurningOnChange(SwitcherState state)
+        {
+            if (TurningOn.Value == SwitcherState.Disabled)
+                return;
+
+            if (state == SwitcherState.Enabled)
+            {
+                FrequencyNumber.Value = 0;
+            }
+        }
+
+        private void OnLeftPuOaChange(SwitcherState state)
+        {
+
+        }
+        private void OnRightPuOaChange(SwitcherState state)
         {
 
         }
 
-        private void OnVolumePRMChange()
-        {
-
-        }
-        private void OnTurningOnChange()
+        private void OnVolumeChange(double value)
         {
 
         }
 
-        private void OnLeftPuOaChange()
-        {
-
-        }
-        private void OnRightPuOaChange()
-        {
-
-        }
-
-        private void OnVolumeChange()
-        {
-
-        }
-
-        private void OnRecordWorkChange()
+        private void OnRecordWorkChange(RecordWorkState state)
         {
             if (RecordWork.Value == RecordWorkState.Record)
-                Scoreboard.Value = SwitcherState.Enabled;
+                Board.Value = SwitcherState.Enabled;
+            else
+                Board.Value = SwitcherState.Disabled;
             _counterNumpadChange = null;
         }
 
-        private void OnSendingChange()
+        private void OnSendingChange(SwitcherState state)
         {
 
         }
 
-        private void OnWorkingFrequenciesChange()
+        private void OnWorkingFrequenciesChange(SwitcherState state)
         {
 
         }
 
-        private void OnScoreboardChange()
+        private void OnBoardChange(SwitcherState state)
         {
-
+            if (Board.Value == SwitcherState.Enabled)
+                Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString();
+            else
+                Frequency.Value = "";
         }
 
         int? _counterNumpadChange;
 
-        private void OnResetChange()
+        private void OnResetChange(SwitcherState state)
         {
+            if (TurningOn.Value == SwitcherState.Disabled)
+                return;
             if (RecordWork.Value == RecordWorkState.Record)
             {
+                Frequency.Value = "";
                 _counterNumpadChange = 0;
             }
         }
 
         private void OnNumpadChange(int i)
         {
+            if (TurningOn.Value == SwitcherState.Disabled)
+                return;
             if (RecordWork.Value == RecordWorkState.Record && _counterNumpadChange.HasValue)
             {
                 Frequency.Value += i.ToString();
 
-                if (++_counterNumpadChange == 4)
+                if (++_counterNumpadChange == 5)
                 {
                     WorkingFrequencies[FrequencyNumber.Value] = int.Parse(Frequency.Value);
                     _counterNumpadChange = null;
@@ -215,6 +241,9 @@
             }
 
             FrequencyNumber.Value = i;
+            if (RecordWork.Value == RecordWorkState.Record)
+                Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString();
         }
+        #endregion
     }
 }

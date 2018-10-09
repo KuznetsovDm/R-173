@@ -94,7 +94,6 @@ namespace R_173.BL
                 _reader.StartListenTone();
             else
                 _reader.StopListenTone();
-            System.Diagnostics.Trace.Write($"Tone: {e.NewValue}");
         }
 
         private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -116,7 +115,7 @@ namespace R_173.BL
             }
         }
 
-        private void Power_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        private void Power_ValueChanged(object sender, ValueChangedEventArgs<PowerState> e)
         {
 
         }
@@ -147,7 +146,7 @@ namespace R_173.BL
         {
             return new SendableRadioModel
             {
-                Frequency = int.Parse(radioModel.Frequency.Value)
+                Frequency = int.TryParse(radioModel.Frequency.Value, out var frequency) ? frequency : 0
             };
         }
 
@@ -155,7 +154,7 @@ namespace R_173.BL
         {
             return new ReceivableRadioModel
             {
-                Frequency = int.Parse(radioModel.Frequency.Value),
+                Frequency = int.TryParse(radioModel.Frequency.Value, out var frequency) ? frequency : 0,
                 Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
                 Volume = radioModel.Volume.Value
             };

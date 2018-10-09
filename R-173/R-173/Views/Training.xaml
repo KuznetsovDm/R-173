@@ -1,4 +1,4 @@
-﻿<Page x:Class="R_173.Views.Training"
+﻿<UserControl x:Class="R_173.Views.Training"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,10 +6,14 @@
       xmlns:local="clr-namespace:R_173.Views"
       xmlns:radio="clr-namespace:R_173.Views.Radio"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Training">
-
-    <Viewbox Stretch="Fill">
-        <radio:RadioView/>
-    </Viewbox>
-</Page>
+      d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel Background="White">
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <Button DockPanel.Dock="Left" Content="Предыдущий шаг"/>
+            <Button DockPanel.Dock="Right" Content="Следующий шаг"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Подготовка к работе"/>
+        </DockPanel>
+        
+        <ContentControl x:Name="MainContent"/>
+    </DockPanel>
+</UserControl>

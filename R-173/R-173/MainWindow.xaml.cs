@@ -12,25 +12,25 @@ namespace R_173
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Dictionary<string, Page> _pages;
+        private readonly Dictionary<Type, ITabView> _pages;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _pages = new Dictionary<string, Page>
+            _pages = new Dictionary<Type, ITabView>
             {
-                { nameof(Tasks), new Tasks() },
-                { nameof(Appointment), new Appointment() },
-                { nameof(Training), new Training() },
-                { nameof(Work), new Work() }
+                { typeof(Tasks), new Tasks() },
+                { typeof(Appointment), new Appointment() },
+                { typeof(Training), new Training() },
+                { typeof(Work), new Work() }
             };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var pageName = (sender as Button).CommandParameter.ToString();
-            Main_Frame.Content = _pages[pageName];
+            var page = (sender as Button).CommandParameter as Type;
+            MainContent.Content = _pages[page];
         }
     }
 
