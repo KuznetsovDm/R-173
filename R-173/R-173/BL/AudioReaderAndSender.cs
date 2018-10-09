@@ -1,5 +1,4 @@
-﻿using NAudio.Wave;
-using P2PMulticastNetwork.Interfaces;
+﻿using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
 using System;
@@ -63,7 +62,6 @@ namespace R_173.BL
                 return;
 
             IsMicrophoneStarted = true;
-            System.Diagnostics.Trace.WriteLine($"Start listen");
             _microphone.StartListen();
         }
 
@@ -73,7 +71,6 @@ namespace R_173.BL
                 return;
 
             IsMicrophoneStarted = false;
-            System.Diagnostics.Trace.WriteLine($"Stop listen");
             _microphone.StopListen();
         }
 

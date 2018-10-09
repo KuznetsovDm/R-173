@@ -4,7 +4,6 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
-using R_173.ViewModels;
 
 namespace R_173.BL
 {
@@ -43,6 +42,7 @@ namespace R_173.BL
         }
 
         #region Events
+    
         private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
 
@@ -50,11 +50,17 @@ namespace R_173.BL
 
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
+            if (!CheckTurningOn())
+                return;
+
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            if (!CheckTurningOn())
+                return;
+
             if (e.NewValue == SwitcherState.Enabled)
             {
                 _player.Start();
@@ -68,6 +74,9 @@ namespace R_173.BL
 
         private void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            if (!CheckTurningOn())
+                return;
+
             if (e.NewValue == SwitcherState.Enabled)
                 _reader.StartListenTone();
             else
@@ -91,6 +100,9 @@ namespace R_173.BL
 
         private void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
+            if (!CheckTurningOn())
+                return;
+
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
@@ -104,18 +116,33 @@ namespace R_173.BL
 
         }
 
-        private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<string> e)
+        private void FrequencyNumber_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
+            if (!CheckTurningOn())
+                return;
+
             _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
+
+        private void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if (!CheckTurningOn())
+                return;
+
+            if (e.NewValue == SwitcherState.Enabled)
+                _reader.StartListenMicrophone();
+            else
+                _reader.StopListenMicrophone();
+        }
+
         #endregion
 
         private static SendableRadioModel GetSendableRadioModelFromRadioModel(RadioModel radioModel)
         {
             return new SendableRadioModel
             {
-                Frequency = int.TryParse(radioModel.Frequency.Value, out var frequency) ? frequency : 0
+                Frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value]
             };
         }
 
@@ -123,15 +150,15 @@ namespace R_173.BL
         {
             return new ReceivableRadioModel
             {
-                Frequency = int.TryParse(radioModel.Frequency.Value, out var frequency) ? frequency : 0,
-                Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
+                Frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value],
+                Noise = radioModel.Noise.Value == NoiseState.Minimum,
                 Volume = radioModel.Volume.Value
             };
         }
 
         private void SubscribeEvents(RadioModel radioModel)
         {
-            radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
+            radioModel.FrequencyNumber.ValueChanged += FrequencyNumber_ValueChanged;
             radioModel.Interference.ValueChanged += Interference_ValueChanged;
             radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
             radioModel.Noise.ValueChanged += Noise_ValueChanged;
@@ -145,18 +172,14 @@ namespace R_173.BL
             radioModel.Sending.ValueChanged += Sending_ValueChanged;
         }
 
-        private void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
-         {
-            System.Diagnostics.Trace.WriteLine($"Micro: {e.NewValue}");
-            if (e.NewValue == SwitcherState.Enabled)
-                _reader.StartListenMicrophone();
-            else
-                _reader.StopListenMicrophone();
+        private bool CheckTurningOn()
+        {
+            return _radioModel.TurningOn.Value == SwitcherState.Disabled;
         }
 
         private void UnsubscribeEvents(RadioModel radioModel)
         {
-            radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
+            radioModel.FrequencyNumber.ValueChanged -= FrequencyNumber_ValueChanged;
             radioModel.Interference.ValueChanged -= Interference_ValueChanged;
             radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
             radioModel.Noise.ValueChanged -= Noise_ValueChanged;
@@ -175,7 +198,7 @@ namespace R_173.BL
             _player.SetModel(GetReceivableRadioModelFromRadioModel(model));
             _reader.SetModel(GetSendableRadioModelFromRadioModel(model));
 
-            if(model.TurningOn.Value == SwitcherState.Enabled)
+            if (model.TurningOn.Value == SwitcherState.Enabled)
             {
                 _player.Start();
             }
