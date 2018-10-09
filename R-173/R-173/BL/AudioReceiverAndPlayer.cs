@@ -48,8 +48,6 @@ namespace R_173.BL
                                 {
                                     //todo:
                                     //if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
-                                    //var result = _compressor.Decode(model.RawAudioSample, 0, model.RawAudioSample.Length);
-                                    //model.RawAudioSample = result;
                                     await next.Invoke(model);
                                 })
                                 .UseMiddleware<AudioMixerHandler>()

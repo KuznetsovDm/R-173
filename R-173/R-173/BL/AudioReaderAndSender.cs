@@ -32,6 +32,8 @@ namespace R_173.BL
 
         private void Microphone_OnDataAvailable(object sender, DataEventArgs e)
         {
+            //var rawAudio = _compressor.Encode(e.Data, 0, e.Data.Length);
+
             var dataModel = new DataModel()
             {
                 Guid = _SenderId,
@@ -40,7 +42,6 @@ namespace R_173.BL
             };
 
             var bytes = _converter.ConvertToBytes(dataModel);
-            //bytes = _compressor.Encode(bytes, 0, bytes.Length);
             var result = _transmitter.Write(bytes);
             if (result.IsFailure)
             {
