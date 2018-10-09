@@ -12,6 +12,7 @@ namespace R_173.Views.Radio
             MouseUp += (s, e) => GetClick(this)?.Execute(false);
         }
 
+
         #region Clickproperty
         public static readonly DependencyProperty ClickProperty = DependencyProperty.Register(
                 "Click",
