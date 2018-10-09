@@ -38,6 +38,8 @@ namespace R_173.BL
             }
 
             _radioModel = radioModel;
+
+            InitRadioManager(_radioModel);
         }
 
         #region Events
