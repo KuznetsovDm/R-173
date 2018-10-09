@@ -18,8 +18,11 @@ namespace R_173.Views.Radio
             DataContext = radioViewModel;
 
             IsVisibleChanged += (s, e) =>
-                App.ServiceCollection.Resolve<IRadioManager>().
-                SetModel((bool)e.NewValue ? radioViewModel.Model : null);
+            {
+                var manager = App.ServiceCollection.Resolve<IRadioManager>();
+                manager.SetModel((bool)e.NewValue ? radioViewModel.Model : null);
+            };
+
         }
     }
 }

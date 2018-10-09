@@ -25,43 +25,22 @@ namespace R_173.BL
         public void SetModel(RadioModel radioModel)
         {
             _keyboardHandler.ActivateRadio(radioModel);
+
             if (_radioModel != null)
             {
-                _radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
-                _radioModel.Interference.ValueChanged -= Interference_ValueChanged;
-                _radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
-                _radioModel.Noise.ValueChanged -= Noise_ValueChanged;
-                _radioModel.Power.ValueChanged -= Power_ValueChanged;
-                _radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
-                _radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
-                _radioModel.Tone.ValueChanged -= Tone_ValueChanged;
-                _radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
-                _radioModel.Volume.ValueChanged -= Volume_ValueChanged;
-                _radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+                UnsubscribeEvents(_radioModel);
+            }
+
+            if (radioModel != null)
+            {
+                SubscribeEvents(radioModel);
             }
 
             _radioModel = radioModel;
 
-            if (_radioModel != null)
-            {
-                #region Events
-                _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
-                _radioModel.Interference.ValueChanged += Interference_ValueChanged;
-                _radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
-                _radioModel.Noise.ValueChanged += Noise_ValueChanged;
-                _radioModel.Power.ValueChanged += Power_ValueChanged;
-                _radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
-                _radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
-                _radioModel.Tone.ValueChanged += Tone_ValueChanged;
-                _radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
-                _radioModel.Volume.ValueChanged += Volume_ValueChanged;
-                _radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
-                #endregion
-            }
-            else
-            {
-            }
+
         }
+
 
         #region Events
         private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
@@ -158,6 +137,36 @@ namespace R_173.BL
                 Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
                 Volume = radioModel.Volume.Value
             };
+        }
+
+        private void SubscribeEvents(RadioModel radioModel)
+        {
+            radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
+            radioModel.Interference.ValueChanged += Interference_ValueChanged;
+            radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
+            radioModel.Noise.ValueChanged += Noise_ValueChanged;
+            radioModel.Power.ValueChanged += Power_ValueChanged;
+            radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
+            radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
+            radioModel.Tone.ValueChanged += Tone_ValueChanged;
+            radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
+            radioModel.Volume.ValueChanged += Volume_ValueChanged;
+            radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
+        }
+
+        private void UnsubscribeEvents(RadioModel radioModel)
+        {
+            radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
+            radioModel.Interference.ValueChanged -= Interference_ValueChanged;
+            radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
+            radioModel.Noise.ValueChanged -= Noise_ValueChanged;
+            radioModel.Power.ValueChanged -= Power_ValueChanged;
+            radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
+            radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
+            radioModel.Tone.ValueChanged -= Tone_ValueChanged;
+            radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
+            radioModel.Volume.ValueChanged -= Volume_ValueChanged;
+            radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
         }
     }
 }
