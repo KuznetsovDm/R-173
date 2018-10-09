@@ -56,7 +56,7 @@ namespace R_173.BL
                                 {
                                     float deltaAbs = (float)Math.Abs(model.RadioModel.Frequency - _model.Frequency) / FrequencyRange;
                                     float volume = VolumeSamplesHelper.LogVolumeApproximation(deltaAbs);
-                                    //VolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
+                                    VolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
                                     await next.Invoke(model);
                                 })
                                 .UseMiddleware<AudioMixerHandler>()
