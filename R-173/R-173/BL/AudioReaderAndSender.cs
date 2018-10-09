@@ -31,7 +31,7 @@ namespace R_173.BL
         {
             var dataModel = new DataModel()
             {
-                Guid = new Guid(), // TODO: unique guid for application
+                Guid = _SenderId, // TODO: unique guid for application
                 RadioModel = _model,
                 RawAudioSample = e.Data
             };

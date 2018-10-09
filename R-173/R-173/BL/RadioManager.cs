@@ -60,8 +60,6 @@ namespace R_173.BL
             }
             else
             {
-                _reader.StartListenMicrophone();
-                _player.Stop();
             }
         }
 
@@ -95,6 +93,7 @@ namespace R_173.BL
                 _reader.StartListenTone();
             else
                 _reader.StopListenTone();
+            System.Diagnostics.Trace.Write($"Tone: {e.NewValue}");
         }
 
         private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
