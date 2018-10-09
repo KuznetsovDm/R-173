@@ -174,7 +174,7 @@ namespace R_173.BL
 
         private bool CheckTurningOn()
         {
-            return _radioModel.TurningOn.Value == SwitcherState.Disabled;
+            return _radioModel.TurningOn.Value == SwitcherState.Enabled;
         }
 
         private void UnsubscribeEvents(RadioModel radioModel)
