@@ -19,10 +19,12 @@ namespace R_173.BL
         private PipelineDelegate<DataModel> _pipeline;
         private bool IsPlayerStarted = false;
         private IGlobalNoiseController _noise;
+        private BufferedWaveCompressor _compressor;
 
         public AudioReceiverAndPlayer(IDataProvider provider, ISamplePlayer player,
             IDataAsByteConverter<DataModel> converter, IDataProcessingBuilder builder,
-            IGlobalNoiseController globalNoise)
+            IGlobalNoiseController globalNoise,
+            BufferedWaveCompressor compressor)
         {
             _provider = provider;
             _player = player;
@@ -31,6 +33,7 @@ namespace R_173.BL
             Build();
             _provider.OnDataAvaliable += Provider_OnDataAvaliable;
             _noise = globalNoise;
+            _compressor = compressor;
         }
 
         private void Provider_OnDataAvaliable(object sender, DataEventArgs e)
@@ -45,6 +48,8 @@ namespace R_173.BL
                                 {
                                     //todo:
                                     //if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                    //var result = _compressor.Decode(model.RawAudioSample, 0, model.RawAudioSample.Length);
+                                    //model.RawAudioSample = result;
                                     await next.Invoke(model);
                                 })
                                 .UseMiddleware<AudioMixerHandler>()
