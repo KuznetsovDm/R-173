@@ -12,18 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace R_173.Views
+namespace R_173.Views.TrainingSteps
 {
     /// <summary>
-    /// Interaction logic for Training.xaml
+    /// Interaction logic for Preparation.xaml
     /// </summary>
-    public partial class Training : UserControl, ITabView
+    public partial class Preparation : UserControl
     {
-        public Training()
+        public Preparation()
         {
             InitializeComponent();
-
-            MainContent.Content = new TrainingSteps.Preparation();
         }
     }
 }

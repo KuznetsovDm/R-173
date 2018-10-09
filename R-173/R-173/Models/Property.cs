@@ -9,10 +9,10 @@ namespace R_173.Models
 
         private T _value;
         private readonly Func<T, T, T> _checkValue;
-        private readonly Action _onValueChange;
+        private readonly Action<T> _onValueChange;
         private readonly string _name;
 
-        public Property(Func<T, T, T> checkValue, Action onValueChange, string name = "")
+        public Property(Func<T, T, T> checkValue, Action<T> onValueChange, string name = "")
         {
             _checkValue = checkValue;
             _onValueChange = onValueChange;
@@ -31,7 +31,7 @@ namespace R_173.Models
                 _value = newValue;
                 System.Diagnostics.Trace.WriteLine($"{_name} = {newValue}");
                 ValueChanged?.Invoke(this, new ValueChangedEventArgs<T>(newValue));
-                _onValueChange();
+                _onValueChange(newValue);
             }
         }
     }
