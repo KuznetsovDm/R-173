@@ -146,8 +146,9 @@ namespace R_173.BL
         }
 
         private void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
-        {
-            if(e.NewValue == SwitcherState.Enabled)
+         {
+            System.Diagnostics.Trace.WriteLine($"Micro: {e.NewValue}");
+            if (e.NewValue == SwitcherState.Enabled)
                 _reader.StartListenMicrophone();
             else
                 _reader.StopListenMicrophone();

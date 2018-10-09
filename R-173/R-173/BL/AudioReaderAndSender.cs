@@ -60,6 +60,7 @@ namespace R_173.BL
                 return;
 
             IsMicrophoneStarted = true;
+            System.Diagnostics.Trace.WriteLine($"Start listen");
             _microphone.StartListen();
         }
 
@@ -69,6 +70,7 @@ namespace R_173.BL
                 return;
 
             IsMicrophoneStarted = false;
+            System.Diagnostics.Trace.WriteLine($"Stop listen");
             _microphone.StopListen();
         }
 
