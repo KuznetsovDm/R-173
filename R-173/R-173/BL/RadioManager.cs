@@ -4,6 +4,7 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
+using R_173.ViewModels;
 
 namespace R_173.BL
 {
@@ -25,42 +26,18 @@ namespace R_173.BL
         public void SetModel(RadioModel radioModel)
         {
             _keyboardHandler.ActivateRadio(radioModel);
+
             if (_radioModel != null)
             {
-                _radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
-                _radioModel.Interference.ValueChanged -= Interference_ValueChanged;
-                _radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
-                _radioModel.Noise.ValueChanged -= Noise_ValueChanged;
-                _radioModel.Power.ValueChanged -= Power_ValueChanged;
-                _radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
-                _radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
-                _radioModel.Tone.ValueChanged -= Tone_ValueChanged;
-                _radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
-                _radioModel.Volume.ValueChanged -= Volume_ValueChanged;
-                _radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+                UnsubscribeEvents(_radioModel);
+            }
+
+            if (radioModel != null)
+            {
+                SubscribeEvents(radioModel);
             }
 
             _radioModel = radioModel;
-
-            if (_radioModel != null)
-            {
-                #region Events
-                _radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
-                _radioModel.Interference.ValueChanged += Interference_ValueChanged;
-                _radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
-                _radioModel.Noise.ValueChanged += Noise_ValueChanged;
-                _radioModel.Power.ValueChanged += Power_ValueChanged;
-                _radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
-                _radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
-                _radioModel.Tone.ValueChanged += Tone_ValueChanged;
-                _radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
-                _radioModel.Volume.ValueChanged += Volume_ValueChanged;
-                _radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
-                #endregion
-            }
-            else
-            {
-            }
         }
 
         #region Events
@@ -103,16 +80,7 @@ namespace R_173.BL
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-            if (e.NewValue == RecordWorkState.Record) // запись
-            {
-                _reader.StartListenMicrophone();
-                _player.Stop();
-            }
-            else
-            {
-                _reader.StopListenMicrophone();
-                _player.Start();
-            }
+
         }
 
         private void Power_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -135,7 +103,7 @@ namespace R_173.BL
 
         }
 
-        private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<int> e)
+        private void Frequency_ValueChanged(object sender, ValueChangedEventArgs<string> e)
         {
             _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
@@ -146,7 +114,7 @@ namespace R_173.BL
         {
             return new SendableRadioModel
             {
-                Frequency = radioModel.Frequency.Value
+                Frequency = int.Parse(radioModel.Frequency.Value)
             };
         }
 
@@ -154,10 +122,66 @@ namespace R_173.BL
         {
             return new ReceivableRadioModel
             {
-                Frequency = radioModel.Frequency.Value,
+                Frequency = int.Parse(radioModel.Frequency.Value),
                 Noise = radioModel.Noise.Value == NoiseState.Minimum, // TODO: noise
                 Volume = radioModel.Volume.Value
             };
+        }
+
+        private void SubscribeEvents(RadioModel radioModel)
+        {
+            radioModel.Frequency.ValueChanged += Frequency_ValueChanged;
+            radioModel.Interference.ValueChanged += Interference_ValueChanged;
+            radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
+            radioModel.Noise.ValueChanged += Noise_ValueChanged;
+            radioModel.Power.ValueChanged += Power_ValueChanged;
+            radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
+            radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
+            radioModel.Tone.ValueChanged += Tone_ValueChanged;
+            radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
+            radioModel.Volume.ValueChanged += Volume_ValueChanged;
+            radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
+            radioModel.Sending.ValueChanged += Sending_ValueChanged;
+        }
+
+        private void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if(e.NewValue == SwitcherState.Enabled)
+                _reader.StartListenMicrophone();
+            else
+                _reader.StopListenMicrophone();
+        }
+
+        private void UnsubscribeEvents(RadioModel radioModel)
+        {
+            radioModel.Frequency.ValueChanged -= Frequency_ValueChanged;
+            radioModel.Interference.ValueChanged -= Interference_ValueChanged;
+            radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
+            radioModel.Noise.ValueChanged -= Noise_ValueChanged;
+            radioModel.Power.ValueChanged -= Power_ValueChanged;
+            radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
+            radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
+            radioModel.Tone.ValueChanged -= Tone_ValueChanged;
+            radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
+            radioModel.Volume.ValueChanged -= Volume_ValueChanged;
+            radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+            radioModel.Sending.ValueChanged -= Sending_ValueChanged;
+        }
+
+        private void InitRadioManager(RadioModel model)
+        {
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(model));
+            _reader.SetModel(GetSendableRadioModelFromRadioModel(model));
+
+            if(model.TurningOn.Value == SwitcherState.Enabled)
+            {
+                _player.Start();
+            }
+            else
+            {
+                _reader.StopListenMicrophone();
+                _player.Stop();
+            }
         }
     }
 }

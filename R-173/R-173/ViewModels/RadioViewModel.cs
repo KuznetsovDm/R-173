@@ -8,7 +8,8 @@ namespace R_173.ViewModels
     {
         public readonly RadioModel Model;
 
-        private int _frequency;
+        private int _frequencyNumber;
+        private string _frequency;
         private bool _interference;
         private bool _power;
         private bool _tone;
@@ -19,17 +20,36 @@ namespace R_173.ViewModels
         private bool _rightPuOa;
         private double _volume;
         private bool _recordWork;
+        private bool _sending;
+        private bool[] _numpad;
 
         public RadioViewModel()
         {
             Model = new RadioModel();
+            _numpad = new bool[10];
 
-            ChangeFrequencyCommand = new SimpleCommand<string>(s => Frequency = Frequency * 10 + int.Parse(s));
-            ClearFrequencyCommand = new SimpleCommand(() => Frequency = 0);
-            ButtonCommand = new SimpleCommand<bool>(s => Tone = s);
-            VolumeCommand = new SimpleCommand<double>(s => Volume += s);
-            VolumePRMCommand = new SimpleCommand<double>(s => VolumePRM += s);
-            
+            ChangeFrequencyCommand = new SimpleCommand<string>(s => Model.Numpad[int.Parse(s)].Value = SwitcherState.Enabled);
+            //ClearFrequencyCommand = new SimpleCommand(() => Frequency = 0);
+            ToneCommand = new SimpleCommand<bool>(value => Tone = value);
+            VolumeCommand = new SimpleCommand<double>(value => Volume += value);
+            VolumePRMCommand = new SimpleCommand<double>(value => VolumePRM += value);
+            Numpad0Command = new SimpleCommand<bool>(value => Numpad0 = value);
+            Numpad1Command = new SimpleCommand<bool>(value => Numpad1 = value);
+            Numpad2Command = new SimpleCommand<bool>(value => Numpad2 = value);
+            Numpad3Command = new SimpleCommand<bool>(value => Numpad3 = value);
+            Numpad4Command = new SimpleCommand<bool>(value => Numpad4 = value);
+            Numpad5Command = new SimpleCommand<bool>(value => Numpad5 = value);
+            Numpad6Command = new SimpleCommand<bool>(value => Numpad6 = value);
+            Numpad7Command = new SimpleCommand<bool>(value => Numpad7 = value);
+            Numpad8Command = new SimpleCommand<bool>(value => Numpad8 = value);
+            Numpad9Command = new SimpleCommand<bool>(value => Numpad9 = value);
+
+
+            Model.FrequencyNumber.ValueChanged += (s, e) =>
+            {
+                _frequencyNumber = e.NewValue;
+                OnPropertyChanged(nameof(FrequencyNumber));
+            };
             Model.Frequency.ValueChanged += (s, e) => 
             {
                 _frequency = e.NewValue;
@@ -85,16 +105,51 @@ namespace R_173.ViewModels
                 _volumePRM = e.NewValue * 360;
                 OnPropertyChanged(nameof(VolumePRM));
             };
+            Model.Sending.ValueChanged += (s, e) =>
+            {
+                _sending = e.NewValue == SwitcherState.Enabled;
+                //OnPropertyChanged(nameof(VolumePRM));
+            };
+
+            for (var i = 0; i < 10; i++)
+            {
+                var num = i;
+                var propName = "Numpad" + num.ToString();
+                Model.Numpad[i].ValueChanged += (s, e) =>
+                {
+                    _numpad[num] = e.NewValue == SwitcherState.Enabled;
+                    OnPropertyChanged(propName);
+                };
+            }
         }
 
         public ICommand ChangeFrequencyCommand { get; }
         public ICommand ClearFrequencyCommand { get; }
-        public ICommand ButtonCommand { get; }
+        public ICommand ToneCommand { get; }
         public ICommand VolumeCommand { get; }
         public ICommand VolumePRMCommand { get; }
+        public ICommand Numpad0Command { get; }
+        public ICommand Numpad1Command { get; }
+        public ICommand Numpad2Command { get; }
+        public ICommand Numpad3Command { get; }
+        public ICommand Numpad4Command { get; }
+        public ICommand Numpad5Command { get; }
+        public ICommand Numpad6Command { get; }
+        public ICommand Numpad7Command { get; }
+        public ICommand Numpad8Command { get; }
+        public ICommand Numpad9Command { get; }
 
 
-        public int Frequency
+        public int FrequencyNumber
+        {
+            get => _frequencyNumber;
+            set
+            {
+                Model.FrequencyNumber.Value = value;
+            }
+        }
+
+        public string Frequency
         {
             get => _frequency;
             set
@@ -189,7 +244,106 @@ namespace R_173.ViewModels
             get => _recordWork;
             set
             {
-                Model.RecordWork.Value = value ? RecordWorkState.Record : RecordWorkState.Work;
+                Model.RecordWork.Value = value ? RecordWorkState.Work : RecordWorkState.Record;
+            }
+        }
+
+        public bool SendingIsPressed
+        {
+            get => _sending;
+            set
+            {
+                Model.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad0
+        {
+            get => _numpad[0];
+            set
+            {
+                Model.Numpad[0].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad1
+        {
+            get => _numpad[1];
+            set
+            {
+                Model.Numpad[1].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad2
+        {
+            get => _numpad[2];
+            set
+            {
+                Model.Numpad[2].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad3
+        {
+            get => _numpad[3];
+            set
+            {
+                Model.Numpad[3].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad4
+        {
+            get => _numpad[4];
+            set
+            {
+                Model.Numpad[4].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad5
+        {
+            get => _numpad[5];
+            set
+            {
+                Model.Numpad[5].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad6
+        {
+            get => _numpad[6];
+            set
+            {
+                Model.Numpad[6].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad7
+        {
+            get => _numpad[7];
+            set
+            {
+                Model.Numpad[7].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad8
+        {
+            get => _numpad[8];
+            set
+            {
+                Model.Numpad[8].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+            }
+        }
+
+        public bool Numpad9
+        {
+            get => _numpad[9];
+            set
+            {
+                Model.Numpad[9].Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
             }
         }
     }
