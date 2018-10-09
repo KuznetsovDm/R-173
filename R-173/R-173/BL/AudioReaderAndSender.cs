@@ -1,4 +1,5 @@
-﻿using P2PMulticastNetwork.Interfaces;
+﻿using NAudio.Wave;
+using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
 using System;
@@ -11,13 +12,14 @@ namespace R_173.BL
         private SendableRadioModel _model;
         private IDataTransmitter _transmitter;
         private IDataAsByteConverter<DataModel> _converter;
+        private BufferedWaveCompressor _compressor;
         private bool IsMicrophoneStarted = false;
         private bool IsToneStarted = false;
         private ToneProvider _tone;
         private Guid _SenderId = Guid.NewGuid();
 
         public AudioReaderAndSender(IMicrophone microphone, IDataTransmitter transmitter,
-            IDataAsByteConverter<DataModel> converter, ToneProvider tone)
+            IDataAsByteConverter<DataModel> converter, ToneProvider tone, BufferedWaveCompressor compressor)
         {
             _tone = tone;
             _tone.OnDataAvailable += Microphone_OnDataAvailable;
@@ -25,19 +27,21 @@ namespace R_173.BL
             _microphone.OnDataAvailable += Microphone_OnDataAvailable;
             _transmitter = transmitter;
             _converter = converter;
+            _compressor = compressor;
         }
 
         private void Microphone_OnDataAvailable(object sender, DataEventArgs e)
         {
+            //var rawAudio = _compressor.Encode(e.Data, 0, e.Data.Length);
+
             var dataModel = new DataModel()
             {
-                Guid = _SenderId, // TODO: unique guid for application
+                Guid = _SenderId,
                 RadioModel = _model,
                 RawAudioSample = e.Data
             };
 
             var bytes = _converter.ConvertToBytes(dataModel);
-
             var result = _transmitter.Write(bytes);
             if (result.IsFailure)
             {
