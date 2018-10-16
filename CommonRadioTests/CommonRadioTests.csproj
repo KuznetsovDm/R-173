@@ -80,6 +80,10 @@
       <Project>{DC232498-6FB2-4562-B888-E32FEC97BBF5}</Project>
       <Name>P2PMulticastNetwork</Name>
     </ProjectReference>
+    <ProjectReference Include="..\R-173\R-173\R-173.csproj">
+      <Project>{E15041B3-9989-4A4C-AF8C-0D52C661B8B9}</Project>
+      <Name>R-173</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

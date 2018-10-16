@@ -59,5 +59,15 @@ namespace R_173.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] RawTone {
+            get {
+                object obj = ResourceManager.GetObject("RawTone", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

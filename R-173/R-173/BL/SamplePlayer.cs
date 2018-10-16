@@ -1,5 +1,6 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using R_173.BL.Utils;
 using R_173.Interfaces;
 using System;
 
@@ -22,7 +23,11 @@ namespace R_173.BL
             _player.Init(_volumeFilter);
         }
 
-        public float Volume { get => _volumeFilter.Volume; set => _volumeFilter.Volume = (float)Math.Pow(value, Math.E); }
+        public float Volume
+        {
+            get => _volumeFilter.Volume;
+            set => _volumeFilter.Volume = VolumeSamplesHelper.LogVolumeApproximation(value);
+        }
 
         public void Add(ISampleProvider provider)
         {

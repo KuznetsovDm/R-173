@@ -1,16 +1,19 @@
 ﻿using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
+using R_173.BL.Handlers;
+using R_173.BL.Utils;
 using R_173.Handlers;
 using R_173.Interfaces;
 using RadioPipeline;
 using System;
 using System.Threading.Tasks;
+using System.IO.Compression;
 
 namespace R_173.BL
 {
     public class AudioReceiverAndPlayer : IAudioReceiverAndPlayer<ReceivableRadioModel>
     {
-        public const int FrequencyRange = 100; // TODO: make constatnts
+        public const int FrequencyRange = 100;
         private ReceivableRadioModel _model;
         private IDataProvider _provider;
         private ISamplePlayer _player;
@@ -19,12 +22,12 @@ namespace R_173.BL
         private PipelineDelegate<DataModel> _pipeline;
         private bool IsPlayerStarted = false;
         private IGlobalNoiseController _noise;
-        private BufferedWaveCompressor _compressor;
+        private DataCompressor _compressor;
 
         public AudioReceiverAndPlayer(IDataProvider provider, ISamplePlayer player,
             IDataAsByteConverter<DataModel> converter, IDataProcessingBuilder builder,
             IGlobalNoiseController globalNoise,
-            BufferedWaveCompressor compressor)
+            DataCompressor compressor)
         {
             _provider = provider;
             _player = player;
@@ -38,7 +41,8 @@ namespace R_173.BL
 
         private void Provider_OnDataAvaliable(object sender, DataEventArgs e)
         {
-            var model = _converter.ConvertFrom(e.Data);
+            var decompressed = _compressor.Decompress(e.Data);
+            var model = _converter.ConvertFrom(decompressed);
             _pipeline.Invoke(model);
         }
 
@@ -46,10 +50,17 @@ namespace R_173.BL
         {
             _pipeline = _builder.Use(async (model, next) =>
                                 {
-                                    //todo:
-                                    //if ((model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                    if (Math.Abs(model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                        await next.Invoke(model);
+                                })
+                                .Use(async (model, next) =>
+                                {
+                                    float deltaAbs = (float)Math.Abs(model.RadioModel.Frequency - _model.Frequency) / FrequencyRange;
+                                    float volume = VolumeSamplesHelper.LogVolumeApproximation(deltaAbs);
+                                    VolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
                                     await next.Invoke(model);
                                 })
+                                .UseMiddleware<RemoteToneHandler>()
                                 .UseMiddleware<AudioMixerHandler>()
                                 .Build();
         }
@@ -70,7 +81,6 @@ namespace R_173.BL
             _provider.Start();
             _noise.Play();
             _player.Play();
-            // TODO: noises start
         }
 
         public void Stop()
@@ -81,7 +91,6 @@ namespace R_173.BL
             IsPlayerStarted = false;
             _provider.Stop();
             _player.Stop();
-            // TODO: noises stop
             _noise.Stop();
         }
 

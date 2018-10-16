@@ -1,18 +1,17 @@
 ﻿using NAudio.Wave;
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
-using R_173.SharedResources;
 using System;
 
 namespace R_173.BL
 {
     public class Microphone : IMicrophone
     {
-        private WaveIn _audioListener;
+        private WaveInEvent _audioListener;
 
         public Microphone(WaveFormat format)
         {
-            _audioListener = new WaveIn();
+            _audioListener = new WaveInEvent();
             _audioListener.WaveFormat = format;
             _audioListener.DataAvailable += (obj, args) =>
             {
