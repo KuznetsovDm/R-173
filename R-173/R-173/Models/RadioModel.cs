@@ -46,14 +46,6 @@ namespace R_173.Models
         /// </summary>
         public readonly Property<SwitcherState> TurningOn;
         /// <summary>
-        /// Левый тумблер "ПУ - ОА"
-        /// </summary>
-        public readonly Property<SwitcherState> LeftPuOa;
-        /// <summary>
-        /// Правый тумблер "ПУ - ОА"
-        /// </summary>
-        public readonly Property<SwitcherState> RightPuOa;
-        /// <summary>
         /// Ручка регулятора громкости
         /// </summary>
         public readonly Property<double> Volume;
@@ -65,10 +57,6 @@ namespace R_173.Models
         /// Тумблер "ПРД"
         /// </summary>
         public readonly Property<SwitcherState> Sending;
-        /// <summary>
-        /// Кнопка "Табло"
-        /// </summary>
-        public readonly Property<SwitcherState> Scoreboard;
         /// <summary>
         /// Кнопка "Сброс"
         /// </summary>
@@ -96,13 +84,19 @@ namespace R_173.Models
             Noise = new Property<NoiseState>((oldValue, newValue) => newValue, OnNoiseChange, nameof(Noise));
             VolumePRM = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, OnVolumePRMChange, nameof(VolumePRM));
             TurningOn = new Property<SwitcherState>((oldValue, newValue) => newValue, OnTurningOnChange, nameof(TurningOn));
-            LeftPuOa = new Property<SwitcherState>((oldValue, newValue) => newValue, OnLeftPuOaChange, nameof(LeftPuOa));
-            RightPuOa = new Property<SwitcherState>((oldValue, newValue) => newValue, OnRightPuOaChange, nameof(RightPuOa));
             Volume = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, OnVolumeChange, nameof(Volume));
             RecordWork = new Property<RecordWorkState>((oldValue, newValue) => newValue, OnRecordWorkChange, nameof(RecordWork));
             Sending = new Property<SwitcherState>((oldValue, newValue) => newValue, OnSendingChange, nameof(Sending));
             Reset = new Property<SwitcherState>((oldValue, newValue) => newValue, OnResetChange, nameof(Reset));
-            Board = new Property<SwitcherState>((oldValue, newValue) => newValue, OnBoardChange, nameof(Board));
+            Board = new Property<SwitcherState>(
+                (oldValue, newValue) =>
+                {
+                    return RecordWork.Value == RecordWorkState.Record ? SwitcherState.Enabled : newValue;
+                },
+                OnBoardChange,
+                nameof(Board)
+            );
+
             Numpad = new Property<SwitcherState>[10];
             for (var i = 0; i < 10; i++)
             {
@@ -126,7 +120,7 @@ namespace R_173.Models
         private void OnFrequnecyNumberChange(int state)
         {
             if (TurningOn.Value == SwitcherState.Enabled && Board.Value == SwitcherState.Enabled)
-            Frequency.Value = WorkingFrequencies[state].ToString();
+                Frequency.Value = WorkingFrequencies[state].ToString();
         }
 
         private void OnFrequencyChange(string state)
@@ -158,6 +152,7 @@ namespace R_173.Models
         {
 
         }
+
         private void OnTurningOnChange(SwitcherState state)
         {
             if (TurningOn.Value == SwitcherState.Disabled)
@@ -167,15 +162,6 @@ namespace R_173.Models
             {
                 FrequencyNumber.Value = 0;
             }
-        }
-
-        private void OnLeftPuOaChange(SwitcherState state)
-        {
-
-        }
-        private void OnRightPuOaChange(SwitcherState state)
-        {
-
         }
 
         private void OnVolumeChange(double value)
