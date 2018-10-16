@@ -7,22 +7,40 @@
              xmlns:radio="clr-namespace:R_173.Views.Radio"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel Background="White">
-        <DockPanel.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="Margin" Value="5"/>
-                <Setter Property="Background" Value="LightGray"/>
-                <!--<Setter Property="Con" Value="LightGray"/>-->
-            </Style>
-        </DockPanel.Resources>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock>1. Установить антенну</TextBlock>
-            <TextBlock>2. Надеть и подготовить шлемофон</TextBlock>
-            
-        </StackPanel>
-        
-        <Viewbox Stretch="Fill">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Canvas Grid.Row="0">
+            <Canvas.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                    <Setter Property="FontSize" Value="10"/>
+                </Style>
+            </Canvas.Resources>
+
+            <TextBlock Canvas.Left="11" Canvas.Top="10" Height="64" Width="96">1. Установить антенну</TextBlock>
+            <TextBlock Canvas.Left="118" Canvas.Top="10" Height="64" Width="88">2. Надеть и подготовить шлемофон</TextBlock>
+            <TextBlock Canvas.Left="219" Canvas.Top="10" Height="64" Width="96">3. Подлючить шлемофон к нагрудному переключателю</TextBlock>
+            <TextBlock Canvas.Left="330" Canvas.Top="10" Height="64" Width="110">4. Установить переключатель на приборе БВ-34 в положение РС-1</TextBlock>
+            <TextBlock Canvas.Left="450" Canvas.Top="10" Height="64" Width="111">5. Снять чехол с приемоперечатчика</TextBlock>
+            <TextBlock Canvas.Left="572" Canvas.Top="10" Height="133" Width="218">6. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении</TextBlock>
+            <TextBlock Canvas.Left="488" Canvas.Top="79" Height="64" Width="73">7. Включить тумблер ПИТАНИЕ</TextBlock>
+            <TextBlock Canvas.Left="368" Canvas.Top="78" Height="64" Width="111">8. Нажать кнопку соответствующую необходимой ЗПЧ</TextBlock>
+            <TextBlock Canvas.Left="97" Canvas.Top="79" Height="64" Width="264">9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА и убидиться по табло ЧАСТОТА в правильности значения рабочей частоты. Переключить тумблер в положение РАБОТА</TextBlock>
+            <TextBlock Canvas.Left="11" Canvas.Top="79" Height="64" Width="77">10. Прослушать собственные шумы</TextBlock>
+
+        </Canvas>
+
+
+
+        <Viewbox Grid.Row="1" Stretch="Fill">
             <radio:RadioView/>
         </Viewbox>
-    </DockPanel>
+    </Grid>
 </UserControl>
