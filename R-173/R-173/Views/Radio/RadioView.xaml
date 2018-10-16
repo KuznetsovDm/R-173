@@ -8,26 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type models:RadioViewModel}}">
-    <UserControl.Resources>
-        <Style x:Key="Button" TargetType="{x:Type radio:ClickedImage}">
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Source" Value="/Files/button.png"/>
-            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
-            <Style.Triggers>
-                <Trigger Property="radio:ClickedImage.IsDown" Value="True">
-                    <Setter Property="RenderTransform">
-                        <Setter.Value>
-                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="Numpad" TargetType="{x:Type radio:ClickedImage}" BasedOn="{StaticResource Button}">
-            <Setter Property="Opacity" Value="0"/>
-        </Style>
-    </UserControl.Resources>
-    <Canvas Width="3988" Height="2388">
+    <Canvas Width="3745" Height="2240">
         <Canvas.Resources>
             <Style x:Name="ClickableElement" TargetType="FrameworkElement">
                 <Setter Property="Cursor" Value="Hand"/>
@@ -37,34 +18,11 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="CheckBox">
-                            <Grid Background="White">
-                                <Image x:Name="image" Source="/Files/switcher.png" RenderTransformOrigin="0.5, 0.5"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter TargetName="image" Property="RenderTransform">
-                                        <Setter.Value>
-                                            <RotateTransform Angle="180"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="HorisontalSwitcher" TargetType="CheckBox">
-                <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="CheckBox">
-                            <Grid Background="White">
-                                <Image x:Name="image" Source="/Files/switcher.png" RenderTransformOrigin="0.5, 0.5">
-                                    <Image.RenderTransform>
-                                        <RotateTransform Angle="90"/>
-                                    </Image.RenderTransform>
-                                </Image>
-                            </Grid>
+                            <Image x:Name="image" Source="/Files/radio/switcher.png" RenderTransformOrigin="0.5, 0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="90"/>
+                                </Image.RenderTransform>
+                            </Image>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
                                     <Setter TargetName="image" Property="RenderTransform">
@@ -78,38 +36,119 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style x:Key="Button" TargetType="radio:ClickedImage">
+            <Style x:Key="HorisontalSwitcher" TargetType="CheckBox">
                 <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Source" Value="/Files/button.png"/>
-                <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
-                <Style.Triggers>
-                    <Trigger Property="IsDown" Value="True">
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                </Style.Triggers>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Image x:Name="image" Source="/Files/radio/switcher.png" RenderTransformOrigin="0.5, 0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="180"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="image" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="RecordWorkSwitcher" TargetType="CheckBox">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Image x:Name="image" Source="/Files/radio/recordWork.png" RenderTransformOrigin="0.5, 0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="180"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="image" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style TargetType="radio:Encoder">
-                <Setter Property="Source" Value="/Files/switcher.png"/>
+                <Setter Property="Source" Value="/Files/radio/encoder.png"/>
                 <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
                 <Setter Property="Cursor" Value="Hand"/>
             </Style>
-            <Style x:Key="Numpad" TargetType="radio:ClickedImage" BasedOn="{StaticResource Button}">
-                <Setter Property="Opacity" Value="0"/>
+            <Style x:Key="NumpadText" TargetType="ContentControl">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Grid Width="174" Height="174">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Text="{TemplateBinding Content}"
+                                           FontSize="110"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
+            <ControlTemplate x:Key="NumpadButton" TargetType="radio:ClickedControl">
+                <Grid Cursor="Hand">
+                    <Image x:Name="background" Source="/Files/radio/buttonUp.png"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 10, 0, 0"
+                               Text="{TemplateBinding Content}"
+                               FontFamily="/R-173;component/Files/#Bahnschrift Light" 
+                               FontSize="110"/>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsDown" Value="True">
+                        <Setter TargetName="background" Property="Source" Value="/Files/radio/buttonDown.png"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <ControlTemplate x:Key="NumpadReset" TargetType="radio:ClickedControl">
+                <Image x:Name="background" Cursor="Hand" Source="/Files/radio/resetUp.png"/>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsDown" Value="True">
+                        <Setter TargetName="background" Property="Source" Value="/Files/radio/resetDown.png"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <ControlTemplate x:Key="NumpadBoard" TargetType="radio:ClickedControl">
+                <Image x:Name="background" Cursor="Hand" Source="/Files/radio/boardUp.png"/>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsDown" Value="True">
+                        <Setter TargetName="background" Property="Source" Value="/Files/radio/boardDown.png"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <ControlTemplate x:Key="ToneButton" TargetType="radio:ClickedControl">
+                <Image x:Name="background" Source="/Files/radio/toneUp.png" Cursor="Hand"/>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsDown" Value="True">
+                        <Setter TargetName="background" Property="Source" Value="/Files/radio/toneDown.png"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+            <radio:IntToImageSourceConverter x:Key="IntToSourceConverter"/>
+            <radio:FrequencyToImageSourceConverter x:Key="IntToFrequencySourceConverter"/>
         </Canvas.Resources>
         <!-- Радиостанция -->
-        <Image Source="/Files/radio.png" Width="3988" Height="2388"/>
+        <Image Source="/Files/radio/radio.png" Width="3988" Height="2388"/>
         <!-- Номер текущей частоты -->
-        <TextBlock Canvas.Left="909" Canvas.Top="526"
-                   Text="{Binding Path=FrequencyNumber}" 
-                   Visibility="{Binding Path=TurningOn, Converter={StaticResource BoolToVisConverter}}"
-                   Width="52" Height="116"
-                   FontFamily="/R-173;component/Files/#DS Crystal" FontSize="100"/>
+        <Image Canvas.Left="707" Canvas.Top="412" 
+               Source="{Binding Path=FrequencyNumber, Converter={StaticResource IntToSourceConverter}}"
+               Visibility="{Binding Path=TurningOn, Converter={StaticResource BoolToVisConverter}}"
+               Height="214" Width="237"/>
         <!-- Текущая частота -->
         <TextBlock Canvas.Left="1061" Canvas.Top="526"
                    Text="{Binding Path=Frequency}"
@@ -117,81 +156,108 @@
                    Width="413" Height="116"
                    FontFamily="/R-173;component/Files/#DS Crystal" FontSize="100" 
                    TextAlignment="Right"/>
+        <Image Canvas.Left="913" Canvas.Top="408" 
+               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=4}"
+               Height="214" Width="237"/>
+        <Image Canvas.Left="1015" Canvas.Top="412" 
+               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=3}"
+               Height="214" Width="237"/>
+        <Image Canvas.Left="1119" Canvas.Top="414" 
+               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=2}"
+               Height="214" Width="237"/>
+        <Image Canvas.Left="1221" Canvas.Top="412" 
+               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=1}"
+               Height="214" Width="237"/>
+        <Image Canvas.Left="1323" Canvas.Top="414" 
+               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=0}"
+               Height="214" Width="237"/>
         <!-- Подавитель помех -->
-        <CheckBox Canvas.Left="1568" Canvas.Top="1208"
+        <CheckBox Canvas.Left="1447" Canvas.Top="1171"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Interference}"/>
         <!-- Мощность -->
-        <CheckBox Canvas.Left="1737" Canvas.Top="884"
-                  Height="132" Width="72"
+        <CheckBox Canvas.Left="1486" Canvas.Top="870"
                   Style="{StaticResource HorisontalSwitcher}" IsChecked="{Binding Path=Power}"/>
         <!-- Тон -->
-        <radio:ClickedImage Canvas.Left="1882" Canvas.Top="914"
-                            Style="{StaticResource Button}"
-                            IsDown="{Binding Path=Tone}"
-                            Click="{Binding Path=ToneCommand}"/>
+        <radio:ClickedControl Canvas.Left="1852" Canvas.Top="850"
+                              Template="{StaticResource ToneButton}"
+                              IsDown="{Binding Path=Tone}"
+                              Click="{Binding Path=ToneCommand}"/>
         <!-- Подавитель шумов -->
-        <CheckBox Canvas.Left="1914" Canvas.Top="1214"
-                  Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Noise}" Width="66"/>
+        <CheckBox Canvas.Left="1851" Canvas.Top="1170"
+                  Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Noise}"/>
         <!-- Питание -->
-        <CheckBox Canvas.Left="1910" Canvas.Top="1537"
-                  Height="132" Width="72"
+        <CheckBox Canvas.Left="1790" Canvas.Top="1553"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=TurningOn}"/>
-        <!-- ПуОа -->
-        <CheckBox Canvas.Left="1637" Canvas.Top="1741"
-                  Height="139" Width="84"
-                  Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=LeftPuOa}"/>
-        <!-- ПуОа -->
-        <CheckBox Canvas.Left="1818" Canvas.Top="1731"
-                  Height="132" Width="72"
-                  Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=RightPuOa}"/>
         <!-- Запись - Работа -->
-        <CheckBox Canvas.Left="1203" Canvas.Top="1676"
-                  Height="132" Width="72"
-                  Style="{StaticResource HorisontalSwitcher}" IsChecked="{Binding Path=RecordWork}"/>
+        <CheckBox Canvas.Left="1002" Canvas.Top="1740"
+                  Style="{StaticResource RecordWorkSwitcher}" IsChecked="{Binding Path=RecordWork}"/>
         <!-- Громкость -->
-        <radio:Encoder Canvas.Left="1620" Canvas.Top="1502" Width="100"
+        <radio:Encoder Canvas.Left="1554" Canvas.Top="1511"
                        Rotate="{Binding Path=VolumeCommand}" Angle="{Binding Path=Volume}"/>
         <!-- Громкость ПРМ -->
-        <radio:Encoder Canvas.Left="1713" Canvas.Top="1163" Width="100"
+        <radio:Encoder Canvas.Left="1667" Canvas.Top="1139"
                        Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM}"/>
-        <radio:ClickedImage Canvas.Left="1014" Canvas.Top="981" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad1}"
-                            Click="{Binding Path=Numpad1Command}"/>
-        <radio:ClickedImage Canvas.Left="1172" Canvas.Top="983" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad2}"
-                            Click="{Binding Path=Numpad2Command}"/>
-        <radio:ClickedImage Canvas.Left="1322" Canvas.Top="985" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad3}"
-                            Click="{Binding Path=Numpad3Command}"/>
-        <radio:ClickedImage Canvas.Left="1014" Canvas.Top="1139" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad4}"
-                            Click="{Binding Path=Numpad4Command}"/>
-        <radio:ClickedImage Canvas.Left="1172" Canvas.Top="1143" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad5}"
-                            Click="{Binding Path=Numpad5Command}"/>
-        <radio:ClickedImage Canvas.Left="1326" Canvas.Top="1145" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad6}"
-                            Click="{Binding Path=Numpad6Command}"/>
-        <radio:ClickedImage Canvas.Left="1012" Canvas.Top="1311" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad7}"
-                            Click="{Binding Path=Numpad7Command}"/>
-        <radio:ClickedImage Canvas.Left="1174" Canvas.Top="1313" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad8}"
-                            Click="{Binding Path=Numpad8Command}"/>
-        <radio:ClickedImage Canvas.Left="1324" Canvas.Top="1315" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad9}"
-                            Click="{Binding Path=Numpad9Command}"/>
-        <radio:ClickedImage Canvas.Left="1324" Canvas.Top="1481" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Path=Numpad0}"
-                            Click="{Binding Path=Numpad0Command}"/>
-        <radio:ClickedImage Canvas.Left="1170" Canvas.Top="1481" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Board}"
-                            Click="{Binding BoardCommand}"/>
-        <radio:ClickedImage Canvas.Left="1009" Canvas.Top="1477" 
-                            Style="{StaticResource Numpad}" IsDown="{Binding Reset}"
-                            Click="{Binding ResetCommand}"/>
+        <!--Цифирблат-->
+        <radio:ClickedControl Canvas.Left="825" Canvas.Top="909" 
+                              Content="1"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad1}"
+                              Click="{Binding Path=Numpad1Command}"/>
+        <radio:ClickedControl Canvas.Left="1040" Canvas.Top="909" 
+                              Content="2"
+                              Template="{StaticResource NumpadButton}"
+                              IsDown="{Binding Path=Numpad2}"
+                              Click="{Binding Path=Numpad2Command}"/>
+        <radio:ClickedControl Canvas.Left="1255" Canvas.Top="909" 
+                              Content="3"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad3}"
+                              Click="{Binding Path=Numpad3Command}"/>
+        <radio:ClickedControl Canvas.Left="825" Canvas.Top="1107" 
+                              Content="4"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad4}"
+                              Click="{Binding Path=Numpad4Command}"/>
+        <radio:ClickedControl Canvas.Left="1039" Canvas.Top="1107" 
+                              Content="5"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad5}"
+                              Click="{Binding Path=Numpad5Command}"/>
+        <radio:ClickedControl Canvas.Left="1255" Canvas.Top="1107" 
+                              Content="6"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad6}"
+                              Click="{Binding Path=Numpad6Command}"/>
+        <radio:ClickedControl Canvas.Left="825" Canvas.Top="1302" 
+                              Content="7"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad7}"
+                              Click="{Binding Path=Numpad7Command}"/>
+        <radio:ClickedControl Canvas.Left="1039" Canvas.Top="1302" 
+                              Content="8"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad8}"
+                              Click="{Binding Path=Numpad8Command}"/>
+        <radio:ClickedControl Canvas.Left="1255" Canvas.Top="1302" 
+                              Content="9"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad9}"
+                              Click="{Binding Path=Numpad9Command}"/>
+        <radio:ClickedControl Canvas.Left="1040" Canvas.Top="1500" 
+                              Content="0"
+                              Template="{StaticResource NumpadButton}" 
+                              IsDown="{Binding Path=Numpad0}"
+                              Click="{Binding Path=Numpad0Command}"/>
+        <radio:ClickedControl Canvas.Left="823" Canvas.Top="1498" 
+                              Template="{StaticResource NumpadBoard}"
+                              IsDown="{Binding Board}"
+                              Click="{Binding BoardCommand}"/>
+        <radio:ClickedControl Canvas.Left="1254" Canvas.Top="1499" 
+                              Template="{StaticResource NumpadReset}"
+                              IsDown="{Binding Reset}"
+                              Click="{Binding ResetCommand}"/>
         <Canvas Name="DrawingTarget" ClipToBounds="True"
-                Canvas.Left="1612" Canvas.Top="408"
+                Canvas.Left="1624" Canvas.Top="352"
                 Background="Transparent"
                 Width="424" Height="328"
                 MouseLeftButtonDown="DrawingMouseDown"

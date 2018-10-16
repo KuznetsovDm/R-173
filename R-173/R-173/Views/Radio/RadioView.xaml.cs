@@ -1,7 +1,10 @@
 ﻿using R_173.Interfaces;
 using R_173.ViewModels;
+using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -88,6 +91,36 @@ namespace R_173.Views.Radio
         void EndFigure()
         {
             currentFigure = null;
+        }
+    }
+
+    public class IntToImageSourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return $"/Files/radio/{value.ToString()}.png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class FrequencyToImageSourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return "/Files/radio/0.png";
+            var v = value.ToString();
+            var param = (int)parameter;
+            return param >= v.Length ? "/Files/radio/0.png" : $"/Files/radio/{v[parameter.ToString()[0] - '0']}.png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }
