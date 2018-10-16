@@ -22,7 +22,7 @@ namespace R_173.Extensions
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
             services.RegisterInstance<IDataTransmitter>(new UdpMulticastConnection(
-                MulticastConnectionOptions.Create(ipAddress: "225.0.0.0", exclusiveAddressUse: false, useBind: false)));
+                MulticastConnectionOptions.Create(ipAddress: "225.0.0", exclusiveAddressUse: false, useBind: false)));
             return services;
         }
 

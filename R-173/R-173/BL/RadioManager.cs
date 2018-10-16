@@ -42,7 +42,7 @@ namespace R_173.BL
         }
 
         #region Events
-    
+
         private void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
 
