@@ -16,8 +16,6 @@ namespace R_173.ViewModels
         private bool _noise;
         private double _volumePRM;
         private bool _turningOn;
-        private bool _leftPuOa;
-        private bool _rightPuOa;
         private double _volume;
         private bool _recordWork;
         private bool _sending;
@@ -63,11 +61,6 @@ namespace R_173.ViewModels
                 _interference = e.NewValue == SwitcherState.Enabled;
                 OnPropertyChanged(nameof(Interference));
             };
-            Model.LeftPuOa.ValueChanged += (s, e) =>
-            {
-                _leftPuOa = e.NewValue == SwitcherState.Enabled;
-                OnPropertyChanged(nameof(LeftPuOa));
-            };
             Model.Noise.ValueChanged += (s, e) =>
             {
                 _noise = e.NewValue == NoiseState.Maximum;
@@ -82,11 +75,6 @@ namespace R_173.ViewModels
             {
                 _recordWork = e.NewValue == RecordWorkState.Work;
                 OnPropertyChanged(nameof(RecordWork));
-            };
-            Model.RightPuOa.ValueChanged += (s, e) =>
-            {
-                _rightPuOa = e.NewValue == SwitcherState.Enabled;
-                OnPropertyChanged(nameof(RightPuOa));
             };
             Model.Tone.ValueChanged += (s, e) =>
             {
@@ -209,18 +197,6 @@ namespace R_173.ViewModels
         {
             get => _turningOn;
             set => Model.TurningOn.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-        }
-
-        public bool LeftPuOa
-        {
-            get => _leftPuOa;
-            set => Model.LeftPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
-        }
-
-        public bool RightPuOa
-        {
-            get => _rightPuOa;
-            set => Model.RightPuOa.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
 
         public double Volume

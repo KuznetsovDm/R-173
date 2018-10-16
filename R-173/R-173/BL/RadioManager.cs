@@ -10,8 +10,8 @@ namespace R_173.BL
     public class RadioManager : IRadioManager
     {
         private RadioModel _radioModel;
-        private IAudioReaderAndSender<SendableRadioModel> _reader;
-        private IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
+        private readonly IAudioReaderAndSender<SendableRadioModel> _reader;
+        private readonly IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
         private readonly KeyboardHandler _keyboardHandler;
 
         public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
@@ -83,11 +83,6 @@ namespace R_173.BL
                 _reader.StopListenTone();
         }
 
-        private void RightPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
-        {
-
-        }
-
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
 
@@ -104,11 +99,6 @@ namespace R_173.BL
                 return;
 
             _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
-        }
-
-        private void LeftPuOa_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
-        {
-
         }
 
         private void Interference_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -160,11 +150,9 @@ namespace R_173.BL
         {
             radioModel.FrequencyNumber.ValueChanged += FrequencyNumber_ValueChanged;
             radioModel.Interference.ValueChanged += Interference_ValueChanged;
-            radioModel.LeftPuOa.ValueChanged += LeftPuOa_ValueChanged;
             radioModel.Noise.ValueChanged += Noise_ValueChanged;
             radioModel.Power.ValueChanged += Power_ValueChanged;
             radioModel.RecordWork.ValueChanged += RecordWork_ValueChanged;
-            radioModel.RightPuOa.ValueChanged += RightPuOa_ValueChanged;
             radioModel.Tone.ValueChanged += Tone_ValueChanged;
             radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
             radioModel.Volume.ValueChanged += Volume_ValueChanged;
@@ -181,11 +169,9 @@ namespace R_173.BL
         {
             radioModel.FrequencyNumber.ValueChanged -= FrequencyNumber_ValueChanged;
             radioModel.Interference.ValueChanged -= Interference_ValueChanged;
-            radioModel.LeftPuOa.ValueChanged -= LeftPuOa_ValueChanged;
             radioModel.Noise.ValueChanged -= Noise_ValueChanged;
             radioModel.Power.ValueChanged -= Power_ValueChanged;
             radioModel.RecordWork.ValueChanged -= RecordWork_ValueChanged;
-            radioModel.RightPuOa.ValueChanged -= RightPuOa_ValueChanged;
             radioModel.Tone.ValueChanged -= Tone_ValueChanged;
             radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
             radioModel.Volume.ValueChanged -= Volume_ValueChanged;
