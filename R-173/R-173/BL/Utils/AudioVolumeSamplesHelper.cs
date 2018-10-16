@@ -14,7 +14,7 @@ namespace R_173.BL.Utils
             int floats = buffer.Length / sizeof(float);
             for (int i = 0; i < floats; i++)
             {
-                floatBuffer[i] *= 4;
+                floatBuffer[i] *= volume;
             }
         }
 
