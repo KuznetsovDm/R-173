@@ -139,38 +139,35 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
-            <radio:IntToImageSourceConverter x:Key="IntToSourceConverter"/>
-            <radio:FrequencyToImageSourceConverter x:Key="IntToFrequencySourceConverter"/>
+            <radio:FrequencyNumberToImageSourceConverter x:Key="FrNumToSourceConverter"/>
+            <radio:FrequencyToImageSourcesConverter x:Key="FrToSourceConverter"/>
         </Canvas.Resources>
         <!-- Радиостанция -->
         <Image Source="/Files/radio/radio.png" Width="3988" Height="2388"/>
-        <!-- Номер текущей частоты -->
-        <Image Canvas.Left="707" Canvas.Top="412" 
-               Source="{Binding Path=FrequencyNumber, Converter={StaticResource IntToSourceConverter}}"
-               Visibility="{Binding Path=TurningOn, Converter={StaticResource BoolToVisConverter}}"
+        <Canvas Visibility="{Binding Path=TurningOn, Converter={StaticResource BoolToVisConverter}}">
+            <!-- Номер текущей частоты -->
+            <Image Canvas.Left="707" Canvas.Top="412" 
+               Source="{Binding Path=FrequencyNumber, Converter={StaticResource FrNumToSourceConverter}}"
                Height="214" Width="237"/>
-        <!-- Текущая частота -->
-        <TextBlock Canvas.Left="1061" Canvas.Top="526"
-                   Text="{Binding Path=Frequency}"
-                   Visibility="{Binding Path=TurningOn, Converter={StaticResource BoolToVisConverter}}"
-                   Width="413" Height="116"
-                   FontFamily="/R-173;component/Files/#DS Crystal" FontSize="100" 
-                   TextAlignment="Right"/>
-        <Image Canvas.Left="913" Canvas.Top="408" 
-               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=4}"
-               Height="214" Width="237"/>
-        <Image Canvas.Left="1015" Canvas.Top="412" 
-               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=3}"
-               Height="214" Width="237"/>
-        <Image Canvas.Left="1119" Canvas.Top="414" 
-               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=2}"
-               Height="214" Width="237"/>
-        <Image Canvas.Left="1221" Canvas.Top="412" 
-               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=1}"
-               Height="214" Width="237"/>
-        <Image Canvas.Left="1323" Canvas.Top="414" 
-               Source="{Binding Path=Frequency, Converter={StaticResource IntToFrequencySourceConverter}, ConverterParameter=0}"
-               Height="214" Width="237"/>
+            <!-- Текущая частота -->
+            <Canvas Visibility="{Binding Path=Board, Converter={StaticResource BoolToVisConverter}}">
+                <Image Canvas.Left="913" Canvas.Top="408" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=4}"
+                       Height="214" Width="237"/>
+                <Image Canvas.Left="1015" Canvas.Top="412" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=3}"
+                       Height="214" Width="237"/>
+                <Image Canvas.Left="1119" Canvas.Top="414" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=2}"
+                       Height="214" Width="237"/>
+                <Image Canvas.Left="1221" Canvas.Top="412" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=1}"
+                       Height="214" Width="237"/>
+                <Image Canvas.Left="1323" Canvas.Top="414" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=0}"
+                       Height="214" Width="237"/>
+            </Canvas>
+        </Canvas>
         <!-- Подавитель помех -->
         <CheckBox Canvas.Left="1447" Canvas.Top="1171"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Interference}"/>
