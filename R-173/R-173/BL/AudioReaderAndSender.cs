@@ -2,6 +2,8 @@
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
 using System;
+using System.IO;
+using System.IO.Compression;
 
 namespace R_173.BL
 {
@@ -11,7 +13,7 @@ namespace R_173.BL
         private SendableRadioModel _model;
         private IDataTransmitter _transmitter;
         private IDataAsByteConverter<DataModel> _converter;
-        private BufferedWaveCompressor _compressor;
+        private DataCompressor _compressor;
         private bool IsMicrophoneStarted = false;
         private bool IsToneStarted = false;
         private ToneProvider _tone;
@@ -21,10 +23,9 @@ namespace R_173.BL
             IDataTransmitter transmitter,
             IDataAsByteConverter<DataModel> converter,
             ToneProvider tone,
-            BufferedWaveCompressor compressor)
+            DataCompressor compressor)
         {
             _tone = tone;
-            _tone.OnDataAvailable += OnSendDataAvailable;
             _microphone = microphone;
             _microphone.OnDataAvailable += OnSendDataAvailable;
             _transmitter = transmitter;
@@ -34,8 +35,6 @@ namespace R_173.BL
 
         private void OnSendDataAvailable(object sender, DataEventArgs e)
         {
-            //var rawAudio = _compressor.Encode(e.Data, 0, e.Data.Length);
-
             var dataModel = new DataModel()
             {
                 Guid = _SenderId,
@@ -44,7 +43,10 @@ namespace R_173.BL
             };
 
             var bytes = _converter.ConvertToBytes(dataModel);
-            var result = _transmitter.Write(bytes);
+
+            var compressed = _compressor.Compress(bytes);
+
+            var result = _transmitter.Write(compressed);
             if (result.IsFailure)
             {
                 // TODO: logger
@@ -80,7 +82,8 @@ namespace R_173.BL
                 return;
 
             IsToneStarted = true;
-            _tone.StartListen();
+            //todo:
+            //_tone.StartListen();
         }
 
         public void StopListenTone()
@@ -89,7 +92,8 @@ namespace R_173.BL
                 return;
 
             IsToneStarted = false;
-            _tone.StopListen();
+            //todo: 
+            //_tone.StopListen();
         }
 
         public void Dispose()

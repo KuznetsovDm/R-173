@@ -99,6 +99,7 @@
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\BufferedWaveCompressor.cs" />
+    <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="BL\Utils\AudioVolumeSamplesHelper.cs" />
     <Compile Include="BL\ToneProvider.cs" />
     <Compile Include="Handlers\KeyboardHandler.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Interfaces\IDataProcessingBuilder.cs" />
     <Compile Include="BL\RadioModelManager.cs" />
     <Compile Include="Extensions\RadioCommunicationExtensions.cs" />
-    <Compile Include="Extensions\RadioHandlingExtensions.cs" />
     <Compile Include="BL\Handlers\AudioMixerHandler.cs" />
     <Compile Include="Interfaces\IInvoker.cs" />
     <Compile Include="Interfaces\IMicrophone.cs" />
@@ -203,6 +203,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Files\Audio\ton.mp3" />
     <Content Include="Files\DS Crystal.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

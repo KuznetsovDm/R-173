@@ -7,6 +7,7 @@ using R_173.Interfaces;
 using RadioPipeline;
 using System;
 using System.Threading.Tasks;
+using System.IO.Compression;
 
 namespace R_173.BL
 {
@@ -21,12 +22,12 @@ namespace R_173.BL
         private PipelineDelegate<DataModel> _pipeline;
         private bool IsPlayerStarted = false;
         private IGlobalNoiseController _noise;
-        private BufferedWaveCompressor _compressor;
+        private DataCompressor _compressor;
 
         public AudioReceiverAndPlayer(IDataProvider provider, ISamplePlayer player,
             IDataAsByteConverter<DataModel> converter, IDataProcessingBuilder builder,
             IGlobalNoiseController globalNoise,
-            BufferedWaveCompressor compressor)
+            DataCompressor compressor)
         {
             _provider = provider;
             _player = player;
@@ -40,7 +41,8 @@ namespace R_173.BL
 
         private void Provider_OnDataAvaliable(object sender, DataEventArgs e)
         {
-            var model = _converter.ConvertFrom(e.Data);
+            var decompressed = _compressor.Decompress(e.Data);
+            var model = _converter.ConvertFrom(decompressed);
             _pipeline.Invoke(model);
         }
 
@@ -59,6 +61,7 @@ namespace R_173.BL
                                     VolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
                                     await next.Invoke(model);
                                 })
+                                .UseMiddleware<RemoteToneHandler>()
                                 .UseMiddleware<AudioMixerHandler>()
                                 .Build();
         }
