@@ -6,5 +6,6 @@ namespace P2PMulticastNetwork.Model
     public struct SendableRadioModel
     {
         public int Frequency { get; set; }
+        public bool PlayTone { get; set; }
     }
 }
