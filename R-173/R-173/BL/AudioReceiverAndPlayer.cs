@@ -12,7 +12,7 @@ namespace R_173.BL
 {
     public class AudioReceiverAndPlayer : IAudioReceiverAndPlayer<ReceivableRadioModel>
     {
-        public const int FrequencyRange = 100; // TODO: make constatnts
+        public const int FrequencyRange = 100;
         private ReceivableRadioModel _model;
         private IDataProvider _provider;
         private ISamplePlayer _player;
@@ -48,7 +48,6 @@ namespace R_173.BL
         {
             _pipeline = _builder.Use(async (model, next) =>
                                 {
-                                    //todo:
                                     if (Math.Abs(model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
                                         await next.Invoke(model);
                                 })
@@ -79,7 +78,6 @@ namespace R_173.BL
             _provider.Start();
             _noise.Play();
             _player.Play();
-            // TODO: noises start
         }
 
         public void Stop()
@@ -90,7 +88,6 @@ namespace R_173.BL
             IsPlayerStarted = false;
             _provider.Stop();
             _player.Stop();
-            // TODO: noises stop
             _noise.Stop();
         }
 
