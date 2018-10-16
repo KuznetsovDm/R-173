@@ -16,7 +16,7 @@ namespace R_173.Extensions
         {
             services.RegisterInstance<IDataReceiver>(
                 new UdpMulticastConnection(
-                MulticastConnectionOptions.Create(ipAddress: "230.0.0.0", exclusiveAddressUse: false, multicastLoopback: true, useBind: true)));
+                MulticastConnectionOptions.Create(ipAddress: "230.0.0.0", exclusiveAddressUse: false, multicastLoopback: false, useBind: true)));
             IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
             services.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());

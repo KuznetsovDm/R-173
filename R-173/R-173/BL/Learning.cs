@@ -34,7 +34,40 @@ namespace R_173.BL
 
         public static IList<Predicate<RadioModel>> GetWorkingFrequencyPreparationChecks()
         {
-            throw new NotImplementedException();
+            IList<Predicate<RadioModel>> result = new List<Predicate<RadioModel>>
+            {
+                // перейти на запись
+                model =>
+                {
+                    return model.RecordWork.Value == RecordWorkState.Record;
+                },
+
+                // выбрать номер частоты и нажать СБРОС
+                model =>
+                {
+                    return model.Reset.Value == SwitcherState.Enabled;
+                },
+
+                // последовательно нажать 5 цифр
+
+
+                // перейти на работу
+                model =>
+                {
+                    return model.RecordWork.Value == RecordWorkState.Work;
+                },
+
+            };
+
+            return result;
         }
     }
+
+    public interface IStep<T>
+    {
+        void Start(T model);
+        event EventHandler StepCompleted;
+        event EventHandler StepCrashed;
+    }
+
 }
