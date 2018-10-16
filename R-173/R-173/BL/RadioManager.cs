@@ -58,6 +58,9 @@ namespace R_173.BL
 
         private void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
+            _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
+
             if (e.NewValue == SwitcherState.Enabled)
             {
                 _player.Start();
@@ -73,6 +76,8 @@ namespace R_173.BL
         {
             if (!CheckTurningOn())
                 return;
+
+            _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
 
             if (e.NewValue == SwitcherState.Enabled)
                 _reader.StartListenTone();

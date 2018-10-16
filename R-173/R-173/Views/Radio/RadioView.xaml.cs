@@ -94,7 +94,7 @@ namespace R_173.Views.Radio
         }
     }
 
-    public class IntToImageSourceConverter : IValueConverter
+    public class FrequencyNumberToImageSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -107,15 +107,15 @@ namespace R_173.Views.Radio
         }
     }
 
-    public class FrequencyToImageSourceConverter : IValueConverter
+    public class FrequencyToImageSourcesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return "/Files/radio/0.png";
             var v = value.ToString();
-            var param = (int)parameter;
-            return param >= v.Length ? "/Files/radio/0.png" : $"/Files/radio/{v[parameter.ToString()[0] - '0']}.png";
+            var param = v.Length - (parameter.ToString()[0] - '0') - 1;
+            return param >= v.Length || param < 0 ? "/Files/radio/0.png" : $"/Files/radio/{v[param]}.png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
