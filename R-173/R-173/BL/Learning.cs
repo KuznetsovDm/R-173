@@ -7,7 +7,7 @@ namespace R_173.BL
 {
     public class Learning
     {
-        public static bool CheckInitialState(RadioModel model, out IList<string> errors)
+        public static bool IsInitialState(RadioModel model, out IList<string> errors)
         {
             errors = new List<string>();
 
@@ -30,6 +30,11 @@ namespace R_173.BL
                 errors.Add("VolumePRM");
 
             return errors.Any();
+        }
+
+        public static IList<Predicate<RadioModel>> GetWorkingFrequencyPreparationChecks()
+        {
+            throw new NotImplementedException();
         }
     }
 }

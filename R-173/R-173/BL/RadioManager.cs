@@ -87,7 +87,8 @@ namespace R_173.BL
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-
+            _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void Power_ValueChanged(object sender, ValueChangedEventArgs<PowerState> e)
