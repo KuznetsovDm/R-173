@@ -2,8 +2,6 @@
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
 using System;
-using System.IO;
-using System.IO.Compression;
 
 namespace R_173.BL
 {
@@ -14,8 +12,8 @@ namespace R_173.BL
         private IDataTransmitter _transmitter;
         private IDataAsByteConverter<DataModel> _converter;
         private DataCompressor _compressor;
-        private bool IsMicrophoneStarted = false;
-        private bool IsToneStarted = false;
+        private bool _isMicrophoneStarted = false;
+        private bool _isToneStarted = false;
         private ToneProvider _tone;
         private Guid _SenderId = Guid.NewGuid();
 
@@ -39,7 +37,7 @@ namespace R_173.BL
             {
                 Guid = _SenderId,
                 RadioModel = _model,
-                RawAudioSample = e.Data
+                RawAudioSample = e.Data,
             };
 
             var bytes = _converter.ConvertToBytes(dataModel);
@@ -60,38 +58,38 @@ namespace R_173.BL
 
         public void StartListenMicrophone()
         {
-            if (IsMicrophoneStarted)
+            if (_isMicrophoneStarted)
                 return;
 
-            IsMicrophoneStarted = true;
+            _isMicrophoneStarted = true;
             _microphone.StartListen();
         }
 
         public void StopListenMicrophone()
         {
-            if (!IsMicrophoneStarted)
+            if (!_isMicrophoneStarted)
                 return;
 
-            IsMicrophoneStarted = false;
+            _isMicrophoneStarted = false;
             _microphone.StopListen();
         }
 
         public void StartListenTone()
         {
-            if (IsToneStarted)
+            if (_isToneStarted)
                 return;
 
-            IsToneStarted = true;
+            _isToneStarted = true;
             //todo:
             //_tone.StartListen();
         }
 
         public void StopListenTone()
         {
-            if (!IsToneStarted)
+            if (!_isToneStarted)
                 return;
 
-            IsToneStarted = false;
+            _isToneStarted = false;
             //todo: 
             //_tone.StopListen();
         }

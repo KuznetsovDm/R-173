@@ -58,9 +58,6 @@ namespace R_173.BL
 
         private void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            if (!CheckTurningOn())
-                return;
-
             if (e.NewValue == SwitcherState.Enabled)
             {
                 _player.Start();
@@ -132,7 +129,8 @@ namespace R_173.BL
         {
             return new SendableRadioModel
             {
-                Frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value]
+                Frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value],
+                Tone = radioModel.Tone.Value == SwitcherState.Enabled
             };
         }
 

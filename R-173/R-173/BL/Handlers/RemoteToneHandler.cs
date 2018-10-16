@@ -28,7 +28,7 @@ namespace R_173.BL.Handlers
         public async Task Invoke(DataModel model, PipelineDelegate<DataModel> next)
         {
             //todo: memory.
-            if (model.RadioModel.PlayTone)
+            if (model.RadioModel.Tone)
                 _mixer.AddMixerInput(_toneProvider.GetSampleProvider());
             await next.Invoke(model);
         }
