@@ -101,6 +101,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="BL\Learning.cs" />
+    <Compile Include="BL\LocalToneController.cs" />
     <Compile Include="BL\Utils\AudioVolumeSamplesHelper.cs" />
     <Compile Include="BL\ToneProvider.cs" />
     <Compile Include="Handlers\KeyboardHandler.cs" />
@@ -127,6 +128,8 @@
     </Compile>
     <Compile Include="Views\ITabView.cs" />
     <Compile Include="Views\Radio\ClickedImage.cs" />
+    <Compile Include="Views\Radio\FrequencyNumberToImageSourceConverter.cs" />
+    <Compile Include="Views\Radio\FrequencyToImageSourcesConverter.cs" />
     <Compile Include="Views\Radio\RadioView.xaml.cs">
       <DependentUpon>RadioView.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,7 @@
     <Compile Include="ViewModels\RadioViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Radio\RotatedImage.cs" />
+    <Compile Include="Views\Radio\ValueToAngleConverter.cs" />
     <Compile Include="Views\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
@@ -199,6 +203,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Files\radio\empty.png" />
     <Resource Include="Files\radio\1.png" />
     <Resource Include="Files\radio\2.png" />
     <Resource Include="Files\radio\3.png" />

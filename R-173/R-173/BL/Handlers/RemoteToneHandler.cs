@@ -5,9 +5,6 @@ using R_173.Interfaces;
 using RadioPipeline;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace R_173.BL.Handlers
@@ -17,8 +14,8 @@ namespace R_173.BL.Handlers
         private WaveFormat _format;
         private ToneProvider _toneProvider;
         private MixingSampleProvider _mixer;
-        private static ConcurrentDictionary<Guid, ISampleProvider> _providers;
-        private static TimeSpan timeDifferencePlaying = TimeSpan.FromSeconds(2);
+        private static ConcurrentDictionary<Guid, PlayerSampleToken> _providers;
+        private static TimeSpan timeDifferencePlaying = TimeSpan.FromMilliseconds(1500);
 
         public RemoteToneHandler(WaveFormat format, ToneProvider provider, MixingSampleProvider mixer)
         {
@@ -26,29 +23,47 @@ namespace R_173.BL.Handlers
             _toneProvider = provider;
             _mixer = mixer;
             if (_providers == null)
-                _providers = new ConcurrentDictionary<Guid, ISampleProvider>();
+                _providers = new ConcurrentDictionary<Guid, PlayerSampleToken>();
         }
 
         public async Task Invoke(DataModel model, PipelineDelegate<DataModel> next)
         {
-            //todo: memory.
-            //if (_providers.ContainsKey(model.Guid))
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
-            if (model.RadioModel.Tone)
+            if (_providers.ContainsKey(model.Guid) && model.RadioModel.Tone)
             {
-                _mixer.AddMixerInput(_toneProvider.GetSampleProvider());
+                var token = _providers[model.Guid];
+                var current = DateTime.UtcNow.TimeOfDay;
+                if ((current - token.TimeStamp) > timeDifferencePlaying)
+                {
+                    _mixer.RemoveMixerInput(token.Provider);
+
+                    var updatedSample = _toneProvider.CreateSampleProvider();
+                    _providers[model.Guid] = new PlayerSampleToken
+                    {
+                        Provider = updatedSample,
+                        TimeStamp = current
+                    };
+
+                    _mixer.AddMixerInput(updatedSample);
+                }
+            }
+            else if (model.RadioModel.Tone)
+            {
+                var sample = _toneProvider.CreateSampleProvider();
+                var timeStamp = DateTime.UtcNow.TimeOfDay;
+                var token = new PlayerSampleToken
+                {
+                    Provider = sample,
+                    TimeStamp = timeStamp
+                };
+                _providers[model.Guid] = token;
+
+                _mixer.AddMixerInput(token.Provider);
             }
             await next.Invoke(model);
         }
     }
 
-    public class PlayerSampleToken
+    public struct PlayerSampleToken
     {
         public ISampleProvider Provider { get; set; }
         public TimeSpan TimeStamp { get; set; }

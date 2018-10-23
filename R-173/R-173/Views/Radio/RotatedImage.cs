@@ -42,7 +42,7 @@ namespace R_173.Views.Radio
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             var currentMousePosition = e.MouseDevice.GetPosition((IInputElement)Parent) - _centerImage;
-            double changeAngle = Vector.AngleBetween(_previousMousePosition, currentMousePosition);
+            double changeAngle = Vector.AngleBetween(_previousMousePosition, currentMousePosition) / ValueToAngleConverter.MaxAngle;
             _previousMousePosition = currentMousePosition;
             GetRotate(this)?.Execute(changeAngle);
         }

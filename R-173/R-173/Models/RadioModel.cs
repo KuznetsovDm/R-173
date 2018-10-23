@@ -120,7 +120,7 @@ namespace R_173.Models
         private void OnFrequnecyNumberChange(int state)
         {
             if (TurningOn.Value == SwitcherState.Enabled && Board.Value == SwitcherState.Enabled)
-                Frequency.Value = WorkingFrequencies[state].ToString();
+                Frequency.Value = WorkingFrequencies[state].ToString().PadLeft(5, '0');
         }
 
         private void OnFrequencyChange(string state)
@@ -191,7 +191,7 @@ namespace R_173.Models
         private void OnBoardChange(SwitcherState state)
         {
             if (Board.Value == SwitcherState.Enabled)
-                Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString();
+                Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString().PadLeft(5, '0');
             else
                 Frequency.Value = "";
         }
@@ -228,7 +228,7 @@ namespace R_173.Models
 
             FrequencyNumber.Value = i;
             if (RecordWork.Value == RecordWorkState.Record)
-                Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString();
+                Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString().PadLeft(5, '0');
         }
         #endregion
     }

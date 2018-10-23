@@ -1,6 +1,7 @@
 ﻿using R_173.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace R_173.Handlers
@@ -18,6 +19,15 @@ namespace R_173.Handlers
                 { Key.Space, value => _currentRadioModel.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.RightCtrl, value => _currentRadioModel.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
             };
+
+            Enumerable.Range(0, 10)
+                .Select(i => new { i, key = Key.NumPad0 + i })
+                .ToList()
+                .ForEach(n => 
+                    _onKeyDownActions.Add(
+                        n.key, 
+                        value => _currentRadioModel.Numpad[n.i].Value = 
+                            value ? SwitcherState.Enabled : SwitcherState.Disabled));
 
             _mainWindow.PreviewKeyDown += OnPreviewKeyDown;
             _mainWindow.PreviewKeyUp += OnPreviewKeyUp;

@@ -141,6 +141,7 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
             <radio:FrequencyNumberToImageSourceConverter x:Key="FrNumToSourceConverter"/>
             <radio:FrequencyToImageSourcesConverter x:Key="FrToSourceConverter"/>
+            <radio:ValueToAngleConverter x:Key="ValToAngConverter"/>
         </Canvas.Resources>
         <!-- Радиостанция -->
         <Image Source="/Files/radio/radio.png" Width="3988" Height="2388"/>
@@ -190,10 +191,10 @@
                   Style="{StaticResource RecordWorkSwitcher}" IsChecked="{Binding Path=RecordWork}"/>
         <!-- Громкость -->
         <radio:Encoder Canvas.Left="1554" Canvas.Top="1511"
-                       Rotate="{Binding Path=VolumeCommand}" Angle="{Binding Path=Volume}"/>
+                       Rotate="{Binding Path=VolumeCommand}" Angle="{Binding Path=Volume, Converter={StaticResource ValToAngConverter}}"/>
         <!-- Громкость ПРМ -->
         <radio:Encoder Canvas.Left="1667" Canvas.Top="1139"
-                       Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM}"/>
+                       Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM, Converter={StaticResource ValToAngConverter}}"/>
         <!--Цифирблат-->
         <radio:ClickedControl Canvas.Left="825" Canvas.Top="909" 
                               Content="1"
