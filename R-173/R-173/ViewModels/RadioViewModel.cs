@@ -29,7 +29,6 @@ namespace R_173.ViewModels
             _numpad = new bool[10];
 
             ChangeFrequencyCommand = new SimpleCommand<string>(s => Model.Numpad[int.Parse(s)].Value = SwitcherState.Enabled);
-            //ClearFrequencyCommand = new SimpleCommand(() => Frequency = 0);
             ToneCommand = new SimpleCommand<bool>(value => Tone = value);
             VolumeCommand = new SimpleCommand<double>(value => Volume += value);
             VolumePRMCommand = new SimpleCommand<double>(value => VolumePRM += value);
@@ -88,12 +87,12 @@ namespace R_173.ViewModels
             };
             Model.Volume.ValueChanged += (s, e) =>
             {
-                _volume = e.NewValue * 360;
+                _volume = e.NewValue;
                 OnPropertyChanged(nameof(Volume));
             };
             Model.VolumePRM.ValueChanged += (s, e) =>
             {
-                _volumePRM = e.NewValue * 360;
+                _volumePRM = e.NewValue;
                 OnPropertyChanged(nameof(VolumePRM));
             };
             Model.Sending.ValueChanged += (s, e) =>
@@ -190,7 +189,7 @@ namespace R_173.ViewModels
         public double VolumePRM
         {
             get => _volumePRM;
-            set => Model.VolumePRM.Value = value / 360;
+            set => Model.VolumePRM.Value = value;
         }
 
         public bool TurningOn
@@ -202,7 +201,7 @@ namespace R_173.ViewModels
         public double Volume
         {
             get => _volume;
-            set => Model.Volume.Value = value / 360;
+            set => Model.Volume.Value = value;
         }
 
         public bool RecordWork
@@ -287,6 +286,12 @@ namespace R_173.ViewModels
         {
             get => _reset;
             set => Model.Reset.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
+        }
+
+        public bool Sending
+        {
+            get => _sending;
+            set => Model.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
     }
 }
