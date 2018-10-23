@@ -4,6 +4,7 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
+using System.Collections.Generic;
 
 namespace R_173.BL
 {
@@ -13,6 +14,8 @@ namespace R_173.BL
         private readonly IAudioReaderAndSender<SendableRadioModel> _reader;
         private readonly IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
         private readonly KeyboardHandler _keyboardHandler;
+        private Learning _learning;
+        private bool isLearningStarted = false;
 
         public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
             IAudioReceiverAndPlayer<ReceivableRadioModel> player, KeyboardHandler keyboardHandler)
@@ -20,6 +23,7 @@ namespace R_173.BL
             _reader = reader;
             _player = player;
             _keyboardHandler = keyboardHandler;
+            _learning = new Learning(new List<InitialStep> { new TurningOnStep()});
         }
 
         public void SetModel(RadioModel radioModel)
@@ -39,6 +43,7 @@ namespace R_173.BL
             SubscribeEvents(radioModel);
 
             InitRadioManager(_radioModel);
+            _learning.Start(_radioModel);
         }
 
         #region Events
@@ -83,6 +88,20 @@ namespace R_173.BL
                 _reader.StartListenTone();
             else
                 _reader.StopListenTone();
+
+
+            //if (e.NewValue == SwitcherState.Enabled)
+            //{
+            //    if (!isLearningStarted)
+            //    {
+            //        _learning.Start(_radioModel);
+            //    }
+            //    else
+            //    {
+            //        _learning.Stop();
+            //    }
+            //    isLearningStarted = !isLearningStarted;
+            //}
         }
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
@@ -93,7 +112,7 @@ namespace R_173.BL
 
         private void Power_ValueChanged(object sender, ValueChangedEventArgs<PowerState> e)
         {
-
+            _player.SetModel(GetReceivableRadioModelFromRadioModel(_radioModel));
         }
 
         private void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
@@ -106,7 +125,6 @@ namespace R_173.BL
 
         private void Interference_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-
         }
 
         private void FrequencyNumber_ValueChanged(object sender, ValueChangedEventArgs<int> e)
