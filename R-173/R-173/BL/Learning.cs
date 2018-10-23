@@ -11,15 +11,20 @@ namespace R_173.BL
         public int Step { get; set; }
     }
 
+    public class CrashedEventArgs : EventArgs
+    {
+        public IList<string> Errors { get; set; }
+    }
+
     public class Learning
     {
-        private List<InitialStep> _steps;
+        private List<Step> _steps;
         private int _currentStep = 0;
         private RadioModel _model;
 
         public event EventHandler<StepChangedEventArgs> StepChanged;
 
-        public Learning(List<InitialStep> steps)
+        public Learning(List<Step> steps)
         {
             _steps = steps;
         }
@@ -34,8 +39,8 @@ namespace R_173.BL
             var step = _steps[newStepNumber];
             if (step.StartIfInputConditionsAreRight(_model, out IList<string> errors))
             {
-                step.StepCompleted += StepCompleted;
-                step.StepCrashed += StepCrashed;
+                step.Completed += StepCompleted;
+                step.Crashed += StepCrashed;
             }
             else
             {
@@ -53,8 +58,8 @@ namespace R_173.BL
             _currentStep--;
             var step = _steps[_currentStep];
 
-            step.StepCompleted -= StepCompleted;
-            step.StepCrashed -= StepCrashed;
+            step.Completed -= StepCompleted;
+            step.Crashed -= StepCrashed;
 
             OnStepChanged(_currentStep);
         }
@@ -64,8 +69,8 @@ namespace R_173.BL
             _currentStep++;
             var step = _steps[_currentStep];
 
-            step.StepCompleted -= StepCompleted;
-            step.StepCrashed -= StepCrashed;
+            step.Completed -= StepCompleted;
+            step.Crashed -= StepCrashed;
 
             OnStepChanged(_currentStep);
         }
@@ -113,26 +118,115 @@ namespace R_173.BL
         Completed
     }
 
-    public interface IStep<T>
+    public class CompositeStep : IStep<RadioModel>
     {
-        bool StartIfInputConditionsAreRight(T model, out IList<string> errors);
-        event EventHandler StepCompleted;
-        event EventHandler StepCrashed;
+        IList<IStep<RadioModel>> _steps;
+        private int _current = 0;
+        private RadioModel _model;
+
+        public CompositeStep(IList<IStep<RadioModel>> steps)
+        {
+            _steps = steps;
+        }
+
+        private void OnStepChange(int prevStateNumber, int current)
+        {
+
+        }
+
+        private void Step_Crashed(object sender, CrashedEventArgs e)
+        {
+            var prevStateNumber = _current;
+            _steps[prevStateNumber].Completed -= Step_Completed;
+            _steps[prevStateNumber].Crashed -= Step_Crashed;
+
+            if (_current == 0)
+            {
+                Crashed(this, e);
+                return;
+            }
+
+            _current--;
+
+            IList<string> errors = null;
+            while (_current >= 0 && !_steps[_current].StartIfInputConditionsAreRight(_model, out errors))
+            {
+                _current--;
+            }
+
+            if (_current == -1)
+            {
+                Crashed(this, new CrashedEventArgs { Errors = errors });
+                return;
+            }
+
+            //если дошли, то значит шаг запустился.
+            _steps[_current].Completed += Step_Completed;
+            _steps[_current].Crashed += Step_Crashed;
+        }
+
+        private void Step_Completed(object sender, EventArgs e)
+        {
+            var prevStateNumber = _current;
+            _steps[prevStateNumber].Completed -= Step_Completed;
+            _steps[prevStateNumber].Crashed -= Step_Crashed;
+
+            bool isCurrentEndOfSteps = _current == _steps.Count - 1;
+            if (isCurrentEndOfSteps)
+            {
+                Completed(this, EventArgs.Empty);
+                return;
+            }
+
+            _current++;
+
+            if (_steps[_current].StartIfInputConditionsAreRight(_model, out var errors))
+            {
+                _steps[_current].Completed += Step_Completed;
+                _steps[_current].Crashed += Step_Crashed;
+            }
+            else
+            {
+                throw new InvalidOperationException($"WTF!!! current={_current}" +
+                    $"{Environment.NewLine}" +
+                    $"{{{String.Join(",", errors)}}}");
+            }
+        }
+
+        public event EventHandler Completed;
+        public event EventHandler<CrashedEventArgs> Crashed;
+
+        public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
+        {
+            _model = model;
+            _steps[_current].Completed += Step_Completed;
+            _steps[_current].Crashed += Step_Crashed;
+            return _steps[0].StartIfInputConditionsAreRight(model, out errors);
+        }
     }
 
-    public abstract class InitialStep : IStep<RadioModel>
+    public class CompositeStepBuilder
+    {
+        private List<IStep<RadioModel>> _steps = new List<IStep<RadioModel>>();
+
+        public CompositeStepBuilder Add(IStep<RadioModel> step)
+        {
+            _steps.Add(step);
+            return this;
+        }
+
+        public CompositeStep Build()
+        {
+            return new CompositeStep(_steps);
+        }
+    }
+
+    public class Step : IStep<RadioModel>
     {
         protected RadioModel Model;
 
-        public StepState State { get; protected set; }
-
-        public event EventHandler StepCompleted = (e, args) => { };
-        public event EventHandler StepCrashed = (e, args) => { };
-
-        public InitialStep()
-        {
-            State = StepState.NotStarted;
-        }
+        public event EventHandler Completed = (e, args) => { };
+        public event EventHandler<CrashedEventArgs> Crashed = (e, args) => { };
 
         public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
         {
@@ -141,8 +235,6 @@ namespace R_173.BL
                 return false;
             }
 
-            State = StepState.InProcess;
-
             Model = model;
             Subscribe(model);
             return true;
@@ -150,7 +242,8 @@ namespace R_173.BL
 
         public virtual bool CheckInputConditions(RadioModel model, out IList<string> errors)
         {
-            return CheckInitialState(model, out errors);
+            errors = Enumerable.Empty<string>().ToList();
+            return true;
         }
 
         public static bool CheckInitialState(RadioModel model, out IList<string> errors)
@@ -239,21 +332,21 @@ namespace R_173.BL
         protected virtual void FrequencyNumber_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
         }
-        
+
         protected void OnStepCompleted()
         {
             Unsubscribe(Model);
-            StepCompleted(this, EventArgs.Empty);
+            Completed(this, EventArgs.Empty);
         }
 
-        protected void OnStepCrashed()
+        protected void OnStepCrashed(IList<string> errors)
         {
             Unsubscribe(Model);
-            StepCrashed(this, EventArgs.Empty);
+            Crashed(this, new CrashedEventArgs { Errors = errors });
         }
     }
 
-    public class TurningOnStep : InitialStep
+    public class TurningOnStep : Step
     {
         protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {

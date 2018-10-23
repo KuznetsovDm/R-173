@@ -23,7 +23,7 @@ namespace R_173.BL
             _reader = reader;
             _player = player;
             _keyboardHandler = keyboardHandler;
-            _learning = new Learning(new List<InitialStep> { new TurningOnStep()});
+            _learning = new Learning(new List<Step> { new TurningOnStep()});
         }
 
         public void SetModel(RadioModel radioModel)
