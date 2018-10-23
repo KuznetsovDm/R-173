@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using R_173.SharedResources;
 
-namespace R_173.BL
+namespace R_173.Interfaces
 {
     public interface IStep<T>
     {

@@ -16,6 +16,7 @@ namespace R_173.BL
         private readonly KeyboardHandler _keyboardHandler;
         private Learning _learning;
         private bool isLearningStarted = false;
+        private CompositeStep _learningStep;
 
         public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
             IAudioReceiverAndPlayer<ReceivableRadioModel> player, KeyboardHandler keyboardHandler)
@@ -23,7 +24,19 @@ namespace R_173.BL
             _reader = reader;
             _player = player;
             _keyboardHandler = keyboardHandler;
-            _learning = new Learning(new List<Step> { new TurningOnStep()});
+            //_learning = new Learning(new List<Step> { new TurningOnStep()});
+            var stepBuilder = new CompositeStepBuilder();
+            _learningStep = stepBuilder
+                .Add(new TurningOnStep())
+                .Add(new ButtonStep())
+                .Add(new BoardStep())
+                .Build();
+            _learningStep.StepChanged += _learningStep_StepChanged;
+        }
+
+        private void _learningStep_StepChanged(object sender, StepChangedEventArgs e)
+        {
+
         }
 
         public void SetModel(RadioModel radioModel)
@@ -43,7 +56,24 @@ namespace R_173.BL
             SubscribeEvents(radioModel);
 
             InitRadioManager(_radioModel);
-            _learning.Start(_radioModel);
+            //_learning.Start(_radioModel);
+            if (_learningStep.StartIfInputConditionsAreRight(_radioModel, out var errors))
+            {
+                _learningStep.Completed += _learningStep_Completed;
+                _learningStep.Crashed += _learningStep_Crashed; ;
+            }
+            else
+            {
+
+            }
+        }
+
+        private void _learningStep_Crashed(object sender, CrashedEventArgs e)
+        {
+        }
+
+        private void _learningStep_Completed(object sender, System.EventArgs e)
+        {
         }
 
         #region Events
