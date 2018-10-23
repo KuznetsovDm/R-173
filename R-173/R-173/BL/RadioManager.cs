@@ -146,7 +146,8 @@ namespace R_173.BL
             {
                 Frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value],
                 Noise = radioModel.Noise.Value == NoiseState.Minimum,
-                Volume = radioModel.Volume.Value
+                Volume = radioModel.Volume.Value,
+                Power = radioModel.Power.Value == PowerState.Full ? PowerLevel.Hight : PowerLevel.Low
             };
         }
 

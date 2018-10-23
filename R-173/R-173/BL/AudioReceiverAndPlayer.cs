@@ -14,6 +14,7 @@ namespace R_173.BL
     public class AudioReceiverAndPlayer : IAudioReceiverAndPlayer<ReceivableRadioModel>
     {
         public const int FrequencyRange = 100;
+        public const float LowPowerLevelVolume = 0.5f;
         private ReceivableRadioModel _model;
         private IDataProvider _provider;
         private ISamplePlayer _player;
@@ -52,6 +53,15 @@ namespace R_173.BL
                                 {
                                     if (Math.Abs(model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
                                         await next.Invoke(model);
+                                })
+                                .Use(async (model, next) =>
+                                {
+                                    if (_model.Power == PowerLevel.Low)
+                                    {
+                                        var volume = VolumeSamplesHelper.LogVolumeApproximation(LowPowerLevelVolume);
+                                        VolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
+                                    }
+                                    await next.Invoke(model);
                                 })
                                 .Use(async (model, next) =>
                                 {

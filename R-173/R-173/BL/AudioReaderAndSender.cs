@@ -83,9 +83,7 @@ namespace R_173.BL
                 return;
 
             _isToneStarted = true;
-            //todo:
             _localToneController.StartPlayTone();
-            //_tone.StartListen();
         }
 
         public void StopListenTone()
@@ -94,9 +92,7 @@ namespace R_173.BL
                 return;
 
             _isToneStarted = false;
-            //todo: 
             _localToneController.StopPlayTone();
-            //_tone.StopListen();
         }
 
         public void Dispose()
