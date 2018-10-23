@@ -101,6 +101,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="BL\Learning.cs" />
+    <Compile Include="BL\LocalToneController.cs" />
     <Compile Include="BL\Utils\AudioVolumeSamplesHelper.cs" />
     <Compile Include="BL\ToneProvider.cs" />
     <Compile Include="Handlers\KeyboardHandler.cs" />
