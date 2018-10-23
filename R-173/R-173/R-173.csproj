@@ -122,6 +122,8 @@
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
+    <Compile Include="ViewModels\PreparationViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="Views\Appointment.xaml.cs">
       <DependentUpon>Appointment.xaml</DependentUpon>
     </Compile>
@@ -143,6 +145,14 @@
     </Compile>
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\CurrentStepToBoolConverter.cs" />
+    <Compile Include="Views\TrainingSteps\FrequencyCheck.xaml.cs">
+      <DependentUpon>FrequencyCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\ITrainingStep.cs" />
+    <Compile Include="Views\TrainingSteps\PerformanceTest.xaml.cs">
+      <DependentUpon>PerformanceTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\Preparation.xaml.cs">
       <DependentUpon>Preparation.xaml</DependentUpon>
@@ -176,6 +186,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Training.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\FrequencyCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\PerformanceTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

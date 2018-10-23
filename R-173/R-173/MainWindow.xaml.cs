@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace R_173
@@ -29,7 +30,7 @@ namespace R_173
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var page = (sender as Button).CommandParameter as Type;
+            var page = (sender as ButtonBase).CommandParameter as Type;
             MainContent.Content = _pages[page];
         }
     }
