@@ -1,10 +1,10 @@
 ﻿namespace R_173.ViewModels
 {
-    class PreparationViewModel : ViewModelBase
+    class TrainingStepViewModel : ViewModelBase
     {
         private int _currentStep;
 
-        public PreparationViewModel()
+        public TrainingStepViewModel()
         {
             _currentStep = -1;
         }

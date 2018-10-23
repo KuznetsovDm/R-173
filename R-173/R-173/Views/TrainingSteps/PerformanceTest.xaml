@@ -5,8 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock>2</TextBlock>
-    </Grid>
+             Height="150" Width="800"
+             FontFamily="Times New Roman">
+    <Canvas Grid.Row="0" Background="White">
+        <Canvas.Resources>
+            <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}"/>
+            <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
+        </Canvas.Resources>
+
+        <CheckBox Canvas.Left="20" Canvas.Top="10"
+                    Content="1. Выполнить операции 1-9 подготовки к работе"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
+        <CheckBox Canvas.Left="170" Canvas.Top="10" 
+                    Content="2. Прослушать собственные шумы приемника"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
+        <CheckBox Canvas.Left="315" Canvas.Top="10" 
+                    Content="3. Проверить работу регулятора громкости"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
+        <CheckBox Canvas.Left="460" Canvas.Top="10" 
+                    Content="4. Проверить работу подавителя шумов"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
+        <CheckBox Canvas.Left="605" Canvas.Top="10" 
+                    Content="5. Нажать кнопку нагрудного переключателя МТ2 в положние ПРД"
+                    Height="130" Width="180"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+        <CheckBox Canvas.Left="460" Canvas.Top="80" 
+                    Content="6. Проверить модуляцию (самопрослушивание)"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
+        <CheckBox Canvas.Left="315" Canvas.Top="80" 
+                    Content="7. Проверить отдачу тока в антенну"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
+        <CheckBox Canvas.Left="170" Canvas.Top="80" 
+                    Content="8. Проверить тональный вызов"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}"/>
+        <CheckBox Canvas.Left="20" Canvas.Top="80" 
+                    Content="9. Повторить операции 2-8 на всех ЗПЧ"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}"/>
+    </Canvas>
 </UserControl>

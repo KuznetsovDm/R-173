@@ -9,6 +9,10 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type models:RadioViewModel}}">
     <Canvas Width="3745" Height="2240">
+        <Canvas.Background>
+            <ImageBrush ImageSource="/Files/radio/radio.png"/>
+        </Canvas.Background>
+
         <Canvas.Resources>
             <Style x:Name="ClickableElement" TargetType="FrameworkElement">
                 <Setter Property="Cursor" Value="Hand"/>
@@ -143,114 +147,106 @@
             <radio:FrequencyToImageSourcesConverter x:Key="FrToSourceConverter"/>
             <radio:ValueToAngleConverter x:Key="ValToAngConverter"/>
         </Canvas.Resources>
-        <!-- Радиостанция -->
-        <Image Source="/Files/radio/radio.png" Width="3988" Height="2388"/>
         <Canvas Visibility="{Binding Path=TurningOn, Converter={StaticResource BoolToVisConverter}}">
             <!-- Номер текущей частоты -->
-            <Image Canvas.Left="707" Canvas.Top="412" 
-               Source="{Binding Path=FrequencyNumber, Converter={StaticResource FrNumToSourceConverter}}"
-               Height="214" Width="237"/>
+            <Image Canvas.Left="728" Canvas.Top="404"  
+                   Source="{Binding Path=FrequencyNumber, Converter={StaticResource FrNumToSourceConverter}}"/>
             <!-- Текущая частота -->
             <Canvas Visibility="{Binding Path=Board, Converter={StaticResource BoolToVisConverter}}">
-                <Image Canvas.Left="913" Canvas.Top="408" 
-                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=4}"
-                       Height="214" Width="237"/>
-                <Image Canvas.Left="1015" Canvas.Top="412" 
-                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=3}"
-                       Height="214" Width="237"/>
-                <Image Canvas.Left="1119" Canvas.Top="414" 
-                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=2}"
-                       Height="214" Width="237"/>
-                <Image Canvas.Left="1221" Canvas.Top="412" 
-                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=1}"
-                       Height="214" Width="237"/>
-                <Image Canvas.Left="1323" Canvas.Top="414" 
-                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=0}"
-                       Height="214" Width="237"/>
+                <Image Canvas.Left="924" Canvas.Top="404" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=4}"/>
+                <Image Canvas.Left="1020" Canvas.Top="404" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=3}"/>
+                <Image Canvas.Left="1116" Canvas.Top="404" 
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=2}"/>
+                <Image Canvas.Left="1212" Canvas.Top="404"
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=1}"/>
+                <Image Canvas.Left="1308" Canvas.Top="404"
+                       Source="{Binding Path=Frequency, Converter={StaticResource FrToSourceConverter}, ConverterParameter=0}"/>
             </Canvas>
         </Canvas>
         <!-- Подавитель помех -->
-        <CheckBox Canvas.Left="1447" Canvas.Top="1171"
+        <CheckBox Canvas.Left="1351" Canvas.Top="1093"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Interference}"/>
         <!-- Мощность -->
-        <CheckBox Canvas.Left="1486" Canvas.Top="870"
+        <CheckBox Canvas.Left="1389" Canvas.Top="812"
                   Style="{StaticResource HorisontalSwitcher}" IsChecked="{Binding Path=Power}"/>
         <!-- Тон -->
-        <radio:ClickedControl Canvas.Left="1852" Canvas.Top="850"
+        <radio:ClickedControl Canvas.Left="1760" Canvas.Top="810"
                               Template="{StaticResource ToneButton}"
                               IsDown="{Binding Path=Tone}"
                               Click="{Binding Path=ToneCommand}"/>
         <!-- Подавитель шумов -->
-        <CheckBox Canvas.Left="1851" Canvas.Top="1170"
+        <CheckBox Canvas.Left="1730" Canvas.Top="1093"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=Noise}"/>
         <!-- Питание -->
-        <CheckBox Canvas.Left="1790" Canvas.Top="1553"
+        <CheckBox Canvas.Left="1673" Canvas.Top="1452"
                   Style="{StaticResource VerticalSwitcher}" IsChecked="{Binding Path=TurningOn}"/>
         <!-- Запись - Работа -->
-        <CheckBox Canvas.Left="1002" Canvas.Top="1740"
+        <CheckBox Canvas.Left="935" Canvas.Top="1630"
                   Style="{StaticResource RecordWorkSwitcher}" IsChecked="{Binding Path=RecordWork}"/>
         <!-- Громкость -->
-        <radio:Encoder Canvas.Left="1554" Canvas.Top="1511"
+        <radio:Encoder Canvas.Left="1458" Canvas.Top="1417"
                        Rotate="{Binding Path=VolumeCommand}" Angle="{Binding Path=Volume, Converter={StaticResource ValToAngConverter}}"/>
         <!-- Громкость ПРМ -->
-        <radio:Encoder Canvas.Left="1667" Canvas.Top="1139"
+        <radio:Encoder Canvas.Left="1560" Canvas.Top="1064"
                        Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM, Converter={StaticResource ValToAngConverter}}"/>
         <!--Цифирблат-->
-        <radio:ClickedControl Canvas.Left="825" Canvas.Top="909" 
-                              Content="1"
+        <radio:ClickedControl Canvas.Left="774" Canvas.Top="851" 
+                              Content="1" Opacity="1"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad1}"
                               Click="{Binding Path=Numpad1Command}"/>
-        <radio:ClickedControl Canvas.Left="1040" Canvas.Top="909" 
+        <radio:ClickedControl Canvas.Left="977" Canvas.Top="851" 
                               Content="2"
                               Template="{StaticResource NumpadButton}"
                               IsDown="{Binding Path=Numpad2}"
                               Click="{Binding Path=Numpad2Command}"/>
-        <radio:ClickedControl Canvas.Left="1255" Canvas.Top="909" 
+        <radio:ClickedControl Canvas.Left="1180" Canvas.Top="850" 
                               Content="3"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad3}"
                               Click="{Binding Path=Numpad3Command}"/>
-        <radio:ClickedControl Canvas.Left="825" Canvas.Top="1107" 
+        <radio:ClickedControl Canvas.Left="774" Canvas.Top="1039" 
                               Content="4"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad4}"
                               Click="{Binding Path=Numpad4Command}"/>
-        <radio:ClickedControl Canvas.Left="1039" Canvas.Top="1107" 
+        <radio:ClickedControl Canvas.Left="977" Canvas.Top="1039" 
                               Content="5"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad5}"
                               Click="{Binding Path=Numpad5Command}"/>
-        <radio:ClickedControl Canvas.Left="1255" Canvas.Top="1107" 
+        <radio:ClickedControl Canvas.Left="1180" Canvas.Top="1039" 
                               Content="6"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad6}"
                               Click="{Binding Path=Numpad6Command}"/>
-        <radio:ClickedControl Canvas.Left="825" Canvas.Top="1302" 
+        <radio:ClickedControl Canvas.Left="774" Canvas.Top="1219" 
                               Content="7"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad7}"
                               Click="{Binding Path=Numpad7Command}"/>
-        <radio:ClickedControl Canvas.Left="1039" Canvas.Top="1302" 
+        <radio:ClickedControl Canvas.Left="977" Canvas.Top="1219" 
                               Content="8"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad8}"
                               Click="{Binding Path=Numpad8Command}"/>
-        <radio:ClickedControl Canvas.Left="1255" Canvas.Top="1302" 
+        <radio:ClickedControl Canvas.Left="1180" Canvas.Top="1219" 
                               Content="9"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad9}"
                               Click="{Binding Path=Numpad9Command}"/>
-        <radio:ClickedControl Canvas.Left="1040" Canvas.Top="1500" 
+        <radio:ClickedControl Canvas.Left="775" Canvas.Top="1405" 
+                              Template="{StaticResource NumpadBoard}"
+                              IsDown="{Binding Board}"
+                              Click="{Binding BoardCommand}"/>
+        <radio:ClickedControl Canvas.Left="977" Canvas.Top="1405" 
                               Content="0"
                               Template="{StaticResource NumpadButton}" 
                               IsDown="{Binding Path=Numpad0}"
                               Click="{Binding Path=Numpad0Command}"/>
-        <radio:ClickedControl Canvas.Left="823" Canvas.Top="1498" 
-                              Template="{StaticResource NumpadBoard}"
-                              IsDown="{Binding Board}"
-                              Click="{Binding BoardCommand}"/>
-        <radio:ClickedControl Canvas.Left="1254" Canvas.Top="1499" 
+        <radio:ClickedControl Canvas.Left="1180" Canvas.Top="1405" 
                               Template="{StaticResource NumpadReset}"
                               IsDown="{Binding Reset}"
                               Click="{Binding ResetCommand}"/>

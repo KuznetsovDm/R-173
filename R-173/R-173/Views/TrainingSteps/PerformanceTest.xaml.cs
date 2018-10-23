@@ -11,5 +11,8 @@ namespace R_173.Views.TrainingSteps
         {
             InitializeComponent();
         }
+
+
+        public string Caption => "Проверка работоспособности";
     }
 }

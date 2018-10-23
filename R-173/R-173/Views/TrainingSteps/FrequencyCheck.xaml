@@ -5,8 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock>3</TextBlock>
-    </Grid>
+             Height="150" Width="800"
+             FontFamily="Times New Roman">
+    <Canvas Grid.Row="0" Background="White">
+        <Canvas.Resources>
+            <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}"/>
+            <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
+        </Canvas.Resources>
+
+        <CheckBox Canvas.Left="20" Canvas.Top="10"
+                    Content="1. Записать на планке заданные рабочие частоты"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
+        <CheckBox Canvas.Left="170" Canvas.Top="10" 
+                    Content="2. Выполнить операции 1-7 подготовки к работе"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
+        <CheckBox Canvas.Left="315" Canvas.Top="10" 
+                    Content="3. Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ: засветится табло ЧАСТОТА КГЦ"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
+        <CheckBox Canvas.Left="460" Canvas.Top="10" 
+                    Content="4. Нажать кнопку, соответствующую номеру подготавливаемой для работы частоты"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
+        <CheckBox Canvas.Left="605" Canvas.Top="10" 
+                    Content="5. Нажать кнопку СБРОС - табло ЧАСТОТА погаснет"
+                    Height="130" Width="180"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+        <CheckBox Canvas.Left="460" Canvas.Top="80" 
+                    Content="6. Набрать с помощью кнопок необходимую ЗПЧ"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
+        <CheckBox Canvas.Left="315" Canvas.Top="80" 
+                    Content="7. Проконтролировать значение набранной ЗПЧ по табло ЧАСТОТА"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
+        <CheckBox Canvas.Left="170" Canvas.Top="80" 
+                    Content="8. Аналогично подготовить все последующие ЗПЧ, повторив операции 4-7"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}"/>
+        <CheckBox Canvas.Left="20" Canvas.Top="80" 
+                    Content="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА"
+                    Height="60" Width="120"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}"/>
+    </Canvas>
 </UserControl>

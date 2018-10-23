@@ -7,17 +7,24 @@ namespace R_173.ViewModels
     class TrainingViewModel : ViewModelBase
     {
         private int _currentStep;
-        private ITrainingStep[] _controls;
-        private SimpleCommand _openNextStepCommand;
-        private SimpleCommand _openPrevStepCommand;
+        private readonly ITrainingStep[] _controls;
+        private readonly TrainingStepViewModel[] _trainingStepViewModels;
+        private readonly SimpleCommand _openNextStepCommand;
+        private readonly SimpleCommand _openPrevStepCommand;
 
         public TrainingViewModel()
         {
+            _trainingStepViewModels = new TrainingStepViewModel[]
+            {
+                new TrainingStepViewModel(),
+                new TrainingStepViewModel(),
+                new TrainingStepViewModel(),
+            };
             _controls = new ITrainingStep[]
             {
-                new Preparation(),
-                new PerformanceTest(),
-                new FrequencyCheck(),
+                new Preparation() { DataContext = _trainingStepViewModels[0] },
+                new PerformanceTest() { DataContext = _trainingStepViewModels[1] },
+                new FrequencyCheck() { DataContext = _trainingStepViewModels[2] },
             };
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--);
@@ -39,6 +46,7 @@ namespace R_173.ViewModels
                 _openNextStepCommand.SetCanExecute = _currentStep < _controls.Length - 1;
                 _openPrevStepCommand.SetCanExecute = _currentStep > 0;
                 OnPropertyChanged(nameof(CurrentControl));
+                OnPropertyChanged(nameof(Caption));
             }
         }
 
@@ -46,5 +54,7 @@ namespace R_173.ViewModels
         public ICommand OpenPrevStepCommand => _openPrevStepCommand;
 
         public ITrainingStep CurrentControl => _controls[_currentStep];
+
+        public string Caption => _controls[_currentStep].Caption;
     }
 }

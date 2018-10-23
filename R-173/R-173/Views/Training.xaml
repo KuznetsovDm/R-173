@@ -9,8 +9,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingViewModel}}"
       FontFamily="Times New Roman">
-    <DockPanel Background="White">
-        <DockPanel DockPanel.Dock="Top" Margin="5">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0" DockPanel.Dock="Top" Margin="5">
             <DockPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5" />
@@ -24,9 +30,17 @@
             
             <Button DockPanel.Dock="Left" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />
             <Button DockPanel.Dock="Right" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Подготовка к работе" FontSize="26" FontWeight="Bold" />
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       Text="{Binding Path=Caption}" 
+                       FontSize="26" FontWeight="Bold" />
         </DockPanel>
-        
-        <ContentControl Content="{Binding Path=CurrentControl}" />
-    </DockPanel>
+
+        <Viewbox Grid.Row="1" Stretch="Uniform">
+            <ContentControl Grid.Row="1" Content="{Binding Path=CurrentControl}" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Stretch="Uniform">
+            <radio:RadioView/>
+        </Viewbox>
+    </Grid>
 </UserControl>

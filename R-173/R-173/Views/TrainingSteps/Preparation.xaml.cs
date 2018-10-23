@@ -15,20 +15,9 @@ namespace R_173.Views.TrainingSteps
         public Preparation()
         {
             InitializeComponent();
-
-            var preparationViewModel = new PreparationViewModel();
-            DataContext = preparationViewModel;
-
-            //Loaded += (s, e) =>
-            //{
-            //    App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown = (key) =>
-            //    {
-            //        if (key == Key.Left)
-            //            preparationViewModel.CurrentStep--;
-            //        else if (key == Key.Right)
-            //            preparationViewModel.CurrentStep++;
-            //    };
-            //};
         }
+
+
+        public string Caption => "Подготовка к работе";
     }
 }
