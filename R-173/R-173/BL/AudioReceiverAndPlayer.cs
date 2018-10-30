@@ -8,6 +8,7 @@ using RadioPipeline;
 using System;
 using System.Threading.Tasks;
 using System.IO.Compression;
+using System.Diagnostics;
 
 namespace R_173.BL
 {
@@ -42,9 +43,16 @@ namespace R_173.BL
 
         private void Provider_OnDataAvaliable(object sender, DataEventArgs e)
         {
-            var decompressed = _compressor.Decompress(e.Data);
-            var model = _converter.ConvertFrom(decompressed);
-            _pipeline.Invoke(model);
+            try
+            {
+                var decompressed = _compressor.Decompress(e.Data);
+                var model = _converter.ConvertFrom(decompressed);
+                _pipeline.Invoke(model);
+            }
+            catch (Exception ex)
+            {
+                Debug.Write($"An exception in {nameof(AudioReceiverAndPlayer)} {ex.Message}.");
+            }
         }
 
         private void Build()
