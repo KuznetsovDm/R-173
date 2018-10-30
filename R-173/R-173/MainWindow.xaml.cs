@@ -1,4 +1,5 @@
-﻿using R_173.Views;
+﻿using R_173.ViewModels;
+using R_173.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -23,8 +24,8 @@ namespace R_173
             {
                 { typeof(Tasks), new Tasks() },
                 { typeof(Appointment), new Appointment() },
-                { typeof(Training), new Training() },
-                { typeof(Work), new Work() }
+                { typeof(Training), new Training(){ DataContext = new TrainingViewModel() } },
+                { typeof(Work), new Work() { DataContext = new WorkViewModel() } }
             };
         }
 

@@ -101,6 +101,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\CompositeStep.cs" />
     <Compile Include="BL\CompositeStepBuilder.cs" />
+    <Compile Include="BL\Learning.cs" />
     <Compile Include="BL\LearningFactory.cs" />
     <Compile Include="BL\PreparationLearning.cs" />
     <Compile Include="BL\Steps.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
     <Compile Include="ViewModels\PreparationViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
+    <Compile Include="ViewModels\WorkViewModel.cs" />
     <Compile Include="Views\Appointment.xaml.cs">
       <DependentUpon>Appointment.xaml</DependentUpon>
     </Compile>

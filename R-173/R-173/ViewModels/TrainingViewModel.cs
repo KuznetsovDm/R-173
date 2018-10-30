@@ -1,4 +1,5 @@
-﻿using R_173.SharedResources;
+﻿using R_173.BL;
+using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System.Windows.Input;
 
@@ -6,11 +7,14 @@ namespace R_173.ViewModels
 {
     class TrainingViewModel : ViewModelBase
     {
-        private int _currentStep;
         private readonly ITrainingStep[] _controls;
         private readonly TrainingStepViewModel[] _trainingStepViewModels;
         private readonly SimpleCommand _openNextStepCommand;
         private readonly SimpleCommand _openPrevStepCommand;
+        private readonly RadioViewModel _radioViewModel;
+        private readonly Learning _learning;
+        private int _currentLearningStep;
+        private int _currentStep;
 
         public TrainingViewModel()
         {
@@ -28,11 +32,11 @@ namespace R_173.ViewModels
             };
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--);
-
+            _radioViewModel = new RadioViewModel();
             _currentStep = -1;
             CurrentStep = 0;
+            _learning = new Learning(_radioViewModel.Model, Learning_Completed, Learning_StepChanged);
         }
-
 
         private int CurrentStep
         {
@@ -56,5 +60,17 @@ namespace R_173.ViewModels
         public ITrainingStep CurrentControl => _controls[_currentStep];
 
         public string Caption => _controls[_currentStep].Caption;
+        public RadioViewModel RadioViewModel => _radioViewModel;
+
+
+        private void Learning_StepChanged(int step)
+        {
+            _trainingStepViewModels[_currentStep].CurrentStep = step;
+        }
+
+        private void Learning_Completed()
+        {
+
+        }
     }
 }
