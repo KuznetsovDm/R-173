@@ -46,9 +46,9 @@ namespace R_173.Handlers
         {
             OnKeyDown?.Invoke(e.Key);
             e.Handled = true;
-            if (e.Key == _lastPressedKey)
-                return;
-            _lastPressedKey = e.Key;
+            //if (e.Key == _lastPressedKey)
+            //    return;
+            //_lastPressedKey = e.Key;
             //System.Diagnostics.Trace.WriteLine(e.Key);
 
             if (_currentRadioModel == null || !_onKeyDownActions.TryGetValue(e.Key, out var action))

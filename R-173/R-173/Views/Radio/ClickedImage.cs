@@ -6,11 +6,32 @@ namespace R_173.Views.Radio
 {
     public class ClickedImage : ContentControl
     {
+        private ICommand _onClick;
+
         public ClickedImage()
         {
-            MouseDown += (s, e) => GetClick(this)?.Execute(true);
-            MouseUp += (s, e) => GetClick(this)?.Execute(false);
+            MouseDown += ClickedImage_MouseDown;
+            MouseUp += ClickedImage_MouseUp;
+            LostMouseCapture += ClickedImage_LostMouseCapture;
         }
+
+        private void ClickedImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _onClick?.Execute(true);
+            Mouse.Capture(this);
+        }
+
+        private void ClickedImage_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(null);
+        }
+
+        private void ClickedImage_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            _onClick?.Execute(false);
+        }
+
+
 
 
         #region Clickproperty
@@ -18,7 +39,7 @@ namespace R_173.Views.Radio
                 "Click",
                 typeof(ICommand),
                 typeof(ClickedImage),
-                new FrameworkPropertyMetadata(null)
+                new FrameworkPropertyMetadata(null, new PropertyChangedCallback(ClickChanged))
             );
 
         public static void SetClick(DependencyObject element, ICommand value)
@@ -29,6 +50,11 @@ namespace R_173.Views.Radio
         public static ICommand GetClick(DependencyObject element)
         {
             return (ICommand)element.GetValue(ClickProperty);
+        }
+
+        private static void ClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ClickedImage)._onClick = (ICommand)e.NewValue;
         }
         #endregion
 

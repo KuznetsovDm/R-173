@@ -54,7 +54,17 @@ namespace R_173.Views.Radio
 
         void FinishRotate()
         {
-            GetSlide(this)?.Execute(Canvas.GetLeft(this) > _maxIndent / 2);
+            if (Canvas.GetLeft(this) > _maxIndent / 2)
+            {
+                Canvas.SetLeft(this, MaxIndentValue);
+                GetSlide(this)?.Execute(true);
+            }
+            else
+            {
+                Canvas.SetLeft(this, 0);
+                GetSlide(this)?.Execute(false);
+            }
+
             MouseMove -= OnMouseMove;
         }
 

@@ -29,7 +29,7 @@ namespace R_173
             };
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ChangeTab(object sender, RoutedEventArgs e)
         {
             var page = (sender as ButtonBase).CommandParameter as Type;
             MainContent.Content = _pages[page];
