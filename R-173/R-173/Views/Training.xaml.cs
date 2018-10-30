@@ -1,5 +1,4 @@
-﻿using R_173.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace R_173.Views
 {
@@ -11,8 +10,6 @@ namespace R_173.Views
         public Training()
         {
             InitializeComponent();
-
-            DataContext = new TrainingViewModel();
         }
     }
 }

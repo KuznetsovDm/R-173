@@ -4,7 +4,6 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -24,12 +23,12 @@ namespace R_173.Views.Radio
             InitializeComponent();
 
             var radioViewModel = new RadioViewModel();
-            DataContext = radioViewModel;
 
             IsVisibleChanged += (s, e) =>
             {
                 var manager = App.ServiceCollection.Resolve<IRadioManager>();
-                manager.SetModel((bool)e.NewValue ? radioViewModel.Model : null);
+                var viewModel = DataContext as RadioViewModel;
+                manager.SetModel((bool)e.NewValue ? viewModel?.Model : null);
             };
 
         }

@@ -59,7 +59,7 @@
         </Viewbox>
 
         <Viewbox Grid.Row="2" Stretch="Uniform">
-            <radio:RadioView/>
+            <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
         </Viewbox>
     </Grid>
 </UserControl>
