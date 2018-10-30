@@ -9,5 +9,7 @@ namespace R_173.Interfaces
         bool StartIfInputConditionsAreRight(T model, out IList<string> errors);
         event EventHandler Completed;
         event EventHandler<CrashedEventArgs> Crashed;
+        void Freeze();
+        void Unfreeze();
     }
 }

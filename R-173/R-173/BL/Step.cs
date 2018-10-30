@@ -163,9 +163,18 @@ namespace R_173.BL
             Crashed(this, new CrashedEventArgs { Errors = errors });
         }
 
-        public void Dispose()
+        public void Freeze()
         {
             Unsubscribe(Model);
+        }
+
+        public void Unfreeze()
+        {
+            Unsubscribe(Model);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
