@@ -98,20 +98,6 @@ namespace R_173.BL
                 _reader.StartListenTone();
             else
                 _reader.StopListenTone();
-
-
-            //if (e.NewValue == SwitcherState.Enabled)
-            //{
-            //    if (!isLearningStarted)
-            //    {
-            //        _learning.Start(_radioModel);
-            //    }
-            //    else
-            //    {
-            //        _learning.Stop();
-            //    }
-            //    isLearningStarted = !isLearningStarted;
-            //}
         }
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
