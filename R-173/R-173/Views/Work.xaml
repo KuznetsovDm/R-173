@@ -4,10 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:radio="clr-namespace:R_173.Views.Radio"
-      mc:Ignorable="d" 
+      xmlns:viewModel="clr-namespace:R_173.ViewModels"
+      mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type viewModel:WorkViewModel}}"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Viewbox Stretch="Fill">
-        <radio:RadioView/>
+        <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
     </Viewbox>
 </UserControl>

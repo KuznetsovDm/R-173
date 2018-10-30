@@ -24,7 +24,7 @@ namespace R_173.BL
 
     public class TurningOnStep : Step
     {
-        public TurningOnStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) 
+        public TurningOnStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
             : base(checkInputConditions, checkInternalState)
         {
 
@@ -72,6 +72,46 @@ namespace R_173.BL
         protected override void Board_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             System.Diagnostics.Trace.WriteLine("Board: " + e.NewValue);
+            OnStepCompleted();
+        }
+    }
+
+    public class VolumeChangeState : Step
+    {
+        public VolumeChangeState(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        {
+        }
+
+        protected override void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
+        {
+            System.Diagnostics.Trace.WriteLine("Volume: " + e.NewValue);
+            OnStepCompleted();
+        }
+    }
+
+    public class NoiseChangedState : Step
+    {
+        public NoiseChangedState(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        {
+        }
+
+        protected override void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
+        {
+            if (e.NewValue == NoiseState.Minimum)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class WaitingStep : Step
+    {
+        public WaitingStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        {
+        }
+
+        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
             OnStepCompleted();
         }
     }

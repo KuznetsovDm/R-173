@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using R_173.SharedResources;
 using R_173.Models;
+using R_173.Views.Radio;
 
 namespace R_173.ViewModels
 {
@@ -44,6 +45,7 @@ namespace R_173.ViewModels
             Numpad9Command = new SimpleCommand<bool>(value => Numpad9 = value);
             BoardCommand = new SimpleCommand<bool>(value => Board = value);
             ResetCommand = new SimpleCommand<bool>(value => Reset = value);
+            RecordWorkCommand = new SimpleCommand<bool>(value => Model.RecordWork.Value = value ? RecordWorkState.Work : RecordWorkState.Record);
 
             Model.FrequencyNumber.ValueChanged += (s, e) =>
             {
@@ -110,6 +112,7 @@ namespace R_173.ViewModels
                 _reset = e.NewValue == SwitcherState.Enabled;
                 OnPropertyChanged(nameof(Reset));
             };
+            Model.Board.ValueChanged += (s, e) => OnPropertyChanged(nameof(MaxIndent));
 
             for (var i = 0; i < 10; i++)
             {
@@ -142,6 +145,7 @@ namespace R_173.ViewModels
         public ICommand Numpad9Command { get; }
         public ICommand BoardCommand { get; }
         public ICommand ResetCommand { get; }
+        public ICommand RecordWorkCommand { get; }
 
 
         public int FrequencyNumber
@@ -293,5 +297,7 @@ namespace R_173.ViewModels
             get => _sending;
             set => Model.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled;
         }
+
+        public int MaxIndent => Model.Board.Value == SwitcherState.Enabled ? SliderImage.MaxIndentValue : 0;
     }
 }

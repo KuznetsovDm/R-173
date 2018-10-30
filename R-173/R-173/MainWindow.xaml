@@ -10,10 +10,10 @@
     <DockPanel>
         <UniformGrid DockPanel.Dock="Top" Columns="4">
             <UniformGrid.Resources>
-                <Style TargetType="Button">
+                <Style TargetType="RadioButton">
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="Button">
+                            <ControlTemplate TargetType="RadioButton">
                                 <Border x:Name="border" Margin="2" CornerRadius="3, 3, 0, 0" Background="WhiteSmoke">
                                     <TextBlock Margin="3" 
                                            Text="{TemplateBinding Content}"
@@ -21,16 +21,24 @@
                                            TextAlignment="Center"
                                            Cursor="Hand"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="Khaki"/>
+                                    </Trigger>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="OliveDrab"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
             </UniformGrid.Resources>
 
-            <Button Grid.Column="0" Content="1. Назначение, ТТХ, комплект" Click="Button_Click" CommandParameter="{x:Type views:Appointment}"/>
-            <Button Grid.Column="1" Content="2. Обучение" Click="Button_Click" CommandParameter="{x:Type views:Training}"/>
-            <Button Grid.Column="2" Content="3. Работа на радиостанции" Click="Button_Click" CommandParameter="{x:Type views:Work}"/>
-            <Button Grid.Column="3" Content="4. Задачи" Click="Button_Click" CommandParameter="{x:Type views:Tasks}"/>
+            <RadioButton Grid.Column="0" GroupName="Tabs" Content="1. Назначение, ТТХ, комплект" Click="Button_Click" CommandParameter="{x:Type views:Appointment}"/>
+            <RadioButton Grid.Column="1" GroupName="Tabs" Content="2. Обучение" Click="Button_Click" CommandParameter="{x:Type views:Training}"/>
+            <RadioButton Grid.Column="2" GroupName="Tabs" Content="3. Работа на радиостанции" Click="Button_Click" CommandParameter="{x:Type views:Work}"/>
+            <RadioButton Grid.Column="3" GroupName="Tabs" Content="4. Задачи" Click="Button_Click" CommandParameter="{x:Type views:Tasks}"/>
         </UniformGrid>
 
         <ContentControl x:Name="MainContent"/>

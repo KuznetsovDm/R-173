@@ -1,8 +1,10 @@
-﻿using R_173.Views;
+﻿using R_173.ViewModels;
+using R_173.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace R_173
@@ -22,14 +24,14 @@ namespace R_173
             {
                 { typeof(Tasks), new Tasks() },
                 { typeof(Appointment), new Appointment() },
-                { typeof(Training), new Training() },
-                { typeof(Work), new Work() }
+                { typeof(Training), new Training(){ DataContext = new TrainingViewModel() } },
+                { typeof(Work), new Work() { DataContext = new WorkViewModel() } }
             };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var page = (sender as Button).CommandParameter as Type;
+            var page = (sender as ButtonBase).CommandParameter as Type;
             MainContent.Content = _pages[page];
         }
     }

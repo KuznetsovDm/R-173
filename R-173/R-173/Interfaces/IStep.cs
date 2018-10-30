@@ -4,7 +4,7 @@ using R_173.SharedResources;
 
 namespace R_173.Interfaces
 {
-    public interface IStep<T>
+    public interface IStep<T> : IDisposable
     {
         bool StartIfInputConditionsAreRight(T model, out IList<string> errors);
         event EventHandler Completed;

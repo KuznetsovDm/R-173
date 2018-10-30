@@ -5,42 +5,90 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
              xmlns:radio="clr-namespace:R_173.Views.Radio"
+             xmlns:viewModels="clr-namespace:R_173.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+             Height="150" Width="840" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingStepViewModel}}"
+             FontFamily="Times New Roman">
+    <StackPanel Orientation="Horizontal" Background="White">
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="TrainigStepsDictionary.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
 
-        <Canvas Grid.Row="0">
-            <Canvas.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Padding" Value="5"/>
-                    <Setter Property="Background" Value="LightGray"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="TextWrapping" Value="Wrap"/>
-                    <Setter Property="FontSize" Value="10"/>
+                <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
+                <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}">
+                    <Setter Property="Height" Value="60" />
                 </Style>
-            </Canvas.Resources>
-
-            <TextBlock Canvas.Left="11" Canvas.Top="10" Height="64" Width="96">1. Установить антенну</TextBlock>
-            <TextBlock Canvas.Left="118" Canvas.Top="10" Height="64" Width="88">2. Надеть и подготовить шлемофон</TextBlock>
-            <TextBlock Canvas.Left="219" Canvas.Top="10" Height="64" Width="96">3. Подлючить шлемофон к нагрудному переключателю</TextBlock>
-            <TextBlock Canvas.Left="330" Canvas.Top="10" Height="64" Width="110">4. Установить переключатель на приборе БВ-34 в положение РС-1</TextBlock>
-            <TextBlock Canvas.Left="450" Canvas.Top="10" Height="64" Width="111">5. Снять чехол с приемоперечатчика</TextBlock>
-            <TextBlock Canvas.Left="572" Canvas.Top="10" Height="133" Width="218">6. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении</TextBlock>
-            <TextBlock Canvas.Left="488" Canvas.Top="79" Height="64" Width="73">7. Включить тумблер ПИТАНИЕ</TextBlock>
-            <TextBlock Canvas.Left="368" Canvas.Top="78" Height="64" Width="111">8. Нажать кнопку соответствующую необходимой ЗПЧ</TextBlock>
-            <TextBlock Canvas.Left="97" Canvas.Top="79" Height="64" Width="264">9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА и убидиться по табло ЧАСТОТА в правильности значения рабочей частоты. Переключить тумблер в положение РАБОТА</TextBlock>
-            <TextBlock Canvas.Left="11" Canvas.Top="79" Height="64" Width="77">10. Прослушать собственные шумы</TextBlock>
-
-        </Canvas>
+            </ResourceDictionary>
+        </StackPanel.Resources>
 
 
 
-        <Viewbox Grid.Row="1" Stretch="Fill">
-            <radio:RadioView/>
-        </Viewbox>
-    </Grid>
+        <StackPanel Margin="20, 10, 0, 0">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="1. Установить антенну"
+                          Width="80"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="2. Надеть и подготовить шлемофон"
+                          Width="80"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="3. Подлючить шлемофон к нагрудному переключателю"
+                          Width="98"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="4. Установить переключатель на приборе БВ-34 в положение РС-1"
+                          Width="105"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+                
+                <CheckBox Content="5. Снять чехол с приемоперечатчика"
+                          Width="105"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+            </StackPanel>
+
+            <StackPanel Margin="0, 10, 0, 0" HorizontalAlignment="Left" Orientation="Horizontal">
+
+                <CheckBox Content="10. Прослушать собственные шумы"
+                          Width="74"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=9}"/>
+
+                <Control Template="{StaticResource ArrowLeft}" />
+                
+                <CheckBox Content="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА и убидиться по табло ЧАСТОТА в правильности значения рабочей частоты. Переключить тумблер в положение РАБОТА"
+                          Width="255"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}"/>
+
+                <Control Template="{StaticResource ArrowLeft}" />
+
+                <CheckBox Content="8. Нажать кнопку соответствующую необходимой ЗПЧ"
+                          Width="95"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}"/>
+
+                <Control Template="{StaticResource ArrowLeft}" />
+
+                <CheckBox Content="7. Включить тумблер ПИТАНИЕ"
+                          Width="70"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
+
+                <Control Template="{StaticResource ArrowLeft}" />
+
+            </StackPanel>
+        </StackPanel>
+
+        <CheckBox Content="6. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
+                  Height="133" Width="202"
+                  IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
+    </StackPanel>
 </UserControl>

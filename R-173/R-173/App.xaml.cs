@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BL;
@@ -22,7 +24,13 @@ namespace R_173
             ConfigureIOC();
             base.OnStartup(e);
             var obj = ServiceCollection.Resolve<MainWindow>();
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             obj.Show();
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            File.AppendAllText("log.log", $"{DateTime.Now} {e.ToString()}");
         }
 
         protected override void OnExit(ExitEventArgs e)

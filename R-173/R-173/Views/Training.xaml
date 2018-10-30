@@ -5,15 +5,61 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:R_173.Views"
       xmlns:radio="clr-namespace:R_173.Views.Radio"
+      xmlns:viewModels="clr-namespace:R_173.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel Background="White">
-        <DockPanel DockPanel.Dock="Top" Margin="5">
-            <Button DockPanel.Dock="Left" Content="Предыдущий шаг"/>
-            <Button DockPanel.Dock="Right" Content="Следующий шаг"/>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Подготовка к работе"/>
-        </DockPanel>
+      d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingViewModel}}"
+      FontFamily="Times New Roman">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         
-        <ContentControl x:Name="MainContent"/>
-    </DockPanel>
+        <DockPanel Grid.Row="0" DockPanel.Dock="Top" Margin="5">
+            <DockPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="5" />
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Focusable" Value="False" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="#98CA69" Padding="7">
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Text="{TemplateBinding Content}"
+                                       Foreground="White" />
+                                </Border>
+                                <!--<ControlTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <Storyboard>
+                                            
+                                        </Storyboard>
+                                    </EventTrigger>
+                                </ControlTemplate.Triggers>-->
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DockPanel.Resources>
+            
+            <Button DockPanel.Dock="Left" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />
+            <Button DockPanel.Dock="Right" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       Text="{Binding Path=Caption}" 
+                       FontSize="26" FontWeight="Bold" />
+        </DockPanel>
+
+        <Viewbox Grid.Row="1" Stretch="Uniform">
+            <ContentControl Grid.Row="1" Content="{Binding Path=CurrentControl}" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Stretch="Uniform">
+            <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
+        </Viewbox>
+    </Grid>
 </UserControl>

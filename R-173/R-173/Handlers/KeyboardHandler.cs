@@ -11,6 +11,7 @@ namespace R_173.Handlers
         private readonly Dictionary<Key, Action<bool>> _onKeyDownActions;
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
+        public Action<Key> OnKeyDown;
 
         public KeyboardHandler(MainWindow _mainWindow)
         {
@@ -18,6 +19,8 @@ namespace R_173.Handlers
             {
                 { Key.Space, value => _currentRadioModel.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.RightCtrl, value => _currentRadioModel.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
+                { Key.N, value => _currentRadioModel.Board.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
+                { Key.C, value => _currentRadioModel.Reset.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
             };
 
             Enumerable.Range(0, 10)
@@ -41,6 +44,7 @@ namespace R_173.Handlers
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
+            OnKeyDown?.Invoke(e.Key);
             e.Handled = true;
             if (e.Key == _lastPressedKey)
                 return;

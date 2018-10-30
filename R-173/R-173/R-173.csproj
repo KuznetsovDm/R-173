@@ -101,6 +101,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\CompositeStep.cs" />
     <Compile Include="BL\CompositeStepBuilder.cs" />
+    <Compile Include="BL\Learning.cs" />
     <Compile Include="BL\LearningFactory.cs" />
     <Compile Include="BL\PreparationLearning.cs" />
     <Compile Include="BL\Steps.cs" />
@@ -131,6 +132,9 @@
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
+    <Compile Include="ViewModels\PreparationViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
+    <Compile Include="ViewModels\WorkViewModel.cs" />
     <Compile Include="Views\Appointment.xaml.cs">
       <DependentUpon>Appointment.xaml</DependentUpon>
     </Compile>
@@ -145,13 +149,22 @@
     <Compile Include="SharedResources\ValueChangedEventArgs.cs" />
     <Compile Include="ViewModels\RadioViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\Radio\RotatedImage.cs" />
+    <Compile Include="Views\Radio\SliderImage.cs" />
+    <Compile Include="Views\Radio\Encoder.cs" />
     <Compile Include="Views\Radio\ValueToAngleConverter.cs" />
     <Compile Include="Views\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\CurrentStepToBoolConverter.cs" />
+    <Compile Include="Views\TrainingSteps\FrequencyCheck.xaml.cs">
+      <DependentUpon>FrequencyCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\ITrainingStep.cs" />
+    <Compile Include="Views\TrainingSteps\PerformanceTest.xaml.cs">
+      <DependentUpon>PerformanceTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\Preparation.xaml.cs">
       <DependentUpon>Preparation.xaml</DependentUpon>
@@ -171,6 +184,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SharedResources\SharedDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Appointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +202,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Training.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\TrainigStepsDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\FrequencyCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\PerformanceTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,6 +240,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Files\radio\slider.png" />
+    <Resource Include="Files\radio\sliderBackground.png" />
     <Resource Include="Files\radio\empty.png" />
     <Resource Include="Files\radio\1.png" />
     <Resource Include="Files\radio\2.png" />
@@ -221,7 +252,6 @@
     <Resource Include="Files\radio\7.png" />
     <Resource Include="Files\radio\8.png" />
     <Resource Include="Files\radio\9.png" />
-    <Resource Include="Files\radio\recordWork.png" />
     <Resource Include="Files\radio\radio.png" />
     <Resource Include="Files\radio\0.png" />
     <Resource Include="Files\radio\toneDown.png" />

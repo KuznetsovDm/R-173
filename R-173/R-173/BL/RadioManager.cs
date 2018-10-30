@@ -4,9 +4,6 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace R_173.BL
 {
@@ -16,7 +13,6 @@ namespace R_173.BL
         private readonly IAudioReaderAndSender<SendableRadioModel> _reader;
         private readonly IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
         private readonly KeyboardHandler _keyboardHandler;
-        private CompositeStep _learningStep;
 
         public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
             IAudioReceiverAndPlayer<ReceivableRadioModel> player, KeyboardHandler keyboardHandler)
@@ -24,7 +20,6 @@ namespace R_173.BL
             _reader = reader;
             _player = player;
             _keyboardHandler = keyboardHandler;
-            _learningStep = LearningFactory.CreatePreparationToWorkLearning();
         }
 
         private void _learningStep_StepChanged(object sender, StepChangedEventArgs e)
@@ -49,16 +44,6 @@ namespace R_173.BL
             SubscribeEvents(radioModel);
 
             InitRadioManager(_radioModel);
-            if (_learningStep.StartIfInputConditionsAreRight(_radioModel, out var errors))
-            {
-                _learningStep.Completed += _learningStep_Completed;
-                _learningStep.Crashed += _learningStep_Crashed;
-                _learningStep.StepChanged += _learningStep_StepChanged;
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
         }
 
         private void _learningStep_Crashed(object sender, CrashedEventArgs e)
