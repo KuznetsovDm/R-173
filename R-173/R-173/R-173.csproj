@@ -108,7 +108,6 @@
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\StepChangedEventArgs.cs" />
     <Compile Include="Interfaces\IStep.cs" />
-    <Compile Include="BL\Learning.cs" />
     <Compile Include="BL\LocalToneController.cs" />
     <Compile Include="BL\Step.cs" />
     <Compile Include="BL\Utils\AudioVolumeSamplesHelper.cs" />

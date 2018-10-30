@@ -18,7 +18,7 @@ namespace P2PMulticastNetwork
         private MulticastConnectionOptions _options;
         private UdpClient _client;
         private bool _wasClose;
-        private CancellationTokenSource  _cancellToken;
+        private CancellationTokenSource _cancellToken;
 
         public UdpMulticastConnection(MulticastConnectionOptions options)
         {
@@ -27,10 +27,18 @@ namespace P2PMulticastNetwork
             _client = new UdpClient();
             _client.ExclusiveAddressUse = options.ExclusiveAddressUse;
             _cancellToken = new CancellationTokenSource();
-            if(options.UseBind)
+            if (options.UseBind)
             {
-                _client.Client.Bind(new IPEndPoint(IPAddress.Any, options.Port));
-                _client.JoinMulticastGroup(options.MulticastAddress);
+                try
+                {
+                    _client.Client.Bind(new IPEndPoint(IPAddress.Any, options.Port));
+                    _client.JoinMulticastGroup(options.MulticastAddress);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"In {nameof(UdpMulticastConnection)} Exception.Message = " + ex.Message);
+                }
             }
             _client.MulticastLoopback = options.MulticastLoopback;
         }
@@ -38,13 +46,13 @@ namespace P2PMulticastNetwork
         public void Dispose()
         {
             Result result = SafeClose();
-            if(result.IsFailure)
+            if (result.IsFailure)
                 Debug.WriteLine($"Error in {nameof(UdpMulticastConnection)}: {result.Error}");
         }
 
         private Result SafeClose()
         {
-            if(!_wasClose)
+            if (!_wasClose)
             {
                 try
                 {
@@ -52,7 +60,7 @@ namespace P2PMulticastNetwork
                     _client.DropMulticastGroup(_options.MulticastAddress);
                     _client.Close();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Result.Fail(ex.ToString());
                 }
@@ -72,7 +80,7 @@ namespace P2PMulticastNetwork
                     byte[] data = _client.Receive(ref ep);
                     return Result.Ok(data);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                     return Result.Fail<byte[]>(ex.ToString());
@@ -88,7 +96,7 @@ namespace P2PMulticastNetwork
                 _client.Send(data, data.Length, _sendTo);
                 return Result.Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Result.Fail(ex.ToString());
             }
