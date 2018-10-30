@@ -5,6 +5,7 @@ using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace R_173.BL
 {
@@ -14,8 +15,6 @@ namespace R_173.BL
         private readonly IAudioReaderAndSender<SendableRadioModel> _reader;
         private readonly IAudioReceiverAndPlayer<ReceivableRadioModel> _player;
         private readonly KeyboardHandler _keyboardHandler;
-        private Learning _learning;
-        private bool isLearningStarted = false;
         private CompositeStep _learningStep;
 
         public RadioManager(IAudioReaderAndSender<SendableRadioModel> reader,
@@ -27,11 +26,22 @@ namespace R_173.BL
             //_learning = new Learning(new List<Step> { new TurningOnStep()});
             var stepBuilder = new CompositeStepBuilder();
             _learningStep = stepBuilder
+                .Add(new InitialStateStep())
                 .Add(new TurningOnStep())
-                .Add(new ButtonStep())
+                .Add(new ButtonStep(CheckButtonState))
                 .Add(new BoardStep())
                 .Build();
             _learningStep.StepChanged += _learningStep_StepChanged;
+        }
+
+        private bool CheckButtonState(RadioModel model, out IList<string> errors)
+        {
+            errors = new List<string>();
+
+            if (model.TurningOn.Value == SwitcherState.Disabled)
+                errors.Add("Питание выключено");
+
+            return !errors.Any();
         }
 
         private void _learningStep_StepChanged(object sender, StepChangedEventArgs e)

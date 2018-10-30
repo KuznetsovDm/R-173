@@ -7,9 +7,22 @@ using System.Linq;
 
 namespace R_173.BL
 {
+    public delegate bool CheckState(RadioModel model, out IList<string> errors);
+
     public class Step : IStep<RadioModel>
     {
         protected RadioModel Model;
+        protected  CheckState _checkCurrentState;
+
+        public Step(CheckState checkCurrentState)
+        {
+            _checkCurrentState = checkCurrentState;
+        }
+
+        public Step()
+        {
+
+        }
 
         public event EventHandler Completed = (e, args) => { };
         public event EventHandler<CrashedEventArgs> Crashed = (e, args) => { };
@@ -104,6 +117,13 @@ namespace R_173.BL
 
         protected virtual void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            if (_checkCurrentState == null)
+                return;
+
+            if (!_checkCurrentState(Model, out var errors))
+            {
+                OnStepCrashed(errors);
+            }
         }
 
         protected virtual void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
