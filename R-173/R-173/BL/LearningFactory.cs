@@ -18,6 +18,11 @@ namespace R_173.BL
         public static CompositeStep CreatePreparationToWorkLearning()
         {
             return new CompositeStepBuilder()
+                .Add(new WaitingStep())
+                .Add(new WaitingStep())
+                .Add(new WaitingStep())
+                .Add(new WaitingStep())
+                .Add(new WaitingStep())
                 .Add(new InitialStateStep())
                 .Add(new TurningOnStep(
                     checkInputConditions: CheckInitialState,
@@ -29,6 +34,15 @@ namespace R_173.BL
                 .Add(new BoardStep(
                     checkInputConditions: PreparationLearning.CheckButtonInputConditions,
                     checkInternalState: PreparationLearning.CheckButtonInternalState))
+                .Build();
+        }
+
+        public static CompositeStep CreateCheckPreparationToWork()
+        {
+            return new CompositeStepBuilder()
+                .Add(CreatePreparationToWorkLearning())
+                .Add(new VolumeChangeState())
+                .Add(new NoiseChangedState())
                 .Build();
         }
 
