@@ -59,6 +59,7 @@ namespace R_173.BL
             radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
             radioModel.FrequencyNumber.ValueChanged += FrequencyNumber_ValueChanged;
             radioModel.Board.ValueChanged += Board_ValueChanged;
+            radioModel.Sending.ValueChanged += Sending_ValueChanged;
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
@@ -78,11 +79,17 @@ namespace R_173.BL
             radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
             radioModel.FrequencyNumber.ValueChanged -= FrequencyNumber_ValueChanged;
             radioModel.Board.ValueChanged -= Board_ValueChanged;
+            radioModel.Sending.ValueChanged -= Sending_ValueChanged;
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
                 radioModel.Numpad[i].ValueChanged -= Numpad_ValueChanged;
             }
+        }
+
+        protected virtual void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            SomethingChanged();
         }
 
         protected virtual void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)

@@ -37,12 +37,19 @@ namespace R_173.BL
                 .Build();
         }
 
-        public static CompositeStep CreateCheckPreparationToWork()
+        public static CompositeStep CreatePreformanceTestLearning()
         {
             return new CompositeStepBuilder()
                 .Add(CreatePreparationToWorkLearning())
-                .Add(new VolumeChangeState())
-                .Add(new NoiseChangedState())
+                .Add(new VolumeChangeStep())
+                .Add(new NoiseChangedStep())
+                .Add(new PrdPressStep())
+                //todo: проверить модуляцию.
+                .Add(new WaitingStep())
+                //todo: проверить подачу тока.
+                .Add(new WaitingStep())
+                .Add(new PressToneStep())
+                //todo: Повторить операции 2-8 на Зпч 2-8
                 .Build();
         }
 
