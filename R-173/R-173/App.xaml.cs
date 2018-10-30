@@ -21,10 +21,10 @@ namespace R_173
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             ConfigureIOC();
             base.OnStartup(e);
             var obj = ServiceCollection.Resolve<MainWindow>();
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             obj.Show();
         }
 
