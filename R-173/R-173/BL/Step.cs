@@ -12,8 +12,8 @@ namespace R_173.BL
     public class Step : IStep<RadioModel>
     {
         protected RadioModel Model;
-        protected  CheckState _checkInputConditions;
-        protected  CheckState _checkInternalState;
+        protected CheckState _checkInputConditions;
+        protected CheckState _checkInternalState;
 
         public Step(CheckState checkInputConditions = null, CheckState checkInternalState = null)
         {
@@ -38,7 +38,7 @@ namespace R_173.BL
 
         public virtual bool CheckInputConditions(RadioModel model, out IList<string> errors)
         {
-            if(_checkInputConditions != null)
+            if (_checkInputConditions != null)
             {
                 return _checkInputConditions(model, out errors);
             }
@@ -97,8 +97,6 @@ namespace R_173.BL
 
         protected virtual void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            
-
             SomethingChanged();
         }
 
@@ -163,6 +161,11 @@ namespace R_173.BL
         {
             Unsubscribe(Model);
             Crashed(this, new CrashedEventArgs { Errors = errors });
+        }
+
+        public void Dispose()
+        {
+            Unsubscribe(Model);
         }
     }
 }
