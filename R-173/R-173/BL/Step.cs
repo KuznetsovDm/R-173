@@ -97,8 +97,6 @@ namespace R_173.BL
 
         protected virtual void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            
-
             SomethingChanged();
         }
 

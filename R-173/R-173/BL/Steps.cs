@@ -15,8 +15,7 @@ namespace R_173.BL
         {
             base.SomethingChanged();
 
-            IList<string> errors;
-            if(LearningFactory.CheckInitialState(Model, out errors))
+            if (LearningFactory.CheckInitialState(Model, out IList<string> errors))
             {
                 OnStepCompleted();
             }

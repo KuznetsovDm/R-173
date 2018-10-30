@@ -98,6 +98,4 @@ namespace R_173.BL
             return !errors.Any();
         }
     }
-
-
 }
