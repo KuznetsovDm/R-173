@@ -19,6 +19,8 @@ namespace R_173.Handlers
             {
                 { Key.Space, value => _currentRadioModel.Sending.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.RightCtrl, value => _currentRadioModel.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
+                { Key.N, value => _currentRadioModel.Board.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
+                { Key.C, value => _currentRadioModel.Reset.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
             };
 
             Enumerable.Range(0, 10)

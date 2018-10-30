@@ -138,7 +138,8 @@
     <Compile Include="SharedResources\ValueChangedEventArgs.cs" />
     <Compile Include="ViewModels\RadioViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\Radio\RotatedImage.cs" />
+    <Compile Include="Views\Radio\SliderImage.cs" />
+    <Compile Include="Views\Radio\Encoder.cs" />
     <Compile Include="Views\Radio\ValueToAngleConverter.cs" />
     <Compile Include="Views\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
@@ -193,6 +194,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TrainingSteps\TrainigStepsDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TrainingSteps\FrequencyCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +229,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Files\radio\slider.png" />
+    <Resource Include="Files\radio\sliderBackground.png" />
     <Resource Include="Files\radio\empty.png" />
     <Resource Include="Files\radio\1.png" />
     <Resource Include="Files\radio\2.png" />
@@ -234,7 +241,6 @@
     <Resource Include="Files\radio\7.png" />
     <Resource Include="Files\radio\8.png" />
     <Resource Include="Files\radio\9.png" />
-    <Resource Include="Files\radio\recordWork.png" />
     <Resource Include="Files\radio\radio.png" />
     <Resource Include="Files\radio\0.png" />
     <Resource Include="Files\radio\toneDown.png" />

@@ -85,7 +85,7 @@ namespace R_173.Views.Radio
 
         void AddFigurePoint(Point point)
         {
-            currentFigure.Segments.Add(new LineSegment(point, isStroked: true));
+            currentFigure?.Segments.Add(new LineSegment(point, isStroked: true));
         }
 
         void EndFigure()

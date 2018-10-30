@@ -1,30 +1,4 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:R_173.SharedResources">
-    <Style x:Key="TrainingStep" TargetType="CheckBox">
-        <Setter Property="IsEnabled" Value="False" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="CheckBox">
-                    <Border x:Name="Text" Background="LightGray">
-                        <TextBlock Text="{TemplateBinding Content}" 
-                                           VerticalAlignment="Center"
-                                           Padding="5" 
-                                           TextAlignment="Center"
-                                           TextWrapping="Wrap" 
-                                           FontWeight="Bold" 
-                                           FontSize="10" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Text" Property="Background" Value="Green" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="Text" Property="Background" Value="Yellow" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>
