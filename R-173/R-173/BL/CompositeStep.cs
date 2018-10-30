@@ -7,19 +7,19 @@ using System.Linq;
 
 namespace R_173.BL
 {
-    public class CompositeStep : IStep<RadioModel>
+    public class CompositeStep : IStep<RadioModel>, IDisposable
     {
         IList<IStep<RadioModel>> _steps;
         private int _current = 0;
         private RadioModel _model;
 
         public event EventHandler<StepChangedEventArgs> StepChanged = (e, args) => { };
-        
+
         public CompositeStep(IList<IStep<RadioModel>> steps)
         {
             _steps = steps;
         }
-        
+
         private void Step_Crashed(object sender, CrashedEventArgs e)
         {
             var prevStateNumber = _current;
@@ -89,13 +89,27 @@ namespace R_173.BL
         public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
         {
             _model = model;
-            if(_steps[_current].StartIfInputConditionsAreRight(model, out errors))
+            if (_steps[_current].StartIfInputConditionsAreRight(model, out errors))
             {
                 _steps[_current].Completed += Step_Completed;
                 _steps[_current].Crashed += Step_Crashed;
             }
 
             return !errors.Any();
+        }
+
+        public void Dispose()
+        {
+            if (_current >= 0 && _current < _steps.Count)
+            {
+                _steps[_current].Completed -= Step_Completed;
+                _steps[_current].Crashed -= Step_Crashed;
+            }
+
+            foreach (var step in _steps)
+            {
+                step.Dispose();
+            }
         }
     }
 
