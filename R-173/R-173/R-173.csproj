@@ -101,7 +101,9 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\CompositeStep.cs" />
     <Compile Include="BL\CompositeStepBuilder.cs" />
-    <Compile Include="BL\TurningOnStep.cs" />
+    <Compile Include="BL\LearningFactory.cs" />
+    <Compile Include="BL\PreparationLearning.cs" />
+    <Compile Include="BL\Steps.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\StepChangedEventArgs.cs" />

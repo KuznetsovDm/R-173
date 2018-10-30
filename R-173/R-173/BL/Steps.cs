@@ -6,11 +6,17 @@ namespace R_173.BL
 {
     public class InitialStateStep : Step
     {
-        protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        public InitialStateStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
         {
-            System.Diagnostics.Trace.WriteLine("Turning on: " + e.NewValue);
 
-            if (e.NewValue == SwitcherState.Enabled)
+        }
+        protected override void SomethingChanged()
+        {
+            base.SomethingChanged();
+
+            IList<string> errors;
+            if(LearningFactory.CheckInitialState(Model, out errors))
             {
                 OnStepCompleted();
             }
@@ -19,9 +25,15 @@ namespace R_173.BL
 
     public class TurningOnStep : Step
     {
+        public TurningOnStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) 
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
         public override bool CheckInputConditions(RadioModel model, out IList<string> errors)
         {
-            return CheckInitialState(model, out errors);
+            return LearningFactory.CheckInitialState(model, out errors);
         }
 
         protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -37,15 +49,12 @@ namespace R_173.BL
 
     public class ButtonStep : Step
     {
-        public ButtonStep(CheckState checkState):base(checkState)
+        public ButtonStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
         {
 
         }
-        protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
-        {
-            if (e.NewValue == SwitcherState.Disabled)
-                OnStepCrashed(new List<string> { "Выключил питание!" });
-        }
+
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             System.Diagnostics.Trace.WriteLine("Numpad: " + e.NewValue);
@@ -55,6 +64,12 @@ namespace R_173.BL
 
     public class BoardStep : Step
     {
+        public BoardStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
         protected override void Board_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             System.Diagnostics.Trace.WriteLine("Board: " + e.NewValue);

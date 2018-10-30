@@ -12,16 +12,13 @@ namespace R_173.BL
     public class Step : IStep<RadioModel>
     {
         protected RadioModel Model;
-        protected  CheckState _checkCurrentState;
+        protected  CheckState _checkInputConditions;
+        protected  CheckState _checkInternalState;
 
-        public Step(CheckState checkCurrentState)
+        public Step(CheckState checkInputConditions = null, CheckState checkInternalState = null)
         {
-            _checkCurrentState = checkCurrentState;
-        }
-
-        public Step()
-        {
-
+            _checkInputConditions = checkInputConditions;
+            _checkInternalState = checkInternalState;
         }
 
         public event EventHandler Completed = (e, args) => { };
@@ -41,33 +38,13 @@ namespace R_173.BL
 
         public virtual bool CheckInputConditions(RadioModel model, out IList<string> errors)
         {
+            if(_checkInputConditions != null)
+            {
+                return _checkInputConditions(model, out errors);
+            }
+
             errors = Enumerable.Empty<string>().ToList();
             return true;
-        }
-
-        public static bool CheckInitialState(RadioModel model, out IList<string> errors)
-        {
-            errors = new List<string>();
-
-            if (model.Noise.Value != NoiseState.Minimum)
-                errors.Add("Noise");
-
-            if (model.Interference.Value != SwitcherState.Disabled)
-                errors.Add("Interference");
-
-            if (model.Power.Value != PowerState.Full)
-                errors.Add("Power");
-
-            if (model.RecordWork.Value != RecordWorkState.Work)
-                errors.Add("Work");
-
-            if (Math.Abs(model.Volume.Value - 0.5) > 0.1)
-                errors.Add("Volume");
-
-            if (model.VolumePRM.Value > 0.01)
-                errors.Add("VolumePRM");
-
-            return !errors.Any();
         }
 
         public virtual void Subscribe(RadioModel radioModel)
@@ -100,6 +77,7 @@ namespace R_173.BL
             radioModel.Volume.ValueChanged -= Volume_ValueChanged;
             radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
             radioModel.FrequencyNumber.ValueChanged -= FrequencyNumber_ValueChanged;
+            radioModel.Board.ValueChanged -= Board_ValueChanged;
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
@@ -109,53 +87,70 @@ namespace R_173.BL
 
         protected virtual void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            if (_checkCurrentState == null)
-                return;
+            
 
-            if (!_checkCurrentState(Model, out var errors))
-            {
-                OnStepCrashed(errors);
-            }
+            SomethingChanged();
         }
 
         protected virtual void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void Power_ValueChanged(object sender, ValueChangedEventArgs<PowerState> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void Interference_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void FrequencyNumber_ValueChanged(object sender, ValueChangedEventArgs<int> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            SomethingChanged();
         }
 
         protected virtual void Board_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
+            SomethingChanged();
+        }
+
+        protected virtual void SomethingChanged()
+        {
+            if (_checkInternalState == null)
+                return;
+
+            if (!_checkInternalState(Model, out var errors))
+            {
+                OnStepCrashed(errors);
+            }
         }
 
         protected void OnStepCompleted()

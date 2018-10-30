@@ -3,6 +3,7 @@ using R_173.Interfaces;
 using R_173.SharedResources;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace R_173.BL
 {
@@ -88,9 +89,13 @@ namespace R_173.BL
         public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
         {
             _model = model;
-            _steps[_current].Completed += Step_Completed;
-            _steps[_current].Crashed += Step_Crashed;
-            return _steps[0].StartIfInputConditionsAreRight(model, out errors);
+            if(_steps[_current].StartIfInputConditionsAreRight(model, out errors))
+            {
+                _steps[_current].Completed += Step_Completed;
+                _steps[_current].Crashed += Step_Crashed;
+            }
+
+            return !errors.Any();
         }
     }
 
