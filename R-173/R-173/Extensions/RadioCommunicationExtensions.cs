@@ -14,15 +14,24 @@ namespace R_173.Extensions
     {
         public static IUnityContainer AddCommunicationServices(this IUnityContainer services)
         {
-            services.RegisterInstance<IDataReceiver>(
-                new UdpMulticastConnection(
-                MulticastConnectionOptions.Create(ipAddress: "230.0.0.0", exclusiveAddressUse: false, multicastLoopback: true, useBind: true)));
+            var listenOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
+                exclusiveAddressUse: false,
+                multicastLoopback: true,
+                useBind: true);
+        
+            var senderOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
+                exclusiveAddressUse: false,
+                useBind: false);
+
+            var listenConnection = new UdpMulticastConnection(listenOptions);
+            var senderConnection = new UdpMulticastConnection(senderOptions);
+
+            services.RegisterInstance<IDataReceiver>(listenConnection);
+            services.RegisterInstance<IDataTransmitter>(senderConnection);
             IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
             services.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
-            services.RegisterInstance<IDataTransmitter>(new UdpMulticastConnection(
-            MulticastConnectionOptions.Create(ipAddress: "230.0.0.0", exclusiveAddressUse: false, useBind: false)));
             return services;
         }
 

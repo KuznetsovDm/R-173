@@ -26,7 +26,7 @@ namespace R_173.BL
             _rawTone = null;
         }
 
-        public ISampleProvider GetSampleProvider()
+        public ISampleProvider CreateSampleProvider()
         {
             var stream = new MemoryStream(_rawTone);
             var reader = new Mp3FileReader(stream);

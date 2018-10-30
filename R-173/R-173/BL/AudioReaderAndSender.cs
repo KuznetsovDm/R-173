@@ -12,6 +12,7 @@ namespace R_173.BL
         private IDataTransmitter _transmitter;
         private IDataAsByteConverter<DataModel> _converter;
         private DataCompressor _compressor;
+        private LocalToneController _localToneController;
         private bool _isMicrophoneStarted = false;
         private bool _isToneStarted = false;
         private ToneProvider _tone;
@@ -21,7 +22,8 @@ namespace R_173.BL
             IDataTransmitter transmitter,
             IDataAsByteConverter<DataModel> converter,
             ToneProvider tone,
-            DataCompressor compressor)
+            DataCompressor compressor,
+            LocalToneController localToneController)
         {
             _tone = tone;
             _microphone = microphone;
@@ -29,6 +31,7 @@ namespace R_173.BL
             _transmitter = transmitter;
             _converter = converter;
             _compressor = compressor;
+            _localToneController = localToneController;
         }
 
         private void OnSendDataAvailable(object sender, DataEventArgs e)
@@ -80,8 +83,7 @@ namespace R_173.BL
                 return;
 
             _isToneStarted = true;
-            //todo:
-            //_tone.StartListen();
+            _localToneController.StartPlayTone();
         }
 
         public void StopListenTone()
@@ -90,8 +92,7 @@ namespace R_173.BL
                 return;
 
             _isToneStarted = false;
-            //todo: 
-            //_tone.StopListen();
+            _localToneController.StopPlayTone();
         }
 
         public void Dispose()
