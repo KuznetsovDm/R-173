@@ -4,6 +4,7 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +29,7 @@ namespace R_173.BL
 
         private void _learningStep_StepChanged(object sender, StepChangedEventArgs e)
         {
-
+            System.Diagnostics.Trace.WriteLine("STEP CHANGED: " + e.Step);
         }
 
         public void SetModel(RadioModel radioModel)
@@ -56,12 +57,13 @@ namespace R_173.BL
             }
             else
             {
-
+                throw new NotImplementedException();
             }
         }
 
         private void _learningStep_Crashed(object sender, CrashedEventArgs e)
         {
+            System.Diagnostics.Trace.WriteLine("CRASHED???");
         }
 
         private void _learningStep_Completed(object sender, System.EventArgs e)
