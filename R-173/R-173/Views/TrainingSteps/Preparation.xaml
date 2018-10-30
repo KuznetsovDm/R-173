@@ -66,7 +66,7 @@
 
                 <Control Template="{StaticResource ArrowLeft}" />
                 
-                <CheckBox Content="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА и убидиться по табло ЧАСТОТА в правильности значения рабочей частоты. Переключить тумблер в положение РАБОТА"
+                <CheckBox Content="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА и убедиться по табло ЧАСТОТА в правильности значения рабочей частоты. Переключить тумблер в положение РАБОТА"
                           Width="255"
                     IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}"/>
 

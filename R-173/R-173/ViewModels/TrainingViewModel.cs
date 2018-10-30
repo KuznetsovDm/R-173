@@ -1,6 +1,7 @@
 ﻿using R_173.BL;
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
+using System.Windows;
 using System.Windows.Input;
 
 namespace R_173.ViewModels
@@ -70,7 +71,7 @@ namespace R_173.ViewModels
 
         private void Learning_Completed()
         {
-
+            MessageBox.Show("Completed");
         }
     }
 }
