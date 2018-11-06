@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:R_173"
         xmlns:views="clr-namespace:R_173.Views"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1024"
-        MinWidth="1000" MinHeight="600"
+        MinWidth="800" MinHeight="600"
         Title="Р-173" WindowState="Maximized" FontFamily="Times New Roman">
     <DockPanel>
         <UniformGrid DockPanel.Dock="Top" Columns="4">

@@ -19,15 +19,14 @@
                 <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
                 <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}">
                     <Setter Property="Height" Value="60" />
+                    <Setter Property="Width" Value="150" />
                 </Style>
             </ResourceDictionary>
         </StackPanel.Resources>
 
-
-
         <StackPanel Margin="20, 10, 0, 0">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Content="1. Установить антенну"
+                <!--<CheckBox Content="1. Установить антенну"
                           Width="80"
                           IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
 
@@ -53,15 +52,28 @@
                 
                 <CheckBox Content="5. Снять чехол с приемоперечатчика"
                           Width="105"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>-->
+
+                <CheckBox Width="330"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}">
+                    1. 
+                    Установить антенну. 
+                    Надеть и подготовить шлемофон. 
+                    Подлючить шлемофон к нагрудному переключателю.
+                    Установить переключатель на приборе БВ-34 в положение РС-1.
+                    Снять чехол с приемоперечатчика.
+                </CheckBox>
 
                 <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="6. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
+                          Width="427"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
             </StackPanel>
 
             <StackPanel Margin="0, 10, 0, 0" HorizontalAlignment="Left" Orientation="Horizontal">
 
                 <CheckBox Content="10. Прослушать собственные шумы"
-                          Width="74"
                           IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=9}"/>
 
                 <Control Template="{StaticResource ArrowLeft}" />
@@ -73,22 +85,21 @@
                 <Control Template="{StaticResource ArrowLeft}" />
 
                 <CheckBox Content="8. Нажать кнопку соответствующую необходимой ЗПЧ"
-                          Width="95"
                           IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}"/>
 
                 <Control Template="{StaticResource ArrowLeft}" />
 
                 <CheckBox Content="7. Включить тумблер ПИТАНИЕ"
-                          Width="70"
                           IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
-
-                <Control Template="{StaticResource ArrowLeft}" />
-
             </StackPanel>
         </StackPanel>
 
-        <CheckBox Content="6. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
-                  Height="133" Width="202"
-                  IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
+        <Grid VerticalAlignment="Center">
+            <Line X1="0" X2="26" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="26" X2="26" Y1="74.5" Y2="3.5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="0" X2="26" Y1="73" Y2="73" StrokeThickness="3" Stroke="Black" />
+            <Line X1="1" X2="8" Y1="73" Y2="80" StrokeThickness="3" Stroke="Black" />
+            <Line X1="1" X2="8" Y1="73" Y2="66" StrokeThickness="3" Stroke="Black" />
+        </Grid>
     </StackPanel>
 </UserControl>
