@@ -11,6 +11,7 @@ namespace R_173.BL
         {
 
         }
+
         protected override void SomethingChanged()
         {
             base.SomethingChanged();
@@ -143,6 +144,57 @@ namespace R_173.BL
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             OnStepCompleted();
+        }
+    }
+
+    public class RecordWorkToRecordStep : Step
+    {
+        public RecordWorkToRecordStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
+        {
+            if(e.NewValue == RecordWorkState.Record)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class RecordWorkToWorkStep : Step
+    {
+        public RecordWorkToWorkStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
+        {
+            if (e.NewValue == RecordWorkState.Work)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class ResetStep : Step
+    {
+        public ResetStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if(e.NewValue == SwitcherState.Enabled)
+            {
+                OnStepCompleted();
+            }
         }
     }
 }

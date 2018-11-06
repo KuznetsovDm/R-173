@@ -40,26 +40,32 @@ namespace R_173.BL
         public static CompositeStep CreatePreformanceTestLearning()
         {
             return new CompositeStepBuilder()
-                .Add(CreatePreparationToWorkLearning())
+                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-9
                 .Add(new VolumeChangeStep())
                 .Add(new NoiseChangedStep())
                 .Add(new PrdPressStep())
-                //todo: проверить модуляцию.
-                .Add(new WaitingStep())
-                //todo: проверить подачу тока.
-                .Add(new WaitingStep())
+                .Add(new WaitingStep()) //todo: проверить модуляцию.
+                .Add(new WaitingStep()) //todo: проверить отдачу тока в антенну.
                 .Add(new PressToneStep())
-                //todo: Повторить операции 2-8 на Зпч 2-8
+                .Add(new WaitingStep()) //todo: Повторить операции 2-8 на всех Зпч
                 .Build();
         }
 
         public static CompositeStep CreateSettingFrequencies()
         {
             return new CompositeStepBuilder()
-                .Add(new InitialStateStep())
-                .Add(new TurningOnStep())
-                .Add(new ButtonStep(PreparationLearning.CheckButtonInternalState))
-                .Add(new BoardStep())
+                .Add(new WaitingStep()) //todo: записать на планке частоты
+                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-7
+                .Add(new RecordWorkToRecordStep())
+                .Add(new ButtonStep())
+                .Add(new ResetStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new WaitingStep()) // todo: набрать все остальные частоты
+                .Add(new RecordWorkToWorkStep())
                 .Build();
         }
 
