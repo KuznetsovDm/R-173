@@ -25,7 +25,6 @@ namespace R_173.BL
             _learnings.Add(LearningFactory.CreateSettingFrequencies());
 
             InitAll();
-            FreezeAll();
 
             SetCurrentLearning(learningType);
         }
@@ -55,6 +54,7 @@ namespace R_173.BL
                 _currentLearning = 2;
             }
 
+            FreezeAll();
             _learnings[_currentLearning].Unfreeze();
         } 
 
@@ -74,6 +74,15 @@ namespace R_173.BL
                 learning.Completed += Completed;
                 learning.StepChanged += StepChanged;
             }
+        }
+
+        public void Restart()
+        {
+            var learning = _learnings[_currentLearning];
+            learning.Reset();
+            learning.StartIfInputConditionsAreRight(_model, out var errors);
+            learning.Completed += Completed;
+            learning.StepChanged += StepChanged;
         }
     }
 }

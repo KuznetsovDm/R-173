@@ -1,5 +1,4 @@
-﻿using R_173.Interfaces;
-using R_173.Models;
+﻿using R_173.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +36,7 @@ namespace R_173.BL
         {
             return new CompositeStepBuilder()
                 .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-9
+                .Add(new WaitingStep()) //todo: прослушать собственные шумы
                 .Add(new VolumeChangeStep())
                 .Add(new NoiseChangedStep())
                 .Add(new PrdPressStep())
@@ -55,16 +55,22 @@ namespace R_173.BL
                 .Add(new RecordWorkToRecordStep())
                 .Add(new ButtonStep())
                 .Add(new ResetStep())
-                .Add(new ButtonStep())
-                .Add(new ButtonStep())
-                .Add(new ButtonStep())
-                .Add(new ButtonStep())
-                .Add(new ButtonStep())
+                .Add(CreateFiveButtonsStep())
                 .Add(new WaitingStep()) // todo: набрать все остальные частоты
                 .Add(new RecordWorkToWorkStep())
                 .Build();
         }
 
+        private static CompositeStep CreateFiveButtonsStep()
+        {
+            return new CompositeStepBuilder()
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Build();
+        }
 
         public static bool CheckInitialState(RadioModel model, out IList<string> errors)
         {

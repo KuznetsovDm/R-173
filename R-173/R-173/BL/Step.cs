@@ -198,6 +198,11 @@ namespace R_173.BL
             Subscribe(Model);
         }
 
+        public void Reset()
+        {
+            Unsubscribe(Model);
+        }
+
         public void Dispose()
         {
         }

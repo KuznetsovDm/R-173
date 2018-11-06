@@ -114,6 +114,17 @@ namespace R_173.BL
             }
         }
 
+        public void Reset()
+        {
+            if (_current >= 0 && _current < _steps.Count)
+            {
+                _steps[_current].Reset();
+                _steps[_current].Completed -= Step_Completed;
+                _steps[_current].Crashed -= Step_Crashed;
+            }
+            _current = 0;
+        }
+
         public void Dispose()
         {
 

@@ -58,7 +58,8 @@ namespace R_173.BL
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             System.Diagnostics.Trace.WriteLine("Numpad: " + e.NewValue);
-            OnStepCompleted();
+            if(e.NewValue == SwitcherState.Enabled)
+                OnStepCompleted();
         }
     }
 
