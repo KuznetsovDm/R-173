@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace R_173.BL
+namespace R_173.BL.Learning
 {
     public class CompositeStep : IStep<RadioModel>, IDisposable
     {

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using R_173.Models;
 using R_173.SharedResources;
 
-namespace R_173.BL
+namespace R_173.BL.Learning
 {
     public class InitialStateStep : Step
     {
@@ -31,15 +32,13 @@ namespace R_173.BL
 
         }
 
-        public override bool CheckInputConditions(RadioModel model, out IList<string> errors)
-        {
-            return LearningFactory.CheckInitialState(model, out errors);
-        }
+        //public override bool CheckInputConditions(RadioModel model, out IList<string> errors)
+        //{
+        //    return LearningFactory.CheckInitialState(model, out errors);
+        //}
 
         protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            System.Diagnostics.Trace.WriteLine("Turning on: " + e.NewValue);
-
             if (e.NewValue == SwitcherState.Enabled)
             {
                 OnStepCompleted();
@@ -57,9 +56,10 @@ namespace R_173.BL
 
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            System.Diagnostics.Trace.WriteLine("Numpad: " + e.NewValue);
-            if(e.NewValue == SwitcherState.Enabled)
+            if (e.NewValue == SwitcherState.Enabled)
+            {
                 OnStepCompleted();
+            }
         }
     }
 
@@ -73,21 +73,24 @@ namespace R_173.BL
 
         protected override void Board_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            System.Diagnostics.Trace.WriteLine("Board: " + e.NewValue);
             OnStepCompleted();
         }
     }
 
     public class VolumeChangeStep : Step
     {
+        private double _initVolume;
         public VolumeChangeStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
         {
+            _initVolume = Model.Volume.Value;
         }
 
         protected override void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
-            System.Diagnostics.Trace.WriteLine("Volume: " + e.NewValue);
-            OnStepCompleted();
+            if(Math.Abs(e.NewValue - _initVolume) > 0.2)
+            {
+                OnStepCompleted();
+            }
         }
     }
 
@@ -99,10 +102,7 @@ namespace R_173.BL
 
         protected override void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
-            if (e.NewValue == NoiseState.Minimum)
-            {
-                OnStepCompleted();
-            }
+            OnStepCompleted();
         }
     }
 
@@ -144,8 +144,10 @@ namespace R_173.BL
 
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            if(e.NewValue == SwitcherState.Enabled)
+            if (e.NewValue == SwitcherState.Enabled)
+            {
                 OnStepCompleted();
+            }
         }
     }
 
@@ -159,7 +161,7 @@ namespace R_173.BL
 
         protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
-            if(e.NewValue == RecordWorkState.Record)
+            if (e.NewValue == RecordWorkState.Record)
             {
                 OnStepCompleted();
             }
@@ -193,7 +195,7 @@ namespace R_173.BL
 
         protected override void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
-            if(e.NewValue == SwitcherState.Enabled)
+            if (e.NewValue == SwitcherState.Enabled)
             {
                 OnStepCompleted();
             }

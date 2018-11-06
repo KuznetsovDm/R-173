@@ -2,7 +2,7 @@
 using R_173.Interfaces;
 using System.Collections.Generic;
 
-namespace R_173.BL
+namespace R_173.BL.Learning
 {
     public class CompositeStepBuilder
     {
