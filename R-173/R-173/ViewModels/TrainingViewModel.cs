@@ -34,8 +34,8 @@ namespace R_173.ViewModels
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--);
             _radioViewModel = new RadioViewModel();
-            CurrentStep = 1;
             _learning = new Learning(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
+            CurrentStep = 1;
         }
 
         public int CurrentStep
@@ -52,6 +52,7 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(CurrentControl));
                 OnPropertyChanged(nameof(Caption));
                 OnPropertyChanged(nameof(CurrentStep));
+                _learning.SetCurrentLearning(_controls[_currentStep - 1].GetType());
             }
         }
 

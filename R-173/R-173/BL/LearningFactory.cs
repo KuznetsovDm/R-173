@@ -19,10 +19,6 @@ namespace R_173.BL
         {
             return new CompositeStepBuilder()
                 .Add(new WaitingStep())
-                .Add(new WaitingStep())
-                .Add(new WaitingStep())
-                .Add(new WaitingStep())
-                .Add(new WaitingStep())
                 .Add(new InitialStateStep())
                 .Add(new TurningOnStep(
                     checkInputConditions: CheckInitialState,
