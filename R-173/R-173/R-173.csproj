@@ -101,6 +101,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\CompositeStep.cs" />
     <Compile Include="BL\CompositeStepBuilder.cs" />
+    <Compile Include="BL\EmptyWrapperWaveIn.cs" />
     <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
     <Compile Include="BL\Learning.cs" />
     <Compile Include="BL\LearningFactory.cs" />
