@@ -14,6 +14,7 @@ namespace R_173.BL
         protected RadioModel Model;
         protected CheckState _checkInputConditions;
         protected CheckState _checkInternalState;
+        private bool _isSubscribed = false;
 
         public Step(CheckState checkInputConditions = null, CheckState checkInternalState = null)
         {
@@ -49,7 +50,7 @@ namespace R_173.BL
 
         public virtual void Subscribe(RadioModel radioModel)
         {
-            if (radioModel == null)
+            if (radioModel == null || _isSubscribed)
                 return;
 
             radioModel.Interference.ValueChanged += Interference_ValueChanged;
@@ -69,11 +70,13 @@ namespace R_173.BL
             {
                 radioModel.Numpad[i].ValueChanged += Numpad_ValueChanged;
             }
+
+            _isSubscribed = true;
         }
 
         public virtual void Unsubscribe(RadioModel radioModel)
         {
-            if (radioModel == null)
+            if (radioModel == null || !_isSubscribed)
                 return;
 
             radioModel.Interference.ValueChanged -= Interference_ValueChanged;
@@ -93,6 +96,8 @@ namespace R_173.BL
             {
                 radioModel.Numpad[i].ValueChanged -= Numpad_ValueChanged;
             }
+
+            _isSubscribed = false;
         }
 
         protected virtual void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
