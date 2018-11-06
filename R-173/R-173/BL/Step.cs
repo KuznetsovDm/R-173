@@ -49,6 +49,9 @@ namespace R_173.BL
 
         public virtual void Subscribe(RadioModel radioModel)
         {
+            if (radioModel == null)
+                return;
+
             radioModel.Interference.ValueChanged += Interference_ValueChanged;
             radioModel.Noise.ValueChanged += Noise_ValueChanged;
             radioModel.Power.ValueChanged += Power_ValueChanged;
@@ -59,6 +62,8 @@ namespace R_173.BL
             radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
             radioModel.FrequencyNumber.ValueChanged += FrequencyNumber_ValueChanged;
             radioModel.Board.ValueChanged += Board_ValueChanged;
+            radioModel.Sending.ValueChanged += Sending_ValueChanged;
+            radioModel.Reset.ValueChanged += Reset_ValueChanged;
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
@@ -68,6 +73,9 @@ namespace R_173.BL
 
         public virtual void Unsubscribe(RadioModel radioModel)
         {
+            if (radioModel == null)
+                return;
+
             radioModel.Interference.ValueChanged -= Interference_ValueChanged;
             radioModel.Noise.ValueChanged -= Noise_ValueChanged;
             radioModel.Power.ValueChanged -= Power_ValueChanged;
@@ -78,11 +86,23 @@ namespace R_173.BL
             radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
             radioModel.FrequencyNumber.ValueChanged -= FrequencyNumber_ValueChanged;
             radioModel.Board.ValueChanged -= Board_ValueChanged;
+            radioModel.Sending.ValueChanged -= Sending_ValueChanged;
+            radioModel.Reset.ValueChanged -= Reset_ValueChanged;
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
                 radioModel.Numpad[i].ValueChanged -= Numpad_ValueChanged;
             }
+        }
+
+        protected virtual void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            SomethingChanged();
+        }
+
+        protected virtual void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            SomethingChanged();
         }
 
         protected virtual void VolumePRM_ValueChanged(object sender, ValueChangedEventArgs<double> e)
@@ -163,9 +183,18 @@ namespace R_173.BL
             Crashed(this, new CrashedEventArgs { Errors = errors });
         }
 
-        public void Dispose()
+        public void Freeze()
         {
             Unsubscribe(Model);
+        }
+
+        public void Unfreeze()
+        {
+            Subscribe(Model);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

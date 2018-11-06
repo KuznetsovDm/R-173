@@ -37,22 +37,35 @@ namespace R_173.BL
                 .Build();
         }
 
-        public static CompositeStep CreateCheckPreparationToWork()
+        public static CompositeStep CreatePreformanceTestLearning()
         {
             return new CompositeStepBuilder()
-                .Add(CreatePreparationToWorkLearning())
-                .Add(new VolumeChangeState())
-                .Add(new NoiseChangedState())
+                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-9
+                .Add(new VolumeChangeStep())
+                .Add(new NoiseChangedStep())
+                .Add(new PrdPressStep())
+                .Add(new WaitingStep()) //todo: проверить модуляцию.
+                .Add(new WaitingStep()) //todo: проверить отдачу тока в антенну.
+                .Add(new PressToneStep())
+                .Add(new WaitingStep()) //todo: Повторить операции 2-8 на всех Зпч
                 .Build();
         }
 
-        public static IStep<RadioModel> CreateSettingFrequencies()
+        public static CompositeStep CreateSettingFrequencies()
         {
             return new CompositeStepBuilder()
-                .Add(new InitialStateStep())
-                .Add(new TurningOnStep())
-                .Add(new ButtonStep(PreparationLearning.CheckButtonInternalState))
-                .Add(new BoardStep())
+                .Add(new WaitingStep()) //todo: записать на планке частоты
+                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-7
+                .Add(new RecordWorkToRecordStep())
+                .Add(new ButtonStep())
+                .Add(new ResetStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new ButtonStep())
+                .Add(new WaitingStep()) // todo: набрать все остальные частоты
+                .Add(new RecordWorkToWorkStep())
                 .Build();
         }
 

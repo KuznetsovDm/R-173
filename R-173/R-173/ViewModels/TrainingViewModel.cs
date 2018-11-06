@@ -35,7 +35,7 @@ namespace R_173.ViewModels
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--);
             _radioViewModel = new RadioViewModel();
             CurrentStep = 1;
-            _learning = new Learning(_radioViewModel.Model, Learning_Completed, Learning_StepChanged);
+            _learning = new Learning(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
         }
 
         public int CurrentStep

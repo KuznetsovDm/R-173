@@ -11,12 +11,12 @@ namespace R_173.BL
         {
 
         }
+
         protected override void SomethingChanged()
         {
             base.SomethingChanged();
 
-            IList<string> errors;
-            if (LearningFactory.CheckInitialState(Model, out errors))
+            if (LearningFactory.CheckInitialState(Model, out IList<string> errors))
             {
                 OnStepCompleted();
             }
@@ -77,9 +77,9 @@ namespace R_173.BL
         }
     }
 
-    public class VolumeChangeState : Step
+    public class VolumeChangeStep : Step
     {
-        public VolumeChangeState(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        public VolumeChangeStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
         {
         }
 
@@ -90,15 +90,45 @@ namespace R_173.BL
         }
     }
 
-    public class NoiseChangedState : Step
+    public class NoiseChangedStep : Step
     {
-        public NoiseChangedState(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        public NoiseChangedStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
         {
         }
 
         protected override void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
             if (e.NewValue == NoiseState.Minimum)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class PrdPressStep : Step
+    {
+        public PrdPressStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        {
+        }
+
+        protected override void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if (e.NewValue == SwitcherState.Enabled)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class PressToneStep : Step
+    {
+        public PressToneStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        {
+        }
+
+        protected override void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if (e.NewValue == SwitcherState.Enabled)
             {
                 OnStepCompleted();
             }
@@ -114,6 +144,57 @@ namespace R_173.BL
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             OnStepCompleted();
+        }
+    }
+
+    public class RecordWorkToRecordStep : Step
+    {
+        public RecordWorkToRecordStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
+        {
+            if(e.NewValue == RecordWorkState.Record)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class RecordWorkToWorkStep : Step
+    {
+        public RecordWorkToWorkStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
+        {
+            if (e.NewValue == RecordWorkState.Work)
+            {
+                OnStepCompleted();
+            }
+        }
+    }
+
+    public class ResetStep : Step
+    {
+        public ResetStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if(e.NewValue == SwitcherState.Enabled)
+            {
+                OnStepCompleted();
+            }
         }
     }
 }

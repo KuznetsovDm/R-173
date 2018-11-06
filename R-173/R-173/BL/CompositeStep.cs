@@ -98,7 +98,7 @@ namespace R_173.BL
             return !errors.Any();
         }
 
-        public void Dispose()
+        public void Freeze()
         {
             if (_current >= 0 && _current < _steps.Count)
             {
@@ -108,10 +108,27 @@ namespace R_173.BL
 
             foreach (var step in _steps)
             {
-                step.Dispose();
+                step.Freeze();
             }
         }
+
+        public void Unfreeze()
+        {
+            if (_current >= 0 && _current < _steps.Count)
+            {
+                _steps[_current].Completed -= Step_Completed;
+                _steps[_current].Crashed -= Step_Crashed;
+            }
+
+            foreach (var step in _steps)
+            {
+                step.Unfreeze();
+            }
+        }
+
+        public void Dispose()
+        {
+
+        }
     }
-
-
 }
