@@ -49,6 +49,9 @@ namespace R_173.BL
 
         public virtual void Subscribe(RadioModel radioModel)
         {
+            if (radioModel == null)
+                return;
+
             radioModel.Interference.ValueChanged += Interference_ValueChanged;
             radioModel.Noise.ValueChanged += Noise_ValueChanged;
             radioModel.Power.ValueChanged += Power_ValueChanged;
@@ -69,6 +72,9 @@ namespace R_173.BL
 
         public virtual void Unsubscribe(RadioModel radioModel)
         {
+            if (radioModel == null)
+                return;
+
             radioModel.Interference.ValueChanged -= Interference_ValueChanged;
             radioModel.Noise.ValueChanged -= Noise_ValueChanged;
             radioModel.Power.ValueChanged -= Power_ValueChanged;
@@ -177,7 +183,7 @@ namespace R_173.BL
 
         public void Unfreeze()
         {
-            Unsubscribe(Model);
+            Subscribe(Model);
         }
 
         public void Dispose()

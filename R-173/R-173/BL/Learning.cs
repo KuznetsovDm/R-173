@@ -10,9 +10,9 @@ namespace R_173.BL
     {
         private readonly Action _completed;
         private readonly Action<int> _stepChanged;
-        private List<CompositeStep> _learnings;
+        private readonly List<CompositeStep> _learnings = new List<CompositeStep>();
         private int _currentLearning;
-        private RadioModel _model;
+        private readonly RadioModel _model;
 
         public Learning(RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
         {
@@ -21,8 +21,11 @@ namespace R_173.BL
             _model = model;
 
             _learnings[0] = LearningFactory.CreatePreparationToWorkLearning();
-            _learnings[1] = LearningFactory.CreatePreparationToWorkLearning();
-            _learnings[2] = LearningFactory.CreatePreparationToWorkLearning();
+            _learnings[1] = LearningFactory.CreatePreformanceTestLearning();
+            _learnings[2] = LearningFactory.CreateSettingFrequencies();
+
+            InitAll();
+            FreezeAll();
 
             SetCurrentLearning(learningType);
         }
@@ -51,13 +54,26 @@ namespace R_173.BL
             {
                 _currentLearning = 2;
             }
+
+            _learnings[_currentLearning].Unfreeze();
+        } 
+
+        public void FreezeAll()
+        {
+            foreach (var learning in _learnings)
+            {
+                learning.Freeze();
+            }
         }
 
-        public void Start()
+        public void InitAll()
         {
-            _learnings[_currentLearning].StartIfInputConditionsAreRight(_model, out var errors);
-            _learnings[_currentLearning].Completed += Completed;
-            _learnings[_currentLearning].StepChanged += StepChanged;
+            foreach (var learning in _learnings)
+            {
+                learning.StartIfInputConditionsAreRight(_model, out var errors);
+                learning.Completed += Completed;
+                learning.StepChanged += StepChanged;
+            }
         }
     }
 }

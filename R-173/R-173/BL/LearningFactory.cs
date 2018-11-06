@@ -53,7 +53,7 @@ namespace R_173.BL
                 .Build();
         }
 
-        public static IStep<RadioModel> CreateSettingFrequencies()
+        public static CompositeStep CreateSettingFrequencies()
         {
             return new CompositeStepBuilder()
                 .Add(new InitialStateStep())

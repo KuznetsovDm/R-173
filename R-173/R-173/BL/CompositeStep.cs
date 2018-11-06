@@ -112,7 +112,6 @@ namespace R_173.BL
             }
         }
 
-
         public void Unfreeze()
         {
             if (_current >= 0 && _current < _steps.Count)
@@ -123,7 +122,7 @@ namespace R_173.BL
 
             foreach (var step in _steps)
             {
-                step.Freeze();
+                step.Unfreeze();
             }
         }
 
