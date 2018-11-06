@@ -20,9 +20,9 @@ namespace R_173.BL
             _stepChanged = stepChanged;
             _model = model;
 
-            _learnings[0] = LearningFactory.CreatePreparationToWorkLearning();
-            _learnings[1] = LearningFactory.CreatePreformanceTestLearning();
-            _learnings[2] = LearningFactory.CreateSettingFrequencies();
+            _learnings.Add(LearningFactory.CreatePreparationToWorkLearning());
+            _learnings.Add(LearningFactory.CreatePreformanceTestLearning());
+            _learnings.Add(LearningFactory.CreateSettingFrequencies());
 
             InitAll();
             FreezeAll();
