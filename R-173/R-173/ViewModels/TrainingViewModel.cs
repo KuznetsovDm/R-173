@@ -1,6 +1,7 @@
 ﻿using R_173.BL;
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,32 +10,26 @@ namespace R_173.ViewModels
     class TrainingViewModel : ViewModelBase
     {
         private readonly ITrainingStep[] _controls;
-        private readonly TrainingStepViewModel[] _trainingStepViewModels;
         private readonly SimpleCommand _openNextStepCommand;
         private readonly SimpleCommand _openPrevStepCommand;
         private readonly RadioViewModel _radioViewModel;
         private readonly Learning _learning;
-        private int _currentLearningStep;
+        private int _maxStep;
         private int _currentStep;
 
         public TrainingViewModel()
         {
-            _trainingStepViewModels = new TrainingStepViewModel[]
-            {
-                new TrainingStepViewModel(),
-                new TrainingStepViewModel(),
-                new TrainingStepViewModel(),
-            };
             _controls = new ITrainingStep[]
             {
-                new Preparation() { DataContext = _trainingStepViewModels[0] },
-                new PerformanceTest() { DataContext = _trainingStepViewModels[1] },
-                new FrequencyCheck() { DataContext = _trainingStepViewModels[2] },
+                new Preparation() { DataContext = new TrainingStepViewModel() },
+                new PerformanceTest() { DataContext = new TrainingStepViewModel() },
+                new FrequencyCheck() { DataContext = new TrainingStepViewModel() },
             };
-            _openNextStepCommand = new SimpleCommand(() => CurrentStep++);
-            _openPrevStepCommand = new SimpleCommand(() => CurrentStep--);
+            _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _controls.Length && _currentStep < _maxStep);
+            _openPrevStepCommand = new SimpleCommand(() => CurrentStep--, () => _currentStep > 1);
             _radioViewModel = new RadioViewModel();
             _learning = new Learning(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
+            _maxStep = 1;
             CurrentStep = 1;
         }
 
@@ -43,12 +38,12 @@ namespace R_173.ViewModels
             get => _currentStep;
             private set
             {
-                if (value == _currentStep || value < 1 || value > _controls.Length)
+                if (value == _currentStep || value < 1 || value > _controls.Length || value > _maxStep)
                     return;
                 _currentStep = value;
 
-                _openNextStepCommand.SetCanExecute = _currentStep < _controls.Length;
-                _openPrevStepCommand.SetCanExecute = _currentStep > 1;
+                _openNextStepCommand.OnCanExecuteChanged();
+                _openPrevStepCommand.OnCanExecuteChanged();
                 OnPropertyChanged(nameof(CurrentControl));
                 OnPropertyChanged(nameof(Caption));
                 OnPropertyChanged(nameof(CurrentStep));
@@ -68,11 +63,14 @@ namespace R_173.ViewModels
 
         private void Learning_StepChanged(int step)
         {
-            _trainingStepViewModels[_currentStep - 1].CurrentStep = step;
+            var viewModel = (TrainingStepViewModel)_controls[_currentStep - 1].DataContext;
+            viewModel.CurrentStep = step;
         }
 
         private void Learning_Completed()
         {
+            _maxStep = Math.Max(_maxStep, _currentStep + 1);
+            _openNextStepCommand.OnCanExecuteChanged();
             MessageBox.Show("Completed");
         }
     }

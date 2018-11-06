@@ -66,8 +66,6 @@
             <ContentControl Grid.Row="1" Content="{Binding Path=CurrentControl}" />
         </Viewbox>
 
-        <Viewbox Grid.Row="2" Stretch="Uniform">
-            <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
-        </Viewbox>
+        <radio:RadioView Grid.Row="2" DataContext="{Binding Path=RadioViewModel}" />
     </Grid>
 </UserControl>

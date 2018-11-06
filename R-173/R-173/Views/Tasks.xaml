@@ -4,10 +4,81 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:R_173.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      xmlns:radio="clr-namespace:R_173.Views.Radio"
+      xmlns:viewModels="clr-namespace:R_173.ViewModels"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type viewModels:TasksViewModel}}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      FontFamily="Times New Roman">
 
     <Grid>
-        <TextBlock Text="Задачи"/>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=TaskIsRunning}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            
+            <Viewbox Stretch="Uniform">
+                <Grid>
+                    <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
+                </Grid>
+            </Viewbox>
+
+            <DockPanel LastChildFill="False">
+                <Button DockPanel.Dock="Bottom" FontSize="24" Margin="40, 10" Command="{Binding Path=StopTaskCommand}">Закончить</Button>
+            </DockPanel>
+        </Grid>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=TaskIsRunning}" Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            
+            <Border Background="White" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="10" FontWeight="Bold" FontSize="24">Выберите задачу:</TextBlock>
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Tasks}" BorderThickness="0">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <DockPanel LastChildFill="False">
+                                                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0, 0, 10, 0"
+                                                       Text="{Binding Path=Title}" 
+                                                       TextWrapping="Wrap" FontWeight="SemiBold" Padding="3" FontSize="20" />
+                                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Path=NumberOfSuccessfulAttempts}" FontSize="20" />
+                                                        <TextBlock Text="/" FontSize="20" />
+                                                        <TextBlock Text="{Binding Path=NumberOfAttempts}" FontSize="20" />
+                                                    </StackPanel>
+                                                    <Button VerticalAlignment="Center"
+                                                        Content="Начать" 
+                                                        Command="{Binding Path=StartCommand}"
+                                                        Margin="5, 10" Padding="3" FontSize="20" />
+                                                </StackPanel>
+                                            </DockPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.Resources>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

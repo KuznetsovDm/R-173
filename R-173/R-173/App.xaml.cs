@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BL;
 using R_173.Extensions;
 using R_173.Handlers;
 using R_173.Interfaces;
+using R_173.Views;
 using Unity;
 using Unity.Lifetime;
 
@@ -18,15 +21,53 @@ namespace R_173
     public partial class App : Application
     {
         public static IUnityContainer ServiceCollection;
+        private MainWindow _mainWindow;
+        private readonly object _mainWindowLock = new object();
+        private Preloader _preloader;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            ConfigureIOC();
-            base.OnStartup(e);
-            var obj = ServiceCollection.Resolve<MainWindow>();
-            obj.Show();
+            lock (_mainWindowLock)
+            {
+                var preloaderThread = new Thread(() =>
+                {
+                    _preloader = new Preloader();
+                    _preloader.ContentRendered += Preloader_ContentRendered;
+                    _preloader.Closed += (s, ev) => _preloader.Dispatcher.BeginInvokeShutdown(DispatcherPriority.Normal);
+                    _preloader.ShowDialog();
+                    Dispatcher.Run();
+                });
+
+                preloaderThread.SetApartmentState(ApartmentState.STA);
+                preloaderThread.IsBackground = true;
+                preloaderThread.Start();
+
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+                ConfigureIOC();
+                base.OnStartup(e);
+                _mainWindow = ServiceCollection.Resolve<MainWindow>();
+            }
         }
+
+        private void Preloader_ContentRendered(object sender, EventArgs ev)
+        {
+            lock (_mainWindowLock)
+            {
+                _mainWindow.Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    _mainWindow.ContentRendered += (send, eventArgs) =>
+                    {
+                        _mainWindow.Activate();
+                        _preloader.Dispatcher.BeginInvoke((Action)(() =>
+                        {
+                            _preloader.Close();
+                        }));
+                    };
+                    _mainWindow.Show();
+                }));
+            }
+        }
+
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {

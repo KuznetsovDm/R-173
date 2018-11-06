@@ -133,12 +133,17 @@
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
     <Compile Include="ViewModels\PreparationViewModel.cs" />
+    <Compile Include="ViewModels\TasksViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\WorkViewModel.cs" />
     <Compile Include="Views\Appointment.xaml.cs">
       <DependentUpon>Appointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ITabView.cs" />
+    <Compile Include="Views\Preloader.xaml.cs">
+      <DependentUpon>Preloader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Radio\ClickedImage.cs" />
     <Compile Include="Views\Radio\FrequencyNumberToImageSourceConverter.cs" />
     <Compile Include="Views\Radio\FrequencyToImageSourcesConverter.cs" />
@@ -192,6 +197,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Preloader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Radio\RadioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,6 +249,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Files\radio\loading.png" />
+    <Resource Include="Files\radio\background.jpg" />
+    <Resource Include="Files\radio\radioWithoutBackground.png" />
     <Resource Include="Files\radio\slider.png" />
     <Resource Include="Files\radio\sliderBackground.png" />
     <Resource Include="Files\radio\empty.png" />

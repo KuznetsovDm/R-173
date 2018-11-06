@@ -7,12 +7,14 @@ namespace R_173.Views.TrainingSteps
     /// </summary>
     public partial class PerformanceTest : UserControl, ITrainingStep
     {
+        public static string StepCaption = "Проверка работоспособности";
+
         public PerformanceTest()
         {
             InitializeComponent();
         }
 
 
-        public string Caption => "Проверка работоспособности";
+        public string Caption => StepCaption;
     }
 }
