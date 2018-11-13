@@ -79,18 +79,9 @@ namespace R_173.BL.Learning
 
     public class VolumeChangeStep : Step
     {
-        private double _initVolume;
-        public VolumeChangeStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
-        {
-            _initVolume = Model.Volume.Value;
-        }
-
         protected override void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
-            if(Math.Abs(e.NewValue - _initVolume) > 0.2)
-            {
-                OnStepCompleted();
-            }
+            OnStepCompleted();
         }
     }
 
