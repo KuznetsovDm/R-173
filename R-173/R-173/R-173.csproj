@@ -136,6 +136,7 @@
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
+    <Compile Include="SimpleLogger.cs" />
     <Compile Include="ViewModels\PreparationViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\WorkViewModel.cs" />

@@ -50,7 +50,7 @@ namespace R_173.BL
             var result = _transmitter.Write(compressed);
             if (result.IsFailure)
             {
-                // TODO: logger
+                SimpleLogger.Log(result.Error);
             }
         }
 

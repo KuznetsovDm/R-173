@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
@@ -30,7 +31,7 @@ namespace R_173
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            File.AppendAllText("log.log", $"{DateTime.Now} {e.ExceptionObject.ToString()}");
+            SimpleLogger.Log((Exception)e.ExceptionObject);
         }
 
         protected override void OnExit(ExitEventArgs e)
