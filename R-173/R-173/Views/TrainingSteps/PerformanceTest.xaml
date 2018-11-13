@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="150" Width="840"
              FontFamily="Times New Roman">
-    <StackPanel Orientation="Horizontal" Background="White">
+    <StackPanel Orientation="Horizontal">
         <StackPanel.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
