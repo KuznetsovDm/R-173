@@ -33,7 +33,10 @@ namespace R_173
                 {
                     _preloader = new Preloader();
                     _preloader.ContentRendered += Preloader_ContentRendered;
-                    _preloader.Closed += (s, ev) => _preloader.Dispatcher.BeginInvokeShutdown(DispatcherPriority.Normal);
+                    _preloader.Closed += delegate 
+                    {
+                        _preloader.Dispatcher.BeginInvokeShutdown(DispatcherPriority.Normal);
+                    };
                     _preloader.ShowDialog();
                     Dispatcher.Run();
                 });
@@ -55,7 +58,7 @@ namespace R_173
             {
                 _mainWindow.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    _mainWindow.ContentRendered += (send, eventArgs) =>
+                    _mainWindow.ContentRendered += delegate
                     {
                         _mainWindow.Activate();
                         _preloader.Dispatcher.BeginInvoke((Action)(() =>

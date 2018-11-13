@@ -19,11 +19,10 @@ namespace R_173
         public MainWindow()
         {
             InitializeComponent();
-
             _pages = new Dictionary<Type, ITabView>
             {
-                { typeof(Tasks), new Tasks() { DataContext = new TasksViewModel() } },
                 { typeof(Appointment), new Appointment() },
+                { typeof(Tasks), new Tasks() { DataContext = new TasksViewModel() } },
                 { typeof(Training), new Training(){ DataContext = new TrainingViewModel() } },
                 { typeof(Work), new Work() { DataContext = new WorkViewModel() } }
             };

@@ -9,11 +9,10 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type models:RadioViewModel}}">
     <Grid>
-        <Image Stretch="UniformToFill" Source="/Files/radio/background.jpg" />
         <Viewbox>
             <Canvas Width="3745" Height="2240">
                 <Canvas.Background>
-                    <ImageBrush ImageSource="/Files/radio/radioWithoutBackground.png" />
+                    <ImageBrush ImageSource="/Files/radio/radio.png" />
                 </Canvas.Background>
 
                 <Canvas.Resources>

@@ -12,6 +12,7 @@ namespace R_173.ViewModels
         private readonly ITrainingStep[] _controls;
         private readonly SimpleCommand _openNextStepCommand;
         private readonly SimpleCommand _openPrevStepCommand;
+        private readonly SimpleCommand _startOverCommand;
         private readonly RadioViewModel _radioViewModel;
         private readonly Learning _learning;
         private int _maxStep;
@@ -53,6 +54,7 @@ namespace R_173.ViewModels
 
         public ICommand OpenNextStepCommand => _openNextStepCommand;
         public ICommand OpenPrevStepCommand => _openPrevStepCommand;
+        public ICommand StartOverCommand => _startOverCommand;
 
         public ITrainingStep CurrentControl => _controls[_currentStep - 1];
 

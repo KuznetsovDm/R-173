@@ -12,6 +12,9 @@
       FontFamily="Times New Roman">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Files/armour-wallpaper3.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
         <Grid>
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -46,10 +49,10 @@
                 </Style>
             </Grid.Style>
             
-            <Border Background="White" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel>
                     <TextBlock Margin="10" FontWeight="Bold" FontSize="24">Выберите задачу:</TextBlock>
-                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Tasks}" BorderThickness="0">
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Tasks}" BorderThickness="0" Background="Transparent">
                         <ListBox.Resources>
                             <Style TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="Template">

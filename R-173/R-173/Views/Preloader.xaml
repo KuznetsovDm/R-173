@@ -5,11 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173.Views"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Title="Preloader" Height="300" Width="500"
+        Title="Preloader" Height="300" Width="500" ResizeMode="NoResize"
         FontFamily="Times New Roman" FontSize="20">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Width="120" Source="/Files/radio/loading.png" RenderTransformOrigin="0.5, 0.5">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Files/Army-Wallpaper.jpg" />
+        </Grid.Background>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True">
+            <Grid.Effect>
+                <DropShadowEffect Color="Black" ShadowDepth="0" BlurRadius="5" />
+            </Grid.Effect>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" TextAlignment="Center" Text="Р-173" Foreground="White" FontSize="70" FontWeight="Bold" />
+            <Image Grid.Row="1" Width="120" Source="/Files/radio/loading2.png" RenderTransformOrigin="0.5, 0.5">
                 <Image.RenderTransform>
                     <RotateTransform Angle="0" />
                 </Image.RenderTransform>
@@ -24,7 +37,6 @@
                     </EventTrigger>
                 </Image.Triggers>
             </Image>
-            <TextBlock TextAlignment="Center" Text="Загрузка" />
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

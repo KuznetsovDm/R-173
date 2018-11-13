@@ -1,7 +1,5 @@
 ﻿using R_173.Interfaces;
 using R_173.ViewModels;
-using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,19 +16,18 @@ namespace R_173.Views.Radio
     {
         bool isDrawing;
 
+        private static IRadioManager _radioManager;
+        private static IRadioManager RadioManager => _radioManager ?? (_radioManager = App.ServiceCollection.Resolve<IRadioManager>());
+
         public RadioView()
         {
             InitializeComponent();
 
-            var radioViewModel = new RadioViewModel();
-
             IsVisibleChanged += (s, e) =>
             {
-                var manager = App.ServiceCollection.Resolve<IRadioManager>();
                 var viewModel = DataContext as RadioViewModel;
-                manager.SetModel((bool)e.NewValue ? viewModel?.Model : null);
+                RadioManager.SetModel((bool)e.NewValue ? viewModel?.Model : null);
             };
-
         }
 
 
