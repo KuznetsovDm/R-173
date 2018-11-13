@@ -69,6 +69,12 @@ namespace R_173.BL.Learning
 
         }
 
+        public override bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
+        {
+            _counter = 0;
+            return base.StartIfInputConditionsAreRight(model, out errors);
+        }
+
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             if (e.NewValue == SwitcherState.Enabled)

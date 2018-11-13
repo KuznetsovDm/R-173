@@ -26,7 +26,7 @@ namespace R_173.BL.Learning
         public event EventHandler Completed = (e, args) => { };
         public event EventHandler<CrashedEventArgs> Crashed = (e, args) => { };
 
-        public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
+        public virtual bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
         {
             if (!CheckInputConditions(model, out errors))
             {

@@ -77,6 +77,8 @@ namespace R_173.ViewModels
 
         private void Learning_Completed()
         {
+            var viewModel = (TrainingStepViewModel)_controls[_currentStep - 1].DataContext;
+            viewModel.CurrentStep++;
             _maxStep = Math.Max(_maxStep, _currentStep + 1);
             _openNextStepCommand.OnCanExecuteChanged();
             MessageBox.Show("Completed");

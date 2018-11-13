@@ -1,4 +1,5 @@
 ﻿using R_173.Handlers;
+using R_173.Interfaces;
 using R_173.Models;
 using System;
 using System.Collections.Generic;
@@ -22,30 +23,41 @@ namespace R_173.BL.Learning
                 .Build();
         }
 
-        public CompositeStep CreatePreparationToWorkLearning()
+        public CompositeStep CreatePreparationToWorkLearning(int? from = null, int? to = null)
         {
-            return new CompositeStepBuilder()
-                .Add(new WaitingStep(_keyboardHandler))
-                .Add(new InitialStateStep())
-                .Add(new TurningOnStep(
+            var steps = new IStep<RadioModel>[]
+            {
+                new WaitingStep(_keyboardHandler),
+                new InitialStateStep(),
+                new TurningOnStep(
                     checkInputConditions: CheckInitialState,
                     checkInternalState: PreparationLearning.CheckTurningOnInternalState
-                    ))
-                .Add(new ButtonStep(
+                    ),
+                new ButtonStep(
                     checkInputConditions: PreparationLearning.CheckButtonInputConditions,
                     checkInternalState: PreparationLearning.CheckButtonInternalState
-                    ))
-                .Add(new BoardStep(
+                    ),
+                new BoardStep(
                     checkInputConditions: PreparationLearning.CheckButtonInputConditions,
                     checkInternalState: PreparationLearning.CheckButtonInternalState
-                    ))
-                .Build();
+                    )
+            };
+
+            from = from ?? 0;
+            to = to ?? steps.Length;
+
+            var builder = new CompositeStepBuilder();
+
+            for (var i = from.Value; i < to.Value; i++)
+                builder.Add(steps[i]);
+
+            return builder.Build();
         }
 
         public CompositeStep CreatePerformanceTestLearning()
         {
             return new CompositeStepBuilder()
-                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-9
+                .Add(CreatePreparationToWorkLearning(1)) // todo: только пункты 1-9
                 .Add(new WaitingStep(
                     _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
@@ -82,7 +94,7 @@ namespace R_173.BL.Learning
         {
             return new CompositeStepBuilder()
                 .Add(new WaitingStep(_keyboardHandler)) // todo: записать на планке частоты
-                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-7
+                .Add(CreatePreparationToWorkLearning(1)) 
                 .Add(new RecordWorkToRecordStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState))
                 .Add(new ButtonStep(
