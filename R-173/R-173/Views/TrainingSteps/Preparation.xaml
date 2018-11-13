@@ -55,7 +55,7 @@
                           IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>-->
 
                 <CheckBox Width="330"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}">
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}">
                     1. 
                     Установить антенну. 
                     Надеть и подготовить шлемофон. 
@@ -66,31 +66,28 @@
 
                 <Control Template="{StaticResource ArrowRight}" />
 
-                <CheckBox Content="6. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
+                <CheckBox Content="2. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
                           Width="427"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
             </StackPanel>
 
             <StackPanel Margin="0, 10, 0, 0" HorizontalAlignment="Left" Orientation="Horizontal">
 
-                <CheckBox Content="10. Прослушать собственные шумы"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=9}"/>
-
-                <Control Template="{StaticResource ArrowLeft}" />
-                
-                <CheckBox Content="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА и убедиться по табло ЧАСТОТА в правильности значения рабочей частоты. Переключить тумблер в положение РАБОТА"
-                          Width="255"
-                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}"/>
+                <CheckBox Content="5. Нажать кнопку ТАБЛО и убедиться по табло ЧАСТОТА в правильности задания рабочей частоты"
+                          Width="300"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
 
                 <Control Template="{StaticResource ArrowLeft}" />
 
-                <CheckBox Content="8. Нажать кнопку соответствующую необходимой ЗПЧ"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}"/>
+                <CheckBox Content="4. Нажать кнопку соответствующую необходимой ЗПЧ"
+                          Width="200"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
 
                 <Control Template="{StaticResource ArrowLeft}" />
 
-                <CheckBox Content="7. Включить тумблер ПИТАНИЕ"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
+                <CheckBox Content="3. Включить тумблер ПИТАНИЕ"
+                          Width="231"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
             </StackPanel>
         </StackPanel>
 

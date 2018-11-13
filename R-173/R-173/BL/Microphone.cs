@@ -7,17 +7,18 @@ namespace R_173.BL
 {
     public class Microphone : IMicrophone
     {
-        private WaveInEvent _audioListener;
+        private IWaveIn _audioListener;
 
-        public Microphone(WaveFormat format)
+        public Microphone(WaveFormat format, IWaveIn waveIn)
         {
-            _audioListener = new WaveInEvent();
+            _audioListener = waveIn;
             _audioListener.WaveFormat = format;
             _audioListener.DataAvailable += (obj, args) =>
             {
                 var bytes = new byte[args.BytesRecorded];
                 Array.Copy(args.Buffer, bytes, args.BytesRecorded);
-                OnDataAvailable?.Invoke(this, new DataEventArgs() {
+                OnDataAvailable?.Invoke(this, new DataEventArgs()
+                {
                     Data = bytes
                 });
             };

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace R_173.BL
+namespace R_173.BL.Learning
 {
     public class CompositeStep : IStep<RadioModel>, IDisposable
     {
@@ -102,13 +102,7 @@ namespace R_173.BL
         {
             if (_current >= 0 && _current < _steps.Count)
             {
-                _steps[_current].Completed -= Step_Completed;
-                _steps[_current].Crashed -= Step_Crashed;
-            }
-
-            foreach (var step in _steps)
-            {
-                step.Freeze();
+                _steps[_current].Freeze();
             }
         }
 
@@ -116,14 +110,19 @@ namespace R_173.BL
         {
             if (_current >= 0 && _current < _steps.Count)
             {
+                _steps[_current].Unfreeze();
+            }
+        }
+
+        public void Reset()
+        {
+            if (_current >= 0 && _current < _steps.Count)
+            {
+                _steps[_current].Reset();
                 _steps[_current].Completed -= Step_Completed;
                 _steps[_current].Crashed -= Step_Crashed;
             }
-
-            foreach (var step in _steps)
-            {
-                step.Unfreeze();
-            }
+            _current = 0;
         }
 
         public void Dispose()

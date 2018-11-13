@@ -7,6 +7,7 @@ using Unity.Lifetime;
 using NAudio.Wave.SampleProviders;
 using R_173.Interfaces;
 using R_173.BL;
+using Unity.Injection;
 
 namespace R_173.Extensions
 {
@@ -18,7 +19,7 @@ namespace R_173.Extensions
                 exclusiveAddressUse: false,
                 multicastLoopback: true,
                 useBind: true);
-        
+
             var senderOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
                 exclusiveAddressUse: false,
                 useBind: false);
@@ -38,18 +39,40 @@ namespace R_173.Extensions
         public static IUnityContainer AddAudioServices(this IUnityContainer services)
         {
             services.RegisterInstance(WaveFormat.CreateIeeeFloatWaveFormat(44100, 2));
+            services.RegisterWavePlayer();
+            services.RegisterWaveIn();
             var format = services.Resolve<WaveFormat>();
             var mixer = new MixingSampleProvider(format);
-            //it's meant that mixer will receive samples continuous.
             mixer.ReadFully = true;
             services.RegisterInstance<MixingSampleProvider>(mixer, new SingletonLifetimeManager());
-            var player = new SamplePlayer(format);
+
+            var test = services.Resolve<IWavePlayer>();
+
+            var player = services.Resolve<SamplePlayer>();
             player.Add(mixer);
             var noise = new NoiseProvider();
             player.Add(noise);
             services.RegisterInstance<IGlobalNoiseController>(noise);
             services.RegisterInstance<ISamplePlayer>(player, new SingletonLifetimeManager());
             services.RegisterSingleton<ToneProvider>();
+            return services;
+        }
+
+        public static IUnityContainer RegisterWavePlayer(this IUnityContainer services)
+        {
+            if (WaveOut.DeviceCount > 0)
+                services.RegisterType<IWavePlayer, WaveOut>(new InjectionConstructor());
+            else
+                services.RegisterType<IWavePlayer, EmptyWrapperWavePlayer>();
+            return services;
+        }
+
+        public static IUnityContainer RegisterWaveIn(this IUnityContainer services)
+        {
+            if (WaveInEvent.DeviceCount > 0)
+                services.RegisterType<IWaveIn, WaveInEvent>();
+            else
+                services.RegisterType<IWaveIn, EmptyWrapperWaveIn>();
             return services;
         }
     }

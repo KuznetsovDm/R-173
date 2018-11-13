@@ -11,5 +11,6 @@ namespace R_173.Interfaces
         event EventHandler<CrashedEventArgs> Crashed;
         void Freeze();
         void Unfreeze();
+        void Reset();
     }
 }

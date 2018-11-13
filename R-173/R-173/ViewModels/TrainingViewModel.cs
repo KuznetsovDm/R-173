@@ -1,4 +1,4 @@
-﻿using R_173.BL;
+﻿using R_173.BL.Learning;
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
@@ -14,7 +14,7 @@ namespace R_173.ViewModels
         private readonly SimpleCommand _openPrevStepCommand;
         private readonly SimpleCommand _startOverCommand;
         private readonly RadioViewModel _radioViewModel;
-        private readonly Learning _learning;
+        private readonly LearningBL _learning;
         private int _maxStep;
         private int _currentStep;
 
@@ -29,7 +29,8 @@ namespace R_173.ViewModels
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _controls.Length && _currentStep < _maxStep);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--, () => _currentStep > 1);
             _radioViewModel = new RadioViewModel();
-            _learning = new Learning(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
+            _learning = new LearningBL(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
+            _startOverCommand = new SimpleCommand(() => _learning.Restart());
             _maxStep = 1;
             CurrentStep = 1;
         }
@@ -59,7 +60,7 @@ namespace R_173.ViewModels
         public ITrainingStep CurrentControl => _controls[_currentStep - 1];
 
         public string Caption => _controls[_currentStep - 1].Caption;
-        public RadioViewModel RadioViewModel => _radioViewModel;
+        public RadioViewModel RadioViewModel { get; }
         public int StepsNumber => _controls.Length;
 
 

@@ -4,9 +4,9 @@ using R_173.Views.TrainingSteps;
 using System;
 using System.Collections.Generic;
 
-namespace R_173.BL
+namespace R_173.BL.Learning
 {
-    public class Learning
+    public class LearningBL
     {
         private readonly Action _completed;
         private readonly Action<int> _stepChanged;
@@ -14,18 +14,17 @@ namespace R_173.BL
         private int _currentLearning;
         private readonly RadioModel _model;
 
-        public Learning(RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
+        public LearningBL(RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
         {
             _completed = completed;
             _stepChanged = stepChanged;
             _model = model;
 
             _learnings.Add(LearningFactory.CreatePreparationToWorkLearning());
-            _learnings.Add(LearningFactory.CreatePreformanceTestLearning());
+            _learnings.Add(LearningFactory.CreatePerformanceTestLearning());
             _learnings.Add(LearningFactory.CreateSettingFrequencies());
 
             InitAll();
-            FreezeAll();
 
             SetCurrentLearning(learningType);
         }
@@ -55,6 +54,7 @@ namespace R_173.BL
                 _currentLearning = 2;
             }
 
+            FreezeAll();
             _learnings[_currentLearning].Unfreeze();
         } 
 
@@ -74,6 +74,15 @@ namespace R_173.BL
                 learning.Completed += Completed;
                 learning.StepChanged += StepChanged;
             }
+        }
+
+        public void Restart()
+        {
+            var learning = _learnings[_currentLearning];
+            learning.Reset();
+            learning.StartIfInputConditionsAreRight(_model, out var errors);
+            learning.Completed += Completed;
+            learning.StepChanged += StepChanged;
         }
     }
 }
