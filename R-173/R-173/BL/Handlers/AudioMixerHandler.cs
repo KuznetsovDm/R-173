@@ -24,7 +24,6 @@ namespace R_173.BL.Handlers
         {
             _mixer = mixer;
             if(_buffers == null)
-                //todo: check guid comparation speed
                 _buffers = new ConcurrentDictionary<Guid, BufferedWaveProvider>();
             _format = format;
         }

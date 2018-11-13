@@ -17,7 +17,7 @@ namespace R_173.Extensions
         {
             var listenOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
                 exclusiveAddressUse: false,
-                multicastLoopback: true,
+                multicastLoopback: false,
                 useBind: true);
 
             var senderOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
@@ -45,8 +45,6 @@ namespace R_173.Extensions
             var mixer = new MixingSampleProvider(format);
             mixer.ReadFully = true;
             services.RegisterInstance<MixingSampleProvider>(mixer, new SingletonLifetimeManager());
-
-            var test = services.Resolve<IWavePlayer>();
 
             var player = services.Resolve<SamplePlayer>();
             player.Add(mixer);

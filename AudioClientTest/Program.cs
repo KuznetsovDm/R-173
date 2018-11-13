@@ -5,6 +5,7 @@ using P2PMulticastNetwork.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -23,12 +24,13 @@ namespace AudioClientTest
                 Frequency = 123132,
             };
 
-            var path = "../../../../music/1.mp3";
+            var path = "1.mp3";
             if(args.Length > 0)
                 path = args[0];
 
-            var options = MulticastConnectionOptions.Create(useBind: false, exclusiveAddressUse: false);
+            var options = MulticastConnectionOptions.Create(useBind: false, exclusiveAddressUse: false, ipAddress: "225.0.0.0");
 
+            var compressor = new DataCompressor();
             var guid = Guid.NewGuid();
             var converter = new DataModelConverter();
 
@@ -45,10 +47,11 @@ namespace AudioClientTest
                     {
                         Guid = guid,
                         RawAudioSample = buffer,
-                        RadioModel = new SendableRadioModel{ Frequency = 123132 }
+                        RadioModel = new SendableRadioModel{ Frequency = 100 }
                     };
-
-                    transmitter.Write(converter.ConvertToBytes(data));
+                    var converted = converter.ConvertToBytes(data);
+                    var compressed = compressor.Compress(converted);
+                    transmitter.Write(compressed);
                 });
 
                 timer.Change(TimeSpan.FromSeconds(0), TimeSpan.FromMilliseconds(1000 / (d)));
@@ -58,5 +61,45 @@ namespace AudioClientTest
             }
             Console.ReadKey();
         }
+    }
+
+    public class DataCompressor
+    {
+        public byte[] Compress(byte[] bytes)
+        {
+            using (var stream = new MemoryStream(bytes))
+            using (var outStream = new MemoryStream())
+            {
+                using (var compressor = new GZipStream(outStream, CompressionMode.Compress))
+                {
+                    CopyTo(stream, compressor);
+                }
+                return outStream.ToArray();
+            }
+        }
+
+        public byte[] Decompress(byte[] bytes)
+        {
+            using (var stream = new MemoryStream(bytes))
+            using (var outStream = new MemoryStream())
+            {
+                using (var decompressor = new GZipStream(stream, CompressionMode.Decompress))
+                {
+                    CopyTo(decompressor, outStream);
+                }
+                return outStream.ToArray();
+            }
+        }
+
+        public static void CopyTo(Stream src, Stream dest)
+        {
+            byte[] bytes = new byte[4096];
+            int cnt;
+            while ((cnt = src.Read(bytes, 0, bytes.Length)) != 0)
+            {
+                dest.Write(bytes, 0, cnt);
+            }
+        }
+
     }
 }

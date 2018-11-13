@@ -75,7 +75,7 @@ namespace R_173
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            File.AppendAllText("log.log", $"{DateTime.Now} {e.ExceptionObject.ToString()}");
+            SimpleLogger.Log((Exception)e.ExceptionObject);
         }
 
         protected override void OnExit(ExitEventArgs e)
