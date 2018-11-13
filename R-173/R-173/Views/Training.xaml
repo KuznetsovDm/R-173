@@ -9,7 +9,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1280" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingViewModel}}"
       FontFamily="Times New Roman">
-    <Grid Background="White">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Files/armour-wallpaper3.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -49,12 +53,16 @@
                     </Setter>
                 </Style>
             </DockPanel.Resources>
-            
-            <Button DockPanel.Dock="Left" Content="Предыдущий этап" Command="{Binding Path=OpenPrevStepCommand}" />
-            <Button DockPanel.Dock="Right" Content="Следующий этап" Command="{Binding Path=OpenNextStepCommand}" />
+
+            <Button DockPanel.Dock="Left" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />
+            <Button DockPanel.Dock="Left" Content="Начать заново" ToolTip="Начать обучение заново" Command="{Binding Path=StartOverCommand}" />
+            <Button DockPanel.Dock="Right" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />
 
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="26" FontWeight="Bold">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" />
+                </TextBlock.Effect>
                 <Run Text="{Binding Path=CurrentStep, Mode=OneWay}" />
                 <Run Text="/" />
                 <Run Text="{Binding Path=StepsNumber, Mode=OneTime}" />
@@ -66,8 +74,6 @@
             <ContentControl Grid.Row="1" Content="{Binding Path=CurrentControl}" />
         </Viewbox>
 
-        <Viewbox Grid.Row="2" Stretch="Uniform">
-            <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
-        </Viewbox>
+        <radio:RadioView Grid.Row="2" DataContext="{Binding Path=RadioViewModel}" />
     </Grid>
 </UserControl>

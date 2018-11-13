@@ -7,12 +7,14 @@ namespace R_173.Views.TrainingSteps
     /// </summary>
     public partial class FrequencyCheck : UserControl, ITrainingStep
     {
+        public static string StepCaption = "Подготовка рабочих частот";
+
         public FrequencyCheck()
         {
             InitializeComponent();
         }
 
 
-        public string Caption => "Подготовка рабочих частот";
+        public string Caption => StepCaption;
     }
 }

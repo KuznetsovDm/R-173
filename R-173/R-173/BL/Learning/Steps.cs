@@ -85,7 +85,6 @@ namespace R_173.BL.Learning
             if (e.NewValue == SwitcherState.Enabled)
             {
                 _counter = 0;
-                OnStepCrashed(new List<string> { "Нажата кнопка сброса" });
             }
         }
     }

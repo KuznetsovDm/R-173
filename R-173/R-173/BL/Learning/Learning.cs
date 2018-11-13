@@ -83,6 +83,13 @@ namespace R_173.BL.Learning
             var learning = _learnings[_currentLearning];
             learning.Reset();
             learning.StartIfInputConditionsAreRight(_model, out var errors);
+        }
+
+        public void RestartCurrentStep()
+        {
+            var learning = _learnings[_currentLearning];
+            learning.Reset();
+            learning.StartIfInputConditionsAreRight(_model, out var errors);
             learning.Completed += Completed;
             learning.StepChanged += StepChanged;
         }

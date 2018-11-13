@@ -1,9 +1,4 @@
-﻿using R_173.Handlers;
-using R_173.ViewModels;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Unity;
-
+﻿using System.Windows.Controls;
 
 namespace R_173.Views.TrainingSteps
 {
@@ -12,12 +7,14 @@ namespace R_173.Views.TrainingSteps
     /// </summary>
     public partial class Preparation : UserControl, ITrainingStep
     {
+        public static string StepCaption = "Подготовка к работе";
+
         public Preparation()
         {
             InitializeComponent();
         }
 
 
-        public string Caption => "Подготовка к работе";
+        public string Caption => StepCaption;
     }
 }

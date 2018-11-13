@@ -29,32 +29,24 @@ namespace R_173.SharedResources
     public class SimpleCommand : ICommand
     {
         private readonly Action _onExecute;
-        private bool _canExecute;
+        private readonly Func<bool> _canExecute;
 
-        public SimpleCommand(Action onExecute)
+        public SimpleCommand(Action onExecute, Func<bool> canExecute = null)
         {
             _onExecute = onExecute;
-            _canExecute = true;
+            _canExecute = canExecute ?? (() => true);
         }
 
         public event EventHandler CanExecuteChanged;
 
 
-        public bool SetCanExecute
-        {
-            get => _canExecute;
-            set
-            {
-                if (_canExecute == value)
-                    return;
-
-                _canExecute = value;
-                var e = CanExecuteChanged;
-                e?.Invoke(this, new EventArgs());
-            }
-        }
-
-        public bool CanExecute(object parameter) => _canExecute;
         public void Execute(object parameter) => _onExecute();
+        public bool CanExecute(object parameter) => _canExecute();
+
+        public void OnCanExecuteChanged()
+        {
+            var e = CanExecuteChanged;
+            e?.Invoke(this, new EventArgs());
+        }
     }
 }

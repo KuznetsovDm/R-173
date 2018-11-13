@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using R_173.ViewModels;
 
 namespace R_173.Views.TrainingSteps
 {
     interface ITrainingStep
     {
         string Caption { get; }
+        object DataContext { get; }
     }
 }

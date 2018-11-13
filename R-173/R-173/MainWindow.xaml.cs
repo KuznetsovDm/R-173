@@ -27,8 +27,8 @@ namespace R_173
 
             _pages = new Dictionary<Type, ITabView>
             {
-                { typeof(Tasks), new Tasks() },
                 { typeof(Appointment), new Appointment() },
+                { typeof(Tasks), new Tasks() { DataContext = new TasksViewModel() } },
                 { typeof(Training), new Training() { DataContext = new TrainingViewModel(keyboardHandler) } },
                 { typeof(Work), new Work() { DataContext = new WorkViewModel() } }
             };
