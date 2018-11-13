@@ -79,6 +79,10 @@ namespace R_173.BL.Learning
 
     public class VolumeChangeStep : Step
     {
+        public VolumeChangeStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        {
+        }
+
         protected override void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
             OnStepCompleted();
