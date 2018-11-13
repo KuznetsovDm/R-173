@@ -1,4 +1,5 @@
 ﻿using R_173.BL.Learning;
+using R_173.Handlers;
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System.Windows;
@@ -16,7 +17,7 @@ namespace R_173.ViewModels
         private int _currentLearningStep;
         private int _currentStep;
 
-        public TrainingViewModel()
+        public TrainingViewModel(KeyboardHandler keyboardHandler)
         {
             _trainingStepViewModels = new TrainingStepViewModel[]
             {
@@ -33,7 +34,7 @@ namespace R_173.ViewModels
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--);
             RadioViewModel = new RadioViewModel();
-            _learning = new LearningBL(RadioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
+            _learning = new LearningBL(keyboardHandler, RadioViewModel.Model, Learning_Completed, Learning_StepChanged, typeof(Preparation));
             CurrentStep = 1;
         }
 

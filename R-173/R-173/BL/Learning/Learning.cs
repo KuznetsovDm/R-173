@@ -1,4 +1,5 @@
-﻿using R_173.Models;
+﻿using R_173.Handlers;
+using R_173.Models;
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
@@ -14,15 +15,16 @@ namespace R_173.BL.Learning
         private int _currentLearning;
         private readonly RadioModel _model;
 
-        public LearningBL(RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
+        public LearningBL(KeyboardHandler keyboardHandler, RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
         {
+            var learningFactory = new LearningFactory(keyboardHandler);
             _completed = completed;
             _stepChanged = stepChanged;
             _model = model;
 
-            _learnings.Add(LearningFactory.CreatePreparationToWorkLearning());
-            _learnings.Add(LearningFactory.CreatePerformanceTestLearning());
-            _learnings.Add(LearningFactory.CreateSettingFrequencies());
+            _learnings.Add(learningFactory.CreatePreparationToWorkLearning());
+            _learnings.Add(learningFactory.CreatePerformanceTestLearning());
+            _learnings.Add(learningFactory.CreateSettingFrequencies());
 
             InitAll();
 

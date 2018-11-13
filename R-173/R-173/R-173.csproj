@@ -111,6 +111,7 @@
     <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
+    <Compile Include="SharedResources\KeyEventArgs.cs" />
     <Compile Include="SharedResources\StepChangedEventArgs.cs" />
     <Compile Include="Interfaces\IStep.cs" />
     <Compile Include="BL\LocalToneController.cs" />

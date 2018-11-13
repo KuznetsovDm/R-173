@@ -1,4 +1,6 @@
-﻿using R_173.ViewModels;
+﻿using R_173.BL.Learning;
+using R_173.Handlers;
+using R_173.ViewModels;
 using R_173.Views;
 using System;
 using System.Collections.Generic;
@@ -16,15 +18,18 @@ namespace R_173
     {
         private readonly Dictionary<Type, ITabView> _pages;
 
-        public MainWindow()
+        public MainWindow(KeyboardHandler keyboardHandler)
         {
             InitializeComponent();
+
+            PreviewKeyDown += keyboardHandler.OnPreviewKeyDown;
+            PreviewKeyUp += keyboardHandler.OnPreviewKeyUp;
 
             _pages = new Dictionary<Type, ITabView>
             {
                 { typeof(Tasks), new Tasks() },
                 { typeof(Appointment), new Appointment() },
-                { typeof(Training), new Training(){ DataContext = new TrainingViewModel() } },
+                { typeof(Training), new Training() { DataContext = new TrainingViewModel(keyboardHandler) } },
                 { typeof(Work), new Work() { DataContext = new WorkViewModel() } }
             };
         }

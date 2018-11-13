@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using R_173.Handlers;
 using R_173.Models;
 using R_173.SharedResources;
 
@@ -32,11 +33,6 @@ namespace R_173.BL.Learning
 
         }
 
-        //public override bool CheckInputConditions(RadioModel model, out IList<string> errors)
-        //{
-        //    return LearningFactory.CheckInitialState(model, out errors);
-        //}
-
         protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             if (e.NewValue == SwitcherState.Enabled)
@@ -59,6 +55,37 @@ namespace R_173.BL.Learning
             if (e.NewValue == SwitcherState.Enabled)
             {
                 OnStepCompleted();
+            }
+        }
+    }
+
+
+    public class FiveButtonsStep : Step
+    {
+        private int _counter = 0;
+        public FiveButtonsStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if (e.NewValue == SwitcherState.Enabled)
+            {
+                if (_counter++ < 4)
+                    return;
+
+                OnStepCompleted();
+            }
+        }
+
+        protected override void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        {
+            if (e.NewValue == SwitcherState.Enabled)
+            {
+                _counter = 0;
+                OnStepCrashed(new List<string> { "Нажата кнопка сброса" });
             }
         }
     }
@@ -133,13 +160,36 @@ namespace R_173.BL.Learning
 
     public class WaitingStep : Step
     {
-        public WaitingStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
+        private readonly KeyboardHandler _keyboardHandler;
+
+        public WaitingStep(KeyboardHandler keyboardHandler, CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
         {
+            _keyboardHandler = keyboardHandler;
         }
 
-        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        public override void Subscribe(RadioModel radioModel)
         {
-            if (e.NewValue == SwitcherState.Enabled)
+            base.Subscribe(radioModel);
+
+            if(_keyboardHandler != null)
+            {
+                _keyboardHandler.OnKeyDown += OnKeyDown;
+            }
+        }
+
+        public override void Unsubscribe(RadioModel radioModel)
+        {
+            base.Unsubscribe(radioModel);
+
+            if (_keyboardHandler != null)
+            {
+                _keyboardHandler.OnKeyDown -= OnKeyDown;
+            }
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs args)
+        {
+            if(args.Key == System.Windows.Input.Key.Enter)
             {
                 OnStepCompleted();
             }

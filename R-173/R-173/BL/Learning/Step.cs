@@ -14,6 +14,7 @@ namespace R_173.BL.Learning
         protected RadioModel Model;
         protected CheckState _checkInputConditions;
         protected CheckState _checkInternalState;
+
         private bool _isSubscribed = false;
 
         public Step(CheckState checkInputConditions = null, CheckState checkInternalState = null)

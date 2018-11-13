@@ -50,8 +50,8 @@
                 </Style>
             </DockPanel.Resources>
             
-            <Button DockPanel.Dock="Left" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />
-            <Button DockPanel.Dock="Right" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />
+            <Button DockPanel.Dock="Left" Content="Предыдущий этап" Command="{Binding Path=OpenPrevStepCommand}" />
+            <Button DockPanel.Dock="Right" Content="Следующий этап" Command="{Binding Path=OpenNextStepCommand}" />
 
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="26" FontWeight="Bold">
