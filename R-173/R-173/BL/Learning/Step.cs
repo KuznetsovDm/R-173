@@ -9,7 +9,7 @@ namespace R_173.BL.Learning
 {
     public delegate bool CheckState(RadioModel model, out IList<string> errors);
 
-    public class Step : IStep<RadioModel>
+    public abstract class Step : IStep<RadioModel>
     {
         protected RadioModel Model;
         protected CheckState _checkInputConditions;
@@ -203,6 +203,8 @@ namespace R_173.BL.Learning
         {
             Unsubscribe(Model);
         }
+
+        public abstract string GetErrorDescription();
 
         public void Dispose()
         {

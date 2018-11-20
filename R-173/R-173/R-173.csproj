@@ -109,6 +109,7 @@
     <Compile Include="BL\Learning\Steps.cs" />
     <Compile Include="BL\EmptyWrapperWaveIn.cs" />
     <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
+    <Compile Include="Extensions\IEnumirableExtentions.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\KeyEventArgs.cs" />

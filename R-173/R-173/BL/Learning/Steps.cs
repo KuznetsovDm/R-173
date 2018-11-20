@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using R_173.Handlers;
 using R_173.Models;
 using R_173.SharedResources;
@@ -12,6 +13,17 @@ namespace R_173.BL.Learning
             : base(checkInputConditions, checkInternalState)
         {
 
+        }
+
+        public override string GetErrorDescription()
+        {
+            StringBuilder builder = new StringBuilder();
+            if (LearningFactory.CheckInitialState(Model, out IList<string> errors))
+            {
+                errors.ForEach(x => builder.AppendLine(x));
+            }
+
+            return builder.ToString();
         }
 
         protected override void SomethingChanged()
@@ -33,6 +45,11 @@ namespace R_173.BL.Learning
 
         }
 
+        public override string GetErrorDescription()
+        {
+            return "Тумблер ПИТАНИЕ не установлен в положение ВКЛ";
+        }
+
         protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             if (e.NewValue == SwitcherState.Enabled)
@@ -50,6 +67,11 @@ namespace R_173.BL.Learning
 
         }
 
+        public override string GetErrorDescription()
+        {
+            return "КНОПКА не нажата";
+        }
+
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
         {
             if (e.NewValue == SwitcherState.Enabled)
@@ -57,8 +79,9 @@ namespace R_173.BL.Learning
                 OnStepCompleted();
             }
         }
-    }
 
+
+    }
 
     public class FiveButtonsStep : Step
     {
@@ -93,6 +116,16 @@ namespace R_173.BL.Learning
                 _counter = 0;
             }
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override string GetErrorDescription()
+        {
+            return "Не нажато 5 КНОПОК";
+        }
     }
 
     public class BoardStep : Step
@@ -101,6 +134,11 @@ namespace R_173.BL.Learning
             : base(checkInputConditions, checkInternalState)
         {
 
+        }
+
+        public override string GetErrorDescription()
+        {
+            return "Не нажата кнопка ТАБЛО";
         }
 
         protected override void Board_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -115,6 +153,11 @@ namespace R_173.BL.Learning
         {
         }
 
+        public override string GetErrorDescription()
+        {
+            return "Не проверен РЕГУЛЯТОР ГРОМКОСТИ";
+        }
+
         protected override void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
         {
             OnStepCompleted();
@@ -127,6 +170,11 @@ namespace R_173.BL.Learning
         {
         }
 
+        public override string GetErrorDescription()
+        {
+            return "Не проверен ПОДАВИТЕЛЬ ШУМОВ";
+        }
+
         protected override void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
         {
             OnStepCompleted();
@@ -137,6 +185,11 @@ namespace R_173.BL.Learning
     {
         public PrdPressStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
         {
+        }
+
+        public override string GetErrorDescription()
+        {
+            return "Не зажата КНОПКА ПРД";
         }
 
         protected override void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -152,6 +205,11 @@ namespace R_173.BL.Learning
     {
         public PressToneStep(CheckState checkInputConditions = null, CheckState checkInternalState = null) : base(checkInputConditions, checkInternalState)
         {
+        }
+
+        public override string GetErrorDescription()
+        {
+            return "Не нажата КНОПКА ТОН";
         }
 
         protected override void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -172,11 +230,16 @@ namespace R_173.BL.Learning
             _keyboardHandler = keyboardHandler;
         }
 
+        public override string GetErrorDescription()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Subscribe(RadioModel radioModel)
         {
             base.Subscribe(radioModel);
 
-            if(_keyboardHandler != null)
+            if (_keyboardHandler != null)
             {
                 _keyboardHandler.OnKeyDown += OnKeyDown;
             }
@@ -194,7 +257,7 @@ namespace R_173.BL.Learning
 
         private void OnKeyDown(object sender, KeyEventArgs args)
         {
-            if(args.Key == System.Windows.Input.Key.Enter)
+            if (args.Key == System.Windows.Input.Key.Enter)
             {
                 OnStepCompleted();
             }
@@ -206,6 +269,12 @@ namespace R_173.BL.Learning
         public RecordWorkToRecordStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
             : base(checkInputConditions, checkInternalState)
         {
+
+        }
+
+        public override string GetErrorDescription()
+        {
+            return "ТУМБЛЕР ЗАПИСЬ-РАБОТА не установлен в положение ЗАПИСЬ";
 
         }
 
@@ -226,6 +295,11 @@ namespace R_173.BL.Learning
 
         }
 
+        public override string GetErrorDescription()
+        {
+            return "ТУМБЛЕР ЗАПИСЬ-РАБОТА не установлен в положение РАБОТА";
+        }
+
         protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
         {
             if (e.NewValue == RecordWorkState.Work)
@@ -241,6 +315,11 @@ namespace R_173.BL.Learning
             : base(checkInputConditions, checkInternalState)
         {
 
+        }
+
+        public override string GetErrorDescription()
+        {
+            return "Не нажата КНОПКА СБРОС";
         }
 
         protected override void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
