@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="R_173.Views.TrainingSteps.Horizontal.FrequencyCheck"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
+             mc:Ignorable="d" 
+             Height="150" Width="840"
+             FontFamily="Times New Roman">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../TrainigStepsDictionary.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackPanel.Resources>
+
+        <StackPanel Margin="20, 10, 0, 0">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Style="{StaticResource 1frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowRight}" />
+                <CheckBox Style="{StaticResource 2frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowRight}" />
+                <CheckBox Style="{StaticResource 3frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowRight}" />
+                <CheckBox Style="{StaticResource 4frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowRight}" />
+            </StackPanel>
+
+            <StackPanel Margin="0, 10, 0, 0" HorizontalAlignment="Left" Orientation="Horizontal">
+                <CheckBox Style="{StaticResource 9frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowLeft}" />
+                <CheckBox Style="{StaticResource 8frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowLeft}" />
+                <CheckBox Style="{StaticResource 7frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowLeft}" />
+                <CheckBox Style="{StaticResource 6frequencyCheck}" Width="130" Height="60" />
+                <Control Template="{StaticResource ArrowLeft}" />
+            </StackPanel>
+        </StackPanel>
+        
+        <CheckBox Style="{StaticResource 5frequencyCheck}" Width="176" Height="130" />
+    </StackPanel>
+</UserControl>

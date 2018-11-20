@@ -3,6 +3,9 @@
                     xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+
+    <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
+
     <Style x:Key="TrainingStep" TargetType="CheckBox">
         <Setter Property="IsEnabled" Value="False" />
         <Setter Property="Template">
@@ -51,5 +54,60 @@
             <Line X1="9" X2="1" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
         </Grid>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="ArrowBottom">
+        <Control Template="{StaticResource ArrowRight}" HorizontalAlignment="Center">
+            <Control.LayoutTransform>
+                <RotateTransform Angle="90" />
+            </Control.LayoutTransform>
+        </Control>
+    </ControlTemplate>
+
     
+    
+    <Style x:Key="1frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="1. Записать на планке заданные рабочие частоты" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
+    </Style>
+
+    <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="2. Выполнить операции подготовки к работе" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
+    </Style>
+
+    <Style x:Key="3frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="3. Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ: засветится табло ЧАСТОТА КГЦ" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
+    </Style>
+
+    <Style x:Key="4frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="4. Нажать кнопку, соответствующую номеру подготавливаемой для работы частоты" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
+    </Style>
+
+    <Style x:Key="5frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="5. Нажать кнопку СБРОС - табло ЧАСТОТА погаснет" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
+    </Style>
+
+    <Style x:Key="6frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="6. Набрать с помощью кнопок необходимую ЗПЧ" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
+    </Style>
+
+    <Style x:Key="7frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="7. Проконтролировать значение набранной ЗПЧ по табло ЧАСТОТА" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
+    </Style>
+
+    <Style x:Key="8frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="8. Аналогично подготовить все последующие ЗПЧ, повторив операции 4-7" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}" />
+    </Style>
+
+    <Style x:Key="9frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}" />
+    </Style>
+
 </ResourceDictionary>

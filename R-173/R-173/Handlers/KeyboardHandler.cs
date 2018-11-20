@@ -11,7 +11,7 @@ namespace R_173.Handlers
         private readonly Dictionary<Key, Action<bool>> _onKeyDownActions;
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
-        public event EventHandler<SharedResources.KeyEventArgs> OnKeyDown;
+        public event Action<Key> OnKeyDown;
 
         public KeyboardHandler()
         {
@@ -42,7 +42,7 @@ namespace R_173.Handlers
 
         public void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            OnKeyDown?.Invoke(this, new SharedResources.KeyEventArgs { Key = e.Key });
+            OnKeyDown?.Invoke(e.Key);
             e.Handled = true;
             //if (e.Key == _lastPressedKey)
             //    return;

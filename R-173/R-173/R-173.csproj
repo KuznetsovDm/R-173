@@ -102,7 +102,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\Learning\CompositeStep.cs" />
     <Compile Include="BL\Learning\CompositeStepBuilder.cs" />
-    <Compile Include="BL\Learning\Learning.cs" />
+    <Compile Include="BL\Learning\LearningBl.cs" />
     <Compile Include="BL\Learning\LearningFactory.cs" />
     <Compile Include="BL\Learning\PerformanceTestLearning.cs" />
     <Compile Include="BL\Learning\PreparationLearning.cs" />
@@ -110,6 +110,10 @@
     <Compile Include="BL\Learning\Steps.cs" />
     <Compile Include="BL\EmptyWrapperWaveIn.cs" />
     <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
+    <Compile Include="BL\Tasks\Task.cs" />
+    <Compile Include="BL\Tasks\TasksBl.cs" />
+    <Compile Include="BL\Tasks\TaskFactory.cs" />
+    <Compile Include="Interfaces\IMessageBox.cs" />
     <Compile Include="Extensions\IEnumirableExtentions.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Models\RadioModel.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
+    <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="SimpleLogger.cs" />
     <Compile Include="ViewModels\PreparationViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
@@ -172,14 +177,24 @@
       <DependentUpon>Training.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\CurrentStepToBoolConverter.cs" />
-    <Compile Include="Views\TrainingSteps\FrequencyCheck.xaml.cs">
+    <Compile Include="Views\TrainingSteps\Horizontal\FrequencyCheck.xaml.cs">
       <DependentUpon>FrequencyCheck.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\ITrainingStep.cs" />
-    <Compile Include="Views\TrainingSteps\PerformanceTest.xaml.cs">
+    <Compile Include="Views\TrainingSteps\Horizontal\PerformanceTest.xaml.cs">
       <DependentUpon>PerformanceTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TrainingSteps\Preparation.xaml.cs">
+    <Compile Include="Views\TrainingSteps\Horizontal\Preparation.xaml.cs">
+      <DependentUpon>Preparation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\StepsTypes.cs" />
+    <Compile Include="Views\TrainingSteps\Vertical\FrequencyCheck.xaml.cs">
+      <DependentUpon>FrequencyCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\Vertical\PerformanceTest.xaml.cs">
+      <DependentUpon>PerformanceTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingSteps\Vertical\Preparation.xaml.cs">
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Work.xaml.cs">
@@ -226,15 +241,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrainingSteps\FrequencyCheck.xaml">
+    <Page Include="Views\TrainingSteps\Horizontal\FrequencyCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrainingSteps\PerformanceTest.xaml">
+    <Page Include="Views\TrainingSteps\Horizontal\PerformanceTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrainingSteps\Preparation.xaml">
+    <Page Include="Views\TrainingSteps\Horizontal\Preparation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\Vertical\FrequencyCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\Vertical\PerformanceTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingSteps\Vertical\Preparation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,6 +324,7 @@
     <Resource Include="Files\armour-wallpaper2.jpg" />
     <Resource Include="Files\Army-Wallpaper.jpg" />
     <Resource Include="Files\armour-wallpaper3.jpg" />
+    <Resource Include="Files\armour-wallpaper4.png" />
     <Content Include="Files\DS Crystal.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

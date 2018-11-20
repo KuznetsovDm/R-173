@@ -4,6 +4,7 @@ using R_173.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity;
 
 namespace R_173.BL.Learning
 {
@@ -11,9 +12,9 @@ namespace R_173.BL.Learning
     {
         private KeyboardHandler _keyboardHandler;
 
-        public LearningFactory(KeyboardHandler keyboardHandler)
+        public LearningFactory()
         {
-            _keyboardHandler = keyboardHandler;
+            _keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
         }
 
         public CompositeStep CreateInitialStateLearning()
@@ -57,7 +58,6 @@ namespace R_173.BL.Learning
         public CompositeStep CreatePerformanceTestLearning()
         {
             return new CompositeStepBuilder()
-                .Add(CreatePreparationToWorkLearning(1)) // todo: только пункты 1-9
                 .Add(new WaitingStep(
                     _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
@@ -83,10 +83,6 @@ namespace R_173.BL.Learning
                 .Add(new PressToneStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))
-                .Add(new WaitingStep(
-                    _keyboardHandler,
-                    checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) // todo: Повторить операции 2-8 на всех Зпч
                 .Build();
         }
 

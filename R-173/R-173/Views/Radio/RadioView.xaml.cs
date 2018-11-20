@@ -1,4 +1,5 @@
-﻿using R_173.Interfaces;
+﻿using R_173.Handlers;
+using R_173.Interfaces;
 using R_173.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,6 @@ namespace R_173.Views.Radio
                 RadioManager.SetModel((bool)e.NewValue ? viewModel?.Model : null);
             };
         }
-
 
         void DrawingMouseDown(object sender, MouseButtonEventArgs e)
         {
