@@ -1,21 +1,25 @@
 ﻿using R_173.BL.Learning;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using R_173.Models;
 
 namespace R_173.BL.Tasks
 {
     public class TaskFactory
     {
         private LearningFactory _learningFactory;
+        private RadioModel _model;
 
-        public TaskFactory(LearningFactory learningFactory)
+        public TaskFactory(RadioModel radioModel, LearningFactory learningFactory)
         {
             _learningFactory = learningFactory;
+            _model = radioModel;
         }
 
-        public CompositeStep CreatePerformanceTestStep()
+        public Task CreatePerfomanceTestTask()
+        {
+            return new Task(_model, CreatePerformanceTestStep());
+        }
+
+        private CompositeStep CreatePerformanceTestStep()
         {
             return new CompositeStepBuilder()
                 .Add(_learningFactory.CreatePreparationToWorkLearning(1))

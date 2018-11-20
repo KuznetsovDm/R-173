@@ -112,6 +112,7 @@
     <Compile Include="BL\Tasks\Task.cs" />
     <Compile Include="BL\Tasks\TasksBl.cs" />
     <Compile Include="BL\Tasks\TaskFactory.cs" />
+    <Compile Include="Extensions\IEnumirableExtentions.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\KeyEventArgs.cs" />

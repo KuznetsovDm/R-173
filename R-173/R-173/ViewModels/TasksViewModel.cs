@@ -23,8 +23,8 @@ namespace R_173.ViewModels
                 new TaskViewModel(FrequencyCheck.StepCaption, () => StartTask(typeof(FrequencyCheck))),
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
-        }
 
+        }
 
         public IEnumerable Tasks => _tasks;
         public ICommand StopTaskCommand => _stopTaskCommand;
@@ -45,6 +45,7 @@ namespace R_173.ViewModels
         private void StartTask(Type taskType)
         {
             TaskIsRunning = true;
+
             MessageBox.Show(taskType.ToString());
         }
 
