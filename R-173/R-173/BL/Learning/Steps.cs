@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using R_173.Handlers;
 using R_173.Models;
 using R_173.SharedResources;
@@ -255,9 +256,9 @@ namespace R_173.BL.Learning
             }
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs args)
+        private void OnKeyDown(Key key)
         {
-            if (args.Key == System.Windows.Input.Key.Enter)
+            if (key == Key.Enter)
             {
                 OnStepCompleted();
             }

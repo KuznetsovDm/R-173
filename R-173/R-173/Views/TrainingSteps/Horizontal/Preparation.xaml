@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="R_173.Views.TrainingSteps.Horizontal.Preparation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
+             xmlns:radio="clr-namespace:R_173.Views.Radio"
+             xmlns:viewModels="clr-namespace:R_173.ViewModels"
+             mc:Ignorable="d" 
+             Height="150" Width="840" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingStepViewModel}}"
+             FontFamily="Times New Roman">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../TrainigStepsDictionary.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+
+                <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
+                <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}">
+                    <Setter Property="Height" Value="60" />
+                    <Setter Property="Width" Value="150" />
+                </Style>
+                
+            </ResourceDictionary>
+        </StackPanel.Resources>
+
+        <StackPanel Margin="20, 10, 0, 0">
+            <StackPanel Orientation="Horizontal">
+                <!--<CheckBox Content="1. Установить антенну"
+                          Width="80"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="2. Надеть и подготовить шлемофон"
+                          Width="80"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="3. Подлючить шлемофон к нагрудному переключателю"
+                          Width="98"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="4. Установить переключатель на приборе БВ-34 в положение РС-1"
+                          Width="105"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
+
+                <Control Template="{StaticResource ArrowRight}" />
+                
+                <CheckBox Content="5. Снять чехол с приемоперечатчика"
+                          Width="105"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>-->
+
+                <CheckBox Width="330"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}">
+                    1. 
+                    Установить антенну. 
+                    Надеть и подготовить шлемофон. 
+                    Подключить шлемофон к нагрудному переключателю.
+                    Установить переключатель на приборе БВ-34 в положение РС-1.
+                    Снять чехол с приемоперечатчика.
+                </CheckBox>
+
+                <Control Template="{StaticResource ArrowRight}" />
+
+                <CheckBox Content="2. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ в среднем положении, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
+                          Width="427"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
+            </StackPanel>
+
+            <StackPanel Margin="0, 10, 0, 0" HorizontalAlignment="Left" Orientation="Horizontal">
+
+                <CheckBox Content="5. Нажать кнопку ТАБЛО и убедиться по табло ЧАСТОТА в правильности задания рабочей частоты"
+                          Width="300"
+                    IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+
+                <Control Template="{StaticResource ArrowLeft}" />
+
+                <CheckBox Content="4. Нажать кнопку соответствующую необходимой ЗПЧ"
+                          Width="200"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
+
+                <Control Template="{StaticResource ArrowLeft}" />
+
+                <CheckBox Content="3. Включить тумблер ПИТАНИЕ"
+                          Width="231"
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid VerticalAlignment="Center">
+            <Line X1="0" X2="26" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="26" X2="26" Y1="74.5" Y2="3.5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="0" X2="26" Y1="73" Y2="73" StrokeThickness="3" Stroke="Black" />
+            <Line X1="1" X2="8" Y1="73" Y2="80" StrokeThickness="3" Stroke="Black" />
+            <Line X1="1" X2="8" Y1="73" Y2="66" StrokeThickness="3" Stroke="Black" />
+        </Grid>
+    </StackPanel>
+</UserControl>

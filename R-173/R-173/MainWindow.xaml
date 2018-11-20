@@ -5,42 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173"
         xmlns:views="clr-namespace:R_173.Views"
+        xmlns:viewModels="clr-namespace:R_173.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1024"
         MinWidth="800" MinHeight="600"
         Title="Р-173" WindowState="Maximized" FontFamily="Times New Roman">
-    <DockPanel>
-        <UniformGrid DockPanel.Dock="Top" Columns="4">
-            <UniformGrid.Resources>
-                <Style TargetType="RadioButton">
-                    <Setter Property="GroupName" Value="Tabs" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="RadioButton">
-                                <Border x:Name="border" Margin="2" CornerRadius="3, 3, 0, 0" 
+    <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        </Grid.Resources>
+        
+        <DockPanel>
+            <UniformGrid DockPanel.Dock="Top" Columns="4">
+                <UniformGrid.Resources>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="GroupName" Value="Tabs" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Border x:Name="border" Margin="2" CornerRadius="3, 3, 0, 0" 
                                         Background="WhiteSmoke" ToolTip="{TemplateBinding Content}">
-                                    <TextBlock Margin="3" 
+                                        <TextBlock Margin="3" 
                                            Text="{TemplateBinding Content}"
                                            FontSize="18" FontFamily="Times New Roman" FontWeight="Bold" 
                                            TextAlignment="Center"
                                            Cursor="Hand"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="border" Property="Background" Value="Khaki"/>
-                                    </Trigger>
-                                    <Trigger Property="IsChecked" Value="True">
-                                        <Setter TargetName="border" Property="Background" Value="OliveDrab"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </UniformGrid.Resources>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Khaki"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="OliveDrab"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </UniformGrid.Resources>
 
             <RadioButton Content="1. Назначение, ТТХ, комплект радиостанции" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Appointment}"/>
-            <RadioButton Content="2. Обучение" 
+                <RadioButton Content="2. Обучение" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Training}"/>
             <RadioButton Content="3. Задачи" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Tasks}"/>
@@ -48,6 +54,35 @@
                          Click="ChangeTab" CommandParameter="{x:Type views:Work}"/>
         </UniformGrid>
 
-        <ContentControl x:Name="MainContent"/>
-    </DockPanel>
+            <ContentControl x:Name="MainContent"/>
+        </DockPanel>
+
+        <Border x:Name="Message" d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}"
+                Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">
+            <Border.Background>
+                <SolidColorBrush Color="White" Opacity="0.5" />
+            </Border.Background>
+            <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    BorderBrush="Black" BorderThickness="3" CornerRadius="5"
+                    Background="LightSteelBlue" Padding="10" Width="400" MinHeight="150">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="Padding" Value="5" />
+                                <Setter Property="MinWidth" Value="80" />
+                                <Setter Property="FontSize" Value="18" />
+                            </Style>
+                        </DockPanel.Resources>
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}" />
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}" Command="{Binding Path=CancelCommand}" />
+                    </DockPanel>
+                    <TextBlock VerticalAlignment="Center" 
+                               Text="{Binding Path=Message}"
+                               FontSize="20" TextWrapping="Wrap" />
+                </DockPanel>
+            </Border>
+        </Border>
+    </Grid>
 </Window>

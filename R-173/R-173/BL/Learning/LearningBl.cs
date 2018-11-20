@@ -15,9 +15,9 @@ namespace R_173.BL.Learning
         private int _currentLearning;
         private readonly RadioModel _model;
 
-        public LearningBL(KeyboardHandler keyboardHandler, RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
+        public LearningBL(RadioModel model, Action completed, Action<int> stepChanged, StepsTypes learningType)
         {
-            var learningFactory = new LearningFactory(keyboardHandler);
+            var learningFactory = new LearningFactory();
             _completed = completed;
             _stepChanged = stepChanged;
             _model = model;
@@ -41,13 +41,13 @@ namespace R_173.BL.Learning
             _stepChanged(args.Step);
         }
 
-        public void SetCurrentLearning(Type learningType)
+        public void SetCurrentLearning(StepsTypes learningType)
         {
-            if (learningType == typeof(Preparation))
+            if (learningType == StepsTypes.Preparation)
             {
                 _currentLearning = 0;
             }
-            else if (learningType == typeof(PerformanceTest))
+            else if (learningType == StepsTypes.PerformanceTest)
             {
                 _currentLearning = 1;
             }

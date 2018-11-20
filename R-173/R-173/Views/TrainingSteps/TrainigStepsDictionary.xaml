@@ -51,5 +51,13 @@
             <Line X1="9" X2="1" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
         </Grid>
     </ControlTemplate>
-    
+
+    <ControlTemplate x:Key="ArrowBottom">
+        <Control Template="{StaticResource ArrowRight}" HorizontalAlignment="Center">
+            <Control.LayoutTransform>
+                <RotateTransform Angle="90" />
+            </Control.LayoutTransform>
+        </Control>
+    </ControlTemplate>
+
 </ResourceDictionary>

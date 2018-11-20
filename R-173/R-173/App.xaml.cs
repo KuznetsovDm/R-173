@@ -10,6 +10,7 @@ using R_173.BL.Learning;
 using R_173.Extensions;
 using R_173.Handlers;
 using R_173.Interfaces;
+using R_173.ViewModels;
 using R_173.Views;
 using Unity;
 using Unity.Lifetime;
@@ -93,6 +94,7 @@ namespace R_173
             container.RegisterType<IAudioReaderAndSender<SendableRadioModel>, AudioReaderAndSender>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
             container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
+            container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
             container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
             container.RegisterType<MainWindow>(new SingletonLifetimeManager());
             ServiceCollection = container;

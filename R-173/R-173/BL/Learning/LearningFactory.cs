@@ -4,6 +4,7 @@ using R_173.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity;
 
 namespace R_173.BL.Learning
 {
@@ -11,9 +12,9 @@ namespace R_173.BL.Learning
     {
         private KeyboardHandler _keyboardHandler;
 
-        public LearningFactory(KeyboardHandler keyboardHandler)
+        public LearningFactory()
         {
-            _keyboardHandler = keyboardHandler;
+            _keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
         }
 
         public CompositeStep CreateInitialStateLearning()
