@@ -15,41 +15,19 @@
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../TrainigStepsDictionary.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
-
-                <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
-                <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}" />
             </ResourceDictionary>
         </StackPanel.Resources>
 
         <StackPanel>
-            <CheckBox IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}">
-                1. 
-                Установить антенну. 
-                Надеть и подготовить шлемофон. 
-                Подключить шлемофон к нагрудному переключателю.
-                Установить переключатель на приборе БВ-34 в положение РС-1.
-                Снять чехол с приемоперечатчика.
-            </CheckBox>
-
+            <CheckBox Style="{StaticResource 1preparation}" />
             <Control Template="{StaticResource ArrowBottom}" />
-                
-            <CheckBox Content="2. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении"
-                      IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
-
+            <CheckBox Style="{StaticResource 2preparation}" />
             <Control Template="{StaticResource ArrowBottom}" />
-                
-            <CheckBox Content="3. Включить тумблер ПИТАНИЕ"
-                      IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
-
+            <CheckBox Style="{StaticResource 3preparation}" />
             <Control Template="{StaticResource ArrowBottom}" />
-
-            <CheckBox Content="4. Нажать кнопку соответствующую необходимой ЗПЧ"
-                      IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
-
+            <CheckBox Style="{StaticResource 4preparation}" />
             <Control Template="{StaticResource ArrowBottom}" />
-
-            <CheckBox Content="5. Нажать кнопку ТАБЛО и убедиться по табло ЧАСТОТА в правильности задания рабочей частоты"
-                      IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+            <CheckBox Style="{StaticResource 5preparation}" />
         </StackPanel>
     </StackPanel>
 </UserControl>

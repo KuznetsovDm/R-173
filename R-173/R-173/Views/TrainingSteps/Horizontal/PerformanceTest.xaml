@@ -13,65 +13,31 @@
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../TrainigStepsDictionary.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
-
-                <local:CurrentStepToBoolConverter x:Key="IntToBoolConverter" />
-                <Style TargetType="CheckBox" BasedOn="{StaticResource TrainingStep}">
-                    <Setter Property="Width" Value="130" />
-                    <Setter Property="Height" Value="60" />
-                </Style>
             </ResourceDictionary>
         </StackPanel.Resources>
 
         <StackPanel Margin="20, 10, 0, 0">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Content="1. Выполнить операции 1-9 подготовки к работе"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}"/>
-
+                <CheckBox Style="{StaticResource 1performanceTest}" Width="130" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-
-                <CheckBox Content="2. Прослушать собственные шумы приемника"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
-
+                <CheckBox Style="{StaticResource 2performanceTest}" Width="130" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-
-                <CheckBox Content="3. Проверить работу регулятора громкости"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
-
+                <CheckBox Style="{StaticResource 3performanceTest}" Width="130" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-
-                <CheckBox Content="4. Проверить работу подавителя шумов"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
-                
+                <CheckBox Style="{StaticResource 4performanceTest}" Width="130" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
             </StackPanel>
 
             <StackPanel Margin="0, 10, 0, 0" HorizontalAlignment="Right" Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-                        <Setter Property="Width" Value="182" />
-                    </Style>
-                </StackPanel.Resources>
-
-                <CheckBox Content="8. Проверить тональный вызов"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
-
+                <CheckBox Style="{StaticResource 8performanceTest}" Width="182" Height="60" />
                 <Control Template="{StaticResource ArrowLeft}" />
-                
-                <CheckBox Content="7. Проверить отдачу тока в антенну"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
-                
+                <CheckBox Style="{StaticResource 7performanceTest}" Width="182" Height="60" />
                 <Control Template="{StaticResource ArrowLeft}" />
-
-                <CheckBox Content="6. Проверить модуляцию (самопрослушивание)"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
-                
+                <CheckBox Style="{StaticResource 6performanceTest}" Width="182" Height="60" />
                 <Control Template="{StaticResource ArrowLeft}" />
             </StackPanel>
         </StackPanel>
 
-        <CheckBox Content="5. Нажать кнопку нагрудного переключателя МТ2 в положние ПРД"
-                  Height="130" Width="176"
-                  IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
-
+        <CheckBox Style="{StaticResource 5performanceTest}" Width="176" Height="130" />
     </StackPanel>
 </UserControl>

@@ -63,51 +63,149 @@
         </Control>
     </ControlTemplate>
 
-    
-    
+
+    <!--FrequencyCheck-->
+
     <Style x:Key="1frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="1. Записать на планке заданные рабочие частоты" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
+        <Setter Property="Content" Value="1. Выполнить операции подготовки к работе" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="2. Выполнить операции подготовки к работе" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
+        <Setter Property="Content" Value="2. Записать на планке заданные рабочие частоты" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="3frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="3. Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ: засветится табло ЧАСТОТА КГЦ" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="4frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="4. Нажать кнопку, соответствующую номеру подготавливаемой для работы частоты" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="5frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="5. Нажать кнопку СБРОС - табло ЧАСТОТА погаснет" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="6frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="6. Набрать с помощью кнопок необходимую ЗПЧ" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="7frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="7. Проконтролировать значение набранной ЗПЧ по табло ЧАСТОТА" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="8frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="8. Аналогично подготовить все последующие ЗПЧ, повторив операции 4-7" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="9frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА" />
-        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=8}" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+    
+    
+    <!--PerformanceTest-->
+
+    <Style x:Key="1performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="1. Выполнить операции 1-9 подготовки к работе" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
+    <Style x:Key="2performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="2. Прослушать собственные шумы приемника" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="3performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="3. Проверить работу регулятора громкости" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="4performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="4. Проверить работу подавителя шумов" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="5performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="5. Нажать кнопку нагрудного переключателя МТ2 в положние ПРД" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="6performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="6. Проверить модуляцию (самопрослушивание)" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="7performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="7. Проверить отдачу тока в антенну" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="8performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="8. Проверить тональный вызов" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+
+    <!--Preparation-->
+
+    <Style x:Key="1preparation" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="1. 
+Установить антенну. 
+Надеть и подготовить шлемофон. 
+Подключить шлемофон к нагрудному переключателю.
+Установить переключатель на приборе БВ-34 в положение РС-1.
+Снять чехол с приемоперечатчика." />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="2preparation" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="2. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="3preparation" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="3. Включить тумблер ПИТАНИЕ" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="4preparation" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="4. Нажать кнопку соответствующую необходимой ЗПЧ" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
+
+    <Style x:Key="5preparation" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
+        <Setter Property="Content" Value="5. Нажать кнопку ТАБЛО и убедиться по табло ЧАСТОТА в правильности задания рабочей частоты" />
+        <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
+        <Setter Property="ToolTip" Value="what do you want?" />
+    </Style>
 </ResourceDictionary>
