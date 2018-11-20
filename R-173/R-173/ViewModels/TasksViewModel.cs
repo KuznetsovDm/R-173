@@ -1,4 +1,5 @@
-﻿using R_173.SharedResources;
+﻿using R_173.BL.Tasks;
+using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
 using System.Collections;

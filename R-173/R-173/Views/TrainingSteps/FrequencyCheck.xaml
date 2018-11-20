@@ -29,7 +29,7 @@
 
                 <Control Template="{StaticResource ArrowRight}" />
 
-                <CheckBox Content="2. Выполнить операции 1-7 подготовки к работе"
+                <CheckBox Content="2. Выполнить операции подготовки к работе"
                           IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
 
                 <Control Template="{StaticResource ArrowRight}" />

@@ -14,6 +14,7 @@ namespace R_173.BL.Learning
         protected RadioModel Model;
         protected CheckState _checkInputConditions;
         protected CheckState _checkInternalState;
+        protected List<EventHandler<ValueChangedEventArgs<SwitcherState>>> _numpadActions = new List<EventHandler<ValueChangedEventArgs<SwitcherState>>>();
 
         private bool _isSubscribed = false;
 
@@ -69,7 +70,14 @@ namespace R_173.BL.Learning
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
-                radioModel.Numpad[i].ValueChanged += Numpad_ValueChanged;
+                int num = i;
+
+                if(_numpadActions.Count - 1 < i)
+                {
+                    _numpadActions.Add((obj, args) => Numpad_ValueChanged(obj, args, num));
+                }
+
+                radioModel.Numpad[i].ValueChanged += _numpadActions[i];
             }
 
             _isSubscribed = true;
@@ -95,7 +103,7 @@ namespace R_173.BL.Learning
 
             for (var i = 0; i < radioModel.Numpad.Length; i++)
             {
-                radioModel.Numpad[i].ValueChanged -= Numpad_ValueChanged;
+                radioModel.Numpad[i].ValueChanged -= _numpadActions[i];
             }
 
             _isSubscribed = false;
@@ -156,7 +164,7 @@ namespace R_173.BL.Learning
             SomethingChanged();
         }
 
-        protected virtual void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        protected virtual void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e, int i)
         {
             SomethingChanged();
         }

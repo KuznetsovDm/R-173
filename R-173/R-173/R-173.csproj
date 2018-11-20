@@ -101,7 +101,7 @@
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\Learning\CompositeStep.cs" />
     <Compile Include="BL\Learning\CompositeStepBuilder.cs" />
-    <Compile Include="BL\Learning\Learning.cs" />
+    <Compile Include="BL\Learning\LearningBl.cs" />
     <Compile Include="BL\Learning\LearningFactory.cs" />
     <Compile Include="BL\Learning\PerformanceTestLearning.cs" />
     <Compile Include="BL\Learning\PreparationLearning.cs" />
@@ -109,6 +109,9 @@
     <Compile Include="BL\Learning\Steps.cs" />
     <Compile Include="BL\EmptyWrapperWaveIn.cs" />
     <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
+    <Compile Include="BL\Tasks\Task.cs" />
+    <Compile Include="BL\Tasks\TasksBl.cs" />
+    <Compile Include="BL\Tasks\TaskFactory.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\KeyEventArgs.cs" />
