@@ -69,9 +69,9 @@
                                                         <TextBlock Text="{Binding Path=NumberOfAttempts}" FontSize="20" />
                                                     </StackPanel>
                                                     <Button VerticalAlignment="Center"
-                                                        Content="Начать" 
-                                                        Command="{Binding Path=StartCommand}"
-                                                        Margin="5, 10" Padding="3" FontSize="20" />
+                                                            Content="Начать" 
+                                                            Command="{Binding Path=StartCommand}"
+                                                            Margin="5, 10" Padding="3" FontSize="20" />
                                                 </StackPanel>
                                             </DockPanel>
                                         </ControlTemplate>

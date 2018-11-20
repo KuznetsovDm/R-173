@@ -14,7 +14,7 @@ namespace R_173.BL.Learning
         private int _currentLearning;
         private readonly RadioModel _model;
 
-        public LearningBL(RadioModel model, Action completed, Action<int> stepChanged, Type learningType)
+        public LearningBL(RadioModel model, Action completed, Action<int> stepChanged, StepsTypes learningType)
         {
             _completed = completed;
             _stepChanged = stepChanged;
@@ -39,13 +39,13 @@ namespace R_173.BL.Learning
             _stepChanged(args.Step);
         }
 
-        public void SetCurrentLearning(Type learningType)
+        public void SetCurrentLearning(StepsTypes learningType)
         {
-            if (learningType == typeof(Preparation))
+            if (learningType == StepsTypes.Preparation)
             {
                 _currentLearning = 0;
             }
-            else if (learningType == typeof(PerformanceTest))
+            else if (learningType == StepsTypes.PerformanceTest)
             {
                 _currentLearning = 1;
             }

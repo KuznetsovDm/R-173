@@ -11,7 +11,7 @@ namespace R_173.Handlers
         private readonly Dictionary<Key, Action<bool>> _onKeyDownActions;
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
-        public Action<Key> OnKeyDown;
+        public event Action<Key> OnKeyDown;
 
         public KeyboardHandler(MainWindow _mainWindow)
         {

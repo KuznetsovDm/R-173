@@ -1,9 +1,11 @@
 ﻿using R_173.SharedResources;
-using R_173.Views.TrainingSteps;
 using System;
 using System.Collections;
 using System.Windows;
 using System.Windows.Input;
+using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
+using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
+using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 
 namespace R_173.ViewModels
 {
@@ -17,9 +19,9 @@ namespace R_173.ViewModels
         {
             _tasks = new[]
             {
-                new TaskViewModel(Preparation.StepCaption, () => StartTask(typeof(Preparation))),
-                new TaskViewModel(PerformanceTest.StepCaption, () => StartTask(typeof(PerformanceTest))),
-                new TaskViewModel(FrequencyCheck.StepCaption, () => StartTask(typeof(FrequencyCheck))),
+                new TaskViewModel(HPreparation.StepCaption, () => StartTask(typeof(HPreparation))),
+                new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(typeof(HPerformanceTest))),
+                new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(typeof(HFrequencyCheck))),
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
         }

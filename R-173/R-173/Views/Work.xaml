@@ -7,6 +7,11 @@
       xmlns:viewModel="clr-namespace:R_173.ViewModels"
       mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type viewModel:WorkViewModel}}"
       d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Files/armour-wallpaper3.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
 
-    <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
+        <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
+    </Grid>
 </UserControl>

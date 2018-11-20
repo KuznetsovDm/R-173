@@ -10,70 +10,133 @@
       d:DesignHeight="900" d:DesignWidth="1280" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingViewModel}}"
       FontFamily="Times New Roman">
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Files/armour-wallpaper3.jpg" Stretch="UniformToFill" />
-        </Grid.Background>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        
-        <DockPanel Grid.Row="0" DockPanel.Dock="Top" Margin="5">
-            <DockPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="5" />
-                    <Setter Property="Padding" Value="5" />
-                    <Setter Property="FontSize" Value="20" />
-                    <Setter Property="Focusable" Value="False" />
-                    <Setter Property="FontWeight" Value="Bold" />
-                    <Setter Property="Cursor" Value="Hand" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="Border" Background="#98CA69" Padding="7">
-                                    <TextBlock x:Name="Text" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{TemplateBinding Content}"
-                                               Foreground="White" />
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#C8E28E" />
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#92C266" />
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="#C9CED1" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </DockPanel.Resources>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Files/armour-wallpaper4.png" Stretch="UniformToFill" />
+            </Grid.Background>
 
-            <Button DockPanel.Dock="Left" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />
-            <Button DockPanel.Dock="Left" Content="Начать заново" ToolTip="Начать обучение заново" Command="{Binding Path=StartOverCommand}" />
-            <Button DockPanel.Dock="Right" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" DockPanel.Dock="Top" Margin="5" UseLayoutRounding="True">
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="Border" Background="#98CA69" Padding="7">
+                                        <!--<Viewbox Stretch="Uniform">-->
+                                            <TextBlock x:Name="Text" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                   Text="{TemplateBinding Content}"
+                                                   Foreground="White" />
+                                        <!--</Viewbox>-->
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#C8E28E" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#92C266" />
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="#C9CED1" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
 
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       FontSize="26" FontWeight="Bold">
-                <TextBlock.Effect>
-                    <DropShadowEffect Color="White" ShadowDepth="0" />
-                </TextBlock.Effect>
-                <Run Text="{Binding Path=CurrentStep, Mode=OneWay}" />
-                <Run Text="/" />
-                <Run Text="{Binding Path=StepsNumber, Mode=OneTime}" />
-                <Run Text="{Binding Path=Caption, Mode=OneWay}" />
-            </TextBlock>
-        </DockPanel>
+                <Grid.ColumnDefinitions>
+                    <!--<ColumnDefinition Width="*" />-->
+                    <ColumnDefinition Width="1.1*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1.1*" />
+                    <!--<ColumnDefinition Width="*" />-->
+                </Grid.ColumnDefinitions>
 
-        <Viewbox Grid.Row="1" Stretch="Uniform">
-            <ContentControl Grid.Row="1" Content="{Binding Path=CurrentControl}" />
-        </Viewbox>
+                <!--<Button Grid.Column="0" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />-->
+                <Button Grid.Column="0" Content="Начать заново" ToolTip="Начать обучение заново" Command="{Binding Path=StartOverCommand}" />
+                <!--<Button Grid.Column="4" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />-->
+                <Button Grid.Column="2" Content="Изменить положение задач" Command="{Binding Path=ChangeOrientationCommand}" />
 
-        <radio:RadioView Grid.Row="2" DataContext="{Binding Path=RadioViewModel}" />
+                <Viewbox Grid.Column="1" Stretch="Uniform" MaxHeight="50" >
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="White" ShadowDepth="0" />
+                        </TextBlock.Effect>
+                    
+                    <Run Text="{Binding Path=CurrentStep, Mode=OneWay}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding Path=StepsNumber, Mode=OneTime}" />
+                    <Run Text="{Binding Path=Caption, Mode=OneWay}" />
+                    </TextBlock>
+                </Viewbox>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Orientation}" Value="Vertical">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
+            </Grid>
+
+            <Viewbox Grid.Row="1" Stretch="Uniform">
+                <Viewbox.Style>
+                    <Style TargetType="{x:Type Viewbox}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Orientation}" Value="Horizontal">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Viewbox.Style>
+
+                <ContentControl Grid.Row="1" Content="{Binding Path=CurrentHorizontalControl}" />
+            </Viewbox>
+
+            <Grid Grid.Row="2" VerticalAlignment="Center">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Orientation}" Value="Vertical">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="9*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="1" Background="#F0FFFFFF" Padding="5">
+                    <Viewbox Stretch="Uniform" VerticalAlignment="Center">
+                        <ContentControl Grid.Row="1" Content="{Binding Path=CurrentVerticalControl}" Background="#10FFFFFF" />
+                    </Viewbox>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
