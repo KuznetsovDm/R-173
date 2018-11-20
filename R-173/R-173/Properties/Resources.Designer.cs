@@ -69,5 +69,14 @@ namespace R_173.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ./Resources/R173.xps.
+        /// </summary>
+        internal static string XpsDescriptionPath {
+            get {
+                return ResourceManager.GetString("XpsDescriptionPath", resourceCulture);
+            }
+        }
     }
 }

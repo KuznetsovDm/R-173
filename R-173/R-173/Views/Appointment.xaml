@@ -9,5 +9,6 @@
 
     <Grid>
         <TextBlock Text="Назначение"/>
+        <DocumentViewer Grid.Column="1" Name="docViewer"/>
     </Grid>
 </UserControl>
