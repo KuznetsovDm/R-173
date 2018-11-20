@@ -88,7 +88,6 @@ namespace R_173.BL.Learning
         {
             return new CompositeStepBuilder()
                 .Add(new WaitingStep(_keyboardHandler)) // todo: записать на планке частоты
-                .Add(CreatePreparationToWorkLearning(1)) 
                 .Add(new RecordWorkToRecordStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState))
                 .Add(new ButtonStep(

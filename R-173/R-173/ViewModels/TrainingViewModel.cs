@@ -11,6 +11,8 @@ using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 using VPreparation = R_173.Views.TrainingSteps.Vertical.Preparation;
 using VPerformanceTest = R_173.Views.TrainingSteps.Vertical.PerformanceTest;
 using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
+using R_173.Interfaces;
+using Unity;
 
 namespace R_173.ViewModels
 {
@@ -57,6 +59,7 @@ namespace R_173.ViewModels
                 ? Orientation.Vertical
                 : Orientation.Horizontal);
             _radioViewModel = new RadioViewModel();
+            _radioViewModel.Model.SetInitialState();
             _learning = new LearningBL(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, _horizontalControls[0].Type);
             _startOverCommand = new SimpleCommand(StartOver);
             _maxStep = 1;
@@ -116,14 +119,24 @@ namespace R_173.ViewModels
 
         private void Learning_Completed()
         {
+            var messages = new[] {
+                "Вы успешно подготовили радиостанцию к работе",
+                "Вы успешно проверили работоспособность радиостанции",
+                "Вы успешно подготовили рабочие частоты"
+            };
             _maxStep = Math.Max(_maxStep, _currentStep + 1);
-            _openNextStepCommand.OnCanExecuteChanged();
-            CurrentStep++;
-            MessageBox.Show("Completed");
+
+            var message = App.ServiceCollection.Resolve<IMessageBox>();
+            message.ShowDialog(() =>
+            {
+                _openNextStepCommand.OnCanExecuteChanged();
+                CurrentStep++;
+            }, () => { StartOver(); }, messages[CurrentStep - 1], "Перейти к следующему этапу", "Начать заново");
         }
 
         private void StartOver()
         {
+            _radioViewModel.Model.SetInitialState();
             CurrentStep = 1;
             _learning.Restart();
         }

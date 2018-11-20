@@ -54,6 +54,7 @@ namespace R_173.ViewModels
             TaskIsRunning = true;
             _tasksBl.Start();
             MessageBox.Show(taskType.ToString());
+            _radioViewModel.Model.SetInitialState();
         }
 
         private void StopTask()
