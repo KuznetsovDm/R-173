@@ -25,22 +25,22 @@
         <StackPanel Margin="20, 10, 0, 0">
             <StackPanel Orientation="Horizontal">
                 <CheckBox Content="1. Выполнить операции 1-9 подготовки к работе"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}"/>
 
                 <Control Template="{StaticResource ArrowRight}" />
 
                 <CheckBox Content="2. Прослушать собственные шумы приемника"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"/>
 
                 <Control Template="{StaticResource ArrowRight}" />
 
                 <CheckBox Content="3. Проверить работу регулятора громкости"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"/>
 
                 <Control Template="{StaticResource ArrowRight}" />
 
                 <CheckBox Content="4. Проверить работу подавителя шумов"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"/>
                 
                 <Control Template="{StaticResource ArrowRight}" />
             </StackPanel>
@@ -53,17 +53,17 @@
                 </StackPanel.Resources>
 
                 <CheckBox Content="8. Проверить тональный вызов"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
 
                 <Control Template="{StaticResource ArrowLeft}" />
                 
                 <CheckBox Content="7. Проверить отдачу тока в антенну"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
                 
                 <Control Template="{StaticResource ArrowLeft}" />
 
                 <CheckBox Content="6. Проверить модуляцию (самопрослушивание)"
-                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"/>
+                          IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
                 
                 <Control Template="{StaticResource ArrowLeft}" />
             </StackPanel>
@@ -71,7 +71,7 @@
 
         <CheckBox Content="5. Нажать кнопку нагрудного переключателя МТ2 в положние ПРД"
                   Height="130" Width="176"
-                  IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"/>
+                  IsChecked="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"/>
 
     </StackPanel>
 </UserControl>

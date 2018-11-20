@@ -73,7 +73,7 @@ namespace R_173.BL.Learning
             return "КНОПКА не нажата";
         }
 
-        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e, int i)
         {
             if (e.NewValue == SwitcherState.Enabled)
             {
@@ -99,7 +99,7 @@ namespace R_173.BL.Learning
             return base.StartIfInputConditionsAreRight(model, out errors);
         }
 
-        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
+        protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e, int i)
         {
             if (e.NewValue == SwitcherState.Enabled)
             {

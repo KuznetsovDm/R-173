@@ -71,7 +71,7 @@
     </Style>
 
     <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="2. Выполнить операции 1-7 подготовки к работе" />
+        <Setter Property="Content" Value="2. Выполнить операции подготовки к работе" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
     </Style>
 

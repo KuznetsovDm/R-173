@@ -1,4 +1,5 @@
-﻿using R_173.SharedResources;
+﻿using R_173.BL.Tasks;
+using R_173.SharedResources;
 using System;
 using System.Collections;
 using System.Windows;
@@ -24,8 +25,8 @@ namespace R_173.ViewModels
                 new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(typeof(HFrequencyCheck))),
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
-        }
 
+        }
 
         public IEnumerable Tasks => _tasks;
         public ICommand StopTaskCommand => _stopTaskCommand;
@@ -46,6 +47,7 @@ namespace R_173.ViewModels
         private void StartTask(Type taskType)
         {
             TaskIsRunning = true;
+
             MessageBox.Show(taskType.ToString());
         }
 
