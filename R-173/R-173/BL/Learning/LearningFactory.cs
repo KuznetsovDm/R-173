@@ -1,47 +1,69 @@
-﻿using R_173.Models;
+﻿using R_173.Handlers;
+using R_173.Interfaces;
+using R_173.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity;
 
 namespace R_173.BL.Learning
 {
-    public static class LearningFactory
+    public class LearningFactory
     {
-        public static CompositeStep CreateInitialStateLearning()
+        private KeyboardHandler _keyboardHandler;
+
+        public LearningFactory()
+        {
+            _keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
+        }
+
+        public CompositeStep CreateInitialStateLearning()
         {
             return new CompositeStepBuilder()
                 .Add(new InitialStateStep())
                 .Build();
         }
 
-        public static CompositeStep CreatePreparationToWorkLearning()
+        public CompositeStep CreatePreparationToWorkLearning(int? from = null, int? to = null)
         {
-            return new CompositeStepBuilder()
-                .Add(new WaitingStep())
-                .Add(new InitialStateStep())
-                .Add(new TurningOnStep(
+            var steps = new IStep<RadioModel>[]
+            {
+                new WaitingStep(_keyboardHandler),
+                new InitialStateStep(),
+                new TurningOnStep(
                     checkInputConditions: CheckInitialState,
                     checkInternalState: PreparationLearning.CheckTurningOnInternalState
-                    ))
-                .Add(new ButtonStep(
+                    ),
+                new ButtonStep(
                     checkInputConditions: PreparationLearning.CheckButtonInputConditions,
                     checkInternalState: PreparationLearning.CheckButtonInternalState
-                    ))
-                .Add(new BoardStep(
+                    ),
+                new BoardStep(
                     checkInputConditions: PreparationLearning.CheckButtonInputConditions,
                     checkInternalState: PreparationLearning.CheckButtonInternalState
-                    ))
-                .Build();
+                    )
+            };
+
+            from = from ?? 0;
+            to = to ?? steps.Length;
+
+            var builder = new CompositeStepBuilder();
+
+            for (var i = from.Value; i < to.Value; i++)
+                builder.Add(steps[i]);
+
+            return builder.Build();
         }
 
-        public static CompositeStep CreatePerformanceTestLearning()
+        public CompositeStep CreatePerformanceTestLearning()
         {
             return new CompositeStepBuilder()
-                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-9
+                .Add(CreatePreparationToWorkLearning(1)) // todo: только пункты 1-9
                 .Add(new WaitingStep(
+                    _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState
-                    )) //todo: прослушать собственные шумы
+                    )) // todo: прослушать собственные шумы
                 .Add(new VolumeChangeStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))
@@ -52,25 +74,28 @@ namespace R_173.BL.Learning
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))
                 .Add(new WaitingStep(
+                    _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) //todo: проверить модуляцию.
+                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) // todo: проверить модуляцию.
                 .Add(new WaitingStep(
+                    _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) //todo: проверить отдачу тока в антенну.
+                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) // todo: проверить отдачу тока в антенну.
                 .Add(new PressToneStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))
                 .Add(new WaitingStep(
+                    _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) //todo: Повторить операции 2-8 на всех Зпч
+                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) // todo: Повторить операции 2-8 на всех Зпч
                 .Build();
         }
 
-        public static CompositeStep CreateSettingFrequencies()
+        public CompositeStep CreateSettingFrequencies()
         {
             return new CompositeStepBuilder()
-                .Add(new WaitingStep()) //todo: записать на планке частоты
-                .Add(CreatePreparationToWorkLearning()) // todo: только пункты 1-7
+                .Add(new WaitingStep(_keyboardHandler)) // todo: записать на планке частоты
+                .Add(CreatePreparationToWorkLearning(1)) 
                 .Add(new RecordWorkToRecordStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState))
                 .Add(new ButtonStep(
@@ -79,10 +104,11 @@ namespace R_173.BL.Learning
                 .Add(new ResetStep(
                     checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
                     checkInternalState: SettingFrequenciesLearning.CheckRecordState))
-                .Add(CreateFiveButtonsStep(
+                .Add(new FiveButtonsStep(
                     checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
                     checkInternalState: SettingFrequenciesLearning.CheckRecordState))
                 .Add(new WaitingStep(
+                    _keyboardHandler,
                     checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
                     checkInternalState: SettingFrequenciesLearning.CheckRecordState)) // todo: набрать все остальные частоты
                 .Add(new RecordWorkToWorkStep())

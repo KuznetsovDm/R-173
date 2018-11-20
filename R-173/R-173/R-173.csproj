@@ -110,8 +110,10 @@
     <Compile Include="BL\EmptyWrapperWaveIn.cs" />
     <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
     <Compile Include="Interfaces\IMessageBox.cs" />
+    <Compile Include="Extensions\IEnumirableExtentions.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
+    <Compile Include="SharedResources\KeyEventArgs.cs" />
     <Compile Include="SharedResources\StepChangedEventArgs.cs" />
     <Compile Include="Interfaces\IStep.cs" />
     <Compile Include="BL\LocalToneController.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Models\Property.cs" />
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="SimpleLogger.cs" />
     <Compile Include="ViewModels\PreparationViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />

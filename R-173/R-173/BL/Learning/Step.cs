@@ -9,11 +9,12 @@ namespace R_173.BL.Learning
 {
     public delegate bool CheckState(RadioModel model, out IList<string> errors);
 
-    public class Step : IStep<RadioModel>
+    public abstract class Step : IStep<RadioModel>
     {
         protected RadioModel Model;
         protected CheckState _checkInputConditions;
         protected CheckState _checkInternalState;
+
         private bool _isSubscribed = false;
 
         public Step(CheckState checkInputConditions = null, CheckState checkInternalState = null)
@@ -25,7 +26,7 @@ namespace R_173.BL.Learning
         public event EventHandler Completed = (e, args) => { };
         public event EventHandler<CrashedEventArgs> Crashed = (e, args) => { };
 
-        public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
+        public virtual bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
         {
             if (!CheckInputConditions(model, out errors))
             {
@@ -202,6 +203,8 @@ namespace R_173.BL.Learning
         {
             Unsubscribe(Model);
         }
+
+        public abstract string GetErrorDescription();
 
         public void Dispose()
         {

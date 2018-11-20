@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BL;
+using R_173.BL.Learning;
 using R_173.Extensions;
 using R_173.Handlers;
 using R_173.Interfaces;
@@ -75,7 +76,7 @@ namespace R_173
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            File.AppendAllText("log.log", $"{DateTime.Now} {e.ExceptionObject.ToString()}");
+            SimpleLogger.Log((Exception)e.ExceptionObject);
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -94,8 +95,8 @@ namespace R_173
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
             container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
             container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
-            container.RegisterType<MainWindow>(new SingletonLifetimeManager());
             container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
+            container.RegisterType<MainWindow>(new SingletonLifetimeManager());
             ServiceCollection = container;
 
         }

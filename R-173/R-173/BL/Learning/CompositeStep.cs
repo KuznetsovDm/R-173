@@ -89,6 +89,7 @@ namespace R_173.BL.Learning
         public bool StartIfInputConditionsAreRight(RadioModel model, out IList<string> errors)
         {
             _model = model;
+            _current = 0;
             if (_steps[_current].StartIfInputConditionsAreRight(model, out errors))
             {
                 _steps[_current].Completed += Step_Completed;
@@ -116,11 +117,12 @@ namespace R_173.BL.Learning
 
         public void Reset()
         {
-            if (_current >= 0 && _current < _steps.Count)
+            while (_current >= 0 )
             {
                 _steps[_current].Reset();
                 _steps[_current].Completed -= Step_Completed;
                 _steps[_current].Crashed -= Step_Crashed;
+                _current--;
             }
             _current = 0;
         }

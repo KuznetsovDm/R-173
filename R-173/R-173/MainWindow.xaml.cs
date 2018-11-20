@@ -1,5 +1,6 @@
 ﻿using R_173.Handlers;
 using R_173.Interfaces;
+﻿using R_173.BL.Learning;
 using R_173.ViewModels;
 using R_173.Views;
 using System;
@@ -20,9 +21,10 @@ namespace R_173
     {
         private readonly Dictionary<Type, ITabView> _pages;
 
-        public MainWindow()
+        public MainWindow(KeyboardHandler keyboardHandler)
         {
             InitializeComponent();
+
             var trainingViewModel = new TrainingViewModel();
             var training = new Training() { DataContext = trainingViewModel };
             training.SizeChanged += (s, e) =>
@@ -31,6 +33,9 @@ namespace R_173
                 Console.WriteLine(attitude);
                 trainingViewModel.Orientation = attitude > 1.5 ? Orientation.Vertical : Orientation.Horizontal;
             };
+
+            PreviewKeyDown += keyboardHandler.OnPreviewKeyDown;
+            PreviewKeyUp += keyboardHandler.OnPreviewKeyUp;
 
             _pages = new Dictionary<Type, ITabView>
             {

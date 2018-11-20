@@ -13,7 +13,7 @@ namespace R_173.Handlers
         private Key? _lastPressedKey;
         public event Action<Key> OnKeyDown;
 
-        public KeyboardHandler(MainWindow _mainWindow)
+        public KeyboardHandler()
         {
             _onKeyDownActions = new Dictionary<Key, Action<bool>>
             {
@@ -32,8 +32,6 @@ namespace R_173.Handlers
                         value => _currentRadioModel.Numpad[n.i].Value = 
                             value ? SwitcherState.Enabled : SwitcherState.Disabled));
 
-            _mainWindow.PreviewKeyDown += OnPreviewKeyDown;
-            _mainWindow.PreviewKeyUp += OnPreviewKeyUp;
         }
 
 
@@ -42,7 +40,7 @@ namespace R_173.Handlers
             _currentRadioModel = model;
         }
 
-        private void OnPreviewKeyDown(object sender, KeyEventArgs e)
+        public void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             OnKeyDown?.Invoke(e.Key);
             e.Handled = true;
@@ -57,7 +55,7 @@ namespace R_173.Handlers
             action(true);
         }
 
-        private void OnPreviewKeyUp(object sender, KeyEventArgs e)
+        public void OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
             e.Handled = true;
             _lastPressedKey = null;
