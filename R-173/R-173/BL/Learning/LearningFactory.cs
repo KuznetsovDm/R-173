@@ -59,9 +59,7 @@ namespace R_173.BL.Learning
         {
             return new CompositeStepBuilder()
                 .Add(new WaitingStep(
-                    _keyboardHandler,
-                    checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState
+                    _keyboardHandler
                     )) // todo: прослушать собственные шумы
                 .Add(new VolumeChangeStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,

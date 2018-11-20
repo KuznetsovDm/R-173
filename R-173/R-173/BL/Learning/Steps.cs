@@ -19,7 +19,7 @@ namespace R_173.BL.Learning
         public override string GetErrorDescription()
         {
             StringBuilder builder = new StringBuilder();
-            if (LearningFactory.CheckInitialState(Model, out IList<string> errors))
+            if (!LearningFactory.CheckInitialState(Model, out IList<string> errors))
             {
                 errors.ForEach(x => builder.AppendLine(x));
             }

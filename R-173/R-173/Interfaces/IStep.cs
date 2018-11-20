@@ -12,5 +12,6 @@ namespace R_173.Interfaces
         void Freeze();
         void Unfreeze();
         void Reset();
+        string GetErrorDescription();
     }
 }
