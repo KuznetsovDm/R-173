@@ -58,7 +58,6 @@ namespace R_173.BL.Learning
         public CompositeStep CreatePerformanceTestLearning()
         {
             return new CompositeStepBuilder()
-                .Add(CreatePreparationToWorkLearning(1)) // todo: только пункты 1-9
                 .Add(new WaitingStep(
                     _keyboardHandler,
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
@@ -84,10 +83,6 @@ namespace R_173.BL.Learning
                 .Add(new PressToneStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))
-                .Add(new WaitingStep(
-                    _keyboardHandler,
-                    checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState)) // todo: Повторить операции 2-8 на всех Зпч
                 .Build();
         }
 

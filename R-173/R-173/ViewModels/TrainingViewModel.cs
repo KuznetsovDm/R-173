@@ -27,10 +27,11 @@ namespace R_173.ViewModels
         private int _maxStep;
         private int _currentStep;
         private Orientation _orientation;
+        private TrainingStepViewModel[] _viewModels;
 
         public TrainingViewModel()
         {
-            var viewModels = new[]
+            _viewModels = new[]
             {
                 new TrainingStepViewModel(),
                 new TrainingStepViewModel(),
@@ -38,15 +39,15 @@ namespace R_173.ViewModels
             };
             _horizontalControls = new ITrainingStep[]
             {
-                new HPreparation() { DataContext = viewModels[0] },
-                new HPerformanceTest() { DataContext = viewModels[1] },
-                new HFrequencyCheck() { DataContext = viewModels[2] },
+                new HPreparation() { DataContext = _viewModels[0] },
+                new HPerformanceTest() { DataContext = _viewModels[1] },
+                new HFrequencyCheck() { DataContext = _viewModels[2] },
             };
             _verticalControls = new ITrainingStep[]
             {
-                new VPreparation() { DataContext = viewModels[0] },
-                new VPerformanceTest() { DataContext = viewModels[1] },
-                new VFrequencyCheck() { DataContext = viewModels[2] },
+                new VPreparation() { DataContext = _viewModels[0] },
+                new VPerformanceTest() { DataContext = _viewModels[1] },
+                new VFrequencyCheck() { DataContext = _viewModels[2] },
             };
 
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
@@ -79,6 +80,7 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(Caption));
                 OnPropertyChanged(nameof(CurrentStep));
                 _learning.SetCurrentLearning(CurrentHorizontalControl.Type);
+                _viewModels[_currentStep - 1].CurrentStep = 0;
             }
         }
 
@@ -109,8 +111,7 @@ namespace R_173.ViewModels
 
         private void Learning_StepChanged(int step)
         {
-            var viewModel = (TrainingStepViewModel)_horizontalControls[_currentStep - 1].DataContext;
-            viewModel.CurrentStep = step;
+            _viewModels[_currentStep - 1].CurrentStep = step;
         }
 
         private void Learning_Completed()
