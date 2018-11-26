@@ -46,6 +46,8 @@ namespace R_173
             };
             Message.DataContext = App.ServiceCollection.Resolve<IMessageBox>();
 
+            MainContent.Content = _pages[typeof(Appointment)];
+
             //ContentRendered += delegate
             //{
             //    App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
