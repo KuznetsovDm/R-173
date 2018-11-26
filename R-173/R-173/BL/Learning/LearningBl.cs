@@ -80,18 +80,20 @@ namespace R_173.BL.Learning
 
         public void Restart()
         {
-            var learning = _learnings[_currentLearning];
-            learning.Reset();
-            learning.StartIfInputConditionsAreRight(_model, out var errors);
+            ResetAll();
+            FreezeAll();
+            _learnings[_currentLearning].Unfreeze();
         }
 
-        public void RestartCurrentStep()
+        private void ResetAll()
         {
-            var learning = _learnings[_currentLearning];
-            learning.Reset();
-            learning.StartIfInputConditionsAreRight(_model, out var errors);
-            learning.Completed += Completed;
-            learning.StepChanged += StepChanged;
+            foreach (var learning in _learnings)
+            {
+                learning.Reset();
+                learning.StartIfInputConditionsAreRight(_model, out var errors);
+                learning.Completed += Completed;
+                learning.StepChanged += StepChanged;
+            }
         }
     }
 }

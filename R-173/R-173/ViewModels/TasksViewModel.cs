@@ -15,6 +15,10 @@ namespace R_173.ViewModels
         private readonly TaskViewModel[] _tasks;
         private readonly SimpleCommand _stopTaskCommand;
         private bool _taskIsRunning;
+        private RadioViewModel _radioViewModel;
+        private TasksBl _tasksBl;
+
+        public RadioViewModel RadioViewModel => _radioViewModel;
 
         public TasksViewModel()
         {
@@ -25,7 +29,8 @@ namespace R_173.ViewModels
                 new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(typeof(HFrequencyCheck))),
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
-
+            _radioViewModel = new RadioViewModel();
+            _tasksBl = new TasksBl(_radioViewModel.Model);
         }
 
         public IEnumerable Tasks => _tasks;
@@ -47,13 +52,16 @@ namespace R_173.ViewModels
         private void StartTask(Type taskType)
         {
             TaskIsRunning = true;
-
+            _tasksBl.Start();
             MessageBox.Show(taskType.ToString());
+            _radioViewModel.Model.SetInitialState();
         }
 
         private void StopTask()
         {
             TaskIsRunning = false;
+            var errors = _tasksBl.Stop();
+            MessageBox.Show(string.Join(Environment.NewLine, errors));
         }
     }
 }

@@ -62,6 +62,12 @@ namespace R_173
             //};
         }
 
+        public void GoToTaskTab()
+        {
+            (buttons.Children[2] as RadioButton).IsChecked = true;
+            MainContent.Content = _pages[typeof(Tasks)];
+        }
+
         private void ChangeTab(object sender, RoutedEventArgs e)
         {
             var page = (sender as ButtonBase).CommandParameter as Type;

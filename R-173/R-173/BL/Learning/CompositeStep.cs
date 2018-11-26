@@ -131,5 +131,10 @@ namespace R_173.BL.Learning
         {
 
         }
+
+        public string GetErrorDescription()
+        {
+            return _steps[_current].GetErrorDescription();
+        }
     }
 }

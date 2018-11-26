@@ -59,9 +59,7 @@ namespace R_173.BL.Learning
         {
             return new CompositeStepBuilder()
                 .Add(new WaitingStep(
-                    _keyboardHandler,
-                    checkInputConditions: PerformanceTestLearning.CheckWorkingState,
-                    checkInternalState: PerformanceTestLearning.CheckWorkingState
+                    _keyboardHandler
                     )) // todo: прослушать собственные шумы
                 .Add(new VolumeChangeStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
@@ -90,7 +88,6 @@ namespace R_173.BL.Learning
         {
             return new CompositeStepBuilder()
                 .Add(new WaitingStep(_keyboardHandler)) // todo: записать на планке частоты
-                .Add(CreatePreparationToWorkLearning(1)) 
                 .Add(new RecordWorkToRecordStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState))
                 .Add(new ButtonStep(

@@ -231,5 +231,19 @@ namespace R_173.Models
                 Frequency.Value = WorkingFrequencies[FrequencyNumber.Value].ToString().PadLeft(5, '0');
         }
         #endregion
+        public void SetInitialState()
+        {
+            TurningOn.Value = SwitcherState.Disabled;
+            Volume.Value = 0.0;
+            RecordWork.Value = RecordWorkState.Work;
+            Power.Value = PowerState.Small;
+            Interference.Value = SwitcherState.Disabled;
+            Noise.Value = NoiseState.Minimum;
+            VolumePRM.Value = 0.0;
+            for (int i = 0; i < WorkingFrequenciesCount; i++)
+            {
+                WorkingFrequencies[i] = 0;
+            }
+        }
     }
 }

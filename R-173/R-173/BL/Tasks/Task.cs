@@ -47,7 +47,9 @@ namespace R_173.BL.Tasks
             {
                 errors.Add("Задача не выполнена.");
                 errors.Add("Текущий шаг: " + _currentStep);
+                errors.Add(_step.GetErrorDescription());
             }
+            _step.Reset();
             return errors;
         }
     }

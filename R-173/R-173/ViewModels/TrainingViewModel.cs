@@ -11,6 +11,8 @@ using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 using VPreparation = R_173.Views.TrainingSteps.Vertical.Preparation;
 using VPerformanceTest = R_173.Views.TrainingSteps.Vertical.PerformanceTest;
 using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
+using R_173.Interfaces;
+using Unity;
 
 namespace R_173.ViewModels
 {
@@ -57,6 +59,7 @@ namespace R_173.ViewModels
                 ? Orientation.Vertical
                 : Orientation.Horizontal);
             _radioViewModel = new RadioViewModel();
+            _radioViewModel.Model.SetInitialState();
             _learning = new LearningBL(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, _horizontalControls[0].Type);
             _startOverCommand = new SimpleCommand(StartOver);
             _maxStep = 1;
@@ -70,7 +73,10 @@ namespace R_173.ViewModels
             set
             {
                 if (value == _currentStep || value < 1 || value > _horizontalControls.Length/* || value > _maxStep*/)
+                {
+                    _viewModels[_currentStep - 1].CurrentStep = 0;
                     return;
+                }
                 _currentStep = value;
 
                 _openNextStepCommand.OnCanExecuteChanged();
@@ -117,13 +123,51 @@ namespace R_173.ViewModels
         private void Learning_Completed()
         {
             _maxStep = Math.Max(_maxStep, _currentStep + 1);
-            _openNextStepCommand.OnCanExecuteChanged();
-            CurrentStep++;
-            MessageBox.Show("Completed");
+
+            var message = App.ServiceCollection.Resolve<IMessageBox>();
+            message.ShowDialog(GetMessageBoxOkAction(CurrentStep), () => { StartOver(); }, GetMessageBoxMessage(CurrentStep), GetMessageBoxOkText(CurrentStep), "Начать заново");
+        }
+
+        private string GetMessageBoxMessage(int stepNumber)
+        {
+            var messages = new[] {
+                "Вы успешно подготовили радиостанцию к работе",
+                "Вы успешно проверили работоспособность радиостанции",
+                "Вы успешно подготовили рабочие частоты"
+            };
+
+            return messages[stepNumber - 1];
+        }
+
+        private string GetMessageBoxOkText(int stepNumber)
+        {
+            if (stepNumber == 3)
+            {
+                return "Перейти к задачам";
+            }
+
+            return "Перейти к следующему этапу";
+        }
+
+
+        private Action GetMessageBoxOkAction(int stepNumber)
+        {
+            if (stepNumber == 3)
+            {
+                var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
+                return mainWindow.GoToTaskTab;
+            }
+
+            return () =>
+            {
+                _openNextStepCommand.OnCanExecuteChanged();
+                CurrentStep++;
+            };
         }
 
         private void StartOver()
         {
+            _radioViewModel.Model.SetInitialState();
             CurrentStep = 1;
             _learning.Restart();
         }
