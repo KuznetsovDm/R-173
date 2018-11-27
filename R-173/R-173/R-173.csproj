@@ -97,9 +97,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BE\TaskTypes.cs" />
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\BufferedWaveCompressor.cs" />
+    <Compile Include="BL\EmptySampleProvider.cs" />
     <Compile Include="BL\Learning\CompositeStep.cs" />
     <Compile Include="BL\Learning\CompositeStepBuilder.cs" />
     <Compile Include="BL\Learning\LearningBl.cs" />
@@ -345,9 +347,7 @@
       <Name>RadioPipeline</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BE\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

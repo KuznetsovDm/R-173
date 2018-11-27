@@ -1,4 +1,5 @@
-﻿using R_173.BL.Learning;
+﻿using R_173.BE;
+using R_173.BL.Learning;
 using R_173.Models;
 using System.Collections.Generic;
 
@@ -8,6 +9,7 @@ namespace R_173.BL.Tasks
     {
         private readonly RadioModel _model;
         private List<Task> _tasks = new List<Task>();
+        private int _activeTask = 0;
 
         public TasksBl(RadioModel model)
         {
@@ -15,17 +17,25 @@ namespace R_173.BL.Tasks
             var taskFactory = new TaskFactory(model, learningFactory);
             _model = model;
 
+            _tasks.Add(taskFactory.CreatePreparationToWorkTask());
             _tasks.Add(taskFactory.CreatePerfomanceTestTask());
         }
 
-        public void Start()
+        public void Start(TaskTypes taskType)
         {
-            _tasks[0].Start();
+            switch (taskType)
+            {
+                case TaskTypes.PreparationToWork: _activeTask = 0; break;
+                case TaskTypes.PerformanceTest: _activeTask = 1; break;
+                case TaskTypes.FrequencyTask: _activeTask = 2; break;
+                default: throw new System.Exception($"Invalid state {taskType}."); break;
+            }
+            _tasks[_activeTask].Start();
         }
 
         public IEnumerable<string> Stop()
         {
-            return _tasks[0].Stop();
+            return _tasks[_activeTask].Stop();
         }
 
     }
