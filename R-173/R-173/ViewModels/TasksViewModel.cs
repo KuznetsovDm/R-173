@@ -48,17 +48,17 @@ namespace R_173.ViewModels
             }
         }
 
-
         private void StartTask(Type taskType)
         {
             TaskIsRunning = true;
+            _radioViewModel.Model.SetInitialState();
             _tasksBl.Start();
             MessageBox.Show(taskType.ToString());
-            _radioViewModel.Model.SetInitialState();
         }
 
         private void StopTask()
         {
+            _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
             var errors = _tasksBl.Stop();
             MessageBox.Show(string.Join(Environment.NewLine, errors));

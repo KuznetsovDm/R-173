@@ -3,9 +3,11 @@
     class TrainingStepViewModel : ViewModelBase
     {
         private int _currentStep;
+        private int _stepCount;
 
-        public TrainingStepViewModel()
+        public TrainingStepViewModel(int stepCount)
         {
+            _stepCount = stepCount;
             _currentStep = -1;
         }
 
@@ -20,6 +22,11 @@
                 _currentStep = value;
                 OnPropertyChanged(nameof(CurrentStep));
             }
+        }
+
+        public void SetMaxStep()
+        {
+            CurrentStep = _stepCount;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using R_173.Handlers;
 using R_173.Interfaces;
-﻿using R_173.BL.Learning;
 using R_173.ViewModels;
 using R_173.Views;
 using System;
@@ -9,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Input;
 using Unity;
 
 namespace R_173

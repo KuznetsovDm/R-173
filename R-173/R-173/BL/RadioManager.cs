@@ -24,7 +24,6 @@ namespace R_173.BL
 
         private void _learningStep_StepChanged(object sender, StepChangedEventArgs e)
         {
-            System.Diagnostics.Trace.WriteLine("STEP CHANGED: " + e.Step);
         }
 
         public void SetModel(RadioModel radioModel)
@@ -44,16 +43,6 @@ namespace R_173.BL
             SubscribeEvents(radioModel);
 
             InitRadioManager(_radioModel);
-        }
-
-        private void _learningStep_Crashed(object sender, CrashedEventArgs e)
-        {
-            System.Diagnostics.Trace.WriteLine("CRASHED???");
-        }
-
-        private void _learningStep_Completed(object sender, System.EventArgs e)
-        {
-            System.Diagnostics.Trace.WriteLine("COMPLETED");
         }
 
         #region Events

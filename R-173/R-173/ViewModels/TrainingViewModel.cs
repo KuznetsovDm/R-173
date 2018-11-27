@@ -35,9 +35,9 @@ namespace R_173.ViewModels
         {
             _viewModels = new[]
             {
-                new TrainingStepViewModel(),
-                new TrainingStepViewModel(),
-                new TrainingStepViewModel(),
+                new TrainingStepViewModel(5),
+                new TrainingStepViewModel(8),
+                new TrainingStepViewModel(9),
             };
             _horizontalControls = new ITrainingStep[]
             {
@@ -123,6 +123,8 @@ namespace R_173.ViewModels
         private void Learning_Completed()
         {
             _maxStep = Math.Max(_maxStep, _currentStep + 1);
+
+            _viewModels[_currentStep - 1].SetMaxStep();
 
             var message = App.ServiceCollection.Resolve<IMessageBox>();
             message.ShowDialog(GetMessageBoxOkAction(CurrentStep), () => { StartOver(); }, GetMessageBoxMessage(CurrentStep), GetMessageBoxOkText(CurrentStep), "Начать заново");

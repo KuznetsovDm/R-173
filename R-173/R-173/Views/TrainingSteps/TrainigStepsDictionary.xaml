@@ -81,7 +81,7 @@
     </Style>
 
     <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="2. Записать на планке заданные рабочие частоты" />
+        <Setter Property="Content" Value="2. Записать на планке заданные рабочие частоты (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
@@ -105,13 +105,13 @@
     </Style>
 
     <Style x:Key="6frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="6. Набрать с помощью кнопок необходимую ЗПЧ" />
+        <Setter Property="Content" Value="6. Набрать с помощью кнопок необходимую ЗПЧ (нажмите 5 кнопок)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="7frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="7. Проконтролировать значение набранной ЗПЧ по табло ЧАСТОТА" />
+        <Setter Property="Content" Value="7. Проконтролировать значение набранной ЗПЧ по табло ЧАСТОТА (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
@@ -132,13 +132,13 @@
     <!--PerformanceTest-->
 
     <Style x:Key="1performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="1. Выполнить операции 1-9 подготовки к работе" />
+        <Setter Property="Content" Value="1. Выполнить операции подготовки к работе" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="2performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="2. Прослушать собственные шумы приемника" />
+        <Setter Property="Content" Value="2. Прослушать собственные шумы приемника (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
@@ -162,13 +162,13 @@
     </Style>
 
     <Style x:Key="6performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="6. Проверить модуляцию (самопрослушивание)" />
+        <Setter Property="Content" Value="6. Проверить модуляцию (самопрослушивание) (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="7performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="7. Проверить отдачу тока в антенну" />
+        <Setter Property="Content" Value="7. Проверить отдачу тока в антенну (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
@@ -188,13 +188,14 @@
 Надеть и подготовить шлемофон. 
 Подключить шлемофон к нагрудному переключателю.
 Установить переключатель на приборе БВ-34 в положение РС-1.
-Снять чехол с приемоперечатчика." />
+Снять чехол с приемоперечатчика.
+(Нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="2preparation" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="2. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении" />
+        <Setter Property="Content" Value="2. Убедиться в правильности исходного положения органов управления: тумблеры ПОДАВИТЕЛЬ ШУМОВ, ПОДАВИТЕЛЬ ПОМЕХ, ПИТАНИЕ в положении ВЫКЛ, тумблер МОЩНОСТЬ в положении ПОЛНАЯ, тумблер ЗАПИСЬ-РАБОТА в положении РАБОТА, ручка ГРОМКОСТЬ в среднем положении, ручка ГРОМКОСТЬ ПРМ в крайнем левом положении" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
