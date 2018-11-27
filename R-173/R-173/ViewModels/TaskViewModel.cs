@@ -14,6 +14,7 @@ namespace R_173.ViewModels
         {
             Title = title;
             StartCommand = new SimpleCommand(start);
+            ShowToolTip = new SimpleCommand<object>(obj => Console.WriteLine(obj.ToString()));
         }
 
 
@@ -43,5 +44,6 @@ namespace R_173.ViewModels
 
         public string Title { get; }
         public ICommand StartCommand { get; }
+        public ICommand ShowToolTip { get; }
     }
 }

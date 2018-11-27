@@ -15,7 +15,7 @@
         </Grid.Resources>
         
         <DockPanel>
-            <UniformGrid DockPanel.Dock="Top" Columns="4">
+            <UniformGrid x:Name="buttons" DockPanel.Dock="Top" Columns="4">
                 <UniformGrid.Resources>
                     <Style TargetType="RadioButton">
                         <Setter Property="GroupName" Value="Tabs" />
@@ -28,7 +28,7 @@
                                            Text="{TemplateBinding Content}"
                                            FontSize="18" FontFamily="Times New Roman" FontWeight="Bold" 
                                            TextAlignment="Center"
-                                           Cursor="Hand"/>
+                                           Cursor="Hand" />
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -46,7 +46,7 @@
 
             <RadioButton Content="1. Назначение, ТТХ, комплект радиостанции" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Appointment}"/>
-                <RadioButton Content="2. Обучение" 
+            <RadioButton Content="2. Обучение" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Training}"/>
             <RadioButton Content="3. Задачи" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Tasks}"/>

@@ -11,6 +11,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
+                    <!--<Button x:Name="Text" Background="LightGray" ToolTip="{TemplateBinding ToolTip}"
+                            views:MouseEnterBehavior.PageChangedCommand="True"
+                            Command="{Binding Path=ShowToolTip}">
+                        <Button.Template>-->
+                            <!--<ControlTemplate TargetType="{x:Type Button}">-->
                     <Border x:Name="Text" Background="LightGray">
                         <ContentControl Content="{TemplateBinding Content}">
                             <ContentControl.Resources>
@@ -26,6 +31,9 @@
                             </ContentControl.Resources>
                         </ContentControl>
                     </Border>
+                            <!--</ControlTemplate>-->
+                        <!--</Button.Template>-->
+                    <!--</Button>-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Text" Property="Background" Value="Green" />
