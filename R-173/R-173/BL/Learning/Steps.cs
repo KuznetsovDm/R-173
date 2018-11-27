@@ -81,8 +81,6 @@ namespace R_173.BL.Learning
                 OnStepCompleted();
             }
         }
-
-
     }
 
     public class FiveButtonsStep : Step
@@ -358,6 +356,33 @@ namespace R_173.BL.Learning
                 .Where(x => x.x == 0)
                 .First();
             return $"Для ЧАСТОТЫ под номером {error.index} не установлено значение.";
+        }
+    }
+
+    public class FrequencySetStep : Step
+    {
+        public FrequencySetStep(int numpadNumber, int frequency, CheckState checkInputConditions, CheckState checkInternalState)
+            : base(checkInputConditions, checkInternalState)
+        {
+            NumpadNumber = numpadNumber;
+            Frequency = frequency;
+        }
+
+        public int NumpadNumber { get; }
+        public int Frequency { get; }
+
+        protected override void SomethingChanged()
+        {
+            base.SomethingChanged();
+            if (Model.WorkingFrequencies[NumpadNumber] == Frequency)
+            {
+                OnStepCompleted();
+            }
+        }
+
+        public override string GetErrorDescription()
+        {
+            return $"Не установлена заданная частота.";
         }
     }
 }

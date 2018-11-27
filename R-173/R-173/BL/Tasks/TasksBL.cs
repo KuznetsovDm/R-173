@@ -19,6 +19,7 @@ namespace R_173.BL.Tasks
 
             _tasks.Add(taskFactory.CreatePreparationToWorkTask());
             _tasks.Add(taskFactory.CreatePerfomanceTestTask());
+            _tasks.Add(taskFactory.CreateFrequencyTask(0, 10));
         }
 
         public void Start(TaskTypes taskType)
