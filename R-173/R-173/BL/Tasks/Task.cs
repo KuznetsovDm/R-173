@@ -21,7 +21,7 @@ namespace R_173.BL.Tasks
 
         public void Start()
         {
-            if(_step.StartIfInputConditionsAreRight(_model, out var errors))
+            if (_step.StartIfInputConditionsAreRight(_model, out var errors))
             {
                 _taskStarted = true;
                 _taskCompleted = false;
@@ -51,6 +51,29 @@ namespace R_173.BL.Tasks
             }
             _step.Reset();
             return errors;
+        }
+    }
+
+    public static class TaskHelper
+    {
+        private static Random _rand = new Random();
+        private static int _minR173Frequency = 30000;
+        private static int _maxR173Frequency = 75999;
+        private static int _maxR173NumpadNumber = 9;
+
+        public static int GenerateValidR173Frequency()
+        {
+            return GeneratNumberInRange(_minR173Frequency, _maxR173Frequency + 1);
+        }
+
+        public static int GenerateValidR173NumpadValue()
+        {
+            return GeneratNumberInRange(0, _maxR173NumpadNumber + 1);
+        }
+
+        public static int GeneratNumberInRange(int min, int max)
+        {
+            return _rand.Next(min, max);
         }
     }
 }

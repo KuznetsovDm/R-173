@@ -53,8 +53,13 @@ namespace R_173.ViewModels
         {
             TaskIsRunning = true;
             _radioViewModel.Model.SetInitialState();
+            _tasksBl.DataContext
+                .Configure()
+                .SetFrequency(TaskHelper.GenerateValidR173Frequency())
+                .SetNumpad(TaskHelper.GenerateValidR173NumpadValue());
+
             _tasksBl.Start(taskType);
-            MessageBox.Show(taskType.ToString());
+            MessageBox.Show(_tasksBl.GetDescriptionForTask(taskType, _tasksBl.DataContext));
         }
 
         private void StopTask()
