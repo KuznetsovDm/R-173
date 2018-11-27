@@ -103,6 +103,9 @@ namespace R_173.BL.Learning
                     _keyboardHandler,
                     checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
                     checkInternalState: SettingFrequenciesLearning.CheckRecordState)) // todo: набрать все остальные частоты
+                .Add(new AllFrequencySetStep(
+                    checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
+                    checkInternalState: SettingFrequenciesLearning.CheckRecordState))
                 .Add(new RecordWorkToWorkStep())
                 .Build();
         }
