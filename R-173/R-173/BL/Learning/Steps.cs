@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using R_173.Handlers;
@@ -329,6 +330,34 @@ namespace R_173.BL.Learning
             {
                 OnStepCompleted();
             }
+        }
+    }
+
+    public class AllFrequencySetStep : Step
+    {
+        public AllFrequencySetStep(CheckState checkInputConditions, CheckState checkInternalState)
+            : base(checkInputConditions, checkInternalState)
+        {
+
+        }
+
+        protected override void SomethingChanged()
+        {
+            base.SomethingChanged();
+
+            if (Model.WorkingFrequencies.All(x => x > 0))
+            {
+                OnStepCompleted();
+            }
+        }
+
+        public override string GetErrorDescription()
+        {
+            var error = Model.WorkingFrequencies
+                .Select((index, x) => new { index = index, x = x })
+                .Where(x => x.x == 0)
+                .First();
+            return $"Для ЧАСТОТЫ под номером {error.index} не установлено значение.";
         }
     }
 }
