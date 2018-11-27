@@ -10,6 +10,7 @@ namespace R_173.BL.Tasks
     {
         private readonly RadioModel _model;
         private List<Task> _tasks = new List<Task>();
+        private int _activeTask = 0;
 
         public TasksBl(RadioModel model)
         {
@@ -25,16 +26,17 @@ namespace R_173.BL.Tasks
         {
             switch (taskType)
             {
-                case TaskTypes.PreparationToWork: _tasks[0].Start(); break;
-                case TaskTypes.PerformanceTest: _tasks[1].Start(); break;
-                case TaskTypes.FrequencyTask: _tasks[2].Start(); break;
+                case TaskTypes.PreparationToWork: _activeTask = 0; break;
+                case TaskTypes.PerformanceTest: _activeTask = 1; break;
+                case TaskTypes.FrequencyTask: _activeTask = 2; break;
                 default: throw new System.Exception($"Invalid state {taskType}."); break;
             }
+            _tasks[_activeTask].Start();
         }
 
         public IEnumerable<string> Stop()
         {
-            return _tasks[0].Stop();
+            return _tasks[_activeTask].Stop();
         }
 
     }
