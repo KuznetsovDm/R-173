@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using R_173.BE;
 using R_173.Handlers;
 using R_173.Models;
 using R_173.SharedResources;
@@ -14,18 +15,17 @@ namespace R_173.BL.Learning
         public InitialStateStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
             : base(checkInputConditions, checkInternalState)
         {
-
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            StringBuilder builder = new StringBuilder();
+            var innerMessages = new List<Message>();
             if (!LearningFactory.CheckInitialState(Model, out IList<string> errors))
             {
-                errors.ForEach(x => builder.AppendLine(x));
+                errors.ForEach(x => innerMessages.Add(new Message { Header = x }));
             }
 
-            return builder.ToString();
+            return new Message { Header = "Установка исходного положения", Messages = innerMessages };
         }
 
         protected override void SomethingChanged()
@@ -44,12 +44,11 @@ namespace R_173.BL.Learning
         public TurningOnStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
             : base(checkInputConditions, checkInternalState)
         {
-
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Тумблер ПИТАНИЕ не установлен в положение ВКЛ";
+            return new Message { Header = "Тумблер ПИТАНИЕ не установлен в положение ВКЛ" };
         }
 
         protected override void TurningOn_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -69,9 +68,9 @@ namespace R_173.BL.Learning
 
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "КНОПКА не нажата";
+            return new Message { Header = "КНОПКА не нажата" };
         }
 
         protected override void Numpad_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e, int i)
@@ -118,15 +117,10 @@ namespace R_173.BL.Learning
                 _counter = 0;
             }
         }
-
-        public override string ToString()
+        
+        public override Message GetErrorDescription()
         {
-            return base.ToString();
-        }
-
-        public override string GetErrorDescription()
-        {
-            return "Не нажато 5 КНОПОК";
+            return new Message { Header = "Не нажато 5 КНОПОК" };
         }
     }
 
@@ -138,9 +132,9 @@ namespace R_173.BL.Learning
 
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Не нажата кнопка ТАБЛО";
+            return new Message { Header = "Не нажата кнопка ТАБЛО" };
         }
 
         protected override void Board_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -155,9 +149,9 @@ namespace R_173.BL.Learning
         {
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Не проверен РЕГУЛЯТОР ГРОМКОСТИ";
+            return new Message { Header = "Не проверен РЕГУЛЯТОР ГРОМКОСТИ" };
         }
 
         protected override void Volume_ValueChanged(object sender, ValueChangedEventArgs<double> e)
@@ -172,9 +166,9 @@ namespace R_173.BL.Learning
         {
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Не проверен ПОДАВИТЕЛЬ ШУМОВ";
+            return new Message { Header = "Не проверен ПОДАВИТЕЛЬ ШУМОВ" };
         }
 
         protected override void Noise_ValueChanged(object sender, ValueChangedEventArgs<NoiseState> e)
@@ -189,9 +183,9 @@ namespace R_173.BL.Learning
         {
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Не зажата КНОПКА ПРД";
+            return new Message { Header = "Не зажата КНОПКА ПРД" };
         }
 
         protected override void Sending_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -209,9 +203,9 @@ namespace R_173.BL.Learning
         {
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Не нажата КНОПКА ТОН";
+            return new Message { Header = "Не нажата КНОПКА ТОН" };
         }
 
         protected override void Tone_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -232,7 +226,7 @@ namespace R_173.BL.Learning
             _keyboardHandler = keyboardHandler;
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
             throw new NotImplementedException();
         }
@@ -274,9 +268,9 @@ namespace R_173.BL.Learning
 
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "ТУМБЛЕР ЗАПИСЬ-РАБОТА не установлен в положение ЗАПИСЬ";
+            return new Message { Header = "ТУМБЛЕР ЗАПИСЬ-РАБОТА не установлен в положение ЗАПИСЬ" };
 
         }
 
@@ -297,9 +291,9 @@ namespace R_173.BL.Learning
 
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "ТУМБЛЕР ЗАПИСЬ-РАБОТА не установлен в положение РАБОТА";
+            return new Message { Header = "ТУМБЛЕР ЗАПИСЬ-РАБОТА не установлен в положение РАБОТА" };
         }
 
         protected override void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
@@ -319,9 +313,9 @@ namespace R_173.BL.Learning
 
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
-            return "Не нажата КНОПКА СБРОС";
+            return new Message { Header = "Не нажата КНОПКА СБРОС" };
         }
 
         protected override void Reset_ValueChanged(object sender, ValueChangedEventArgs<SwitcherState> e)
@@ -351,13 +345,13 @@ namespace R_173.BL.Learning
             }
         }
 
-        public override string GetErrorDescription()
+        public override Message GetErrorDescription()
         {
             var error = Model.WorkingFrequencies
-                .Select((index, x) => new { index = index, x = x })
+                .Select((index, x) => new { index, x })
                 .Where(x => x.x == 0)
                 .First();
-            return $"Для ЧАСТОТЫ под номером {error.index} не установлено значение.";
+            return new Message { Header = $"Для ЧАСТОТЫ под номером {error.index} не установлено значение." };
         }
     }
 }

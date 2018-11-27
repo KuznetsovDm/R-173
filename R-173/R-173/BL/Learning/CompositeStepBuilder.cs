@@ -14,9 +14,9 @@ namespace R_173.BL.Learning
             return this;
         }
 
-        public CompositeStep Build()
+        public CompositeStep Build(string stepName = null)
         {
-            return new CompositeStep(_steps);
+            return new CompositeStep(_steps, stepName);
         }
     }
 

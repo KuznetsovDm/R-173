@@ -87,7 +87,7 @@
     </Style>
 
     <Style x:Key="3frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
-        <Setter Property="Content" Value="3. Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ: засветится табло ЧАСТОТА КГЦ" />
+        <Setter Property="Content" Value="3. Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
         <Setter Property="ToolTip" Value="what do you want?" />
     </Style>

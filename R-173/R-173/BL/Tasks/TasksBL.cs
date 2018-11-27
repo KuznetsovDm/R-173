@@ -28,12 +28,12 @@ namespace R_173.BL.Tasks
                 case TaskTypes.PreparationToWork: _activeTask = 0; break;
                 case TaskTypes.PerformanceTest: _activeTask = 1; break;
                 case TaskTypes.FrequencyTask: _activeTask = 2; break;
-                default: throw new System.Exception($"Invalid state {taskType}."); break;
+                default: throw new System.Exception($"Invalid state {taskType}.");
             }
             _tasks[_activeTask].Start();
         }
 
-        public IEnumerable<string> Stop()
+        public Message Stop()
         {
             return _tasks[_activeTask].Stop();
         }

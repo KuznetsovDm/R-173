@@ -52,7 +52,7 @@ namespace R_173.BL.Learning
             for (var i = from.Value; i < to.Value; i++)
                 builder.Add(steps[i]);
 
-            return builder.Build();
+            return builder.Build("Подготовка к работе");
         }
 
         public CompositeStep CreatePerformanceTestLearning()
