@@ -19,6 +19,11 @@ namespace R_173.BL.Tasks
             return new Task(_model, CreatePerformanceTestStep());
         }
 
+        public Task CreatePreparationToWorkTask()
+        {
+            return new Task(_model, _learningFactory.CreatePreparationToWorkLearning(1));
+        }
+
         private CompositeStep CreatePerformanceTestStep()
         {
             return new CompositeStepBuilder()

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
 using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
 using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
+using R_173.BE;
 
 namespace R_173.ViewModels
 {
@@ -24,9 +25,9 @@ namespace R_173.ViewModels
         {
             _tasks = new[]
             {
-                new TaskViewModel(HPreparation.StepCaption, () => StartTask(typeof(HPreparation))),
-                new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(typeof(HPerformanceTest))),
-                new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(typeof(HFrequencyCheck))),
+                new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork)),
+                new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(TaskTypes.PerformanceTest)),
+                new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask)),
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
             _radioViewModel = new RadioViewModel();
@@ -48,11 +49,10 @@ namespace R_173.ViewModels
             }
         }
 
-
-        private void StartTask(Type taskType)
+        private void StartTask(TaskTypes taskType)
         {
             TaskIsRunning = true;
-            _tasksBl.Start();
+            _tasksBl.Start(taskType);
             MessageBox.Show(taskType.ToString());
             _radioViewModel.Model.SetInitialState();
         }
