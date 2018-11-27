@@ -2,7 +2,6 @@
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;

@@ -8,6 +8,8 @@ using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
 using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
 using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 using R_173.BE;
+using R_173.Interfaces;
+using Unity;
 
 namespace R_173.ViewModels
 {
@@ -53,16 +55,47 @@ namespace R_173.ViewModels
         {
             TaskIsRunning = true;
             _radioViewModel.Model.SetInitialState();
+            _tasksBl.DataContext
+                .Configure()
+                .SetFrequency(TaskHelper.GenerateValidR173Frequency())
+                .SetNumpad(TaskHelper.GenerateValidR173NumpadValue());
+
             _tasksBl.Start(taskType);
-            MessageBox.Show(taskType.ToString());
+            var taskDescription = _tasksBl.GetDescriptionForTask(taskType, _tasksBl.DataContext);
+            ShowDialog(taskDescription);
+        }
+
+        private void ShowDialog(string message)
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog(() => { }, () => { }, message, "OK", "");
+        }
+
+        private void ShowSuccessDialog(string message = "Задача успешно выполнена")
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog(() => { }, () => { }, message, "OK", "");
+        }
+
+        private void ShowErrorDialog(string message = "Задача не выполнена")
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog(() => { }, () => { }, message, "OK", "");
         }
 
         private void StopTask()
         {
-            var errors = _tasksBl.Stop();
+            var message = _tasksBl.Stop();
             _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
-            MessageBox.Show(string.Join(Environment.NewLine, errors));
+            if(message == null)
+            {
+                ShowSuccessDialog();
+            }
+            else
+            {
+                ShowErrorDialog("Задача не выполнена" + Environment.NewLine + message.ToString());
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace R_173.BE
         private IEnumerable<string> FormatMessage(int level)
         {
             if(!string.IsNullOrEmpty(Header))
-                yield return GetTabs(level) + Header;
+                yield return GetTabs(level++) + Header;
 
             if (Messages == null)
             {
@@ -27,7 +27,7 @@ namespace R_173.BE
 
             foreach (var message in Messages)
             {
-                foreach (var item in message.FormatMessage(level + 1))
+                foreach (var item in message.FormatMessage(level))
                 {
                     yield return item;
                 }

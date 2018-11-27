@@ -102,7 +102,7 @@
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\BufferedWaveCompressor.cs" />
-    <Compile Include="BL\EmptySampleProvider.cs" />
+    <Compile Include="BL\Utils\EmptySampleProvider.cs" />
     <Compile Include="BL\Learning\CompositeStep.cs" />
     <Compile Include="BL\Learning\CompositeStepBuilder.cs" />
     <Compile Include="BL\Learning\LearningBl.cs" />
@@ -111,8 +111,8 @@
     <Compile Include="BL\Learning\PreparationLearning.cs" />
     <Compile Include="BL\Learning\SettingFrequenciesLearning.cs" />
     <Compile Include="BL\Learning\Steps.cs" />
-    <Compile Include="BL\EmptyWrapperWaveIn.cs" />
-    <Compile Include="BL\EmptyWrapperWavePlayer.cs" />
+    <Compile Include="BL\Utils\EmptyWrapperWaveIn.cs" />
+    <Compile Include="BL\Utils\EmptyWrapperWavePlayer.cs" />
     <Compile Include="BL\Tasks\Task.cs" />
     <Compile Include="BL\Tasks\TasksBl.cs" />
     <Compile Include="BL\Tasks\TaskFactory.cs" />
