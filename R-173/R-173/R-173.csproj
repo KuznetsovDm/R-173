@@ -171,9 +171,6 @@
     <Compile Include="Views\Appointment.xaml.cs">
       <DependentUpon>Appointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ErrorTree.xaml.cs">
-      <DependentUpon>ErrorTree.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ITabView.cs" />
     <Compile Include="Views\Preloader.xaml.cs">
       <DependentUpon>Preloader.xaml</DependentUpon>
@@ -239,10 +236,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Appointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ErrorTree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
