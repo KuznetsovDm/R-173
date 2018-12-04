@@ -135,7 +135,9 @@
     <Compile Include="Extensions\IEnumirableExtentions.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
+    <Compile Include="SharedResources\ITabWithMessage.cs" />
     <Compile Include="SharedResources\KeyEventArgs.cs" />
+    <Compile Include="SharedResources\MessageBoxParameters.cs" />
     <Compile Include="SharedResources\StepChangedEventArgs.cs" />
     <Compile Include="Interfaces\IStep.cs" />
     <Compile Include="BL\LocalToneController.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="Views\TrainingSteps\Vertical\Preparation.xaml.cs">
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControlWithMessage.cs" />
     <Compile Include="Views\Work.xaml.cs">
       <DependentUpon>Work.xaml</DependentUpon>
     </Compile>

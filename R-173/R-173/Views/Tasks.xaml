@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="R_173.Views.Tasks"
+﻿<local:UserControlWithMessage x:Class="R_173.Views.Tasks"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -84,4 +84,4 @@
             </Border>
         </Grid>
     </Grid>
-</UserControl>
+</local:UserControlWithMessage>

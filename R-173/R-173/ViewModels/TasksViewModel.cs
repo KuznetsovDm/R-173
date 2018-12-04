@@ -15,8 +15,9 @@ using System.Linq;
 
 namespace R_173.ViewModels
 {
-    class TasksViewModel : ViewModelBase
+    class TasksViewModel : ViewModelBase, ITabWithMessage
     {
+        private readonly MessageBoxParameters _message;
         private readonly TaskViewModel[] _tasks;
         private readonly SimpleCommand _stopTaskCommand;
         private bool _taskIsRunning;
@@ -27,6 +28,7 @@ namespace R_173.ViewModels
 
         public TasksViewModel()
         {
+            _message = new MessageBoxParameters("Tab tasks", "message");
             _tasks = new[]
             {
                 new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork)),
@@ -53,6 +55,8 @@ namespace R_173.ViewModels
             }
         }
 
+        public MessageBoxParameters Message => _message;
+
         private void StartTask(TaskTypes taskType)
         {
             TaskIsRunning = true;
@@ -70,19 +74,19 @@ namespace R_173.ViewModels
         private void ShowDialog(string message)
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(() => { }, () => { }, message, "OK", "");
+            messageBox.ShowDialog("title", message);
         }
 
         private void ShowSuccessDialog(string message = "Задача успешно выполнена")
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(() => { }, () => { }, message, "OK", "");
+            messageBox.ShowDialog("title", message);
         }
 
         private void ShowErrorDialog(string message = "Задача не выполнена")
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(() => { }, () => { }, message, "OK", "");
+            messageBox.ShowDialog("title", message);
         }
 
         private void StopTask()

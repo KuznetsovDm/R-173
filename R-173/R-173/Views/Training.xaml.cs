@@ -10,7 +10,7 @@ namespace R_173.Views
     /// <summary>
     /// Interaction logic for Training.xaml
     /// </summary>
-    public partial class Training : UserControl, ITabView
+    public partial class Training : UserControlWithMessage, ITabView
     {
         public Training()
         {
