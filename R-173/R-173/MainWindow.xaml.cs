@@ -71,6 +71,11 @@ namespace R_173
             var page = (sender as ButtonBase).CommandParameter as Type;
             MainContent.Content = _pages[page];
         }
+
+        private void CloseWelcome(object sender, RoutedEventArgs e)
+        {
+            Welcome.Visibility = Visibility.Collapsed;
+        }
     }
 
     public class TabSizeConverter : IMultiValueConverter

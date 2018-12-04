@@ -21,6 +21,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             
+            <!--Top-->
             <Grid Grid.Row="0" DockPanel.Dock="Top" Margin="5" UseLayoutRounding="True">
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -59,9 +60,9 @@
 
                 <Grid.ColumnDefinitions>
                     <!--<ColumnDefinition Width="*" />-->
-                    <ColumnDefinition Width="1.1*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="1.1*" />
+                    <ColumnDefinition Width="270" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="270" />
                     <!--<ColumnDefinition Width="*" />-->
                 </Grid.ColumnDefinitions>
 
@@ -70,20 +71,20 @@
                 <!--<Button Grid.Column="4" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />-->
                 <Button Grid.Column="2" Content="Изменить положение задач" Command="{Binding Path=ChangeOrientationCommand}" />
 
-                <Viewbox Grid.Column="1" Stretch="Uniform" MaxHeight="50" >
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="White" ShadowDepth="0" />
-                        </TextBlock.Effect>
+                <!--<Viewbox Grid.Column="1" Stretch="Uniform" MaxHeight="50" >-->
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="0" />
+                    </TextBlock.Effect>
                     
                     <Run Text="{Binding Path=CurrentStep, Mode=OneWay}" />
                     <Run Text="/" />
                     <Run Text="{Binding Path=StepsNumber, Mode=OneTime}" />
                     <Run Text="{Binding Path=Caption, Mode=OneWay}" />
-                    </TextBlock>
-                </Viewbox>
+                </TextBlock>
+                <!--</Viewbox>-->
             </Grid>
-
+            <!--Radio-->
             <Grid Grid.Row="2">
                 <Grid.Style>
                     <Style TargetType="{x:Type Grid}">
@@ -98,7 +99,7 @@
 
                 <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
             </Grid>
-
+            <!--Horizontal tasks-->
             <Viewbox Grid.Row="1" Stretch="Uniform">
                 <Viewbox.Style>
                     <Style TargetType="{x:Type Viewbox}">
@@ -113,7 +114,7 @@
 
                 <ContentControl Grid.Row="1" Content="{Binding Path=CurrentHorizontalControl}" />
             </Viewbox>
-
+            <!--Vertical tasks-->
             <Grid Grid.Row="2" VerticalAlignment="Center">
                 <Grid.Style>
                     <Style TargetType="{x:Type Grid}">
@@ -138,5 +139,8 @@
                 </Border>
             </Grid>
         </Grid>
+        <Popup StaysOpen="{Binding Path=ToolTipIsOpen}" Placement="Mouse">
+            <TextBlock Text="Popup" />
+        </Popup>
     </Grid>
 </UserControl>

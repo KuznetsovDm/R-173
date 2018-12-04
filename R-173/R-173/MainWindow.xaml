@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:R_173.Views"
         xmlns:viewModels="clr-namespace:R_173.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1050" d:DesignHeight="1024"
-        MinWidth="800" MinHeight="600"
+        MinWidth="1050" MinHeight="600"
         Title="Р-173" WindowState="Maximized" FontFamily="Times New Roman">
     <Grid>
         <Grid.Resources>
@@ -84,5 +84,30 @@
                 </DockPanel>
             </Border>
         </Border>
+
+        <Grid x:Name="Welcome" d:IsHidden="True">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Files/radio.jpg" Stretch="UniformToFill" />
+            </Grid.Background>
+
+            <DockPanel LastChildFill="False">
+                <DockPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                        <Setter Property="FontSize" Value="30"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Background" Value="#8fff"/>
+                        <Setter Property="Padding" Value="5"/>
+                    </Style>
+                </DockPanel.Resources>
+                <TextBlock DockPanel.Dock="Top" Text="Обучающая программа-симулятор радиостанци Р-173"/>
+                <Button DockPanel.Dock="Top" Width="350" Click="CloseWelcome" IsDefault="True" Background="DarkSeaGreen">
+                    <TextBlock Text="Приступить к работе" Background="Transparent" Padding="2" />
+                </Button>
+                <TextBlock DockPanel.Dock="Bottom" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ"/>
+            </DockPanel>
+        </Grid>
     </Grid>
 </Window>
