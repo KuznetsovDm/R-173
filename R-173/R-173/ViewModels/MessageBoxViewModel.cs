@@ -115,6 +115,18 @@ namespace R_173.ViewModels
             Visible = true;
         }
 
+        public void ShowDialog(string title, string message, string okText)
+        {
+            Content = null;
+            _ok = ok;
+            _cancel = null;
+            Message = message;
+            Title = title;
+            OkText = okText;
+            CancelText = null;
+            Visible = true;
+        }
+
         public void ShowDialog(Action ok, string title, string message, string okText)
         {
             Content = null;
