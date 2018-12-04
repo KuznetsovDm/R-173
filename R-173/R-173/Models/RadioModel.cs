@@ -102,7 +102,8 @@ namespace R_173.Models
                 {
                     return RecordWork.Value == RecordWorkState.Record ? SwitcherState.Enabled : newValue;
                 },
-                nameof(Board)
+                nameof(Board),
+                OnBoardChange
             );
             CallColor = new Property<Color>((oldValue, newValue) => newValue, nameof(CallColor));
             BroadcastColor = new Property<Color>((oldValue, newValue) => newValue, nameof(BroadcastColor));
