@@ -13,7 +13,7 @@
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         </Grid.Resources>
-        
+
         <DockPanel>
             <UniformGrid x:Name="buttons" DockPanel.Dock="Top" Columns="4">
                 <UniformGrid.Resources>
@@ -44,15 +44,15 @@
                     </Style>
                 </UniformGrid.Resources>
 
-            <RadioButton Content="1. Назначение, ТТХ, комплект" 
+                <RadioButton Content="1. Назначение, ТТХ, комплект" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Appointment}"/>
-            <RadioButton Content="2. Обучение" 
+                <RadioButton Content="2. Обучение" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Training}"/>
-            <RadioButton Content="3. Задачи" 
+                <RadioButton Content="3. Задачи" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Tasks}"/>
-            <RadioButton Content="4. Работа на радиостанции" 
+                <RadioButton Content="4. Работа на радиостанции" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Work}"/>
-        </UniformGrid>
+            </UniformGrid>
 
             <ContentControl x:Name="MainContent"/>
         </DockPanel>
@@ -65,23 +65,35 @@
             <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
                     BorderBrush="Black" BorderThickness="3" CornerRadius="5"
                     Background="LightSteelBlue" Padding="10" Width="400" MinHeight="150">
-                <DockPanel>
-                    <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-                        <DockPanel.Resources>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Margin" Value="5" />
-                                <Setter Property="Padding" Value="5" />
-                                <Setter Property="MinWidth" Value="80" />
-                                <Setter Property="FontSize" Value="18" />
-                            </Style>
-                        </DockPanel.Resources>
-                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}" />
-                        <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}" Command="{Binding Path=CancelCommand}" />
+                <Grid>
+                    <Grid.Resources>
+                        <local:NullableToVisibilityConverter x:Key="NullToVis" NullValue="Visible" NotNullValue="Hidden" />
+                        <local:NullableToVisibilityConverter x:Key="NotNullToVis" NullValue="Hidden" NotNullValue="Visible" />
+                    </Grid.Resources>
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+                            <DockPanel.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Margin" Value="5" />
+                                    <Setter Property="Padding" Value="5" />
+                                    <Setter Property="MinWidth" Value="80" />
+                                    <Setter Property="FontSize" Value="18" />
+                                </Style>
+                            </DockPanel.Resources>
+                            <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}" />
+                            <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}" Command="{Binding Path=CancelCommand}" />
+                        </DockPanel>
+                        <Grid>
+                            <TextBlock  VerticalAlignment="Center" 
+                                        Visibility="{Binding Path=Content, Converter={StaticResource NullToVis}}"
+                                        Text="{Binding Path=Message}"
+                                        FontSize="20" TextWrapping="Wrap" />
+                            <ContentControl Content="{Binding Path=Content}" 
+                                            Visibility="{Binding Path=Content, Converter={StaticResource NotNullToVis}}" />
+                        </Grid>
                     </DockPanel>
-                    <TextBlock VerticalAlignment="Center" 
-                               Text="{Binding Path=Message}"
-                               FontSize="20" TextWrapping="Wrap" />
-                </DockPanel>
+                </Grid>
+
             </Border>
         </Border>
     </Grid>

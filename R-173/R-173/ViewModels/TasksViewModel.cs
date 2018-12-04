@@ -10,6 +10,8 @@ using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 using R_173.BE;
 using R_173.Interfaces;
 using Unity;
+using System.Windows.Controls;
+using System.Linq;
 
 namespace R_173.ViewModels
 {
@@ -94,8 +96,45 @@ namespace R_173.ViewModels
             }
             else
             {
-                ShowErrorDialog("Задача не выполнена" + Environment.NewLine + message.ToString());
+                //ShowErrorDialog("Задача не выполнена" + Environment.NewLine + message.ToString());
+
+                var item = FormatMessage(message);
+                var tree = new TreeView();
+                tree.Items.Add(item);
+
+                var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+                messageBox.InsertBody(tree);
             }
+        }
+
+        private TreeViewItem FormatMessage(Message message)
+        {
+            if(string.IsNullOrEmpty(message.Header) && message.Messages.Count() == 1)
+            {
+                return FormatMessage(message.Messages.First());
+            }
+
+            var item = new TreeViewItem()
+            {
+                IsExpanded = true
+            };
+
+            if (!string.IsNullOrEmpty(message.Header))
+            {
+                item.Header = message.Header;
+            }
+
+            if (message.Messages == null)
+            {
+                return item;
+            }
+
+            foreach (var m in message.Messages)
+            {
+                item.Items.Add(FormatMessage(m));
+            }
+
+            return item;
         }
     }
 }

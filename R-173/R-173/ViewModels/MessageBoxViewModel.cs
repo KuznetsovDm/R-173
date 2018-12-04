@@ -1,6 +1,8 @@
 ﻿using R_173.Interfaces;
 using R_173.SharedResources;
 using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace R_173.ViewModels
@@ -15,6 +17,7 @@ namespace R_173.ViewModels
         private string _okText;
         private string _cancelText;
         private bool _visible;
+        private UIElement _content;
 
         public MessageBoxViewModel()
         {
@@ -74,9 +77,22 @@ namespace R_173.ViewModels
             }
         }
 
+        public UIElement Content
+        {
+            get => _content;
+            set
+            {
+                if (value == _content)
+                    return;
+                _content = value;
+                OnPropertyChanged(nameof(Content));
+            }
+        }
+
 
         public void ShowDialog(Action ok, Action cancel, string message, string okText, string cancelText)
         {
+            Content = null;
             _ok = ok;
             _cancel = cancel;
             Message = message;
@@ -95,6 +111,12 @@ namespace R_173.ViewModels
         {
             Visible = false;
             _cancel?.Invoke();
+        }
+
+        public void InsertBody(UIElement element)
+        {
+            Content = element;
+            Visible = true;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace R_173.BL.Tasks
         private CompositeStep CreatePerformanceTestStep()
         {
             return new CompositeStepBuilder()
-                .Add(_learningFactory.CreatePreparationToWorkLearning(1))
+                .Add(_learningFactory.CreatePreparationToWorkLearning(1, 3))
                 .Add(new VolumeChangeStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))
