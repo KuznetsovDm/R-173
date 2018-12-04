@@ -76,6 +76,7 @@ namespace R_173
         private void CloseWelcome(object sender, RoutedEventArgs e)
         {
             Welcome.Visibility = Visibility.Collapsed;
+            App.ServiceCollection.Resolve<IMessageBox>().ShowDialog("Hello", "I am radio");
         }
     }
 

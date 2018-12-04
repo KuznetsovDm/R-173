@@ -57,45 +57,76 @@
             <ContentControl x:Name="MainContent"/>
         </DockPanel>
 
-        <Border x:Name="Message" d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}"
-                Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">
-            <Border.Background>
+        <Grid x:Name="Message" d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}"
+              Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">
+            <Grid.Background>
                 <SolidColorBrush Color="White" Opacity="0.5" />
-            </Border.Background>
-            <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
-                    BorderBrush="Black" BorderThickness="3" CornerRadius="5"
-                    Background="LightSteelBlue" Padding="10" Width="400" MinHeight="150">
-                <Grid>
-                    <Grid.Resources>
+            </Grid.Background>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="0"
+                    Background="White" Padding="10" CornerRadius="2">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
+                </Border.Effect>
+                <DockPanel>
+                    <DockPanel.Resources>
                         <local:NullableToVisibilityConverter x:Key="NullToVis" NullValue="Visible" NotNullValue="Hidden" />
                         <local:NullableToVisibilityConverter x:Key="NotNullToVis" NullValue="Hidden" NotNullValue="Visible" />
-                    </Grid.Resources>
-                    <DockPanel>
-                        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-                            <DockPanel.Resources>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Margin" Value="5" />
-                                    <Setter Property="Padding" Value="5" />
-                                    <Setter Property="MinWidth" Value="80" />
-                                    <Setter Property="FontSize" Value="18" />
-                                </Style>
-                            </DockPanel.Resources>
-                            <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}" />
-                            <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}" Command="{Binding Path=CancelCommand}" />
-                        </DockPanel>
-                        <Grid>
-                            <TextBlock  VerticalAlignment="Center" 
-                                        Visibility="{Binding Path=Content, Converter={StaticResource NullToVis}}"
-                                        Text="{Binding Path=Message}"
-                                        FontSize="20" TextWrapping="Wrap" />
-                            <ContentControl Content="{Binding Path=Content}" 
-                                            Visibility="{Binding Path=Content, Converter={StaticResource NotNullToVis}}" />
-                        </Grid>
+                    </DockPanel.Resources>
+                    <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="5, 3" />
+                                <Setter Property="MinWidth" Value="100" />
+                                <Setter Property="FontSize" Value="18" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="SnapsToDevicePixels" Value="True" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Padding="5" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="2">
+                                                <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Border" Property="BorderBrush" Value="LightGray" />
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="Gray" />
+                                                    <Setter Property="Foreground" Value="White" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DockPanel.Resources>
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}" />
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}" Command="{Binding Path=CancelCommand}"
+                                Visibility="{Binding Path=CancelText, Converter={StaticResource NotNullToVis}}" />
                     </DockPanel>
-                </Grid>
-
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Center" Margin="5"
+                                   Text="{Binding Path=Title}"
+                                   FontSize="20" TextWrapping="Wrap" FontWeight="Bold"
+                                   Visibility="{Binding Path=Content, Converter={StaticResource NullToVis}}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5"
+                                   Text="{Binding Path=Message}"
+                                   FontSize="20" TextWrapping="Wrap"
+                                   Visibility="{Binding Path=Content, Converter={StaticResource NullToVis}}"/>
+                        <ContentControl Content="{Binding Path=Content}" 
+                                        Visibility="{Binding Path=Content, Converter={StaticResource NotNullToVis}}" />
+                    </StackPanel>
+                </DockPanel>
             </Border>
-        </Border>
+        </Grid>
 
         <Grid x:Name="Welcome" d:IsHidden="True">
             <Grid.Background>

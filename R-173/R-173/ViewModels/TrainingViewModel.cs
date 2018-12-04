@@ -16,10 +16,11 @@ using System.Windows;
 
 namespace R_173.ViewModels
 {
-    class TrainingViewModel : ViewModelBase
+    class TrainingViewModel : ViewModelBase, ITabWithMessage
     {
         private readonly ITrainingStep[] _horizontalControls;
         private readonly ITrainingStep[] _verticalControls;
+        private readonly MessageBoxParameters[] _messages;
         private readonly SimpleCommand _openNextStepCommand;
         private readonly SimpleCommand _openPrevStepCommand;
         private readonly SimpleCommand _startOverCommand;
@@ -52,6 +53,12 @@ namespace R_173.ViewModels
                 new VPreparation() { DataContext = _viewModels[0] },
                 new VPerformanceTest() { DataContext = _viewModels[1] },
                 new VFrequencyCheck() { DataContext = _viewModels[2] },
+            };
+            _messages = new MessageBoxParameters[]
+            {
+                new MessageBoxParameters(() => { }, "title", "1", "ok"),
+                new MessageBoxParameters(() => { }, "title", "2", "ok"),
+                new MessageBoxParameters(() => { }, "title", "3", "ok"),
             };
 
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
@@ -140,6 +147,7 @@ namespace R_173.ViewModels
             }
         }
 
+        public MessageBoxParameters Message => _messages[0];
 
         private void Learning_StepChanged(int step)
         {
@@ -153,7 +161,12 @@ namespace R_173.ViewModels
             _viewModels[_currentStep - 1].SetMaxStep();
 
             var message = App.ServiceCollection.Resolve<IMessageBox>();
-            message.ShowDialog(GetMessageBoxOkAction(CurrentStep), () => { StartOver(); }, GetMessageBoxMessage(CurrentStep), GetMessageBoxOkText(CurrentStep), "Начать заново");
+            message.ShowDialog(GetMessageBoxOkAction(CurrentStep), 
+                StartOver, 
+                "Этап обучения завершен!", 
+                GetMessageBoxMessage(CurrentStep), 
+                GetMessageBoxOkText(CurrentStep), 
+                "Начать заново");
         }
 
         private string GetMessageBoxMessage(int stepNumber)
