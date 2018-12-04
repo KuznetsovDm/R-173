@@ -327,7 +327,7 @@ namespace R_173.BL.Learning
 
     public class AllFrequencySetStep : Step
     {
-        public AllFrequencySetStep(CheckState checkInputConditions, CheckState checkInternalState)
+        public AllFrequencySetStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
             : base(checkInputConditions, checkInternalState)
         {
 
