@@ -12,7 +12,7 @@ namespace R_173.Models
         private readonly Action<T> _onValueChange;
         private readonly string _name;
 
-        public Property(Func<T, T, T> checkValue, Action<T> onValueChange, string name = "")
+        public Property(Func<T, T, T> checkValue, string name, Action<T> onValueChange = null)
         {
             _checkValue = checkValue;
             _onValueChange = onValueChange;
