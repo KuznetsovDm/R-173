@@ -12,6 +12,7 @@ using VPerformanceTest = R_173.Views.TrainingSteps.Vertical.PerformanceTest;
 using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
 using R_173.Interfaces;
 using Unity;
+using System.Windows;
 
 namespace R_173.ViewModels
 {
@@ -27,6 +28,8 @@ namespace R_173.ViewModels
         private readonly LearningBL _learning;
         private int _maxStep;
         private int _currentStep;
+        private bool _popupIsOpen;
+        private FrameworkElement _blockUnderMouse;
         private Orientation _orientation;
         private TrainingStepViewModel[] _viewModels;
 
@@ -110,6 +113,30 @@ namespace R_173.ViewModels
                     return;
                 _orientation = value;
                 OnPropertyChanged(nameof(Orientation));
+            }
+        }
+
+        public bool PopupIsOpen
+        {
+            get => _popupIsOpen;
+            set
+            {
+                if (value == _popupIsOpen)
+                    return;
+                _popupIsOpen = value;
+                OnPropertyChanged(nameof(PopupIsOpen));
+            }
+        }
+
+        public FrameworkElement BlockUnderMouse
+        {
+            get => _blockUnderMouse;
+            set
+            {
+                if (value == _blockUnderMouse)
+                    return;
+                _blockUnderMouse = value;
+                OnPropertyChanged(nameof(BlockUnderMouse));
             }
         }
 

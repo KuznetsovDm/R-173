@@ -208,6 +208,7 @@
     <Compile Include="Views\TrainingSteps\Horizontal\Preparation.xaml.cs">
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TrainingSteps\MouseBehavior.cs" />
     <Compile Include="Views\TrainingSteps\StepsTypes.cs" />
     <Compile Include="Views\TrainingSteps\Vertical\FrequencyCheck.xaml.cs">
       <DependentUpon>FrequencyCheck.xaml</DependentUpon>
@@ -309,6 +310,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Files\radio.jpg" />
     <None Include="Resources\R173.xps">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
