@@ -118,7 +118,7 @@ namespace R_173.ViewModels
         public void ShowDialog(string title, string message, string okText)
         {
             Content = null;
-            _ok = ok;
+            _ok = null;
             _cancel = null;
             Message = message;
             Title = title;
