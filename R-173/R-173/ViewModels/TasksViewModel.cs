@@ -12,6 +12,8 @@ using R_173.Interfaces;
 using Unity;
 using System.Windows.Controls;
 using System.Linq;
+using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace R_173.ViewModels
 {
@@ -23,17 +25,25 @@ namespace R_173.ViewModels
         private bool _taskIsRunning;
         private RadioViewModel _radioViewModel;
         private TasksBl _tasksBl;
+        private TaskTypes? runningTaskType = null;
+        private Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
         public RadioViewModel RadioViewModel => _radioViewModel;
 
         public TasksViewModel()
         {
             _message = new MessageBoxParameters("Tab tasks", "message");
+            _taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
+            {
+                { TaskTypes.PreparationToWork, new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork))},
+                { TaskTypes.PerformanceTest, new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(TaskTypes.PerformanceTest))},
+                { TaskTypes.FrequencyTask, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask))},
+            };
             _tasks = new[]
             {
-                new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork)),
-                new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(TaskTypes.PerformanceTest)),
-                new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask)),
+                _taskViewModels[TaskTypes.PreparationToWork],
+                _taskViewModels[TaskTypes.PerformanceTest],
+                _taskViewModels[TaskTypes.FrequencyTask],
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
             _radioViewModel = new RadioViewModel();
@@ -66,27 +76,38 @@ namespace R_173.ViewModels
                 .SetFrequency(TaskHelper.GenerateValidR173Frequency())
                 .SetNumpad(TaskHelper.GenerateValidR173NumpadValue());
 
+            runningTaskType = taskType;
+
             _tasksBl.Start(taskType);
             var taskDescription = _tasksBl.GetDescriptionForTask(taskType, _tasksBl.DataContext);
-            ShowDialog(taskDescription);
+            ShowDialog("Начало задачи", taskDescription);
         }
 
-        private void ShowDialog(string message)
+        private void ShowDialog(string title, string message)
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog("title", message);
+            messageBox.ShowDialog(title, message);
         }
 
-        private void ShowSuccessDialog(string message = "Задача успешно выполнена")
+        private void ShowSuccessDialog(string title = "Задача успешно выполнена", string message = "")
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog("title", message);
+            messageBox.ShowDialog(title, message);
         }
 
-        private void ShowErrorDialog(string message = "Задача не выполнена")
+        private void ShowErrorDialog(Message message, string title = "Задача не выполнена")
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog("title", message);
+            var item = FormatMessage(message);
+            var tree = new TreeView()
+            {
+                BorderThickness = new Thickness(0),
+                Focusable = false,
+                IsManipulationEnabled = false,
+            };
+            tree.Items.Add(item);
+
+            messageBox.InsertBody(title, tree);
         }
 
         private void StopTask()
@@ -94,21 +115,17 @@ namespace R_173.ViewModels
             var message = _tasksBl.Stop();
             _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
-            if(message == null)
+            _taskViewModels[runningTaskType.Value].NumberOfAttempts++;
+            if (message == null)
             {
                 ShowSuccessDialog();
+                _taskViewModels[runningTaskType.Value].NumberOfSuccessfulAttempts++;
             }
             else
             {
-                //ShowErrorDialog("Задача не выполнена" + Environment.NewLine + message.ToString());
-
-                var item = FormatMessage(message);
-                var tree = new TreeView();
-                tree.Items.Add(item);
-
-                var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-                messageBox.InsertBody(tree);
+                ShowErrorDialog(message, "Задача не выполнена");
             }
+            runningTaskType = null;
         }
 
         private TreeViewItem FormatMessage(Message message)
@@ -120,7 +137,9 @@ namespace R_173.ViewModels
 
             var item = new TreeViewItem()
             {
-                IsExpanded = true
+                IsExpanded = true,
+                Foreground = new SolidColorBrush(Colors.Red),
+                FontSize = 18
             };
 
             if (!string.IsNullOrEmpty(message.Header))

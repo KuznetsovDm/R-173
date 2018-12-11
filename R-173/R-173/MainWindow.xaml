@@ -115,8 +115,7 @@
                     <StackPanel>
                         <TextBlock VerticalAlignment="Center" Margin="5"
                                    Text="{Binding Path=Title}"
-                                   FontSize="20" TextWrapping="Wrap" FontWeight="Bold"
-                                   Visibility="{Binding Path=Content, Converter={StaticResource NullToVis}}" />
+                                   FontSize="20" TextWrapping="Wrap" FontWeight="Bold"/>
                         <TextBlock VerticalAlignment="Center" Margin="5"
                                    Text="{Binding Path=Message}"
                                    FontSize="20" TextWrapping="Wrap"

@@ -10,7 +10,7 @@ namespace R_173.Interfaces
         void ShowDialog(Action ok, string title, string message, string okText);
         void ShowDialog(string title, string message, string okText);
         void ShowDialog(string title, string message);
-        void InsertBody(UIElement element);
+        void InsertBody(string title, UIElement element);
         void ShowDialog(MessageBoxParameters parameters);
     }
 }
