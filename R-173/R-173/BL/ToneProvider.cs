@@ -1,4 +1,5 @@
 ﻿using NAudio.Wave;
+using R_173.BE;
 using System.IO;
 
 namespace R_173.BL
@@ -8,7 +9,7 @@ namespace R_173.BL
         private byte[] _rawTone;
         private EmptySampleProvider _emptyProvider;
 
-        public ToneProvider(WaveFormat format)
+        public ToneProvider(WaveFormat format, ActionDescriptionOption option)
         {
             _rawTone = Properties.Resources.RawTone;
             _emptyProvider = new EmptySampleProvider(format);

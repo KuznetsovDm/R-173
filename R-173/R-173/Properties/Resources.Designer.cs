@@ -61,6 +61,15 @@ namespace R_173.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ./Resources/RadioStationText.json.
+        /// </summary>
+        internal static string JsonRadioStationTextPath {
+            get {
+                return ResourceManager.GetString("JsonRadioStationTextPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
         internal static byte[] RawTone {

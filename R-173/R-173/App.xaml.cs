@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Threading;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
+using R_173.BE;
 using R_173.BL;
 using R_173.BL.Learning;
 using R_173.Extensions;
@@ -35,7 +36,7 @@ namespace R_173
                 {
                     _preloader = new Preloader();
                     _preloader.ContentRendered += Preloader_ContentRendered;
-                    _preloader.Closed += delegate 
+                    _preloader.Closed += delegate
                     {
                         _preloader.Dispatcher.BeginInvokeShutdown(DispatcherPriority.Normal);
                     };
@@ -90,6 +91,10 @@ namespace R_173
             container.AddCommunicationServices()
                      .AddAudioServices();
 
+            var binder = new JsonBinder<ActionDescriptionOption>();
+            var option = binder.BindFromFile(R_173.Properties.Resources.JsonRadioStationTextPath);
+
+            container.RegisterInstance<ActionDescriptionOption>(option, new SingletonLifetimeManager());
             container.RegisterType<IRadioManager, RadioManager>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReaderAndSender<SendableRadioModel>, AudioReaderAndSender>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
