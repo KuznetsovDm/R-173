@@ -193,6 +193,9 @@
     <Compile Include="Views\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Tasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

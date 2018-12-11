@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using Unity;
 
 namespace R_173
@@ -47,18 +48,15 @@ namespace R_173
 
             MainContent.Content = _pages[typeof(Appointment)];
 
-            //ContentRendered += delegate
-            //{
-            //    App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
-            //    {
-            //        if (key != Key.F1)
-            //            return;
-            //        App.ServiceCollection.Resolve<IMessageBox>()
-            //        .ShowDialog(() => { MessageBox.Show("ok"); }, () => { MessageBox.Show("cancel"); },
-            //            "Вы уверены, что хотите перейти на другой этап? Текущий прогресс будет утерян.",
-            //            "Перейти", "Отмена");
-            //    };
-            //};
+            ContentRendered += delegate
+            {
+                App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
+                {
+                    if (key != Key.F1)
+                        return;
+                    MainContent.Content = new Views.Test();
+                };
+            };
         }
 
         public void GoToTaskTab()

@@ -139,8 +139,5 @@
                 </Border>
             </Grid>
         </Grid>
-        <Popup StaysOpen="{Binding Path=ToolTipIsOpen}" Placement="Mouse">
-            <TextBlock Text="Popup" />
-        </Popup>
     </Grid>
 </local:UserControlWithMessage>

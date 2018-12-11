@@ -71,7 +71,7 @@
 
             <Border Grid.Column="1"
                     HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="0"
-                    Background="White" Padding="10" CornerRadius="2">
+                    Background="White" Padding="10" CornerRadius="2" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
                 </Border.Effect>
@@ -108,9 +108,10 @@
                                 </Setter>
                             </Style>
                         </DockPanel.Resources>
-                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}" />
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}" Command="{Binding Path=OkCommand}"
+                                IsDefault="True"/>
                         <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}" Command="{Binding Path=CancelCommand}"
-                                Visibility="{Binding Path=CancelText, Converter={StaticResource NotNullToVis}}" />
+                                IsCancel="True" Visibility="{Binding Path=CancelText, Converter={StaticResource NotNullToVis}}" />
                     </DockPanel>
                     <StackPanel>
                         <TextBlock VerticalAlignment="Center" Margin="5"

@@ -1,0 +1,209 @@
+﻿<UserControl x:Class="R_173.Views.Test"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:R_173.Views"
+             xmlns:radio="clr-namespace:R_173.Views.Radio"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1050">
+    <Grid Background="White">
+        <Grid.Resources>
+            <Style TargetType="{x:Type ListBox}">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <DataTemplate DataType="{x:Type local:Task}">
+                <Border x:Name="border" Width="200" Height="150" Background="Yellow" Cursor="Hand" Margin="10" Padding="5">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top" HorizontalAlignment="Center" Width="18" Height="18" 
+                                BorderBrush="Black" BorderThickness="1" CornerRadius="20" Margin="0, 0, 0, 5">
+                            <TextBlock Text="{Binding Path=Number}" TextAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <TextBlock Text="{Binding Path=Description}" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"
+                                   FontSize="16" FontWeight="Bold" />
+                    </DockPanel>
+                </Border>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding Path=Orientation}" Value="Horizontal">
+                        <Setter TargetName="border" Property="Width" Value="200" />
+                        <Setter TargetName="border" Property="Height" Value="150" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:Line}">
+                <Border x:Name="border">
+                    <Line x:Name="line" X1="0" X2="0" Y1="0" Y2="10" StrokeThickness="3" Stroke="Black"
+                          VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Border>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding Path=Orientation}" Value="Horizontal">
+                        <Setter TargetName="line" Property="X2" Value="10" />
+                        <Setter TargetName="line" Property="Y2" Value="0" />
+                        <Setter TargetName="border" Property="Width" Value="Auto" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="3" Height="00">
+            
+        </Grid>
+
+        <radio:RadioView Grid.Column="1" Grid.Row="1" />
+
+        <!--<StackPanel Grid.RowSpan="2" VerticalAlignment="Bottom">
+            <ListBox>
+                <ListBox.Items>
+                    <local:Task Number="1" Description="Выполнить операции подготовки к работе" />
+                    <local:Line Orientation="Vertical" />
+                    <local:Task Number="2" Description="Записать на планке заданные рабочие частоты (нажмите Enter для продолжения)" />
+                    <local:Line Orientation="Vertical" />
+                    <local:Task Number="3" Description="Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
+                </ListBox.Items>
+            </ListBox>
+        </StackPanel>
+
+        <ListBox Grid.Row="2" Grid.Column="1">
+            <ListBox>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.Items>
+                    <local:Task Number="4" Description="Нажать кнопку, соответствующую номеру подготавливаемой для работы частоты" />
+                    <local:Line Orientation="Horizontal" />
+                    <local:Task Number="5" Description="Нажать кнопку СБРОС - табло ЧАСТОТА погаснет" />
+                    <local:Line Orientation="Horizontal" />
+                    <local:Task Number="6" Description="Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
+                </ListBox.Items>
+            </ListBox>
+        </ListBox>
+
+        <StackPanel Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Bottom">
+            <ListBox>
+                <ListBox.Items>
+                    <local:Task Number="9" Description="Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
+                    <local:Line Orientation="Vertical" />
+                    <local:Task Number="8" Description="Записать на планке заданные рабочие частоты (нажмите Enter для продолжения)" />
+                    <local:Line Orientation="Vertical" />
+                    <local:Task Number="7" Description="Выполнить операции подготовки к работе" />
+                </ListBox.Items>
+            </ListBox>
+            <Line X1="0" X2="0" Y1="0" Y2="50" StrokeThickness="3" Stroke="Black" HorizontalAlignment="Center" />
+            <Line X1="0" X2="75" Y1="0" Y2="0" Height="50" StrokeThickness="3" Stroke="Black" HorizontalAlignment="Stretch" />
+        </StackPanel>-->
+
+        <Grid Grid.RowSpan="2">
+            <Line X1="0" X2="0" Y1="50" Y2="9999" Stroke="Black" StrokeThickness="5" HorizontalAlignment="Center" />
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Grid.Row="0">
+                    <local:Task Number="1" Orientation="Vertical"
+                                Description="Выполнить операции подготовки к работе" />
+                </ContentControl>
+                <ContentControl Grid.Row="2">
+                    <local:Task Number="2" Orientation="Vertical"
+                                Description="Записать на планке заданные рабочие частоты (нажмите Enter для продолжения)" />
+                </ContentControl>
+                <ContentControl Grid.Row="4">
+                    <local:Task Number="3" Orientation="Vertical"
+                                Description="Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
+                </ContentControl>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Line X1="0" X2="9999" Y1="0" Y2="0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Center" />
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ContentControl Grid.Column="0">
+                    <local:Task Number="4" Description="Нажать кнопку, соответствующую номеру подготавливаемой для работы частоты" />
+                </ContentControl>
+                <ContentControl Grid.Column="2">
+                    <local:Task Number="5" Description="Нажать кнопку СБРОС - табло ЧАСТОТА погаснет" />
+                </ContentControl>
+                <ContentControl Grid.Column="4">
+                    <local:Task Number="6" Description="Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
+                </ContentControl>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.RowSpan="2">
+            <Line X1="0" X2="0" Y1="50" Y2="9999" Stroke="Black" StrokeThickness="5" HorizontalAlignment="Center" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Grid.Row="0">
+                    <local:Task Number="9" Orientation="Vertical"
+                                Description="Выполнить операции подготовки к работе" />
+                </ContentControl>
+                <ContentControl Grid.Row="2">
+                    <local:Task Number="8" Orientation="Vertical"
+                                Description="Записать на планке заданные рабочие частоты (нажмите Enter для продолжения)" />
+                </ContentControl>
+                <ContentControl Grid.Row="4">
+                    <local:Task Number="7" Orientation="Vertical"
+                                Description="Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
+                </ContentControl>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Line X1="0" X2="113.5" Y1="0" Y2="0" Stroke="Black" StrokeThickness="5"
+                  VerticalAlignment="Center" HorizontalAlignment="Right" />
+            <Line X1="0" X2="0" Y1="0" Y2="85.5" Stroke="Black" StrokeThickness="5"
+                  VerticalAlignment="Top" HorizontalAlignment="Center" />
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Line X1="0" X2="110.5" Y1="0" Y2="0" Stroke="Black" StrokeThickness="5"
+                  VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Line X1="0" X2="0" Y1="0" Y2="85.5" Stroke="Black" StrokeThickness="5"
+                  VerticalAlignment="Top" HorizontalAlignment="Center" />
+        </Grid>
+
+    </Grid>
+</UserControl>
