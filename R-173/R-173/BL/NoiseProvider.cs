@@ -12,9 +12,9 @@ namespace R_173.BL
     {
         private SignalGenerator _signalrGenerator;
 
-        public NoiseProvider()
+        public NoiseProvider(WaveFormat format)
         {
-            _signalrGenerator = new SignalGenerator { Type = SignalGeneratorType.White };
+            _signalrGenerator = new SignalGenerator(format.SampleRate, format.Channels) { Type = SignalGeneratorType.White };
         }
 
         public WaveFormat WaveFormat => _signalrGenerator.WaveFormat;

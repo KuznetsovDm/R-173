@@ -17,7 +17,7 @@ namespace R_173.Extensions
         {
             var listenOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
                 exclusiveAddressUse: false,
-                multicastLoopback: false,
+                multicastLoopback: true,
                 useBind: true);
 
             var senderOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
@@ -48,7 +48,7 @@ namespace R_173.Extensions
 
             var player = services.Resolve<SamplePlayer>();
             player.Add(mixer);
-            var noise = new NoiseProvider();
+            var noise = new NoiseProvider(format);
             player.Add(noise);
             services.RegisterInstance<IGlobalNoiseController>(noise);
             services.RegisterInstance<ISamplePlayer>(player, new SingletonLifetimeManager());
