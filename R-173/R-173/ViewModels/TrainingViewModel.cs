@@ -2,7 +2,6 @@
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
@@ -13,13 +12,15 @@ using VPerformanceTest = R_173.Views.TrainingSteps.Vertical.PerformanceTest;
 using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
 using R_173.Interfaces;
 using Unity;
+using System.Windows;
 
 namespace R_173.ViewModels
 {
-    class TrainingViewModel : ViewModelBase
+    class TrainingViewModel : ViewModelBase, ITabWithMessage
     {
         private readonly ITrainingStep[] _horizontalControls;
         private readonly ITrainingStep[] _verticalControls;
+        private readonly MessageBoxParameters[] _messages;
         private readonly SimpleCommand _openNextStepCommand;
         private readonly SimpleCommand _openPrevStepCommand;
         private readonly SimpleCommand _startOverCommand;
@@ -28,6 +29,8 @@ namespace R_173.ViewModels
         private readonly LearningBL _learning;
         private int _maxStep;
         private int _currentStep;
+        private bool _popupIsOpen;
+        private FrameworkElement _blockUnderMouse;
         private Orientation _orientation;
         private TrainingStepViewModel[] _viewModels;
 
@@ -50,6 +53,12 @@ namespace R_173.ViewModels
                 new VPreparation() { DataContext = _viewModels[0] },
                 new VPerformanceTest() { DataContext = _viewModels[1] },
                 new VFrequencyCheck() { DataContext = _viewModels[2] },
+            };
+            _messages = new MessageBoxParameters[]
+            {
+                new MessageBoxParameters(() => { }, "title", "1", "ok"),
+                new MessageBoxParameters(() => { }, "title", "2", "ok"),
+                new MessageBoxParameters(() => { }, "title", "3", "ok"),
             };
 
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
@@ -114,6 +123,31 @@ namespace R_173.ViewModels
             }
         }
 
+        public bool PopupIsOpen
+        {
+            get => _popupIsOpen;
+            set
+            {
+                if (value == _popupIsOpen)
+                    return;
+                _popupIsOpen = value;
+                OnPropertyChanged(nameof(PopupIsOpen));
+            }
+        }
+
+        public FrameworkElement BlockUnderMouse
+        {
+            get => _blockUnderMouse;
+            set
+            {
+                if (value == _blockUnderMouse)
+                    return;
+                _blockUnderMouse = value;
+                OnPropertyChanged(nameof(BlockUnderMouse));
+            }
+        }
+
+        public MessageBoxParameters Message => _messages[0];
 
         private void Learning_StepChanged(int step)
         {
@@ -127,7 +161,12 @@ namespace R_173.ViewModels
             _viewModels[_currentStep - 1].SetMaxStep();
 
             var message = App.ServiceCollection.Resolve<IMessageBox>();
-            message.ShowDialog(GetMessageBoxOkAction(CurrentStep), () => { StartOver(); }, GetMessageBoxMessage(CurrentStep), GetMessageBoxOkText(CurrentStep), "Начать заново");
+            message.ShowDialog(GetMessageBoxOkAction(CurrentStep), 
+                StartOver, 
+                "Этап обучения завершен!", 
+                GetMessageBoxMessage(CurrentStep), 
+                GetMessageBoxOkText(CurrentStep), 
+                "Начать заново");
         }
 
         private string GetMessageBoxMessage(int stepNumber)

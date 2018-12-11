@@ -1,4 +1,5 @@
-﻿using R_173.Interfaces;
+﻿using R_173.BE;
+using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
 using System;
@@ -15,6 +16,8 @@ namespace R_173.BL.Learning
         protected CheckState _checkInputConditions;
         protected CheckState _checkInternalState;
         protected List<EventHandler<ValueChangedEventArgs<SwitcherState>>> _numpadActions = new List<EventHandler<ValueChangedEventArgs<SwitcherState>>>();
+
+        public string StepName { get; protected set; }
 
         private bool _isSubscribed = false;
 
@@ -212,7 +215,7 @@ namespace R_173.BL.Learning
             Unsubscribe(Model);
         }
 
-        public abstract string GetErrorDescription();
+        public abstract Message GetErrorDescription();
 
         public void Dispose()
         {

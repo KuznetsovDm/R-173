@@ -238,12 +238,22 @@
                               IsDown="{Binding Reset}"
                               Click="{Binding ResetCommand}"/>
                 <Canvas Name="DrawingTarget" ClipToBounds="True"
-                Canvas.Left="1624" Canvas.Top="352"
-                Background="Transparent"
-                Width="424" Height="328"
-                MouseLeftButtonDown="DrawingMouseDown"
-                MouseLeftButtonUp="DrawingMouseUp"
-                MouseMove="DrawingMouseMove"/>
+                        Canvas.Left="1509" Canvas.Top="319"
+                        Background="Transparent"
+                        Width="424" Height="328"
+                        MouseLeftButtonDown="DrawingMouseDown"
+                        MouseLeftButtonUp="DrawingMouseUp"
+                        MouseMove="DrawingMouseMove" />
+                <Ellipse Width="66" Height="68" Canvas.Left="1025" Canvas.Top="747">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{Binding Path=CallColor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Width="66" Height="68" Canvas.Left="1651" Canvas.Top="843">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{Binding Path=BroadcastColor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
             </Canvas>
         </Viewbox>
     </Grid>

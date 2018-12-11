@@ -17,7 +17,7 @@ namespace R_173.Views
     /// <summary>
     /// Interaction logic for Tasks.xaml
     /// </summary>
-    public partial class Tasks : UserControl, ITabView
+    public partial class Tasks : UserControlWithMessage, ITabView
     {
         public Tasks()
         {

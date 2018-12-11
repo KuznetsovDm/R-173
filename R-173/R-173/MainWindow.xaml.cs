@@ -4,6 +4,7 @@ using R_173.ViewModels;
 using R_173.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -71,6 +72,12 @@ namespace R_173
             var page = (sender as ButtonBase).CommandParameter as Type;
             MainContent.Content = _pages[page];
         }
+
+        private void CloseWelcome(object sender, RoutedEventArgs e)
+        {
+            Welcome.Visibility = Visibility.Collapsed;
+            App.ServiceCollection.Resolve<IMessageBox>().ShowDialog("Hello", "I am radio");
+        }
     }
 
     public class TabSizeConverter : IMultiValueConverter
@@ -85,6 +92,22 @@ namespace R_173
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotSupportedException();
+        }
+    }
+
+    public class NullableToVisibilityConverter : IValueConverter
+    {
+        public Visibility NullValue { get; set; }
+        public Visibility NotNullValue { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value == null ? NullValue : NotNullValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

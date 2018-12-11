@@ -30,9 +30,7 @@ namespace R_173.BL.Tasks
             var step = builder.Add(_learningFactory.CreatePreparationToWorkLearning(1, 3))
                     .Add(new RecordWorkToRecordStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState))
-                    .Add(new FrequencySetStep(notepadNumber, frequency,
-                    checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
-                    checkInternalState: SettingFrequenciesLearning.CheckRecordState))
+                    .Add(new FrequencySetStep(notepadNumber, frequency))
                     .Add(new RecordWorkToWorkStep())
                     .Build();
 
@@ -42,7 +40,7 @@ namespace R_173.BL.Tasks
         private CompositeStep CreatePerformanceTestStep()
         {
             return new CompositeStepBuilder()
-                .Add(_learningFactory.CreatePreparationToWorkLearning(1))
+                .Add(_learningFactory.CreatePreparationToWorkLearning(1, 3))
                 .Add(new VolumeChangeStep(
                     checkInputConditions: PerformanceTestLearning.CheckWorkingState,
                     checkInternalState: PerformanceTestLearning.CheckWorkingState))

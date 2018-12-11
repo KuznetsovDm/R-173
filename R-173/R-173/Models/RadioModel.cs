@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 
 namespace R_173.Models
 {
@@ -66,6 +67,14 @@ namespace R_173.Models
         /// </summary>
         public readonly Property<SwitcherState> Board;
         /// <summary>
+        /// Индикатор вызова
+        /// </summary>
+        public readonly Property<Color> CallColor;
+        /// <summary>
+        /// Индикатор ПРД
+        /// </summary>
+        public readonly Property<Color> BroadcastColor;
+        /// <summary>
         /// Кнопки циферблата
         /// </summary>
         public readonly Property<SwitcherState>[] Numpad;
@@ -76,36 +85,40 @@ namespace R_173.Models
 
         public RadioModel()
         {
-            FrequencyNumber = new Property<int>((oldValue, newValue) => newValue, OnFrequnecyNumberChange, nameof(FrequencyNumber));
-            Frequency = new Property<string>((oldValue, newValue) => newValue, OnFrequencyChange, nameof(Frequency));
-            Interference = new Property<SwitcherState>((oldValue, newValue) => newValue, OnInterferenceChange, nameof(Interference));
-            Power = new Property<PowerState>((oldValue, newValue) => newValue, OnPowerChange, nameof(Power));
-            Tone = new Property<SwitcherState>((oldValue, newValue) => newValue, OnToneChange, nameof(Tone));
-            Noise = new Property<NoiseState>((oldValue, newValue) => newValue, OnNoiseChange, nameof(Noise));
-            VolumePRM = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, OnVolumePRMChange, nameof(VolumePRM));
-            TurningOn = new Property<SwitcherState>((oldValue, newValue) => newValue, OnTurningOnChange, nameof(TurningOn));
-            Volume = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, OnVolumeChange, nameof(Volume));
-            RecordWork = new Property<RecordWorkState>((oldValue, newValue) => newValue, OnRecordWorkChange, nameof(RecordWork));
-            Sending = new Property<SwitcherState>((oldValue, newValue) => newValue, OnSendingChange, nameof(Sending));
-            Reset = new Property<SwitcherState>((oldValue, newValue) => newValue, OnResetChange, nameof(Reset));
+            FrequencyNumber = new Property<int>((oldValue, newValue) => newValue, nameof(FrequencyNumber), OnFrequnecyNumberChange);
+            Frequency = new Property<string>((oldValue, newValue) => newValue, nameof(Frequency));
+            Interference = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Interference));
+            Power = new Property<PowerState>((oldValue, newValue) => newValue, nameof(Power));
+            Tone = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Tone));
+            Noise = new Property<NoiseState>((oldValue, newValue) => newValue, nameof(Noise));
+            VolumePRM = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, nameof(VolumePRM));
+            TurningOn = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(TurningOn), OnTurningOnChange);
+            Volume = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, nameof(Volume));
+            RecordWork = new Property<RecordWorkState>((oldValue, newValue) => newValue, nameof(RecordWork), OnRecordWorkChange);
+            Sending = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Sending));
+            Reset = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Reset), OnResetChange);
             Board = new Property<SwitcherState>(
                 (oldValue, newValue) =>
                 {
                     return RecordWork.Value == RecordWorkState.Record ? SwitcherState.Enabled : newValue;
                 },
-                OnBoardChange,
-                nameof(Board)
+                nameof(Board),
+                OnBoardChange
             );
+            CallColor = new Property<Color>((oldValue, newValue) => newValue, nameof(CallColor));
+            BroadcastColor = new Property<Color>((oldValue, newValue) => newValue, nameof(BroadcastColor));
 
             Numpad = new Property<SwitcherState>[10];
             for (var i = 0; i < 10; i++)
             {
                 var num = i;
-                Numpad[i] = new Property<SwitcherState>((oldValue, newValue) => newValue, value =>
-                {
-                    if (value == SwitcherState.Enabled)
-                        OnNumpadChange(num);
-                }, nameof(Numpad) + num.ToString());
+                Numpad[i] = new Property<SwitcherState>((oldValue, newValue) => newValue,
+                    nameof(Numpad) + num.ToString(),
+                    value =>
+                    {
+                        if (value == SwitcherState.Enabled)
+                            OnNumpadChange(num);
+                    });
             }
 
             WorkingFrequencies = new int[WorkingFrequenciesCount];
@@ -123,36 +136,6 @@ namespace R_173.Models
                 Frequency.Value = WorkingFrequencies[state].ToString().PadLeft(5, '0');
         }
 
-        private void OnFrequencyChange(string state)
-        {
-
-        }
-
-        private void OnInterferenceChange(SwitcherState state)
-        {
-
-        }
-
-        private void OnPowerChange(PowerState state)
-        {
-
-        }
-
-        private void OnToneChange(SwitcherState state)
-        {
-
-        }
-
-        private void OnNoiseChange(NoiseState state)
-        {
-
-        }
-
-        private void OnVolumePRMChange(double value)
-        {
-
-        }
-
         private void OnTurningOnChange(SwitcherState state)
         {
             if (TurningOn.Value == SwitcherState.Disabled)
@@ -164,11 +147,6 @@ namespace R_173.Models
             }
         }
 
-        private void OnVolumeChange(double value)
-        {
-
-        }
-
         private void OnRecordWorkChange(RecordWorkState state)
         {
             if (RecordWork.Value == RecordWorkState.Record)
@@ -176,16 +154,6 @@ namespace R_173.Models
             else
                 Board.Value = SwitcherState.Disabled;
             _counterNumpadChange = null;
-        }
-
-        private void OnSendingChange(SwitcherState state)
-        {
-
-        }
-
-        private void OnWorkingFrequenciesChange(SwitcherState state)
-        {
-
         }
 
         private void OnBoardChange(SwitcherState state)

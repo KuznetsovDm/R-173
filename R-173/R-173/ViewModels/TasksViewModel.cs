@@ -8,11 +8,16 @@ using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
 using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
 using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 using R_173.BE;
+using R_173.Interfaces;
+using Unity;
+using System.Windows.Controls;
+using System.Linq;
 
 namespace R_173.ViewModels
 {
-    class TasksViewModel : ViewModelBase
+    class TasksViewModel : ViewModelBase, ITabWithMessage
     {
+        private readonly MessageBoxParameters _message;
         private readonly TaskViewModel[] _tasks;
         private readonly SimpleCommand _stopTaskCommand;
         private bool _taskIsRunning;
@@ -23,6 +28,7 @@ namespace R_173.ViewModels
 
         public TasksViewModel()
         {
+            _message = new MessageBoxParameters("Tab tasks", "message");
             _tasks = new[]
             {
                 new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork)),
@@ -49,6 +55,8 @@ namespace R_173.ViewModels
             }
         }
 
+        public MessageBoxParameters Message => _message;
+
         private void StartTask(TaskTypes taskType)
         {
             TaskIsRunning = true;
@@ -59,15 +67,78 @@ namespace R_173.ViewModels
                 .SetNumpad(TaskHelper.GenerateValidR173NumpadValue());
 
             _tasksBl.Start(taskType);
-            MessageBox.Show(_tasksBl.GetDescriptionForTask(taskType, _tasksBl.DataContext));
+            var taskDescription = _tasksBl.GetDescriptionForTask(taskType, _tasksBl.DataContext);
+            ShowDialog(taskDescription);
+        }
+
+        private void ShowDialog(string message)
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog("title", message);
+        }
+
+        private void ShowSuccessDialog(string message = "Задача успешно выполнена")
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog("title", message);
+        }
+
+        private void ShowErrorDialog(string message = "Задача не выполнена")
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog("title", message);
         }
 
         private void StopTask()
         {
-            var errors = _tasksBl.Stop();
+            var message = _tasksBl.Stop();
             _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
-            MessageBox.Show(string.Join(Environment.NewLine, errors));
+            if(message == null)
+            {
+                ShowSuccessDialog();
+            }
+            else
+            {
+                //ShowErrorDialog("Задача не выполнена" + Environment.NewLine + message.ToString());
+
+                var item = FormatMessage(message);
+                var tree = new TreeView();
+                tree.Items.Add(item);
+
+                var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+                messageBox.InsertBody(tree);
+            }
+        }
+
+        private TreeViewItem FormatMessage(Message message)
+        {
+            if(string.IsNullOrEmpty(message.Header) && message.Messages.Count() == 1)
+            {
+                return FormatMessage(message.Messages.First());
+            }
+
+            var item = new TreeViewItem()
+            {
+                IsExpanded = true
+            };
+
+            if (!string.IsNullOrEmpty(message.Header))
+            {
+                item.Header = message.Header;
+            }
+
+            if (message.Messages == null)
+            {
+                return item;
+            }
+
+            foreach (var m in message.Messages)
+            {
+                item.Items.Add(FormatMessage(m));
+            }
+
+            return item;
         }
     }
 }

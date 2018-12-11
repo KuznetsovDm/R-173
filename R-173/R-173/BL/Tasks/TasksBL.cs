@@ -34,7 +34,7 @@ namespace R_173.BL.Tasks
                 case TaskTypes.PerformanceTest: _activeTask = _taskFactory.CreatePerfomanceTestTask(); break;
                 case TaskTypes.FrequencyTask:
                     _activeTask = _taskFactory.CreateFrequencyTask(DataContext.NumpadNumber, DataContext.Frequency); break;
-                default: throw new System.Exception($"Invalid state {taskType}."); break;
+                default: throw new Exception($"Invalid state {taskType}.");
             }
             _activeTask.Start();
         }
@@ -50,7 +50,7 @@ namespace R_173.BL.Tasks
             }
         }
 
-        public IEnumerable<string> Stop()
+        public Message Stop()
         {
             return _activeTask.Stop();
         }

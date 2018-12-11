@@ -14,7 +14,7 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackPanel.Resources>
-        
+
         <CheckBox Style="{StaticResource 1frequencyCheck}" />
         <Control Template="{StaticResource ArrowBottom}" />
         <CheckBox Style="{StaticResource 2frequencyCheck}" />

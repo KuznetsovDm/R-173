@@ -2,6 +2,7 @@
 using R_173.SharedResources;
 using R_173.Models;
 using R_173.Views.Radio;
+using System.Windows.Media;
 
 namespace R_173.ViewModels
 {
@@ -22,6 +23,8 @@ namespace R_173.ViewModels
         private bool _sending;
         private bool _board;
         private bool _reset;
+        private Color _callColor;
+        private Color _broadcastColor;
         private bool[] _numpad;
 
         public RadioViewModel()
@@ -113,6 +116,16 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(Reset));
             };
             Model.Board.ValueChanged += (s, e) => OnPropertyChanged(nameof(MaxIndent));
+            Model.CallColor.ValueChanged += (s, e) =>
+            {
+                _callColor = e.NewValue;
+                OnPropertyChanged(nameof(CallColor));
+            };
+            Model.BroadcastColor.ValueChanged += (s, e) =>
+            {
+                _broadcastColor = e.NewValue;
+                OnPropertyChanged(nameof(BroadcastColor));
+            };
 
             for (var i = 0; i < 10; i++)
             {
@@ -299,5 +312,9 @@ namespace R_173.ViewModels
         }
 
         public int MaxIndent => Model.Board.Value == SwitcherState.Enabled ? SliderImage.MaxIndentValue : 0;
+
+        public Color CallColor => _callColor;
+
+        public Color BroadcastColor => _broadcastColor;
     }
 }

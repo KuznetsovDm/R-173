@@ -4,6 +4,7 @@ using R_173.SharedResources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using R_173.BE;
 
 namespace R_173.BL.Learning
 {
@@ -13,11 +14,14 @@ namespace R_173.BL.Learning
         private int _current = 0;
         private RadioModel _model;
 
+        public string StepName { get; private set; }
+
         public event EventHandler<StepChangedEventArgs> StepChanged = (e, args) => { };
 
-        public CompositeStep(IList<IStep<RadioModel>> steps)
+        public CompositeStep(IList<IStep<RadioModel>> steps, string stepName = null)
         {
             _steps = steps;
+            StepName = stepName;
         }
 
         private void Step_Crashed(object sender, CrashedEventArgs e)
@@ -132,9 +136,9 @@ namespace R_173.BL.Learning
 
         }
 
-        public string GetErrorDescription()
+        public Message GetErrorDescription()
         {
-            return _steps[_current].GetErrorDescription();
+            return new Message { Header = StepName, Messages = new[] { _steps[_current].GetErrorDescription() } };
         }
     }
 }

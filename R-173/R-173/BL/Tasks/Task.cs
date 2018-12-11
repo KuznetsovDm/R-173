@@ -1,4 +1,5 @@
-﻿using R_173.BL.Learning;
+﻿using R_173.BE;
+using R_173.BL.Learning;
 using R_173.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace R_173.BL.Tasks
     {
         private readonly RadioModel _model;
         private CompositeStep _step;
-        private bool _taskStarted = false;
         private bool _taskCompleted = false;
         private int _currentStep = 0;
 
@@ -23,7 +23,6 @@ namespace R_173.BL.Tasks
         {
             if (_step.StartIfInputConditionsAreRight(_model, out var errors))
             {
-                _taskStarted = true;
                 _taskCompleted = false;
                 _step.StepChanged += _step_StepChanged;
                 _step.Completed += _step_Completed;
@@ -40,17 +39,15 @@ namespace R_173.BL.Tasks
             _currentStep = e.Step;
         }
 
-        public IEnumerable<string> Stop()
+        public Message Stop()
         {
-            var errors = new List<string>();
+            Message message = null;
             if (!_taskCompleted)
             {
-                errors.Add("Задача не выполнена.");
-                errors.Add("Текущий шаг: " + _currentStep);
-                errors.Add(_step.GetErrorDescription());
+                message = new Message { Header = null, Messages = new[] { _step.GetErrorDescription() } };
             }
             _step.Reset();
-            return errors;
+            return message;
         }
     }
 
