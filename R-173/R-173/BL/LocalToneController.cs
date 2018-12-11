@@ -17,11 +17,11 @@ namespace R_173.BL
         {
             _mixer = mixer;
             _toneProvider = provider;
+            _sample = _toneProvider.CreateInfiniteWaveStream().ToSampleProvider();
         }
 
         public void StartPlayTone()
         {
-            _sample = _toneProvider.CreateSampleProvider();
             _mixer.AddMixerInput(_sample);
         }
 

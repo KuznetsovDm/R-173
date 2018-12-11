@@ -175,8 +175,9 @@ namespace R_173.ViewModels
             _cancel?.Invoke();
         }
 
-        public void InsertBody(UIElement element)
+        public void InsertBody(string title, UIElement element)
         {
+            Title = title;
             Content = element;
             Visible = true;
         }

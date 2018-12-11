@@ -29,5 +29,16 @@ namespace R_173.BL
             }
             else return _emptyProvider;
         }
+
+        public InfiniteWaveStream CreateInfiniteWaveStream()
+        {
+            if (_rawTone != null)
+            {
+                var stream = new MemoryStream(_rawTone);
+                var reader = new Mp3FileReader(stream);
+                return new InfiniteWaveStream(reader);
+            }
+            return null;
+        }
     }
 }
