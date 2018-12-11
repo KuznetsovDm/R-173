@@ -4,6 +4,7 @@ using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.Models;
 using R_173.SharedResources;
+using System.Windows.Media;
 
 namespace R_173.BL
 {
@@ -21,11 +22,7 @@ namespace R_173.BL
             _player = player;
             _keyboardHandler = keyboardHandler;
         }
-
-        private void _learningStep_StepChanged(object sender, StepChangedEventArgs e)
-        {
-        }
-
+        
         public void SetModel(RadioModel radioModel)
         {
             _keyboardHandler.ActivateRadio(radioModel);
@@ -84,9 +81,15 @@ namespace R_173.BL
             _reader.SetModel(GetSendableRadioModelFromRadioModel(_radioModel));
 
             if (e.NewValue == SwitcherState.Enabled)
+            {
+                _radioModel.CallColor.Value = Colors.Red;
                 _reader.StartListenTone();
+            }
             else
+            {
+                _radioModel.CallColor.Value = Colors.Transparent;
                 _reader.StopListenTone();
+            }
         }
 
         private void RecordWork_ValueChanged(object sender, ValueChangedEventArgs<RecordWorkState> e)
@@ -127,9 +130,15 @@ namespace R_173.BL
                 return;
 
             if (e.NewValue == SwitcherState.Enabled)
+            {
                 _reader.StartListenMicrophone();
+                _radioModel.BroadcastColor.Value = Colors.Red;
+            }
             else
+            {
                 _reader.StopListenMicrophone();
+                _radioModel.BroadcastColor.Value = Colors.Transparent;
+            }
         }
 
         #endregion
