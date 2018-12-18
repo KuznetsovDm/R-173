@@ -70,7 +70,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning1_1.gif" />
+                <local:Prompt Text="Выполнить операции подготовки к работе. (Выполнены на 1 этапе обучения)" GifSource="Files/gif/learning1_1.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -143,7 +143,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning2_1.gif" />
+                <local:Prompt Text="Повращайте регулятор ГРОМКОСТЬ." GifSource="Files/gif/learning2_1.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -153,7 +153,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning2_2.gif" />
+                <local:Prompt Text="Переключите ПОДАВИТЕЛЬ ШУМОВ в положение ВКЛ" GifSource="Files/gif/learning2_2.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -163,7 +163,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning12_3.gif" />
+                <local:Prompt Text="Нажмите пробел или тангенту" GifSource="Files/gif/learning12_3.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -185,7 +185,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning2_4.gif" />
+                <local:Prompt Text="Нажмите кнопку ТОН" GifSource="Files/gif/learning2_4.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -204,7 +204,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="texttexttexttext texttexttexttext"/>
+                <local:Prompt Text="Эти действия вы должны выполнить на реальной радиостанции. Для продолжения нажмите Enter."/>
             </Setter.Value>
         </Setter>
     </Style>
@@ -214,7 +214,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning1_1.gif" />
+                <local:Prompt Text="Установите органы в исходное положение." GifSource="Files/gif/learning1_1.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -224,7 +224,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning1_2.gif" />
+                <local:Prompt Text="Установите переключатель ПИТАНИЕ в положение ВКЛ" GifSource="Files/gif/learning1_2.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -234,7 +234,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/leatning1_3.gif" />
+                <local:Prompt Text="Нажмите любую кнопку частот." GifSource="Files/gif/leatning1_3.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -244,7 +244,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning1_4.gif" />
+                <local:Prompt Text="Нажмите кнопку ТАБЛО" GifSource="Files/gif/learning1_4.gif" />
             </Setter.Value>
         </Setter>
     </Style>
