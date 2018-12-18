@@ -70,7 +70,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="/Files/Gif/GIF.gif" />
+                <local:Prompt Text="text" GifSource="Files/gif/learning1_1.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -141,19 +141,31 @@
     <Style x:Key="3performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="3. Проверить работу регулятора громкости" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning2_1.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="4performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="4. Проверить работу подавителя шумов" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning2_2.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="5performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="5. Нажать кнопку нагрудного переключателя МТ2 в положние ПРД" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning12_3.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="6performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -171,7 +183,11 @@
     <Style x:Key="8performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="8. Проверить тональный вызов" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning2_4.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
 
@@ -188,7 +204,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="texttexttexttext texttexttexttext texttexttexttext texttexttexttext texttexttexttext texttexttexttext texttexttexttext texttexttexttext" GifSource="../../Files/gif/gif.gif" />
+                <local:Prompt Text="texttexttexttext texttexttexttext"/>
             </Setter.Value>
         </Setter>
     </Style>
@@ -198,7 +214,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="../../Files/gif/gif.gif" />
+                <local:Prompt Text="text" GifSource="Files/gif/learning1_1.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -208,7 +224,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="../../Files/gif/gif.gif" />
+                <local:Prompt Text="text" GifSource="Files/gif/learning1_2.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -218,7 +234,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="../../Files/gif/gif.gif" />
+                <local:Prompt Text="text" GifSource="Files/gif/leatning1_3.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -228,7 +244,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="../../Files/gif/gif.gif" />
+                <local:Prompt Text="text" GifSource="Files/gif/learning1_4.gif" />
             </Setter.Value>
         </Setter>
     </Style>

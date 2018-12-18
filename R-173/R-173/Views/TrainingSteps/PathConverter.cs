@@ -9,7 +9,7 @@ namespace R_173.Views.TrainingSteps
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, value.ToString());
+            return value != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, value.ToString()) : null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
