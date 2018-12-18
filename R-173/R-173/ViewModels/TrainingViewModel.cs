@@ -17,7 +17,7 @@ using R_173.BE;
 
 namespace R_173.ViewModels
 {
-    class TrainingViewModel : ViewModelBase, ITabWithMessage
+    public class TrainingViewModel : ViewModelBase, ITabWithMessage
     {
         private readonly ITrainingStep[] _horizontalControls;
         private readonly ITrainingStep[] _verticalControls;
@@ -34,6 +34,7 @@ namespace R_173.ViewModels
         private FrameworkElement _blockUnderMouse;
         private Orientation _orientation;
         private TrainingStepViewModel[] _viewModels;
+        private object _currentToolTip;
         private bool _crutch = true;
 
         public TrainingViewModel()
@@ -154,6 +155,18 @@ namespace R_173.ViewModels
             }
         }
 
+        public object CurrentToolTip
+        {
+            get => _currentToolTip;
+            set
+            {
+                if (value == _currentToolTip)
+                    return;
+                _currentToolTip = value;
+                OnPropertyChanged(nameof(CurrentToolTip));
+            }
+        }
+        
         public MessageBoxParameters Message => _message;
 
         private void Learning_StepChanged(int step)

@@ -121,6 +121,14 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
+                    <ControlTemplate x:Key="TangentButton" TargetType="radio:ClickedImage">
+                        <Image x:Name="background" Source="/files/radio/tangenta_prm.png" Cursor="Hand"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDown" Value="True">
+                                <Setter TargetName="background" Property="Source" Value="/files/radio/tangenta_prd.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                     <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
                     <radio:FrequencyNumberToImageSourceConverter x:Key="FrNumToSourceConverter"/>
                     <radio:FrequencyToImageSourcesConverter x:Key="FrToSourceConverter"/>
@@ -178,6 +186,11 @@
                 <!-- Громкость ПРМ -->
                 <radio:Encoder Canvas.Left="1560" Canvas.Top="1064"
                        Rotate="{Binding Path=VolumePRMCommand}" Angle="{Binding Path=VolumePRM, Converter={StaticResource ValToAngConverter}}"/>
+                <!-- Тангента -->
+                <radio:ClickedImage Canvas.Left="1995" Canvas.Top="669" Width="350"
+                              Template="{StaticResource TangentButton}"
+                              IsDown="{Binding Path=Sending}"
+                              Click="{Binding Path=SendingCommand}" />
                 <!--Цифирблат-->
                 <radio:ClickedImage Canvas.Left="774" Canvas.Top="851" 
                               Content="1" Opacity="1"

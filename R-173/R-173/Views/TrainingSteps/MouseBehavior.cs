@@ -21,5 +21,13 @@ namespace R_173.Views.TrainingSteps
         {
             return (bool)element.GetValue(IsBlockProperty);
         }
+
+
+        public MouseBehavior()
+        {
+
+        }
+
+        public string GetToolTip => "hello";
     }
 }
