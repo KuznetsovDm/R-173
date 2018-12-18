@@ -61,11 +61,17 @@ namespace R_173.BL
 
         public void StartListenMicrophone()
         {
-            if (_isMicrophoneStarted)
-                return;
+            try
+            {
+                if (_isMicrophoneStarted)
+                    return;
 
-            _isMicrophoneStarted = true;
-            _microphone.StartListen();
+                _isMicrophoneStarted = true;
+                _microphone.StartListen();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void StopListenMicrophone()
@@ -79,11 +85,17 @@ namespace R_173.BL
 
         public void StartListenTone()
         {
-            if (_isToneStarted)
-                return;
+            try
+            {
+                if (_isToneStarted)
+                    return;
 
-            _isToneStarted = true;
-            _localToneController.StartPlayTone();
+                _isToneStarted = true;
+                _localToneController.StartPlayTone();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void StopListenTone()
