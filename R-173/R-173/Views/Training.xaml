@@ -124,6 +124,16 @@
                 </Grid.ColumnDefinitions>
 
                 <Border xmlns:gif="http://wpfanimatedgif.codeplex.com">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Grid.Column" Value="0" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Orientation}" Value="Horizontal">
+                                    <Setter Property="Grid.Column" Value="1" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <ContentControl Content="{Binding Path=CurrentToolTip}">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type system:String}">
@@ -132,11 +142,18 @@
                             <trainingSteps:PathConverter x:Key="PathConverter" />
                             <DataTemplate DataType="{x:Type trainingSteps:Prompt}">
                                 <Border MinWidth="100" MinHeight="100" Background="#EEFFFFFF">
-                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Image gif:ImageBehavior.AnimatedSource="{Binding Path=GifSource, Converter={StaticResource PathConverter}}"
-                                           Width="300" Height="300" />
-                                        <TextBlock Text="{Binding Path=Text}" FontSize="20" TextAlignment="Center" TextWrapping="Wrap" FontWeight="DemiBold" />
-                                    </StackPanel>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Image Grid.Row="0"
+                                            gif:ImageBehavior.AnimatedSource="{Binding Path=GifSource, Converter={StaticResource PathConverter}}" />
+                                        <TextBlock Grid.Row="1" Text="{Binding Path=Text}" 
+                                                   FontSize="20" TextAlignment="Center" 
+                                                   TextWrapping="Wrap" FontWeight="DemiBold" />
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ContentControl.Resources>
