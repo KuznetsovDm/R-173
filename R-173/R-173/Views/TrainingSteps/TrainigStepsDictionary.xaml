@@ -11,7 +11,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
-                    <Border x:Name="Text" Background="LightGray">
+                    <Border x:Name="Text" Background="LightGray" ToolTip="{TemplateBinding ToolTip}">
                         <ContentControl>
                             <TextBlock Text="{TemplateBinding Content}" 
                                                VerticalAlignment="Center"
