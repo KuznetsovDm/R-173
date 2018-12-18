@@ -240,6 +240,7 @@
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\MouseBehavior.cs" />
+    <Compile Include="Views\TrainingSteps\PathConverter.cs" />
     <Compile Include="Views\TrainingSteps\Prompt.cs" />
     <Compile Include="Views\TrainingSteps\StepsTypes.cs" />
     <Compile Include="Views\TrainingSteps\Vertical\FrequencyCheck.xaml.cs">
@@ -422,7 +423,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Files\Gif\" />
+    <Folder Include="Files\gif\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
