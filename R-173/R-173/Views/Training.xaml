@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:R_173.Views"
       xmlns:radio="clr-namespace:R_173.Views.Radio"
+      xmlns:trainingSteps="clr-namespace:R_173.Views.TrainingSteps"
       xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:viewModels="clr-namespace:R_173.ViewModels"
       mc:Ignorable="d" 
@@ -122,11 +123,21 @@
                     <ColumnDefinition Width="9*" />
                 </Grid.ColumnDefinitions>
 
-                <Border>
+                <Border xmlns:gif="http://wpfanimatedgif.codeplex.com">
                     <ContentControl Content="{Binding Path=CurrentToolTip}">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type system:String}">
                                 <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </DataTemplate>
+                            <trainingSteps:PathConverter x:Key="PathConverter" />
+                            <DataTemplate DataType="{x:Type trainingSteps:Prompt}">
+                                <Border MinWidth="100" MinHeight="100" Background="#EEFFFFFF">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Image gif:ImageBehavior.AnimatedSource="{Binding Path=GifSource, Converter={StaticResource PathConverter}}"
+                                           Width="300" Height="300" />
+                                        <TextBlock Text="{Binding Path=Text}" FontSize="20" TextAlignment="Center" TextWrapping="Wrap" FontWeight="DemiBold" />
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </ContentControl.Resources>
                     </ContentControl>
