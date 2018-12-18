@@ -13,6 +13,7 @@ using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
 using R_173.Interfaces;
 using Unity;
 using System.Windows;
+using R_173.BE;
 
 namespace R_173.ViewModels
 {
@@ -20,7 +21,7 @@ namespace R_173.ViewModels
     {
         private readonly ITrainingStep[] _horizontalControls;
         private readonly ITrainingStep[] _verticalControls;
-        private readonly MessageBoxParameters[] _messages;
+        private readonly MessageBoxParameters _message;
         private readonly SimpleCommand _openNextStepCommand;
         private readonly SimpleCommand _openPrevStepCommand;
         private readonly SimpleCommand _startOverCommand;
@@ -34,6 +35,7 @@ namespace R_173.ViewModels
         private Orientation _orientation;
         private TrainingStepViewModel[] _viewModels;
         private object _currentToolTip;
+        private bool _crutch = true;
 
         public TrainingViewModel()
         {
@@ -55,12 +57,7 @@ namespace R_173.ViewModels
                 new VPerformanceTest() { DataContext = _viewModels[1] },
                 new VFrequencyCheck() { DataContext = _viewModels[2] },
             };
-            _messages = new MessageBoxParameters[]
-            {
-                new MessageBoxParameters(() => { }, "title", "1", "ok"),
-                new MessageBoxParameters(() => { }, "title", "2", "ok"),
-                new MessageBoxParameters(() => { }, "title", "3", "ok"),
-            };
+            _message = GetMessageBoxParameters("Preparation.Begin");
 
             _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--, () => _currentStep > 1);
@@ -82,7 +79,7 @@ namespace R_173.ViewModels
             get => _currentStep;
             set
             {
-                if (value == _currentStep || value < 1 || value > _horizontalControls.Length/* || value > _maxStep*/)
+                if (value == _currentStep || value < 1 || value > _horizontalControls.Length)
                 {
                     _viewModels[_currentStep - 1].CurrentStep = 0;
                     return;
@@ -97,6 +94,16 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(CurrentStep));
                 _learning.SetCurrentLearning(CurrentHorizontalControl.Type);
                 _viewModels[_currentStep - 1].CurrentStep = 0;
+
+                if (_crutch)
+                {
+                    _crutch = false;
+                    return;
+                }
+
+                var type = ConvertStepNumberToString(_currentStep) + ".Begin";
+                var parameters = GetMessageBoxParameters(type);
+                ShowDialog(parameters);
             }
         }
 
@@ -159,8 +166,8 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(CurrentToolTip));
             }
         }
-
-        public MessageBoxParameters Message => _messages[0];
+        
+        public MessageBoxParameters Message => _message;
 
         private void Learning_StepChanged(int step)
         {
@@ -173,36 +180,33 @@ namespace R_173.ViewModels
 
             _viewModels[_currentStep - 1].SetMaxStep();
 
-            var message = App.ServiceCollection.Resolve<IMessageBox>();
-            message.ShowDialog(GetMessageBoxOkAction(CurrentStep), 
-                StartOver, 
-                "Этап обучения завершен!", 
-                GetMessageBoxMessage(CurrentStep), 
-                GetMessageBoxOkText(CurrentStep), 
-                "Начать заново");
+            var type = ConvertStepNumberToString(CurrentStep) + ".End";
+            var parameters = GetMessageBoxParameters(type);
+            parameters.Cancel = StartOver;
+            parameters.Ok = GetMessageBoxOkAction(CurrentStep);
+            ShowDialog(parameters);
         }
-
-        private string GetMessageBoxMessage(int stepNumber)
+        
+        private static string ConvertStepNumberToString(int stepNumber)
         {
-            var messages = new[] {
-                "Вы успешно подготовили радиостанцию к работе",
-                "Вы успешно проверили работоспособность радиостанции",
-                "Вы успешно подготовили рабочие частоты"
-            };
-
-            return messages[stepNumber - 1];
-        }
-
-        private string GetMessageBoxOkText(int stepNumber)
-        {
-            if (stepNumber == 3)
+            switch (stepNumber)
             {
-                return "Перейти к задачам";
+                case 1:
+                    return "Preparation";
+                case 2:
+                    return "Performance";
+                case 3:
+                    return "WorkingFrequency";
+                default:
+                    throw new Exception("Unknown step number.");
             }
-
-            return "Перейти к следующему этапу";
         }
 
+        private void ShowDialog(MessageBoxParameters parameters)
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog(parameters);
+        }
 
         private Action GetMessageBoxOkAction(int stepNumber)
         {
@@ -225,5 +229,54 @@ namespace R_173.ViewModels
             CurrentStep = 1;
             _learning.Restart();
         }
+
+
+
+        private static ControlDescription GetControlDescription(string type)
+        {
+            var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
+
+            switch (type)
+            {
+                case "Preparation.Begin":
+                    return option.PreparationToWork.Begin;
+                case "Preparation.End":
+                    return option.PreparationToWork.End;
+                case "Performance.Begin":
+                    return option.HealthCheck.Begin;
+                case "Performance.End":
+                    return option.HealthCheck.End;
+                case "WorkingFrequency.Begin":
+                    return option.WorkingFrequencyPreparation.Begin;
+                case "WorkingFrequency.End":
+                    return option.WorkingFrequencyPreparation.End;
+                default:
+                    throw new Exception("Unknown message box type.");
+            }
+        }
+
+        private static MessageBoxParameters GetMessageBoxParameters(string type)
+        {
+            var description = GetControlDescription(type);
+
+            var parameters = new MessageBoxParameters
+            {
+                Title = description.Title,
+                Message = description.Body
+            };
+
+            if (type.EndsWith("Begin"))
+            {
+                parameters.OkText = description.Buttons[0];
+            }
+            else
+            {
+                parameters.CancelText = description.Buttons[0];
+                parameters.OkText = description.Buttons[1];
+            }
+
+            return parameters;
+        }
+
     }
 }

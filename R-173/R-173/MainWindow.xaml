@@ -146,7 +146,7 @@
                     </Style>
                 </DockPanel.Resources>
                 <TextBlock DockPanel.Dock="Top" Text="Обучающая программа-симулятор радиостанци Р-173"/>
-                <Button DockPanel.Dock="Top" Width="350" Click="CloseWelcome" IsDefault="True" Background="DarkSeaGreen">
+                <Button DockPanel.Dock="Top" Width="350" Click="CloseWelcome" IsDefault="True" Background="DarkSeaGreen" Cursor="Hand">
                     <TextBlock Text="Приступить к работе" Background="Transparent" Padding="2" />
                 </Button>
                 <TextBlock DockPanel.Dock="Bottom" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ"/>
