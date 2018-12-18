@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace R_173.BE
 {
@@ -41,11 +38,11 @@ namespace R_173.BE
 
     public class ActionDescriptions
     {
-        public ControllDescription Begin { get; set; }
-        public ControllDescription End { get; set; }
+        public ControlDescription Begin { get; set; }
+        public ControlDescription End { get; set; }
     }
 
-    public class ControllDescription
+    public class ControlDescription
     {
         public string Title { get; set; }
         public string Body { get; set; }
@@ -54,11 +51,11 @@ namespace R_173.BE
 
     public class Tasks
     {
-        public ControllDescription Begin { get; set; }
-        public ControllDescription PreparationToWork { get; set; }
-        public ControllDescription HealthCheck { get; set; }
-        public ControllDescription WorkingFrequencyPreparation { get; set; }
-        public ControllDescription EndSuccesseful { get; set; }
-        public ControllDescription EndFail { get; set; }
+        public ControlDescription Begin { get; set; }
+        public ControlDescription PreparationToWork { get; set; }
+        public ControlDescription HealthCheck { get; set; }
+        public ControlDescription WorkingFrequencyPreparation { get; set; }
+        public ControlDescription EndSuccesseful { get; set; }
+        public ControlDescription EndFail { get; set; }
     }
 }

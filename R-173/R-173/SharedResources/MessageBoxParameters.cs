@@ -2,14 +2,18 @@
 
 namespace R_173.SharedResources
 {
-    class MessageBoxParameters
+    public class MessageBoxParameters
     {
-        public readonly Action Ok;
-        public readonly Action Cancel;
-        public readonly string Title;
-        public readonly string Message;
-        public readonly string OkText;
-        public readonly string CancelText;
+        public Action Ok { get; set; }
+        public Action Cancel { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
+        public string OkText { get; set; }
+        public string CancelText { get; set; }
+
+        public MessageBoxParameters()
+        {
+        }
 
         public MessageBoxParameters(Action ok, Action cancel, string title, string message, string okText, string cancelText)
         {

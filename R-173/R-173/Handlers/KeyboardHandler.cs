@@ -43,7 +43,7 @@ namespace R_173.Handlers
         public void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             OnKeyDown?.Invoke(e.Key);
-            //e.Handled = true;
+            e.Handled = true;
             //if (e.Key == _lastPressedKey)
             //    return;
             //_lastPressedKey = e.Key;

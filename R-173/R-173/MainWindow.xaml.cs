@@ -1,4 +1,5 @@
-﻿using R_173.Handlers;
+﻿//using R_173.BE;
+using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.ViewModels;
 using R_173.Views;
@@ -74,7 +75,9 @@ namespace R_173
         private void CloseWelcome(object sender, RoutedEventArgs e)
         {
             Welcome.Visibility = Visibility.Collapsed;
-            App.ServiceCollection.Resolve<IMessageBox>().ShowDialog("Hello", "I am radio");
+            //var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
+            //var text = "";
+            //App.ServiceCollection.Resolve<IMessageBox>().ShowDialog("Добро пожаловать", text);
         }
     }
 

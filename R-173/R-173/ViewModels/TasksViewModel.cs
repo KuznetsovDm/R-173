@@ -32,7 +32,7 @@ namespace R_173.ViewModels
 
         public TasksViewModel()
         {
-            _message = new MessageBoxParameters("Tab tasks", "message");
+            _message = GetMessageBoxParameters("Begin");
             _taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
             {
                 { TaskTypes.PreparationToWork, new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork))},
@@ -69,36 +69,82 @@ namespace R_173.ViewModels
 
         private void StartTask(TaskTypes taskType)
         {
-            TaskIsRunning = true;
-            _radioViewModel.Model.SetInitialState();
-            _tasksBl.DataContext
-                .Configure()
-                .SetFrequency(TaskHelper.GenerateValidR173Frequency())
-                .SetNumpad(TaskHelper.GenerateValidR173NumpadValue());
+            var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(taskType));
+            var frequency = TaskHelper.GenerateValidR173Frequency();
+            var number = TaskHelper.GenerateValidR173NumpadValue();
 
-            runningTaskType = taskType;
+            if (taskType == TaskTypes.FrequencyTask)
+            {
+                parameters.Message = string.Format(parameters.Message, frequency, number);
+            }
 
-            _tasksBl.Start(taskType);
-            var taskDescription = _tasksBl.GetDescriptionForTask(taskType, _tasksBl.DataContext);
-            ShowDialog("Начало задачи", taskDescription);
+            parameters.Ok = () =>
+            {
+                TaskIsRunning = true;
+                _radioViewModel.Model.SetInitialState();
+
+                _tasksBl.DataContext
+                    .Configure()
+                    .SetFrequency(frequency)
+                    .SetNumpad(number);
+
+                runningTaskType = taskType;
+
+                _tasksBl.Start(taskType);
+            };
+
+            ShowDialog(parameters);
         }
 
-        private void ShowDialog(string title, string message)
+        private static string ConvertTaskTypeToString(TaskTypes taskType)
         {
-            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(title, message);
+            switch (taskType)
+            {
+                case TaskTypes.PreparationToWork:
+                    return "Preparation";
+                case TaskTypes.PerformanceTest:
+                    return "Perfomance";
+                case TaskTypes.FrequencyTask:
+                    return "WorkingFrequency";
+                default:
+                    throw new Exception("Unknown TaskType");
+            }
         }
 
-        private void ShowSuccessDialog(string title = "Задача успешно выполнена", string message = "")
+        private void ShowDialog(string type)
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(title, message);
+            var parameters = GetMessageBoxParameters(type);
+            messageBox.ShowDialog(parameters);
         }
 
-        private void ShowErrorDialog(Message message, string title = "Задача не выполнена")
+        private void ShowDialog(MessageBoxParameters parameters)
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            messageBox.ShowDialog(parameters);
+        }
+
+        private void ShowSuccessDialog()
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            var parameters = GetMessageBoxParameters("EndSuccess");
+            messageBox.ShowDialog(parameters);
+        }
+
+        private void ShowErrorDialog(Message message)
+        {
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            var messageBoxParameters = GetMessageBoxParameters("EndFail");
             var item = FormatMessage(message);
+            var panel = new StackPanel();
+            var text = new TextBlock()
+            {
+                FontSize = 20,
+                TextWrapping = TextWrapping.Wrap,
+                Text = messageBoxParameters.Message
+            };
+
+            panel.Children.Add(text);
             var tree = new TreeView()
             {
                 BorderThickness = new Thickness(0),
@@ -107,7 +153,9 @@ namespace R_173.ViewModels
             };
             tree.Items.Add(item);
 
-            messageBox.InsertBody(title, tree);
+            panel.Children.Add(tree);
+
+            messageBox.InsertBody(messageBoxParameters, panel);
         }
 
         private void StopTask()
@@ -116,16 +164,64 @@ namespace R_173.ViewModels
             _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
             _taskViewModels[runningTaskType.Value].NumberOfAttempts++;
+
             if (message == null)
             {
-                ShowSuccessDialog();
+                ShowDialog("EndSuccess");
                 _taskViewModels[runningTaskType.Value].NumberOfSuccessfulAttempts++;
             }
             else
             {
-                ShowErrorDialog(message, "Задача не выполнена");
+                ShowErrorDialog(message);
             }
+
             runningTaskType = null;
+        }
+
+        private static ControlDescription GetControlDescription(string type)
+        {
+            var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
+
+            switch (type)
+            {
+                case "Begin":
+                    return option.Tasks.Begin;
+                case "Preparation":
+                    return option.Tasks.PreparationToWork;
+                case "Perfomance":
+                    return option.Tasks.HealthCheck;
+                case "WorkingFrequency":
+                    return option.Tasks.WorkingFrequencyPreparation;
+                case "EndSuccess":
+                    return option.Tasks.EndSuccesseful;
+                case "EndFail":
+                    return option.Tasks.EndFail;
+                default:
+                    throw new Exception("Unknown message box type.");
+            }
+        }
+
+        private static MessageBoxParameters GetMessageBoxParameters(string type)
+        {
+            var description = GetControlDescription(type);
+
+            var parameters = new MessageBoxParameters
+            {
+                Title = description.Title,
+                Message = description.Body
+            };
+
+            if(type == "Begin" || type == "EndSuccess" || type == "EndFail")
+            {
+                parameters.OkText = description.Buttons[0];
+            }
+            else
+            {
+                parameters.CancelText = description.Buttons[0];
+                parameters.OkText = description.Buttons[1];
+            }
+
+            return parameters;
         }
 
         private TreeViewItem FormatMessage(Message message)
