@@ -192,10 +192,15 @@ namespace R_173.ViewModels
             _cancel?.Invoke();
         }
 
-        public void InsertBody(string title, UIElement element)
+        public void InsertBody(MessageBoxParameters parameters, UIElement element)
         {
-            Title = title;
             Content = element;
+            _ok = parameters.Ok;
+            _cancel = parameters.Cancel;
+            Message = parameters.Message;
+            Title = parameters.Title;
+            OkText = parameters.OkText;
+            CancelText = parameters.CancelText;
             Visible = true;
         }
     }

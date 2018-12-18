@@ -2,7 +2,6 @@
 using R_173.BL.Learning;
 using R_173.Models;
 using System;
-using System.Collections.Generic;
 
 namespace R_173.BL.Tasks
 {

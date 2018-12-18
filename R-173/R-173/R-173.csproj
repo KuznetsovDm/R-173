@@ -191,7 +191,7 @@
     <Compile Include="SharedResources\EventArgsWithValue.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="SimpleLogger.cs" />
-    <Compile Include="ViewModels\PreparationViewModel.cs" />
+    <Compile Include="ViewModels\TrainingStepViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
