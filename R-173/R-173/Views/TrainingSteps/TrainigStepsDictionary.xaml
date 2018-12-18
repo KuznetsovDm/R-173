@@ -43,7 +43,7 @@
             <Line X1="17" X2="25" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
         </Grid>
     </ControlTemplate>
-    
+
     <ControlTemplate x:Key="ArrowLeft">
         <Grid VerticalAlignment="Center">
             <Line X1="9" X2="1" Y1="0" Y2="5" StrokeThickness="3" Stroke="Black" />
@@ -68,11 +68,7 @@
     <Style x:Key="1frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="1. Выполнить операции подготовки к работе" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning1_1.gif" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="ToolTip" Value="what do you want?" />
     </Style>
 
     <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -84,25 +80,41 @@
     <Style x:Key="3frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="3. Переключить тумблер ЗАПИСЬ-РАБОТА в положение ЗАПИСЬ (удерживая клавишу N (зажмется кнопка ТАБЛО), передвиньте ползунок ЗАПИСЬ-РАБОТА влево): засветится табло ЧАСТОТА КГЦ" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning3_1.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="4frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="4. Нажать кнопку, соответствующую номеру подготавливаемой для работы частоты" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning3_2.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="5frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="5. Нажать кнопку СБРОС - табло ЧАСТОТА погаснет" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning3_3.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="6frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="6. Набрать с помощью кнопок необходимую ЗПЧ (нажмите 5 кнопок)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning3_4.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="7frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -120,10 +132,14 @@
     <Style x:Key="9frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="9. Переключить тумблер ЗАПИСЬ-РАБОТА в положение РАБОТА" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=7}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="Files/gif/learning3_5.gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
-    
-    
+
+
     <!--PerformanceTest-->
 
     <Style x:Key="1performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -163,7 +179,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="Files/gif/learning12_3.gif" />
+                <local:Prompt Text="text" GifSource="Files/gif/learning2_3.gif" />
             </Setter.Value>
         </Setter>
     </Style>
