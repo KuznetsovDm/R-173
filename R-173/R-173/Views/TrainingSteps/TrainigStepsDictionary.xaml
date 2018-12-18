@@ -70,7 +70,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="text" GifSource="gif" />
+                <local:Prompt Text="text" GifSource="/Files/Gif/GIF.gif" />
             </Setter.Value>
         </Setter>
     </Style>
