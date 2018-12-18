@@ -1,6 +1,6 @@
 ﻿namespace R_173.Views.TrainingSteps
 {
-    interface ITrainingStep
+    public interface ITrainingStep
     {
         string Caption { get; }
         object DataContext { get; }

@@ -34,6 +34,7 @@ namespace R_173.ViewModels
 
             ChangeFrequencyCommand = new SimpleCommand<string>(s => Model.Numpad[int.Parse(s)].Value = SwitcherState.Enabled);
             ToneCommand = new SimpleCommand<bool>(value => Tone = value);
+            SendingCommand = new SimpleCommand<bool>(value => Sending = value);
             VolumeCommand = new SimpleCommand<double>(value => Volume += value);
             VolumePRMCommand = new SimpleCommand<double>(value => VolumePRM += value);
             Numpad0Command = new SimpleCommand<bool>(value => Numpad0 = value);
@@ -103,7 +104,7 @@ namespace R_173.ViewModels
             Model.Sending.ValueChanged += (s, e) =>
             {
                 _sending = e.NewValue == SwitcherState.Enabled;
-                //OnPropertyChanged(nameof(VolumePRM));
+                OnPropertyChanged(nameof(Sending));
             };
             Model.Board.ValueChanged += (s, e) =>
             {
@@ -144,6 +145,7 @@ namespace R_173.ViewModels
         public ICommand ChangeFrequencyCommand { get; }
         public ICommand ClearFrequencyCommand { get; }
         public ICommand ToneCommand { get; }
+        public ICommand SendingCommand { get; }
         public ICommand VolumeCommand { get; }
         public ICommand VolumePRMCommand { get; }
         public ICommand Numpad0Command { get; }

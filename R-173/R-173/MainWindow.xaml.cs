@@ -26,7 +26,7 @@ namespace R_173
             InitializeComponent();
 
             var trainingViewModel = new TrainingViewModel();
-            var training = new Training() { DataContext = trainingViewModel };
+            var training = new Training(trainingViewModel);
             training.SizeChanged += (s, e) =>
             {
                 var attitude = e.NewSize.Width / e.NewSize.Height;
@@ -54,7 +54,7 @@ namespace R_173
                 {
                     if (key != Key.F1)
                         return;
-                    MainContent.Content = new Views.Test();
+                    MainContent.Content = new Training2() { DataContext = new TrainingViewModel() };
                 };
             };
         }

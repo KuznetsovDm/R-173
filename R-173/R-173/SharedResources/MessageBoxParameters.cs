@@ -2,7 +2,7 @@
 
 namespace R_173.SharedResources
 {
-    class MessageBoxParameters
+    public class MessageBoxParameters
     {
         public readonly Action Ok;
         public readonly Action Cancel;

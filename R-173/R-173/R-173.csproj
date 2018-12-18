@@ -222,6 +222,9 @@
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Training2.xaml.cs">
+      <DependentUpon>Training2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrainingSteps\CurrentStepToBoolConverter.cs" />
     <Compile Include="Views\TrainingSteps\Horizontal\FrequencyCheck.xaml.cs">
       <DependentUpon>FrequencyCheck.xaml</DependentUpon>
@@ -234,6 +237,7 @@
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\MouseBehavior.cs" />
+    <Compile Include="Views\TrainingSteps\Prompt.cs" />
     <Compile Include="Views\TrainingSteps\StepsTypes.cs" />
     <Compile Include="Views\TrainingSteps\Vertical\FrequencyCheck.xaml.cs">
       <DependentUpon>FrequencyCheck.xaml</DependentUpon>
@@ -289,6 +293,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Training2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TrainingSteps\TrainigStepsDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -336,6 +344,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Files\radio\tangenta_prd.png" />
+    <Resource Include="Files\radio\tangenta_prm.png" />
     <None Include="Resources\RadioStationText.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

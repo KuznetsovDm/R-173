@@ -11,29 +11,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
-                    <!--<Button x:Name="Text" Background="LightGray" ToolTip="{TemplateBinding ToolTip}"
-                            views:MouseEnterBehavior.PageChangedCommand="True"
-                            Command="{Binding Path=ShowToolTip}">
-                        <Button.Template>-->
-                            <!--<ControlTemplate TargetType="{x:Type Button}">-->
                     <Border x:Name="Text" Background="LightGray">
-                        <ContentControl Content="{TemplateBinding Content}">
-                            <ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type system:String}">
-                                    <TextBlock Text="{TemplateBinding Content}" 
+                        <ContentControl>
+                            <TextBlock Text="{TemplateBinding Content}" 
                                                VerticalAlignment="Center"
                                                Padding="5" 
                                                TextAlignment="Center"
                                                TextWrapping="Wrap" 
                                                FontWeight="Bold" 
-                                               FontSize="10" />
-                                </DataTemplate>
-                            </ContentControl.Resources>
+                                               FontSize="10"
+                                               ToolTip="{TemplateBinding ToolTip}" />
                         </ContentControl>
                     </Border>
-                            <!--</ControlTemplate>-->
-                        <!--</Button.Template>-->
-                    <!--</Button>-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Text" Property="Background" Value="Green" />
@@ -74,10 +63,16 @@
 
     <!--FrequencyCheck-->
 
+    <local:MouseBehavior x:Key="test" x:Name="test1" />
+
     <Style x:Key="1frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="1. Выполнить операции подготовки к работе" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="text" GifSource="gif" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">

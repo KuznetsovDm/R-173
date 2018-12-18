@@ -3,8 +3,8 @@ using Unity;
 using R_173.Handlers;
 using R_173.ViewModels;
 using System.Windows.Input;
-using System.Windows;
 using System;
+using System.Windows.Media;
 
 namespace R_173.Views
 {
@@ -13,9 +13,14 @@ namespace R_173.Views
     /// </summary>
     public partial class Training : UserControlWithMessage, ITabView
     {
-        public Training()
+        private readonly TrainingViewModel _viewModel;
+
+        public Training(TrainingViewModel viewModel)
         {
             InitializeComponent();
+
+            _viewModel = viewModel;
+            DataContext = viewModel;
 
             Loaded += delegate
             {
@@ -23,13 +28,30 @@ namespace R_173.Views
                 {
                     if (!Keyboard.IsKeyDown(Key.LeftCtrl))
                         return;
-                    var viewModel = DataContext as TrainingViewModel;
                     if (key == Key.Right)
                         viewModel.CurrentStep++;
                     else if (key == Key.Left)
                         viewModel.CurrentStep--;
                 };
             };
+        }
+
+        private void Viewbox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var viewBox = sender as Viewbox;
+            var result = VisualTreeHelper.HitTest(viewBox, e.GetPosition(viewBox));
+            _viewModel.CurrentToolTip = result.VisualHit is TextBlock textBlock 
+                ? textBlock.ToolTip 
+                : null;
+        }
+
+        private void Viewbox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var viewBox = sender as Viewbox;
+            var result = VisualTreeHelper.HitTest(viewBox, e.GetPosition(viewBox));
+            _viewModel.CurrentToolTip = result?.VisualHit is TextBlock textBlock
+                ? textBlock.ToolTip
+                : null;
         }
     }
 }
