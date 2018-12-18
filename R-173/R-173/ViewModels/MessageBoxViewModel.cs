@@ -1,9 +1,10 @@
-﻿using R_173.Interfaces;
+﻿using R_173.Handlers;
+using R_173.Interfaces;
 using R_173.SharedResources;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using Unity;
 
 namespace R_173.ViewModels
 {
@@ -24,6 +25,14 @@ namespace R_173.ViewModels
         {
             _okCommand = new SimpleCommand(Ok);
             _cancelCommand = new SimpleCommand(Cancel);
+
+            App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
+            {
+                if (key == Key.Enter)
+                    Ok();
+                else if (key == Key.Escape)
+                    Cancel();
+            };
         }
 
 
@@ -165,12 +174,20 @@ namespace R_173.ViewModels
 
         private void Ok()
         {
+            if (OkText == null)
+                return;
+            OkText = null;
+            CancelText = null;
             Visible = false;
             _ok?.Invoke();
         }
 
         private void Cancel()
         {
+            if (CancelText == null)
+                return;
+            OkText = null;
+            CancelText = null;
             Visible = false;
             _cancel?.Invoke();
         }

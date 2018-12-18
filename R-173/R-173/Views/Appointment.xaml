@@ -9,6 +9,15 @@
 
     <Grid>
         <TextBlock Text="Назначение"/>
-        <DocumentViewer Grid.Column="1" Name="docViewer"/>
+        <DocumentViewer Grid.Column="1" Name="docViewer">
+            <DocumentViewer.Resources>
+                <Style TargetType="ToolBar">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </DocumentViewer.Resources>
+        </DocumentViewer>
     </Grid>
 </UserControl>
