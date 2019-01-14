@@ -40,7 +40,7 @@ namespace R_173
 
             _pages = new Dictionary<Type, ITabView>
             {
-                { typeof(Appointment), new Appointment() },
+                { typeof(Appointment), new Appointment(){ DataContext = new AppointmentViewModel() } },
                 { typeof(Tasks), new Tasks(){ DataContext = new TasksViewModel() } },
                 { typeof(Training), training },
                 { typeof(Work), new Work() { DataContext = new WorkViewModel() } },

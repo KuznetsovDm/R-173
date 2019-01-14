@@ -3,6 +3,7 @@ using R_173.SharedResources;
 using R_173.Models;
 using R_173.Views.Radio;
 using System.Windows.Media;
+using System.Windows;
 
 namespace R_173.ViewModels
 {
@@ -26,9 +27,16 @@ namespace R_173.ViewModels
         private Color _callColor;
         private Color _broadcastColor;
         private bool[] _numpad;
+        private bool _blackoutIsEnabled;
+        private bool _blackoutIsVisible;
+        private double _blackoutWidth;
+        private double _blackoutHeight;
+        private Point _blackoutCenter;
 
-        public RadioViewModel()
+        public RadioViewModel(bool blackoutIdEnabled = false)
         {
+            _blackoutIsEnabled = blackoutIdEnabled;
+
             Model = new RadioModel();
             _numpad = new bool[10];
 
@@ -318,5 +326,55 @@ namespace R_173.ViewModels
         public Color CallColor => _callColor;
 
         public Color BroadcastColor => _broadcastColor;
+
+        public bool BlackoutIsEnabled => _blackoutIsEnabled;
+
+        public bool BlackoutIsVisible
+        {
+            get => _blackoutIsVisible;
+            set
+            {
+                if (value == _blackoutIsVisible)
+                    return;
+                _blackoutIsVisible = value;
+                OnPropertyChanged(nameof(BlackoutIsVisible));
+            }
+        }
+
+        public double BlackoutWidth
+        {
+            get => _blackoutWidth;
+            set
+            {
+                if (value == _blackoutWidth)
+                    return;
+                _blackoutWidth = value;
+                OnPropertyChanged(nameof(BlackoutWidth));
+            }
+        }
+
+        public double BlackoutHeight
+        {
+            get => _blackoutHeight;
+            set
+            {
+                if (value == _blackoutHeight)
+                    return;
+                _blackoutHeight = value;
+                OnPropertyChanged(nameof(BlackoutHeight));
+            }
+        }
+
+        public Point BlackoutCenter
+        {
+            get => _blackoutCenter;
+            set
+            {
+                if (value == _blackoutCenter)
+                    return;
+                _blackoutCenter = value;
+                OnPropertyChanged(nameof(BlackoutCenter));
+            }
+        }
     }
 }
