@@ -44,7 +44,7 @@
                     </Style>
                 </UniformGrid.Resources>
 
-                <RadioButton Content="1. Назначение, ТТХ, комплект" 
+                <RadioButton Content="1. Назначение, ТТХ, комплект" IsChecked="True"
                          Click="ChangeTab" CommandParameter="{x:Type views:Appointment}"/>
                 <RadioButton Content="2. Обучение" 
                          Click="ChangeTab" CommandParameter="{x:Type views:Training}"/>

@@ -32,6 +32,7 @@ namespace R_173.ViewModels
         private double _blackoutWidth;
         private double _blackoutHeight;
         private Point _blackoutCenter;
+        private string _blackoutDescription;
 
         public RadioViewModel(bool blackoutIdEnabled = false)
         {
@@ -374,6 +375,18 @@ namespace R_173.ViewModels
                     return;
                 _blackoutCenter = value;
                 OnPropertyChanged(nameof(BlackoutCenter));
+            }
+        }
+
+        public string BlackoutDescription
+        {
+            get => _blackoutDescription;
+            set
+            {
+                if (value == _blackoutDescription)
+                    return;
+                _blackoutDescription = value;
+                OnPropertyChanged(nameof(BlackoutDescription));
             }
         }
     }

@@ -91,6 +91,26 @@ namespace R_173.Views.Radio
         {
             currentFigure = null;
         }
+
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var border = sender as Border;
+            var ellipse = Ellipses.Children[int.Parse(border.DataContext as string) - 1] as FrameworkElement;
+
+            var viewModel = DataContext as RadioViewModel;
+            viewModel.BlackoutIsVisible = true;
+            viewModel.BlackoutWidth = ellipse.Width / 2;
+            viewModel.BlackoutHeight = ellipse.Height / 2;
+            viewModel.BlackoutCenter = new Point(Canvas.GetLeft(ellipse) + viewModel.BlackoutWidth, 
+                Canvas.GetTop(ellipse) + viewModel.BlackoutHeight);
+            viewModel.BlackoutDescription = BlackoutBehaviour.GetDescription(ellipse);
+        }
+
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var viewModel = DataContext as RadioViewModel;
+            viewModel.BlackoutIsVisible = false;
+        }
     }
 
     public class BlackoutBehaviour
@@ -120,23 +140,24 @@ namespace R_173.Views.Radio
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var element = (FrameworkElement)d;
-            var width = element.Width / 2;
-            var height = element.Height / 2;
-            var center = new Point(Canvas.GetLeft(element) + width, Canvas.GetTop(element) + height);
+            var ellipse = d as FrameworkElement;
+            var width = ellipse.Width / 2;
+            var height = ellipse.Height / 2;
+            var center = new Point(Canvas.GetLeft(ellipse) + width, Canvas.GetTop(ellipse) + height);
 
-            element.MouseEnter += (s, args) =>
+            ellipse.MouseEnter += (s, args) =>
             {
-                var viewModel = element.DataContext as RadioViewModel;
+                var viewModel = ellipse.DataContext as RadioViewModel;
                 viewModel.BlackoutIsVisible = true;
                 viewModel.BlackoutWidth = width;
                 viewModel.BlackoutHeight = height;
                 viewModel.BlackoutCenter = center;
+                viewModel.BlackoutDescription = GetDescription(ellipse);
             };
 
-            element.MouseLeave += (s, args) =>
+            ellipse.MouseLeave += (s, args) =>
             {
-                var viewModel = element.DataContext as RadioViewModel;
+                var viewModel = ellipse.DataContext as RadioViewModel;
                 viewModel.BlackoutIsVisible = false;
             };
         }
