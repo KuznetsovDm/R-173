@@ -15,7 +15,7 @@ namespace R_173.Views
         {
             InitializeComponent();
             var document = new XpsDocument(Properties.Resources.XpsDescriptionPath, FileAccess.Read);
-            DocViewer.Document = document.GetFixedDocumentSequence();
+            docViewer.Document = document.GetFixedDocumentSequence();
         }
 
         private void docViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
