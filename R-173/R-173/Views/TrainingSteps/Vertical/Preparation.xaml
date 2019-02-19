@@ -7,8 +7,7 @@
              xmlns:viewModels="clr-namespace:R_173.ViewModels"
              mc:Ignorable="d" 
              Height="305" Width="400"
-             d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingStepViewModel}}"
-             FontFamily="Times New Roman">
+             d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingStepViewModel}}">
     <StackPanel>
         <StackPanel.Resources>
             <ResourceDictionary>

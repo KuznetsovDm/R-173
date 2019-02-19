@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:R_173.Views"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterScreen"
         Title="Preloader" Height="300" Width="500" ResizeMode="NoResize"
-        FontFamily="Times New Roman" FontSize="20">
+        FontSize="20">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Files/Army-Wallpaper.jpg" />
