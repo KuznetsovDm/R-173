@@ -61,16 +61,26 @@
                 <TextBlock Style="{StaticResource TextInTabItemHeader}">1. Документация</TextBlock>
             </TabItem.Header>
             <TabItem.Content>
-                <DocumentViewer Grid.Column="1" Name="docViewer">
-                    <DocumentViewer.Resources>
-                        <Style TargetType="ToolBar">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </Style>
-                        <Style TargetType="ContentControl">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </Style>
-                    </DocumentViewer.Resources>
-                </DocumentViewer>
+                <Grid>
+                    <DocumentViewer Grid.Column="1" Name="docViewer" ScrollViewer.ScrollChanged="docViewer_ScrollChanged">
+                        <DocumentViewer.Resources>
+                            <Style TargetType="ToolBar">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Style>
+                            <Style TargetType="ContentControl">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Style>
+                            <Style TargetType="Hyperlink">
+                                <Style.Setters>
+                                    <EventSetter Event="Click" Handler="Hyperlink_Click" />
+                                </Style.Setters>
+                            </Style>
+                        </DocumentViewer.Resources>
+                    </DocumentViewer>
+
+                    <Button x:Name="NextButton" Width="200" Height="60" Content="Next" Margin="10" 
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                </Grid>
             </TabItem.Content>
         </TabItem>
         <TabItem>

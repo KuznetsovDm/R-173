@@ -140,8 +140,14 @@
                         </DataTemplate>
                         <trainingSteps:PathConverter x:Key="PathConverter" />
                         <DataTemplate DataType="{x:Type trainingSteps:Prompt}">
-                            <Border MinWidth="100" MinHeight="100" Background="#EEFFFFFF">
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid MinWidth="100" MinHeight="100" Background="#EEFFFFFF">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="18*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                
+                                <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
@@ -150,10 +156,10 @@
                                     <Image Grid.Row="0"
                                         gif:ImageBehavior.AnimatedSource="{Binding Path=GifSource, Converter={StaticResource PathConverter}}" />
                                     <TextBlock Grid.Row="1" Text="{Binding Path=Text}" 
-                                                FontSize="20" TextAlignment="Center" 
+                                                FontSize="40" TextAlignment="Center" 
                                                 TextWrapping="Wrap" FontWeight="DemiBold" />
                                 </Grid>
-                            </Border>
+                            </Grid>
                         </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>
