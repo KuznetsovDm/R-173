@@ -120,6 +120,9 @@
   <data name="JsonRadioStationTextPath" xml:space="preserve">
     <value>./Resources/RadioStationText.json</value>
   </data>
+  <data name="JsonRadioStationAssemblyName" xml:space="preserve">
+    <value>R_173.Resources.RadioStationText.json</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="RawTone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Files\Audio\ton.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

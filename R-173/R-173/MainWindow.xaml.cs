@@ -1,4 +1,5 @@
 ﻿//using R_173.BE;
+
 using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.ViewModels;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using MahApps.Metro.Controls.Dialogs;
 using Unity;
 
 namespace R_173
@@ -25,7 +27,6 @@ namespace R_173
         public MainWindow(KeyboardHandler keyboardHandler)
         {
             InitializeComponent();
-
             var trainingViewModel = new TrainingViewModel();
             var training = new Training(trainingViewModel);
             training.SizeChanged += (s, e) =>
@@ -40,10 +41,10 @@ namespace R_173
 
             _pages = new Dictionary<Type, ITabView>
             {
-                { typeof(Appointment), new Appointment(){ DataContext = new AppointmentViewModel() } },
-                { typeof(Tasks), new Tasks(){ DataContext = new TasksViewModel() } },
-                { typeof(Training), training },
-                { typeof(Work), new Work() { DataContext = new WorkViewModel() } },
+                {typeof(Appointment), new Appointment() {DataContext = new AppointmentViewModel()}},
+                {typeof(Tasks), new Tasks() {DataContext = new TasksViewModel()}},
+                {typeof(Training), training},
+                {typeof(Work), new Work() {DataContext = new WorkViewModel()}},
             };
             Message.DataContext = App.ServiceCollection.Resolve<IMessageBox>();
 
@@ -73,14 +74,16 @@ namespace R_173
 
     public class TabSizeConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
         {
             TabControl tabControl = values[0] as TabControl;
             double width = tabControl.ActualWidth / (tabControl.Items.Count);
             return (width <= 1) ? 0 : (width - 1);
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter,
+            System.Globalization.CultureInfo culture)
         {
             throw new NotSupportedException();
         }
