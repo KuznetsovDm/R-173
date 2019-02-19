@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:R_173.Views.TrainingSteps"
              mc:Ignorable="d" 
-             Height="380" Width="350"
-             FontFamily="Times New Roman">
+             Height="380" Width="350">
     <StackPanel>
         <StackPanel.Resources>
             <ResourceDictionary>

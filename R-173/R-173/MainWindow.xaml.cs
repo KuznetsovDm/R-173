@@ -53,14 +53,14 @@ namespace R_173
 
         public void GoToTaskTab()
         {
-            (buttons.Children[2] as RadioButton).IsChecked = true;
+            ((RadioButton) buttons.Children[2]).IsChecked = true;
             MainContent.Content = _pages[typeof(Tasks)];
         }
 
         private void ChangeTab(object sender, RoutedEventArgs e)
         {
-            var page = (sender as ButtonBase).CommandParameter as Type;
-            MainContent.Content = _pages[page];
+            var page = (sender as ButtonBase)?.CommandParameter as Type;
+            MainContent.Content = _pages[page ?? throw new InvalidOperationException()];
         }
 
         private void CloseWelcome(object sender, RoutedEventArgs e)

@@ -18,7 +18,7 @@
                                                Padding="5" 
                                                TextAlignment="Center"
                                                TextWrapping="Wrap" 
-                                               FontWeight="Bold" 
+                                               FontWeight="SemiBold" 
                                                FontSize="10"
                                                ToolTip="{TemplateBinding ToolTip}" />
                         </ContentControl>

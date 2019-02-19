@@ -10,7 +10,7 @@
       xmlns:viewModels="clr-namespace:R_173.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1280" d:DataContext="{d:DesignInstance {x:Type viewModels:TrainingViewModel}}"
-      FontFamily="Times New Roman">
+      >
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Files/armour-wallpaper4.png" Stretch="UniformToFill" />
@@ -39,10 +39,12 @@
             <Button Grid.Column="2" Content="Изменить положение задач" Command="{Binding Path=ChangeOrientationCommand}" />
 
             <!--<Viewbox Grid.Column="1" Stretch="Uniform" MaxHeight="50" >-->
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="30">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="White" ShadowDepth="0" />
                 </TextBlock.Effect>
+                
+                КАПСОМ
                     
                 <Run Text="{Binding Path=CurrentStep, Mode=OneWay}" />
                 <Run Text="/" />
