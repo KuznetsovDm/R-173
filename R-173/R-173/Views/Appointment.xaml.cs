@@ -2,6 +2,8 @@
 using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Navigation;
 using System.Windows.Xps.Packaging;
 
 namespace R_173.Views
@@ -15,17 +17,26 @@ namespace R_173.Views
         {
             InitializeComponent();
             var document = new XpsDocument(Properties.Resources.XpsDescriptionPath, FileAccess.Read);
-            docViewer.Document = document.GetFixedDocumentSequence();
+            DocViewer.Document = document.GetFixedDocumentSequence();
+
+            DocViewer.AddHandler(Hyperlink.RequestNavigateEvent, new RequestNavigateEventHandler(OnRequestNavigate));
         }
 
-        private void docViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        private void OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            System.Diagnostics.Trace.WriteLine($"{e.VerticalOffset}, {docViewer.MasterPageNumber}");
+            if (!int.TryParse(e.Uri.Host, out var number))
+                return;
+
+            DocViewer.Visibility = System.Windows.Visibility.Collapsed;
+            Radio.Visibility = System.Windows.Visibility.Visible;
+
+            RadioView.SetBlackouts(number - 1);
         }
 
-        private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            DocViewer.Visibility = System.Windows.Visibility.Visible;
+            Radio.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 
