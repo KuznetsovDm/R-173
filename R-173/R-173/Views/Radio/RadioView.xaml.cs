@@ -34,6 +34,7 @@ namespace R_173.Views.Radio
             };
         }
 
+
         void DrawingMouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(DrawingTarget);
@@ -94,20 +95,29 @@ namespace R_173.Views.Radio
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
+            return;
             var border = sender as Border;
-            var ellipse = Ellipses.Children[int.Parse(border.DataContext as string) - 1] as FrameworkElement;
+            SetBlackouts(int.Parse(border.DataContext as string) - 1);
+        }
+
+        public void SetBlackouts(int number)
+        {
+            if (number >= Ellipses.Children.Count || number < 0)
+                return;
+            var ellipse = Ellipses.Children[number] as FrameworkElement;
 
             var viewModel = DataContext as RadioViewModel;
             viewModel.BlackoutIsVisible = true;
             viewModel.BlackoutWidth = ellipse.Width / 2;
             viewModel.BlackoutHeight = ellipse.Height / 2;
-            viewModel.BlackoutCenter = new Point(Canvas.GetLeft(ellipse) + viewModel.BlackoutWidth, 
+            viewModel.BlackoutCenter = new Point(Canvas.GetLeft(ellipse) + viewModel.BlackoutWidth,
                 Canvas.GetTop(ellipse) + viewModel.BlackoutHeight);
             viewModel.BlackoutDescription = BlackoutBehaviour.GetDescription(ellipse);
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
+            return;
             var viewModel = DataContext as RadioViewModel;
             viewModel.BlackoutIsVisible = false;
         }
@@ -140,6 +150,7 @@ namespace R_173.Views.Radio
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            return;
             var ellipse = d as FrameworkElement;
             var width = ellipse.Width / 2;
             var height = ellipse.Height / 2;
