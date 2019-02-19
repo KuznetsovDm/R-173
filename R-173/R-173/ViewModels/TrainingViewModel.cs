@@ -33,7 +33,7 @@ namespace R_173.ViewModels
         private bool _popupIsOpen;
         private FrameworkElement _blockUnderMouse;
         private Orientation _orientation;
-        private TrainingStepViewModel[] _viewModels;
+        private readonly TrainingStepViewModel[] _viewModels;
         private object _currentToolTip;
         private bool _crutch = true;
 
