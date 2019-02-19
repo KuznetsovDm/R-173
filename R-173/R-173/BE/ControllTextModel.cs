@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Reflection;
 
 namespace R_173.BE
 {
@@ -17,14 +18,32 @@ namespace R_173.BE
             {
                 SimpleLogger.Log(ex);
             }
+
             return default(T);
+        }
+
+        public T BindFromAssemblyResources(string path)
+        {
+            try
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                using (var stream = assembly.GetManifestResourceStream(path))
+                using (var reader = new StreamReader(stream))
+                {
+                    var obj = reader.ReadToEnd();
+                    return Bind(obj);
+                }
+            }
+            catch (Exception e)
+            {
+                return default(T);
+            }
         }
 
         public T Bind(string obj)
         {
             return JsonConvert.DeserializeObject<T>(obj);
         }
-
     }
 
     public class ActionDescriptionOption
