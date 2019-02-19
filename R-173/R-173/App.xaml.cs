@@ -92,6 +92,7 @@ namespace R_173
                      .AddAudioServices();
 
             var binder = new JsonBinder<ActionDescriptionOption>();
+            
             var option = binder.BindFromFile(R_173.Properties.Resources.JsonRadioStationTextPath);
 
             container.RegisterInstance<ActionDescriptionOption>(option, new SingletonLifetimeManager());
