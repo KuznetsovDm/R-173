@@ -58,10 +58,10 @@
     <TabControl>
         <TabItem>
             <TabItem.Header>
-                <TextBlock Style="{StaticResource TextInTabItemHeader}">1. Документация</TextBlock>
+                <TextBlock Style="{StaticResource TextInTabItemHeader}">1. Назначение, ТТХ, комплект</TextBlock>
             </TabItem.Header>
             <TabItem.Content>
-                <DocumentViewer Grid.Column="1" Name="docViewer">
+                <DocumentViewer Grid.Column="1" Name="DocViewer">
                     <DocumentViewer.Resources>
                         <Style TargetType="ToolBar">
                             <Setter Property="Visibility" Value="Collapsed" />

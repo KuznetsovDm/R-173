@@ -9,13 +9,13 @@ namespace R_173.Views
     /// <summary>
     /// Interaction logic for Appointment.xaml
     /// </summary>
-    public partial class Appointment : UserControl, ITabView
+    public partial class Appointment : ITabView
     {
         public Appointment()
         {
             InitializeComponent();
             var document = new XpsDocument(Properties.Resources.XpsDescriptionPath, FileAccess.Read);
-            docViewer.Document = document.GetFixedDocumentSequence();
+            DocViewer.Document = document.GetFixedDocumentSequence();
         }
     }
 
