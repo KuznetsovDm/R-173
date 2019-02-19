@@ -307,6 +307,7 @@
                     </Canvas.Resources>
 
                     <Canvas Visibility="{Binding Path=BlackoutIsVisible, Converter={StaticResource BoolToVisConverter}}">
+                    <!--<Canvas>-->
                         <Path Stroke="Black" StrokeThickness="1" Fill="#000" Opacity="0.8">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Xor">
@@ -362,66 +363,70 @@
                     </Canvas>
                     <Canvas Canvas.Left="50" Canvas.Top="100">
                         <Line X2="300" Y2="200" />
-                        <Control Style="{StaticResource Number}" DataContext="23" />
+                        <Control Style="{StaticResource Number}" DataContext="24" />
                     </Canvas>
                     <Canvas Canvas.Left="50" Canvas.Top="650">
                         <Line X2="700" Y2="250" />
-                        <Control Style="{StaticResource Number}" DataContext="22" />
+                        <Control Style="{StaticResource Number}" DataContext="23" />
                     </Canvas>
                     <Canvas Canvas.Left="50" Canvas.Top="875">
                         <Line X2="500" Y2="50" />
-                        <Control Style="{StaticResource Number}" DataContext="21" />
+                        <Control Style="{StaticResource Number}" DataContext="22" />
                     </Canvas>
                     <Canvas Canvas.Left="50" Canvas.Top="1100">
                         <Line X2="500" Y2="100" />
-                        <Control Style="{StaticResource Number}" DataContext="20" />
+                        <Control Style="{StaticResource Number}" DataContext="21" />
                     </Canvas>
                     <Canvas Canvas.Left="50" Canvas.Top="1400">
                         <Line X2="500" Y2="100" />
-                        <Control Style="{StaticResource Number}" DataContext="19" />
+                        <Control Style="{StaticResource Number}" DataContext="20" />
                     </Canvas>
                     <Canvas Canvas.Left="50" Canvas.Top="1700">
                         <Line X2="500" Y2="100" />
-                        <Control Style="{StaticResource Number}" DataContext="18" />
+                        <Control Style="{StaticResource Number}" DataContext="19" />
                     </Canvas>
                     <Canvas Canvas.Left="150" Canvas.Top="2000">
                         <Line X2="700" Y2="-430" />
+                        <Control Style="{StaticResource Number}" DataContext="18" />
+                    </Canvas>
+                    <Canvas Canvas.Left="500" Canvas.Top="2000">
+                        <Line X2="500" Y2="-300" />
                         <Control Style="{StaticResource Number}" DataContext="17" />
                     </Canvas>
-                    <Canvas Canvas.Left="400" Canvas.Top="2000">
-                        <Line X2="600" Y2="-300" />
-                        <Control Style="{StaticResource Number}" DataContext="16" />
-                    </Canvas>
-                    <Canvas Canvas.Left="650" Canvas.Top="2000">
+                    <!--<Canvas Canvas.Left="650" Canvas.Top="2000">
                         <Line X2="600" Y2="-430" />
-                        <Control Style="{StaticResource Number}" DataContext="15" />
-                    </Canvas>
+                        <Control Style="{StaticResource Number}" DataContext="17" />
+                    </Canvas>-->
                     <Canvas Canvas.Left="900" Canvas.Top="2000">
                         <Line X2="250" Y2="-100" />
-                        <Control Style="{StaticResource Number}" DataContext="14" />
+                        <Control Style="{StaticResource Number}" DataContext="16" />
                     </Canvas>
                     <Canvas Canvas.Left="1150" Canvas.Top="2000">
                         <Line X2="200" Y2="-100" />
-                        <Control Style="{StaticResource Number}" DataContext="13" />
+                        <Control Style="{StaticResource Number}" DataContext="15" />
                     </Canvas>
                     <Canvas Canvas.Left="1400" Canvas.Top="2000">
                         <Line X2="120" Y2="-100" />
-                        <Control Style="{StaticResource Number}" DataContext="12" />
+                        <Control Style="{StaticResource Number}" DataContext="14" />
                     </Canvas>
                     <Canvas Canvas.Left="1650" Canvas.Top="2000">
                         <Line X2="-40" Y2="-380" />
-                        <Control Style="{StaticResource Number}" DataContext="11" />
+                        <Control Style="{StaticResource Number}" DataContext="13" />
                     </Canvas>
                     <Canvas Canvas.Left="1900" Canvas.Top="2000">
                         <Line X2="-70" Y2="-380" />
-                        <Control Style="{StaticResource Number}" DataContext="10" />
+                        <Control Style="{StaticResource Number}" DataContext="12" />
                     </Canvas>
                     <Canvas Canvas.Left="2150" Canvas.Top="2000">
                         <Line X2="-400" Y2="-730" />
-                        <Control Style="{StaticResource Number}" DataContext="9" />
+                        <Control Style="{StaticResource Number}" DataContext="11" />
+                    </Canvas>
+                    <Canvas Canvas.Left="2750" Canvas.Top="2000">
+                        <Line X2="500" Y2="-100" />
+                        <Control Style="{StaticResource Number}" DataContext="10" />
                     </Canvas>
 
-                    <Canvas x:Name="Ellipses">
+                    <Canvas x:Name="Ellipses" IsHitTestVisible="False">
                         <Ellipse Width="871" Height="326" Canvas.Left="622" Canvas.Top="321" 
                              radio:BlackoutBehaviour.Description="Табло ЗПЧ и ЧАСТОТА" />
                         <Ellipse Width="423" Height="149" Canvas.Left="846" Canvas.Top="697" 
@@ -438,6 +443,10 @@
                              radio:BlackoutBehaviour.Description="Кнопка ТОН ('Т' на клавиатуре)" />
                         <Ellipse Width="199" Height="298" Canvas.Left="1763" Canvas.Top="1013" 
                              radio:BlackoutBehaviour.Description="Тумблер ПОДАВИТЕЛЬ ШУМОВ" />
+                        <Ellipse Width="0" Height="0" Canvas.Left="3116" Canvas.Top="1643" 
+                             radio:BlackoutBehaviour.Description="Клемма корпуса для подключения к массе объекта" />
+                        <Ellipse Width="622" Height="597" Canvas.Left="3116" Canvas.Top="1643" 
+                             radio:BlackoutBehaviour.Description="Ручка ГРОМКОСТЬ ПРМ" />
                         <Ellipse Width="274" Height="323" Canvas.Left="1523" Canvas.Top="996" 
                              radio:BlackoutBehaviour.Description="Ручка ГРОМКОСТЬ ПРМ" />
                         <Ellipse Width="248" Height="324" Canvas.Left="1673" Canvas.Top="1344" 
@@ -450,8 +459,6 @@
                              radio:BlackoutBehaviour.Description="Пробка корректора частоты управляемого генератора" />
                         <Ellipse Width="150" Height="150" Canvas.Left="1079" Canvas.Top="1836" 
                              radio:BlackoutBehaviour.Description="Пробка регулятора выходного уровня НЧ тракта ОА" />
-                        <Ellipse Width="224" Height="249" Canvas.Left="1150" Canvas.Top="1369" 
-                             radio:BlackoutBehaviour.Description="Кнопка СБРОС ('С' на клавиатуре)" />
                         <Ellipse Width="398" Height="199" Canvas.Left="876" Canvas.Top="1568" 
                              radio:BlackoutBehaviour.Description="Тумблер ЗАПИСЬ - РАБОТА" />
                         <Ellipse Width="224" Height="249" Canvas.Left="752" Canvas.Top="1369" 
