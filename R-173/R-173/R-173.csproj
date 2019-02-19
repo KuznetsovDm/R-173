@@ -232,14 +232,8 @@
     <Compile Include="Views\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Training2.xaml.cs">
-      <DependentUpon>Training2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\CurrentStepToBoolConverter.cs" />
     <Compile Include="Views\TrainingSteps\Horizontal\FrequencyCheck.xaml.cs">
@@ -302,15 +296,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Training.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Training2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -400,15 +386,15 @@
     <None Include="Files\gif\leatning1_3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Р173.xps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Resource Include="Files\radio\tangenta_prd.png" />
     <Resource Include="Files\radio\tangenta_prm.png" />
     <EmbeddedResource Include="Resources\RadioStationText.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Files\radio.jpg" />
-    <None Include="Resources\R173.xps">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Resource Include="Files\radio\loading2.png" />
     <Resource Include="Files\radio\loading.png" />
     <Resource Include="Files\radio\background.jpg" />

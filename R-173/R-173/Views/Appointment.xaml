@@ -55,31 +55,25 @@
         </Style>
     </UserControl.Resources>
 
-    <TabControl>
-        <TabItem>
-            <TabItem.Header>
-                <TextBlock Style="{StaticResource TextInTabItemHeader}">1. Документация</TextBlock>
-            </TabItem.Header>
-            <TabItem.Content>
-                <DocumentViewer Grid.Column="1" Name="docViewer">
-                    <DocumentViewer.Resources>
-                        <Style TargetType="ToolBar">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </Style>
-                        <Style TargetType="ContentControl">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </Style>
-                    </DocumentViewer.Resources>
-                </DocumentViewer>
-            </TabItem.Content>
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                <TextBlock Style="{StaticResource TextInTabItemHeader}">2. Размещение органов управления</TextBlock>
-            </TabItem.Header>
-            <TabItem.Content>
-                <radio:RadioView DataContext="{Binding Path=RadioViewModel}" />
-            </TabItem.Content>
-        </TabItem>
-    </TabControl>
+    <Grid>
+        <DocumentViewer Name="DocViewer">
+            <DocumentViewer.Resources>
+                <Style TargetType="ToolBar">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </DocumentViewer.Resources>
+        </DocumentViewer>
+
+        <Grid x:Name="Radio" Visibility="Collapsed">
+            <radio:RadioView x:Name="RadioView" DataContext="{Binding Path=RadioViewModel}" />
+
+            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30" 
+                    Content="Вернуться к документу"
+                    Padding="10" 
+                    Click="Button_Click"/>
+        </Grid>
+    </Grid>
 </UserControl>

@@ -48,16 +48,6 @@ namespace R_173
             Message.DataContext = App.ServiceCollection.Resolve<IMessageBox>();
 
             MainContent.Content = _pages[typeof(Appointment)];
-
-            ContentRendered += delegate
-            {
-                App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
-                {
-                    if (key != Key.F1)
-                        return;
-                    MainContent.Content = new Training2() { DataContext = new TrainingViewModel() };
-                };
-            };
         }
 
         public void GoToTaskTab()
