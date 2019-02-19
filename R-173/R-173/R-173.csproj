@@ -220,14 +220,8 @@
     <Compile Include="Views\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Training.xaml.cs">
       <DependentUpon>Training.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Training2.xaml.cs">
-      <DependentUpon>Training2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\CurrentStepToBoolConverter.cs" />
     <Compile Include="Views\TrainingSteps\Horizontal\FrequencyCheck.xaml.cs">
@@ -290,15 +284,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Training.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Training2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

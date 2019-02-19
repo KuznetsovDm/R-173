@@ -17,6 +17,16 @@ namespace R_173.Views
             var document = new XpsDocument(Properties.Resources.XpsDescriptionPath, FileAccess.Read);
             DocViewer.Document = document.GetFixedDocumentSequence();
         }
+
+        private void docViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            System.Diagnostics.Trace.WriteLine($"{e.VerticalOffset}, {docViewer.MasterPageNumber}");
+        }
+
+        private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class TabSizeConverter : IMultiValueConverter
