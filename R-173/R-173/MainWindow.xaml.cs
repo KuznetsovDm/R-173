@@ -18,7 +18,7 @@ namespace R_173
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly Dictionary<Type, ITabView> _pages;
 
