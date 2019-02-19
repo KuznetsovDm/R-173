@@ -3,8 +3,10 @@ using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Xps.Packaging;
+using Unity;
 
 namespace R_173.Views
 {
@@ -22,15 +24,22 @@ namespace R_173.Views
             DocViewer.AddHandler(Hyperlink.RequestNavigateEvent, new RequestNavigateEventHandler(OnRequestNavigate));
         }
 
+
+        private static MainWindow _mainWindow;
+        private static MainWindow MainWindow => _mainWindow ?? (_mainWindow = App.ServiceCollection.Resolve<MainWindow>());
+
         private void OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             if (!int.TryParse(e.Uri.Host, out var number))
                 return;
 
+            MainWindow.Cursor = Cursors.Wait;
+
             DocViewer.Visibility = System.Windows.Visibility.Collapsed;
             Radio.Visibility = System.Windows.Visibility.Visible;
-
             RadioView.SetBlackouts(number - 1);
+
+            MainWindow.Cursor = Cursors.Arrow;
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
