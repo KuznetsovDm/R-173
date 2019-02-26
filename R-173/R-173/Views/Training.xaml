@@ -78,8 +78,6 @@
                     <DropShadowEffect Color="White" ShadowDepth="0" />
                 </TextBlock.Effect>
                 
-                КАПСОМ
-                    
                 <Run Text="{Binding Path=CurrentStep, Mode=OneWay}" />
                 <Run Text="/" />
                 <Run Text="{Binding Path=StepsNumber, Mode=OneTime}" />
