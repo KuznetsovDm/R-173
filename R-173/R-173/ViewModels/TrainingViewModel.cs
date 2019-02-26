@@ -10,11 +10,9 @@ using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
 using VPreparation = R_173.Views.TrainingSteps.Vertical.Preparation;
 using VPerformanceTest = R_173.Views.TrainingSteps.Vertical.PerformanceTest;
 using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
-using R_173.Interfaces;
 using Unity;
 using System.Windows;
 using System.Windows.Threading;
-using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using R_173.BE;
 
@@ -190,7 +188,7 @@ namespace R_173.ViewModels
             parameters.Ok = GetMessageBoxOkAction(CurrentStep);
             ShowDialog(parameters);
         }
-        
+
         private static string ConvertStepNumberToString(int stepNumber)
         {
             switch (stepNumber)
@@ -208,28 +206,60 @@ namespace R_173.ViewModels
 
         private void ShowDialog(MessageBoxParameters parameters)
         {
-            //var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            //messageBox.ShowDialog(parameters);
-
+            var dispatcher = Dispatcher.CurrentDispatcher;
             var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
-            mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, MessageDialogStyle.AffirmativeAndNegative,
-                new MetroDialogSettings()
+
+            var dialogStyle = string.IsNullOrEmpty(parameters.CancelText)
+                ? MessageDialogStyle.Affirmative
+                : MessageDialogStyle.AffirmativeAndNegative;
+
+            mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, dialogStyle,
+                new MetroDialogSettings
                 {
-                    AffirmativeButtonText = parameters.CancelText,
+                    AffirmativeButtonText = string.IsNullOrEmpty(parameters.CancelText) ? parameters.OkText : parameters.CancelText,
                     ColorScheme = MetroDialogColorScheme.Theme,
                     AnimateShow = true,
                     NegativeButtonText = parameters.OkText,
+                    AnimateHide = false,
+                    DefaultButtonFocus = MessageDialogResult.Affirmative,
+                    DialogResultOnCancel = MessageDialogResult.Canceled,
 
-                }).ContinueWith(task =>
-            {
-                Dispatcher.CurrentDispatcher.BeginInvoke((Action) (() =>
+                })
+                .ContinueWith(task =>
                 {
-                    var result = task.Result;
-                    if (result == MessageDialogResult.Negative)
-                        parameters.Ok();
-                    else parameters.Cancel();
-                }));
-            });
+                    dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            var result = task.Result;
+                            if (dialogStyle == MessageDialogStyle.Affirmative)
+                            {
+                                if (result == MessageDialogResult.Affirmative)
+                                {
+                                    parameters.Ok?.Invoke();
+                                }
+
+                                return;
+                            }
+
+                            switch (result)
+                            {
+                                case MessageDialogResult.Negative:
+                                    parameters.Ok?.Invoke();
+                                    break;
+                                case MessageDialogResult.Affirmative:
+                                    parameters.Cancel?.Invoke();
+                                    break;
+                                case MessageDialogResult.Canceled:
+                                    break;
+                                case MessageDialogResult.FirstAuxiliary:
+                                    break;
+                                case MessageDialogResult.SecondAuxiliary:
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
+                        })
+                    );
+                });
         }
 
         private Action GetMessageBoxOkAction(int stepNumber)
