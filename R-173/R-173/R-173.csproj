@@ -270,6 +270,7 @@
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\MouseBehavior.cs" />
+    <Compile Include="Views\TrainingSteps\NullToVisibilityConverter.cs" />
     <Compile Include="Views\TrainingSteps\PathConverter.cs" />
     <Compile Include="Views\TrainingSteps\Prompt.cs" />
     <Compile Include="Views\TrainingSteps\StepsTypes.cs" />

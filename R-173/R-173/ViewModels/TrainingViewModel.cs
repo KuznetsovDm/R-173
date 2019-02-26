@@ -2,6 +2,7 @@
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
@@ -13,6 +14,7 @@ using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
 using R_173.Interfaces;
 using Unity;
 using System.Windows;
+using MahApps.Metro.Controls.Dialogs;
 using R_173.BE;
 
 namespace R_173.ViewModels
@@ -206,6 +208,24 @@ namespace R_173.ViewModels
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
             messageBox.ShowDialog(parameters);
+
+            //var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
+            //mainWindow.ShowOverlay();
+            //await mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, MessageDialogStyle.AffirmativeAndNegative,
+            //    new MetroDialogSettings()
+            //    {
+            //        AffirmativeButtonText = parameters.OkText,
+            //        ColorScheme = MetroDialogColorScheme.Theme,
+            //        AnimateShow = true,
+            //        NegativeButtonText = parameters.CancelText,
+
+            //    }).ContinueWith(task =>
+            //{
+            //    var result = task.Result;
+            //    if (result == MessageDialogResult.Negative)
+            //        parameters.Cancel();
+            //    else parameters.Ok();
+            //});
         }
 
         private Action GetMessageBoxOkAction(int stepNumber)

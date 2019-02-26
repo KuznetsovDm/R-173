@@ -7,6 +7,7 @@
                       xmlns:local="clr-namespace:R_173"
                       xmlns:views="clr-namespace:R_173.Views"
                       xmlns:viewModels="clr-namespace:R_173.ViewModels"
+                      xmlns:trainingSteps="clr-namespace:R_173.Views.TrainingSteps"
                       mc:Ignorable="d" d:DesignWidth="1050" d:DesignHeight="1024"
                       MinWidth="1050" MinHeight="600"
                       Title="Р-173" WindowState="Maximized" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana">
@@ -83,9 +84,9 @@
                 </Border.Effect>
                 <DockPanel>
                     <DockPanel.Resources>
-                        <local:NullableToVisibilityConverter x:Key="NullToVis" NullValue="Visible"
+                        <trainingSteps:NullableToVisibilityConverter x:Key="NullToVis" NullValue="Visible"
                                                              NotNullValue="Hidden" />
-                        <local:NullableToVisibilityConverter x:Key="NotNullToVis" NullValue="Hidden"
+                        <trainingSteps:NullableToVisibilityConverter x:Key="NotNullToVis" NullValue="Hidden"
                                                              NotNullValue="Visible" />
                     </DockPanel.Resources>
                     <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
