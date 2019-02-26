@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
+using MahApps.Metro.Controls;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BE;
@@ -92,8 +93,8 @@ namespace R_173
                      .AddAudioServices();
 
             var binder = new JsonBinder<ActionDescriptionOption>();
-            
-            var option = binder.BindFromFile(R_173.Properties.Resources.JsonRadioStationTextPath);
+            //R_173.Resources.RadioStationText.json
+            var option = binder.BindFromAssemblyResources(R_173.Properties.Resources.JsonRadioStationAssemblyName);
 
             container.RegisterInstance<ActionDescriptionOption>(option, new SingletonLifetimeManager());
             container.RegisterType<IRadioManager, RadioManager>(new SingletonLifetimeManager());
@@ -102,7 +103,7 @@ namespace R_173
             container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
             container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
             container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
-            container.RegisterType<MainWindow>(new SingletonLifetimeManager());
+            container.RegisterType<MetroWindow>(new SingletonLifetimeManager());
             ServiceCollection = container;
 
         }

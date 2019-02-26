@@ -85,40 +85,10 @@
                                                              NotNullValue="Visible" />
                     </DockPanel.Resources>
                     <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-                        <DockPanel.Resources>
-                            <!-- <Style TargetType="{x:Type Button}"> -->
-                            <!--     <Setter Property="Margin" Value="5, 3" /> -->
-                            <!--     <Setter Property="MinWidth" Value="100" /> -->
-                            <!--     <Setter Property="FontSize" Value="18" /> -->
-                            <!--     <Setter Property="FontWeight" Value="Bold" /> -->
-                            <!--     <Setter Property="SnapsToDevicePixels" Value="True" /> -->
-                            <!--     <Setter Property="Template"> -->
-                            <!--         <Setter.Value> -->
-                            <!--             <ControlTemplate TargetType="{x:Type Button}"> -->
-                            <!--                 <Border x:Name="Border" Padding="5" Background="Transparent" -->
-                            <!--                         BorderBrush="Transparent" BorderThickness="1" CornerRadius="2"> -->
-                            <!--                     <TextBlock Text="{TemplateBinding Content}" -->
-                            <!--                                HorizontalAlignment="Center" /> -->
-                            <!--                 </Border> -->
-                            <!--                 <ControlTemplate.Triggers> -->
-                            <!--                     <Trigger Property="IsMouseOver" Value="True"> -->
-                            <!--                         <Setter TargetName="Border" Property="BorderBrush" -->
-                            <!--                                 Value="LightGray" /> -->
-                            <!--                     </Trigger> -->
-                            <!--                     <Trigger Property="IsPressed" Value="True"> -->
-                            <!--                         <Setter TargetName="Border" Property="Background" Value="Gray" /> -->
-                            <!--                         <Setter Property="Foreground" Value="White" /> -->
-                            <!--                     </Trigger> -->
-                            <!--                 </ControlTemplate.Triggers> -->
-                            <!--             </ControlTemplate> -->
-                            <!--         </Setter.Value> -->
-                            <!--     </Setter> -->
-                            <!-- </Style> -->
-                        </DockPanel.Resources>
-                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}"
+                        <Button Style="{StaticResource AccentedSquareButtonStyle}" DockPanel.Dock="Right" Content="{Binding Path=OkText}"
                                 Command="{Binding Path=OkCommand}"
                                 IsDefault="True" />
-                        <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}"
+                        <Button Style="{StaticResource AccentedSquareButtonStyle}" DockPanel.Dock="Right" Content="{Binding Path=CancelText}"
                                 Command="{Binding Path=CancelCommand}"
                                 IsCancel="True"
                                 Visibility="{Binding Path=CancelText, Converter={StaticResource NotNullToVis}}" />

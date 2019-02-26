@@ -7,21 +7,6 @@ namespace R_173.BE
 {
     public class JsonBinder<T>
     {
-        public T BindFromFile(string path)
-        {
-            try
-            {
-                var text = File.ReadAllText(path);
-                return Bind(text);
-            }
-            catch (Exception ex)
-            {
-                SimpleLogger.Log(ex);
-            }
-
-            return default(T);
-        }
-
         public T BindFromAssemblyResources(string path)
         {
             try
