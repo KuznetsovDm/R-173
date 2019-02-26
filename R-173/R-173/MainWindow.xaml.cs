@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MahApps.Metro.Controls.Dialogs;
 using Unity;
+using System.Linq;
 
 namespace R_173
 {
@@ -24,10 +25,14 @@ namespace R_173
     {
         private readonly Dictionary<Type, ITabView> _pages;
         private ButtonBase _lastButton;
+        private readonly Brush _brush;
+        private readonly Brush _selectedBrush;
 
         public MainWindow(KeyboardHandler keyboardHandler)
         {
             InitializeComponent();
+            _brush = new SolidColorBrush(Color.FromRgb(0xFF, 0xF7, 0xF7));
+            _selectedBrush = new SolidColorBrush(Color.FromRgb(0xBE, 0xE6, 0xFD));
             var trainingViewModel = new TrainingViewModel();
             var training = new Training(trainingViewModel);
             training.SizeChanged += (s, e) =>
@@ -53,6 +58,7 @@ namespace R_173
 
             //this.ShowMetroDialogAsync(new Dialog(this, new MetroDialogSettings()));
             _lastButton = buttons.Children[0] as Button;
+            _lastButton.Background = _selectedBrush;
         }
 
         public void GoToTaskTab()
@@ -64,8 +70,8 @@ namespace R_173
 
         private void SelectButton(Button button)
         {
-            _lastButton.Background = Brushes.RosyBrown;
-            //button.Background = Color.;#FFF7F7F7
+            button.Background = _selectedBrush;
+            _lastButton.Background = _brush;
             _lastButton = button;
         }
 
