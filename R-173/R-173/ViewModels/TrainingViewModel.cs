@@ -169,7 +169,7 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(CurrentToolTip));
             }
         }
-        
+
         public MessageBoxParameters Message => _message;
 
         private void Learning_StepChanged(int step)

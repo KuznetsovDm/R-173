@@ -1,6 +1,7 @@
 ﻿using R_173.Interfaces;
 using R_173.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace R_173.Views.Radio
     public partial class RadioView : UserControl
     {
         bool isDrawing;
+        private Dictionary<int, Control> _canvases;
 
         private static IRadioManager _radioManager;
         private static IRadioManager RadioManager => _radioManager ?? (_radioManager = App.ServiceCollection.Resolve<IRadioManager>());
@@ -32,6 +34,27 @@ namespace R_173.Views.Radio
                 var viewModel = DataContext as RadioViewModel;
                 RadioManager.SetModel((bool)e.NewValue ? viewModel?.Model : null);
             };
+
+            DataContextChanged += (s, e) =>
+            {
+                if (e.NewValue is RadioViewModel viewModel && viewModel.BlackoutIsEnabled)
+                {
+                    _canvases = new Dictionary<int, Control>();
+
+                    foreach (var obj in Canvases.Children)
+                    {
+                        if (obj is Canvas canvas &&
+                            canvas.Children.Count > 1 &&
+                            canvas.Children[1] is Control control &&
+                            control.DataContext != null &&
+                            int.TryParse(control.DataContext.ToString(), out var value))
+                        {
+                            _canvases.Add(value, control);
+                        }
+                    }
+                }
+            };
+
         }
 
 
@@ -95,16 +118,20 @@ namespace R_173.Views.Radio
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
-            return;
+            //return;
             var border = sender as Border;
             SetBlackouts(int.Parse(border.DataContext as string) - 1);
         }
 
+        private Control _lastControl;
+
         public void SetBlackouts(int number)
         {
+            if (_lastControl != null)
+                _lastControl.Background = Brushes.White;
             if (number >= Ellipses.Children.Count || number < 0)
                 return;
-            var ellipse = Ellipses.Children[number] as FrameworkElement;
+            var ellipse = Ellipses.Children[number] as Ellipse;
 
             var viewModel = DataContext as RadioViewModel;
             viewModel.BlackoutIsVisible = true;
@@ -113,11 +140,14 @@ namespace R_173.Views.Radio
             viewModel.BlackoutCenter = new Point(Canvas.GetLeft(ellipse) + viewModel.BlackoutWidth,
                 Canvas.GetTop(ellipse) + viewModel.BlackoutHeight);
             viewModel.BlackoutDescription = BlackoutBehaviour.GetDescription(ellipse);
+            if (_canvases == null || !_canvases.TryGetValue(number + 1, out _lastControl))
+                return;
+            _lastControl.Background = Brushes.Blue;
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
-            return;
+            //return;
             var viewModel = DataContext as RadioViewModel;
             viewModel.BlackoutIsVisible = false;
         }
@@ -150,7 +180,7 @@ namespace R_173.Views.Radio
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            return;
+            //return;
             var ellipse = d as FrameworkElement;
             var width = ellipse.Width / 2;
             var height = ellipse.Height / 2;

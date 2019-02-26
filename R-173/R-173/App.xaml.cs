@@ -103,7 +103,7 @@ namespace R_173
             container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
             container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
             container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
-            container.RegisterType<MetroWindow>(new SingletonLifetimeManager());
+            container.RegisterType<MainWindow>(new SingletonLifetimeManager());
             ServiceCollection = container;
 
         }

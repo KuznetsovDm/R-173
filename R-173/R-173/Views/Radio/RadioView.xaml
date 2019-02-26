@@ -274,8 +274,8 @@
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <Canvas Visibility="{Binding Path=BlackoutIsEnabled, Converter={StaticResource BoolToVisConverter}}">
-                <!--<Canvas>-->
+                <!--<Canvas x:Name="Canvases" Visibility="{Binding Path=BlackoutIsEnabled, Converter={StaticResource BoolToVisConverter}}">-->
+                <Canvas x:Name="Canvases">
                     <Canvas.Resources>
                         <Style TargetType="{x:Type Ellipse}">
                             <Setter Property="Fill" Value="Transparent" />
@@ -284,10 +284,11 @@
                             <!--<Setter Property="Visibility" Value="Hidden" />-->
                         </Style>
                         <Style x:Key="Number" TargetType="{x:Type Control}">
+                            <Setter Property="Background" Value="White" />
                             <Setter Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate>
-                                        <Border Width="200" Height="200" Background="White" CornerRadius="100"
+                                    <ControlTemplate TargetType="{x:Type Control}">
+                                        <Border Width="200" Height="200" Background="{TemplateBinding Background}" CornerRadius="100"
                                             MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"
                                             DataContext="{TemplateBinding DataContext}">
                                             <TextBlock VerticalAlignment="Center" 
@@ -446,7 +447,7 @@
                         <Ellipse Width="0" Height="0" Canvas.Left="3116" Canvas.Top="1643" 
                              radio:BlackoutBehaviour.Description="Клемма корпуса для подключения к массе объекта" />
                         <Ellipse Width="622" Height="597" Canvas.Left="3116" Canvas.Top="1643" 
-                             radio:BlackoutBehaviour.Description="Ручка ГРОМКОСТЬ ПРМ" />
+                             radio:BlackoutBehaviour.Description="Высокочастотный разъем для подключения антены или БАФ" />
                         <Ellipse Width="274" Height="323" Canvas.Left="1523" Canvas.Top="996" 
                              radio:BlackoutBehaviour.Description="Ручка ГРОМКОСТЬ ПРМ" />
                         <Ellipse Width="248" Height="324" Canvas.Left="1673" Canvas.Top="1344" 
