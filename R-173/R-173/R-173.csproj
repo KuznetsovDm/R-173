@@ -400,7 +400,6 @@
     <None Include="Files\gif\leatning1_3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="R-173_TemporaryKey.pfx" />
     <None Include="Resources\Р173.xps">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
