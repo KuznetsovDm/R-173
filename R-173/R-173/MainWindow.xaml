@@ -43,6 +43,10 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#FFF7F7" />
+                        <Setter Property="Focusable" Value="False" />
+                    </Style>
                 </UniformGrid.Resources>
 
                 <Button Content="1. Назначение, ТТХ, комплект"

@@ -1,5 +1,4 @@
 ﻿//using R_173.BE;
-
 using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.ViewModels;
@@ -12,8 +11,10 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using MahApps.Metro.Controls.Dialogs;
 using Unity;
+using System.Linq;
 
 namespace R_173
 {
@@ -23,10 +24,15 @@ namespace R_173
     public partial class MainWindow
     {
         private readonly Dictionary<Type, ITabView> _pages;
+        private ButtonBase _lastButton;
+        private readonly Brush _brush;
+        private readonly Brush _selectedBrush;
 
         public MainWindow(KeyboardHandler keyboardHandler)
         {
             InitializeComponent();
+            _brush = new SolidColorBrush(Color.FromRgb(0xFF, 0xF7, 0xF7));
+            _selectedBrush = new SolidColorBrush(Color.FromRgb(0xBE, 0xE6, 0xFD));
             var trainingViewModel = new TrainingViewModel();
             var training = new Training(trainingViewModel);
             training.SizeChanged += (s, e) =>
@@ -49,17 +55,30 @@ namespace R_173
             Message.DataContext = App.ServiceCollection.Resolve<IMessageBox>();
 
             MainContent.Content = _pages[typeof(Appointment)];
+
+            //this.ShowMetroDialogAsync(new Dialog(this, new MetroDialogSettings()));
+            _lastButton = buttons.Children[0] as Button;
+            _lastButton.Background = _selectedBrush;
         }
 
         public void GoToTaskTab()
         {
-            ((RadioButton) buttons.Children[2]).IsChecked = true;
             MainContent.Content = _pages[typeof(Tasks)];
+            SelectButton(buttons.Children[2] as Button);
+        }
+
+        private void SelectButton(Button button)
+        {
+            button.Background = _selectedBrush;
+            _lastButton.Background = _brush;
+            _lastButton = button;
         }
 
         private void ChangeTab(object sender, RoutedEventArgs e)
         {
-            var page = (sender as ButtonBase)?.CommandParameter as Type;
+            var button = sender as Button;
+            SelectButton(button);
+            var page = button.CommandParameter as Type;
             MainContent.Content = _pages[page ?? throw new InvalidOperationException()];
         }
 

@@ -11,7 +11,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
-                    <Border x:Name="Text" Background="LightGray" ToolTip="{TemplateBinding ToolTip}">
+                    <Border x:Name="Text" Background="White" BorderBrush="DarkSlateGray" BorderThickness="1" CornerRadius="3" ToolTip="{TemplateBinding ToolTip}">
                         <ContentControl>
                             <TextBlock Text="{TemplateBinding Content}" 
                                                VerticalAlignment="Center"
@@ -19,7 +19,7 @@
                                                TextAlignment="Center"
                                                TextWrapping="Wrap" 
                                                FontWeight="SemiBold" 
-                                               FontSize="10"
+                                               FontSize="9"
                                                ToolTip="{TemplateBinding ToolTip}" />
                         </ContentControl>
                     </Border>
@@ -38,16 +38,16 @@
 
     <ControlTemplate x:Key="ArrowRight">
         <Grid VerticalAlignment="Center">
-            <Line X1="17" X2="25" Y1="0" Y2="5" StrokeThickness="3" Stroke="Black" />
-            <Line X1="0" X2="26" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
-            <Line X1="17" X2="25" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="12" X2="19" Y1="0" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="0" X2="20" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="12" X2="19" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
         </Grid>
     </ControlTemplate>
 
     <ControlTemplate x:Key="ArrowLeft">
         <Grid VerticalAlignment="Center">
             <Line X1="9" X2="1" Y1="0" Y2="5" StrokeThickness="3" Stroke="Black" />
-            <Line X1="0" X2="26" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="0" X2="20" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
             <Line X1="9" X2="1" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
         </Grid>
     </ControlTemplate>
@@ -78,7 +78,11 @@
     <Style x:Key="2frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="2. Записать на планке заданные рабочие частоты (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Эти действия вы должны выполнить на стационарной радиостанции" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="3frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -124,13 +128,21 @@
     <Style x:Key="7frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="7. Проконтролировать значение набранной ЗПЧ по табло ЧАСТОТА (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Эти действия вы должны выполнить на стационарной радиостанции. Для продолжения нажмите Enter."/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="8frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="8. Аналогично подготовить все последующие ЗПЧ, повторив операции 4-7" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=6}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Установите все рабочие частоты"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="9frequencyCheck" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -149,13 +161,21 @@
     <Style x:Key="1performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="1. Выполнить операции подготовки к работе" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=-1}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Этот шаг вы выполнили на предыдущем этапе"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="2performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="2. Прослушать собственные шумы приемника (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Эти действия вы должны выполнить на стационарной радиостанции. Для продолжения нажмите Enter."/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="3performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -183,7 +203,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="Нажмите пробел или тангенту" GifSource="Files/gif/learning2_3.gif" />
+                <local:Prompt Text="Нажмите ПРОБЕЛ или тангенту" GifSource="Files/gif/learning2_3.gif" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -191,13 +211,21 @@
     <Style x:Key="6performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="6. Проверить модуляцию (самопрослушивание) (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Эти действия вы должны выполнить на стационарной радиостанции. Для продолжения нажмите Enter."/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="7performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
         <Setter Property="Content" Value="7. Проверить отдачу тока в антенну (нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
-        <Setter Property="ToolTip" Value="what do you want?" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <local:Prompt Text="Эти действия вы должны выполнить на стационарной радиостанции. Для продолжения нажмите Enter."/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="8performanceTest" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource TrainingStep}">
@@ -224,7 +252,7 @@
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip">
             <Setter.Value>
-                <local:Prompt Text="Эти действия вы должны выполнить на реальной радиостанции. Для продолжения нажмите Enter."/>
+                <local:Prompt Text="Эти действия вы должны выполнить на стационарной радиостанции. Для продолжения нажмите Enter."/>
             </Setter.Value>
         </Setter>
     </Style>

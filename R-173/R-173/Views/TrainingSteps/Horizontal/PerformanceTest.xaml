@@ -23,7 +23,7 @@
                 <Control Template="{StaticResource ArrowRight}" />
                 <CheckBox Style="{StaticResource 3performanceTest}" Width="130" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-                <CheckBox Style="{StaticResource 4performanceTest}" Width="130" Height="60" />
+                <CheckBox Style="{StaticResource 4performanceTest}" Width="135" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
             </StackPanel>
 
