@@ -195,6 +195,7 @@
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\ITabWithMessage.cs" />
     <Compile Include="SharedResources\KeyEventArgs.cs" />
+    <Compile Include="SharedResources\MessageBehavior.cs" />
     <Compile Include="SharedResources\MessageBoxParameters.cs" />
     <Compile Include="SharedResources\StepChangedEventArgs.cs" />
     <Compile Include="Interfaces\IStep.cs" />
