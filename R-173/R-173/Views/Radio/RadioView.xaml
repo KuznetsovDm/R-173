@@ -274,8 +274,8 @@
                     </Ellipse.Fill>
                 </Ellipse>
 
-                <!--<Canvas x:Name="Canvases" Visibility="{Binding Path=BlackoutIsEnabled, Converter={StaticResource BoolToVisConverter}}">-->
-                <Canvas x:Name="Canvases">
+                <Canvas x:Name="Canvases" Visibility="{Binding Path=BlackoutIsEnabled, Converter={StaticResource BoolToVisConverter}}">
+                <!--<Canvas x:Name="Canvases">-->
                     <Canvas.Resources>
                         <Style TargetType="{x:Type Ellipse}">
                             <Setter Property="Fill" Value="Transparent" />
