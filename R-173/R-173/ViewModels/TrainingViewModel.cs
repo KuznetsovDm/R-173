@@ -2,7 +2,6 @@
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
@@ -14,6 +13,7 @@ using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
 using R_173.Interfaces;
 using Unity;
 using System.Windows;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using R_173.BE;
 
@@ -61,7 +61,8 @@ namespace R_173.ViewModels
             };
             _message = GetMessageBoxParameters("Preparation.Begin");
 
-            _openNextStepCommand = new SimpleCommand(() => CurrentStep++, () => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
+            _openNextStepCommand = new SimpleCommand(() => CurrentStep++,
+                () => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
             _openPrevStepCommand = new SimpleCommand(() => CurrentStep--, () => _currentStep > 1);
             _changeOrientationCommand = new SimpleCommand(() => Orientation =
                 Orientation == Orientation.Horizontal
@@ -150,7 +151,7 @@ namespace R_173.ViewModels
             get => _blockUnderMouse;
             set
             {
-                if (value == _blockUnderMouse)
+                if (Equals(value, _blockUnderMouse))
                     return;
                 _blockUnderMouse = value;
                 OnPropertyChanged(nameof(BlockUnderMouse));
@@ -206,26 +207,25 @@ namespace R_173.ViewModels
 
         private void ShowDialog(MessageBoxParameters parameters)
         {
-            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(parameters);
+            //var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
+            //messageBox.ShowDialog(parameters);
 
-            //var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
-            //mainWindow.ShowOverlay();
-            //await mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, MessageDialogStyle.AffirmativeAndNegative,
-            //    new MetroDialogSettings()
-            //    {
-            //        AffirmativeButtonText = parameters.OkText,
-            //        ColorScheme = MetroDialogColorScheme.Theme,
-            //        AnimateShow = true,
-            //        NegativeButtonText = parameters.CancelText,
+            var mainWindow = App.ServiceCollection.Resolve<MetroWindow>();
+            mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, MessageDialogStyle.AffirmativeAndNegative,
+                new MetroDialogSettings()
+                {
+                    AffirmativeButtonText = parameters.OkText,
+                    ColorScheme = MetroDialogColorScheme.Theme,
+                    AnimateShow = true,
+                    NegativeButtonText = parameters.CancelText,
 
-            //    }).ContinueWith(task =>
-            //{
-            //    var result = task.Result;
-            //    if (result == MessageDialogResult.Negative)
-            //        parameters.Cancel();
-            //    else parameters.Ok();
-            //});
+                }).ContinueWith(task =>
+            {
+                var result = task.Result;
+                if (result == MessageDialogResult.Negative)
+                    parameters.Cancel();
+                else parameters.Ok();
+            });
         }
 
         private Action GetMessageBoxOkAction(int stepNumber)

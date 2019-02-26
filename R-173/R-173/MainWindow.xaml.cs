@@ -1,20 +1,15 @@
-﻿//using R_173.BE;
-using R_173.Handlers;
+﻿using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.ViewModels;
 using R_173.Views;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media;
-using MahApps.Metro.Controls.Dialogs;
 using Unity;
-using System.Linq;
 
 namespace R_173
 {
@@ -78,7 +73,7 @@ namespace R_173
         {
             var button = sender as Button;
             SelectButton(button);
-            var page = button.CommandParameter as Type;
+            var page = button?.CommandParameter as Type;
             MainContent.Content = _pages[page ?? throw new InvalidOperationException()];
         }
 

@@ -3,7 +3,6 @@ using Unity;
 using R_173.Handlers;
 using R_173.ViewModels;
 using System.Windows.Input;
-using System;
 using System.Windows.Media;
 using System.Windows;
 
@@ -12,7 +11,7 @@ namespace R_173.Views
     /// <summary>
     /// Interaction logic for Training.xaml
     /// </summary>
-    public partial class Training : UserControlWithMessage, ITabView
+    public partial class Training : ITabView
     {
         private readonly TrainingViewModel _viewModel;
 

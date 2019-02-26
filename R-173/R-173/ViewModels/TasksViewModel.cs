@@ -25,7 +25,7 @@ namespace R_173.ViewModels
         private bool _taskIsRunning;
         private RadioViewModel _radioViewModel;
         private TasksBl _tasksBl;
-        private TaskTypes? runningTaskType = null;
+        private TaskTypes? _runningTaskType = null;
         private Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
         public RadioViewModel RadioViewModel => _radioViewModel;
@@ -88,7 +88,7 @@ namespace R_173.ViewModels
                     .SetFrequency(frequency)
                     .SetNumpad(number);
 
-                runningTaskType = taskType;
+                _runningTaskType = taskType;
 
                 _tasksBl.Start(taskType);
             };
@@ -163,19 +163,19 @@ namespace R_173.ViewModels
             var message = _tasksBl.Stop();
             _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
-            _taskViewModels[runningTaskType.Value].NumberOfAttempts++;
+            _taskViewModels[_runningTaskType.Value].NumberOfAttempts++;
 
             if (message == null)
             {
                 ShowDialog("EndSuccess");
-                _taskViewModels[runningTaskType.Value].NumberOfSuccessfulAttempts++;
+                _taskViewModels[_runningTaskType.Value].NumberOfSuccessfulAttempts++;
             }
             else
             {
                 ShowErrorDialog(message);
             }
 
-            runningTaskType = null;
+            _runningTaskType = null;
         }
 
         private static ControlDescription GetControlDescription(string type)

@@ -53,11 +53,15 @@
                     <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Tasks}"
                              BorderThickness="0" Background="Transparent">
                         <ListBox.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource MahApps.Metro.Styles.MetroButton}">
+                                <Setter Property="Padding" Value="10"></Setter>
+                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                            </Style>
                             <Style TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                            <DockPanel LastChildFill="False">
+                                            <DockPanel LastChildFill="False" Margin="10">
                                                 <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center"
                                                            Margin="0, 0, 10, 0"
                                                            Text="{Binding Path=Title}"
@@ -70,10 +74,7 @@
                                                         <TextBlock Text="/" FontSize="20" />
                                                         <TextBlock Text="{Binding Path=NumberOfAttempts}" FontSize="20" />
                                                     </StackPanel>
-                                                    <Button VerticalAlignment="Center"
-                                                            Content="Начать"
-                                                            Command="{Binding Path=StartCommand}"
-                                                            Margin="5, 10" Padding="3" FontSize="20" />
+                                                    <Button Content="Начать" Command="{Binding Path=StartCommand}" Margin="20,0" FontSize="12"/>
                                                 </StackPanel>
                                             </DockPanel>
                                         </ControlTemplate>
