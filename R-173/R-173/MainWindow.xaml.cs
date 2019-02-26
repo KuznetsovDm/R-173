@@ -108,19 +108,4 @@ namespace R_173
         }
     }
 
-    public class NullableToVisibilityConverter : IValueConverter
-    {
-        public Visibility NullValue { get; set; }
-        public Visibility NotNullValue { get; set; }
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value == null ? NullValue : NotNullValue;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

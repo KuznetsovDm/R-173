@@ -270,6 +270,7 @@
       <DependentUpon>Preparation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingSteps\MouseBehavior.cs" />
+    <Compile Include="Views\TrainingSteps\NullToVisibilityConverter.cs" />
     <Compile Include="Views\TrainingSteps\PathConverter.cs" />
     <Compile Include="Views\TrainingSteps\Prompt.cs" />
     <Compile Include="Views\TrainingSteps\StepsTypes.cs" />
@@ -413,7 +414,6 @@
     <None Include="Files\gif\leatning1_3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Properties\app.manifest" />
     <None Include="Resources\Р173.xps">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
