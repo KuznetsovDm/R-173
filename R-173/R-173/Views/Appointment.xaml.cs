@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Xps.Packaging;
 using Unity;
+using System.Windows;
 
 namespace R_173.Views
 {
@@ -22,6 +23,8 @@ namespace R_173.Views
             DocViewer.Document = document.GetFixedDocumentSequence();
 
             DocViewer.AddHandler(Hyperlink.RequestNavigateEvent, new RequestNavigateEventHandler(OnRequestNavigate));
+
+            IsVisibleChanged += (s, e) => RadioView.RadioIsEnabled = (bool)e.NewValue && Radio.Visibility == Visibility.Visible;
         }
 
 
@@ -32,16 +35,18 @@ namespace R_173.Views
         {
             if (!int.TryParse(e.Uri.Host, out var number))
                 return;
-            DocViewer.Visibility = System.Windows.Visibility.Collapsed;
-            Radio.Visibility = System.Windows.Visibility.Visible;
+            DocViewer.Visibility = Visibility.Collapsed;
+            Radio.Visibility = Visibility.Visible;
             RadioView.SetBlackouts(number - 1);
             MainWindow.Cursor = null;
+            RadioView.RadioIsEnabled = true;
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DocViewer.Visibility = System.Windows.Visibility.Visible;
-            Radio.Visibility = System.Windows.Visibility.Collapsed;
+            DocViewer.Visibility = Visibility.Visible;
+            Radio.Visibility = Visibility.Collapsed;
+            RadioView.RadioIsEnabled = false;
         }
     }
 
