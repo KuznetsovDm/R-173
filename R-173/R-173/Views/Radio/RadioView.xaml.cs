@@ -29,11 +29,7 @@ namespace R_173.Views.Radio
         {
             InitializeComponent();
 
-            IsVisibleChanged += (s, e) =>
-            {
-                var viewModel = DataContext as RadioViewModel;
-                RadioManager.SetModel((bool)e.NewValue ? viewModel?.Model : null);
-            };
+            IsVisibleChanged += RadioView_IsVisibleChanged;
 
             DataContextChanged += (s, e) =>
             {
@@ -57,6 +53,19 @@ namespace R_173.Views.Radio
 
         }
 
+        private void RadioView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            RadioIsEnabled = (bool)e.NewValue;
+        }
+
+        public bool RadioIsEnabled
+        {
+            set
+            {
+                var viewModel = DataContext as RadioViewModel;
+                RadioManager.SetModel(value ? viewModel?.Model : null);
+            }
+        }
 
         void DrawingMouseDown(object sender, MouseButtonEventArgs e)
         {
