@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="ru-RU" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <!--<String Id="ProductName">R123</String>
+  <String Id="ShortcutName">R123</String>
+  <String Id="ExeName">R123\bin\Release\R123.exe</String>
+  <String Id="WorkDirectory">R123\bin\Release\</String>-->
+  <String Id="ProductName">R173</String>
+  <String Id="ShortcutName">R173</String>
+  <String Id="ExeName">R-173.exe</String>
+  <String Id="WorkDirectory"></String>
+</WixLocalization>

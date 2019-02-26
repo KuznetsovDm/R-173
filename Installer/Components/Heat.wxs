@@ -1,0 +1,1083 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir5A10D01FB847007B5517A50CB592C011" Name="app.publish" />
+            <Directory Id="dir5FD5B93CE6DC308CC0CAC3042BE2A51D" Name="Files" />
+            <Directory Id="dir61B122782F2749F187324C134F6498C1" Name="Resources" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="HeatComponents">
+            <Component Id="cmpE5004356FE7CC543DB30277EBA335A30" Directory="INSTALLDIR" Guid="{EE2AA639-69D8-4FC0-8474-6900C26653A0}">
+                <Class Id="{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}" Context="InprocServer32" Description="CommonServiceLocator.ActivationException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="CommonServiceLocator.ActivationException" Description="CommonServiceLocator.ActivationException" />
+                </Class>
+                <File Id="fil5159DCE9D857F88BB103745E425061C9" KeyPath="yes" Source="$(var.SourcePath)\CommonServiceLocator.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32\2.0.4.0" Name="Class" Value="CommonServiceLocator.ActivationException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32\2.0.4.0" Name="Assembly" Value="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32\2.0.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32\2.0.4.0" Name="CodeBase" Value="file:///[#fil5159DCE9D857F88BB103745E425061C9]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32" Name="Class" Value="CommonServiceLocator.ActivationException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32" Name="Assembly" Value="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32" Name="CodeBase" Value="file:///[#fil5159DCE9D857F88BB103745E425061C9]" Type="string" Action="write" />
+            </Component>
+            <Component Id="cmpACE8BB4791E97E4648B221C51BB01214" Directory="INSTALLDIR" Guid="{38BCC4C3-2237-4E8F-ADAE-179CB1EA41C8}">
+                <File Id="fil20E4F57B869C1ABB0D1CB2E53378F92F" KeyPath="yes" Source="$(var.SourcePath)\CommonServiceLocator.pdb" />
+            </Component>
+            <Component Id="cmp669D7BFE3F77F8D3E757F78FE36D1217" Directory="INSTALLDIR" Guid="{88CC1311-99FF-432A-B6EA-2B802F3B13CF}">
+                <File Id="fil01FD9A438453A336BFC7E1C098C52A86" KeyPath="yes" Source="$(var.SourcePath)\ControlzEx.dll" />
+            </Component>
+            <Component Id="cmpC5F969B3A325E1E71512166A7084C7A9" Directory="INSTALLDIR" Guid="{935ECE93-F138-40CB-A05E-6A5AB3845D1D}">
+                <File Id="filFD6828E2362630921E75BDC73BAA802E" KeyPath="yes" Source="$(var.SourcePath)\ControlzEx.pdb" />
+            </Component>
+            <Component Id="cmp5AA67C54786010695636AC936B6DAB6B" Directory="INSTALLDIR" Guid="{31ACFE5A-CFE1-42F5-950B-0E334D25431F}">
+                <File Id="fil00D5841010DB1A067ED42F5490017C77" KeyPath="yes" Source="$(var.SourcePath)\CSharpFunctionalExtensions.dll" />
+            </Component>
+            <Component Id="cmp2AC41B9A3E9E58C9FAC717C515DD6534" Directory="INSTALLDIR" Guid="{54489949-03A9-45A8-98DE-8B9AB812376F}">
+                <File Id="filC48A97D03FAF26C6CB0B00A73EBC747A" KeyPath="yes" Source="$(var.SourcePath)\MahApps.Metro.dll" />
+            </Component>
+            <Component Id="cmpBBDC2313992859C5873E1F15DC5731BF" Directory="INSTALLDIR" Guid="{6F50627D-71BB-4C5B-983D-2A7C39A6EA64}">
+                <File Id="fil1F854C70B64EB7C08E9D4CF3603D8981" KeyPath="yes" Source="$(var.SourcePath)\MahApps.Metro.pdb" />
+            </Component>
+            <Component Id="cmp0D35E873877D8F733E33BE324EB6E7DD" Directory="INSTALLDIR" Guid="{DF0431CE-2877-4D0D-9903-5F3A531CF7BF}">
+                <File Id="filEA89C8C631F78E7D57A8BA32C9D3716B" KeyPath="yes" Source="$(var.SourcePath)\MahApps.Metro.xml" />
+            </Component>
+            <Component Id="cmp4370A5F473BC7C578FA8C4A674514135" Directory="INSTALLDIR" Guid="{BD220AD5-F9ED-4CBA-A9D6-EFB11C762D28}">
+                <File Id="fil44FD26BE5AA3BE512E4A18D3072087AE" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.dll" />
+                <RegistryValue Root="HKCR" Key="Record\{2FAF1D94-0A36-3214-B904-3F98E93A1347}\1.0.12.0" Name="Class" Value="Microsoft.Runtime.CompilerServices.YieldAwaitable" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{2FAF1D94-0A36-3214-B904-3F98E93A1347}\1.0.12.0" Name="Assembly" Value="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{2FAF1D94-0A36-3214-B904-3F98E93A1347}\1.0.12.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{2FAF1D94-0A36-3214-B904-3F98E93A1347}\1.0.12.0" Name="CodeBase" Value="file:///[#fil44FD26BE5AA3BE512E4A18D3072087AE]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{73F58F7F-FAFB-3240-8E9E-82F4E9A8F4ED}\1.0.12.0" Name="Class" Value="Microsoft.Runtime.CompilerServices.ConfiguredTaskAwaitable" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{73F58F7F-FAFB-3240-8E9E-82F4E9A8F4ED}\1.0.12.0" Name="Assembly" Value="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{73F58F7F-FAFB-3240-8E9E-82F4E9A8F4ED}\1.0.12.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{73F58F7F-FAFB-3240-8E9E-82F4E9A8F4ED}\1.0.12.0" Name="CodeBase" Value="file:///[#fil44FD26BE5AA3BE512E4A18D3072087AE]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{860F96AE-74E9-3A35-AC33-2E578BF3B504}\1.0.12.0" Name="Class" Value="Microsoft.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{860F96AE-74E9-3A35-AC33-2E578BF3B504}\1.0.12.0" Name="Assembly" Value="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{860F96AE-74E9-3A35-AC33-2E578BF3B504}\1.0.12.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{860F96AE-74E9-3A35-AC33-2E578BF3B504}\1.0.12.0" Name="CodeBase" Value="file:///[#fil44FD26BE5AA3BE512E4A18D3072087AE]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{EA7ADF52-E661-327C-8CB8-B1469F8F1C18}\1.0.12.0" Name="Class" Value="Microsoft.Runtime.CompilerServices.TaskAwaiter" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{EA7ADF52-E661-327C-8CB8-B1469F8F1C18}\1.0.12.0" Name="Assembly" Value="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{EA7ADF52-E661-327C-8CB8-B1469F8F1C18}\1.0.12.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{EA7ADF52-E661-327C-8CB8-B1469F8F1C18}\1.0.12.0" Name="CodeBase" Value="file:///[#fil44FD26BE5AA3BE512E4A18D3072087AE]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F973E172-9860-3CC1-B846-723D2F159D0B}\1.0.12.0" Name="Class" Value="Microsoft.Runtime.CompilerServices.ConfiguredTaskAwaitable+ConfiguredTaskAwaiter" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F973E172-9860-3CC1-B846-723D2F159D0B}\1.0.12.0" Name="Assembly" Value="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F973E172-9860-3CC1-B846-723D2F159D0B}\1.0.12.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{F973E172-9860-3CC1-B846-723D2F159D0B}\1.0.12.0" Name="CodeBase" Value="file:///[#fil44FD26BE5AA3BE512E4A18D3072087AE]" Type="string" Action="write" />
+            </Component>
+            <Component Id="cmpBF316BAA97EE8CE76D0E2E7D86CB70F5" Directory="INSTALLDIR" Guid="{C14D9C87-820B-4DC3-A78E-4F03C0121E5E}">
+                <File Id="fil3F3FAF9A5D44A074B2AB8FC3101C1A92" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+            </Component>
+            <Component Id="cmpAFEF0EA8DECEAAB8BF79359C00DEA6ED" Directory="INSTALLDIR" Guid="{F6DEF8BC-3844-4C97-A5D5-B59F476F7DFD}">
+                <File Id="filACFE12D57A32B2C72BA8E7AE9A49D4E4" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.Desktop.xml" />
+            </Component>
+            <Component Id="cmp82951EB65984B52CAC92DE74F90EEE71" Directory="INSTALLDIR" Guid="{A87E6AB8-D3E2-4B4A-825A-3850EFD9D913}">
+                <File Id="fil4A3914E8BA2E4BD8BB82F62B0967AAFB" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.dll" />
+            </Component>
+            <Component Id="cmp94D5FFE5FF6099213A7AC02683C46665" Directory="INSTALLDIR" Guid="{9416A670-454B-45E1-954F-4D2E9106B207}">
+                <File Id="filF2DD242574BAB9F39D668104468E2F2E" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.xml" />
+            </Component>
+            <Component Id="cmp656AC62D9ECB4E2ED08B76344839B68D" Directory="INSTALLDIR" Guid="{006A7405-E932-4E70-B917-AC7D312E35E8}">
+                <File Id="fil83BEB135436C874F9901495AACB76B94" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.xml" />
+            </Component>
+            <Component Id="cmpCBAD1189E4A95476F45730EA6D8A3E03" Directory="INSTALLDIR" Guid="{5D00D4AC-AD70-4046-AAF0-5BF94B5C216F}">
+                <File Id="filB5CE7890FC801E39F6B9B8C9FF5E4D0D" KeyPath="yes" Source="$(var.SourcePath)\NAudio.dll" />
+            </Component>
+            <Component Id="cmp4BF2CBA69AEA31291ECB2C85E2077879" Directory="INSTALLDIR" Guid="{C5590054-1D15-4037-B172-667F7D1975B3}">
+                <File Id="fil30BFD7D8D4EECD19E2477BECA85CC1B4" KeyPath="yes" Source="$(var.SourcePath)\NAudio.xml" />
+            </Component>
+            <Component Id="cmp1874AB219070404EED322213C6A1A49E" Directory="INSTALLDIR" Guid="{6EEA7AC8-21A4-45B1-B4EE-2B68714B181D}">
+                <File Id="fil05FF769999D602AD4FA6A489C44ED290" KeyPath="yes" Source="$(var.SourcePath)\Newtonsoft.Json.dll" />
+            </Component>
+            <Component Id="cmp8B12861281018C7705A9A4EF5DE7844D" Directory="INSTALLDIR" Guid="{BD34D118-3B0D-4F0B-BA82-7F4510CE9DA2}">
+                <File Id="fil4CEA1250BEA9A8B3AD634680F620CBEA" KeyPath="yes" Source="$(var.SourcePath)\Newtonsoft.Json.pdb" />
+            </Component>
+            <Component Id="cmp03F5503D497D187BDDF7D932D5BD55E9" Directory="INSTALLDIR" Guid="{F373E26E-3A2A-43FC-B6EE-7D83138E8F4A}">
+                <File Id="fil094941A1CF7BE1998B69C59AF0F5D834" KeyPath="yes" Source="$(var.SourcePath)\Newtonsoft.Json.xml" />
+            </Component>
+            <Component Id="cmpC79A48D4ACA7A441B3163328F04340E8" Directory="INSTALLDIR" Guid="{F1D361EB-F12B-4D3E-8706-CB0E99988649}">
+                <File Id="fil6DB5736A2189D570566047EE44A78AE0" KeyPath="yes" Source="$(var.SourcePath)\P2PMulticastNetwork.dll" />
+            </Component>
+            <Component Id="cmp04ACE5774772C16F8471F385F0BC833D" Directory="INSTALLDIR" Guid="{95A37D3E-B7C6-4FB3-9BC1-B213ED056C18}">
+                <File Id="fil127A01F03EAC2B0D2B706616EC6E714F" KeyPath="yes" Source="$(var.SourcePath)\P2PMulticastNetwork.dll.config" />
+            </Component>
+            <Component Id="cmp6AA42DEDDF65B9C6FE5714199C4774C7" Directory="INSTALLDIR" Guid="{4C942E36-BF3C-4388-96E1-160F04D1B269}">
+                <File Id="filF0DEAAE97324D41169763C99929298A3" KeyPath="yes" Source="$(var.SourcePath)\P2PMulticastNetwork.pdb" />
+            </Component>
+            <Component Id="cmp6C6D376DB6851D82496ECB569BA4AC51" Directory="INSTALLDIR" Guid="{823289D9-7313-4B19-9CBB-4780A13E10C9}">
+                <File Id="filFC5E8D3FDDEA30A1D154A5E9CC76FF7C" KeyPath="yes" Source="$(var.SourcePath)\R-173.application" />
+            </Component>
+            <Component Id="cmp13FBE0A9EEC3BA68F9FCCE5C889F9F81" Directory="INSTALLDIR" Guid="{3BD8A525-80CF-4B6C-A477-08B300DEA152}">
+                <File Id="filDF509483E3986C21819DB8442D917FA9" KeyPath="yes" Source="$(var.SourcePath)\R-173.exe" />
+            </Component>
+            <Component Id="cmp05DCBC62160D5A4025CF868387CE50D3" Directory="INSTALLDIR" Guid="{13D05E60-8F68-4753-9E3A-E05A4B07EC61}">
+                <File Id="fil11652D5D4D4778B138EE03509C452B9B" KeyPath="yes" Source="$(var.SourcePath)\R-173.exe.config" />
+            </Component>
+            <Component Id="cmpBE70284DD57CEC3C611B663170CCA298" Directory="INSTALLDIR" Guid="{1C3FA396-AF94-48BE-A5DB-EDCFC906596E}">
+                <File Id="fil1C8523DE87BE43ED924727D5266F3999" KeyPath="yes" Source="$(var.SourcePath)\R-173.exe.manifest" />
+            </Component>
+            <Component Id="cmp065A25BE2C69B070F5A19F6244F59708" Directory="INSTALLDIR" Guid="{907FFF3C-BF74-4741-A3E2-3A542124E346}">
+                <File Id="filE7E27692B6A3D73CDB35250C94164B5C" KeyPath="yes" Source="$(var.SourcePath)\R-173.pdb" />
+            </Component>
+            <Component Id="cmp7CE50EAD4CBC955FC9520CFC518C67C9" Directory="INSTALLDIR" Guid="{1A4F6B8F-A9E8-401D-9869-7CACD27D6E90}">
+                <File Id="fil0AF74F43FD306E46CFCAC7A1ED14769C" KeyPath="yes" Source="$(var.SourcePath)\RadioPipeline.dll" />
+            </Component>
+            <Component Id="cmpDA4ADF0975AFCDECC7AF8EBDC92E36F0" Directory="INSTALLDIR" Guid="{D643E6F5-9CDF-4C05-9968-2B58A52269D7}">
+                <File Id="fil5339FB0C7A4AD33D9D477832B77E0AF6" KeyPath="yes" Source="$(var.SourcePath)\RadioPipeline.dll.config" />
+            </Component>
+            <Component Id="cmpA86F697445F11E80F1DEF404534278AA" Directory="INSTALLDIR" Guid="{AACD4794-2E7C-4FB2-97E2-85279693672D}">
+                <File Id="fil6B41DC8CF6EE03746108E7686D54046F" KeyPath="yes" Source="$(var.SourcePath)\RadioPipeline.pdb" />
+            </Component>
+            <Component Id="cmp1AB2F694FBE065FEC98E27EC233540D7" Directory="INSTALLDIR" Guid="{41CDEE2C-7DF5-44DC-BFCE-286EC9029678}">
+                <File Id="filF97298386D9CA5BBFEF3BA1266204948" KeyPath="yes" Source="$(var.SourcePath)\System.IO.dll" />
+            </Component>
+            <Component Id="cmpC26FE09E2418625639BAC28CBECA7B73" Directory="INSTALLDIR" Guid="{CA08257F-1CE2-43F2-81D1-6F9E3E26BFEA}">
+                <File Id="filB4DF804CDD3C586C17A6F8638B93269C" KeyPath="yes" Source="$(var.SourcePath)\System.IO.xml" />
+            </Component>
+            <Component Id="cmpF68CE304EDD0D14A7BFF18236F51BC48" Directory="INSTALLDIR" Guid="{D215DF37-4512-4F8D-A788-BC6BD411FE9B}">
+                <File Id="fil1DF46A3A328CA5A1B3C9E619D2E6B80A" KeyPath="yes" Source="$(var.SourcePath)\System.Runtime.dll" />
+            </Component>
+            <Component Id="cmp879AE94D390DB9518768A208B937A77E" Directory="INSTALLDIR" Guid="{966B1712-0F12-4CAE-AE82-2B3E553CADB8}">
+                <File Id="fil39E573962B52B7BC2533E12901AB9F42" KeyPath="yes" Source="$(var.SourcePath)\System.Runtime.xml" />
+            </Component>
+            <Component Id="cmp3B63C4A8BD59792FD308ADD749073AE3" Directory="INSTALLDIR" Guid="{4B74A933-8DD5-481F-9A57-30629CE64E5A}">
+                <File Id="filAFB2C8AB9328AAA60E4F1F016E024155" KeyPath="yes" Source="$(var.SourcePath)\System.Threading.Tasks.dll" />
+            </Component>
+            <Component Id="cmp7EBCC4CE000A80609A51830EF9AA7AC7" Directory="INSTALLDIR" Guid="{444A0E51-67CE-40A7-8892-15909E9E8A58}">
+                <File Id="fil9F9F5D812A7B2116707473940D2C5E58" KeyPath="yes" Source="$(var.SourcePath)\System.Threading.Tasks.xml" />
+            </Component>
+            <Component Id="cmp4FE4E61EC9791201921745B40643CBB8" Directory="INSTALLDIR" Guid="{D5977DE5-E969-4F93-AA25-C0840AE98486}">
+                <File Id="fil6F11DE09547B0AE8405683CDB88F7FC4" KeyPath="yes" Source="$(var.SourcePath)\System.Windows.Interactivity.dll" />
+            </Component>
+            <Component Id="cmp72FCE36E5ECB5C2AA4401520340A84DA" Directory="INSTALLDIR" Guid="{A70932E9-26A5-48E9-BAA1-F052E5727957}">
+                <Class Id="{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}" Context="InprocServer32" Description="Unity.Lifetime.PerResolveLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.PerResolveLifetimeManager" Description="Unity.Lifetime.PerResolveLifetimeManager" />
+                </Class>
+                <Class Id="{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}" Context="InprocServer32" Description="Unity.Attributes.InjectionConstructorAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Attributes.InjectionConstructorAttribute" Description="Unity.Attributes.InjectionConstructorAttribute" />
+                </Class>
+                <Class Id="{227823F0-F2CF-37DB-B572-98EF650F5F57}" Context="InprocServer32" Description="Unity.Resolution.PropertyOverrides" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Resolution.PropertyOverrides" Description="Unity.Resolution.PropertyOverrides" />
+                </Class>
+                <Class Id="{34AA16B4-C6FC-3A53-B706-C07FC9413575}" Context="InprocServer32" Description="Unity.Builder.Selection.SelectedMemberWithParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Builder.Selection.SelectedMemberWithParameters" Description="Unity.Builder.Selection.SelectedMemberWithParameters" />
+                </Class>
+                <Class Id="{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}" Context="InprocServer32" Description="Unity.Lifetime.PerThreadLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.PerThreadLifetimeManager" Description="Unity.Lifetime.PerThreadLifetimeManager" />
+                </Class>
+                <Class Id="{4B584402-8482-3BA6-8B2D-1623DAB7F48D}" Context="InprocServer32" Description="Unity.Lifetime.HierarchicalLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.HierarchicalLifetimeManager" Description="Unity.Lifetime.HierarchicalLifetimeManager" />
+                </Class>
+                <Class Id="{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}" Context="InprocServer32" Description="Unity.Resolution.CompositeResolverOverride" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Resolution.CompositeResolverOverride" Description="Unity.Resolution.CompositeResolverOverride" />
+                </Class>
+                <Class Id="{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}" Context="InprocServer32" Description="Unity.Builder.Policy.SpecifiedMethodsSelectorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Builder.Policy.SpecifiedMethodsSelectorPolicy" Description="Unity.Builder.Policy.SpecifiedMethodsSelectorPolicy" />
+                </Class>
+                <Class Id="{6C5171AF-CFE8-302D-B007-BA4696A661B2}" Context="InprocServer32" Description="Unity.Lifetime.ContainerControlledTransientManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.ContainerControlledTransientManager" Description="Unity.Lifetime.ContainerControlledTransientManager" />
+                </Class>
+                <Class Id="{7EDAD016-CE9A-3BF6-A182-096F39FDA274}" Context="InprocServer32" Description="Unity.Events.RegisterInstanceEventArgs" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Events.RegisterInstanceEventArgs" Description="Unity.Events.RegisterInstanceEventArgs" />
+                </Class>
+                <Class Id="{866D6F20-A8B0-3E80-B3BD-65968A5424C3}" Context="InprocServer32" Description="Unity.Builder.Policy.SpecifiedPropertiesSelectorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Builder.Policy.SpecifiedPropertiesSelectorPolicy" Description="Unity.Builder.Policy.SpecifiedPropertiesSelectorPolicy" />
+                </Class>
+                <Class Id="{98AD6E18-A191-33BC-986D-647E5D5F7DC1}" Context="InprocServer32" Description="Unity.Resolution.ParameterOverrides" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Resolution.ParameterOverrides" Description="Unity.Resolution.ParameterOverrides" />
+                </Class>
+                <Class Id="{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}" Context="InprocServer32" Description="Unity.Injection.InjectionConstructor" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Injection.InjectionConstructor" Description="Unity.Injection.InjectionConstructor" />
+                </Class>
+                <Class Id="{B93F6418-98E6-31F2-8630-6807054BDC05}" Context="InprocServer32" Description="Unity.Lifetime.ExternallyControlledLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.ExternallyControlledLifetimeManager" Description="Unity.Lifetime.ExternallyControlledLifetimeManager" />
+                </Class>
+                <Class Id="{C823017F-2791-34E6-A463-79B6D4EC8685}" Context="InprocServer32" Description="Unity.Lifetime.TransientLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.TransientLifetimeManager" Description="Unity.Lifetime.TransientLifetimeManager" />
+                </Class>
+                <Class Id="{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}" Context="InprocServer32" Description="Unity.Resolution.DependencyOverrides" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Resolution.DependencyOverrides" Description="Unity.Resolution.DependencyOverrides" />
+                </Class>
+                <Class Id="{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}" Context="InprocServer32" Description="Unity.Lifetime.SingletonLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.SingletonLifetimeManager" Description="Unity.Lifetime.SingletonLifetimeManager" />
+                </Class>
+                <Class Id="{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}" Context="InprocServer32" Description="Unity.Attributes.OptionalDependencyAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Attributes.OptionalDependencyAttribute" Description="Unity.Attributes.OptionalDependencyAttribute" />
+                </Class>
+                <Class Id="{E252A71F-01C4-3770-8390-B1355AA23714}" Context="InprocServer32" Description="Unity.Policy.OverriddenBuildPlanMarkerPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Policy.OverriddenBuildPlanMarkerPolicy" Description="Unity.Policy.OverriddenBuildPlanMarkerPolicy" />
+                </Class>
+                <Class Id="{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}" Context="InprocServer32" Description="Unity.Lifetime.ContainerControlledLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Lifetime.ContainerControlledLifetimeManager" Description="Unity.Lifetime.ContainerControlledLifetimeManager" />
+                </Class>
+                <Class Id="{EB5BE41E-65B7-38A0-B09C-92EF0216A452}" Context="InprocServer32" Description="Unity.Exceptions.IllegalInjectionMethodException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Exceptions.IllegalInjectionMethodException" Description="Unity.Exceptions.IllegalInjectionMethodException" />
+                </Class>
+                <Class Id="{F11A76AB-AC93-33F6-9287-F24B88E4F86F}" Context="InprocServer32" Description="Unity.Attributes.DependencyAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Attributes.DependencyAttribute" Description="Unity.Attributes.DependencyAttribute" />
+                </Class>
+                <Class Id="{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}" Context="InprocServer32" Description="Unity.Exceptions.DependencyMissingException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Exceptions.DependencyMissingException" Description="Unity.Exceptions.DependencyMissingException" />
+                </Class>
+                <Class Id="{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}" Context="InprocServer32" Description="Unity.Attributes.InjectionMethodAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Attributes.InjectionMethodAttribute" Description="Unity.Attributes.InjectionMethodAttribute" />
+                </Class>
+                <File Id="fil633E45EDF94A090D34C6EB14793DEB00" KeyPath="yes" Source="$(var.SourcePath)\Unity.Abstractions.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.PerResolveLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32" Name="Class" Value="Unity.Lifetime.PerResolveLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Attributes.InjectionConstructorAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32" Name="Class" Value="Unity.Attributes.InjectionConstructorAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E6BBABB-C89E-312E-9310-D0F0ED9102F4}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Resolution.PropertyOverrides" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32" Name="Class" Value="Unity.Resolution.PropertyOverrides" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{227823F0-F2CF-37DB-B572-98EF650F5F57}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Builder.Selection.SelectedMemberWithParameters" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32" Name="Class" Value="Unity.Builder.Selection.SelectedMemberWithParameters" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{34AA16B4-C6FC-3A53-B706-C07FC9413575}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.PerThreadLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32" Name="Class" Value="Unity.Lifetime.PerThreadLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4955FA1C-5AF9-38F6-A663-A61E0EA3A37E}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.HierarchicalLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32" Name="Class" Value="Unity.Lifetime.HierarchicalLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4B584402-8482-3BA6-8B2D-1623DAB7F48D}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Resolution.CompositeResolverOverride" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32" Name="Class" Value="Unity.Resolution.CompositeResolverOverride" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{505C63AA-6D81-3FBF-BA7D-5F6EE893C6A1}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Builder.Policy.SpecifiedMethodsSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32" Name="Class" Value="Unity.Builder.Policy.SpecifiedMethodsSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5E33C59F-8533-3ECF-80FF-B719C9FFD8E1}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.ContainerControlledTransientManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32" Name="Class" Value="Unity.Lifetime.ContainerControlledTransientManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C5171AF-CFE8-302D-B007-BA4696A661B2}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Events.RegisterInstanceEventArgs" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32" Name="Class" Value="Unity.Events.RegisterInstanceEventArgs" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7EDAD016-CE9A-3BF6-A182-096F39FDA274}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Builder.Policy.SpecifiedPropertiesSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32" Name="Class" Value="Unity.Builder.Policy.SpecifiedPropertiesSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{866D6F20-A8B0-3E80-B3BD-65968A5424C3}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Resolution.ParameterOverrides" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32" Name="Class" Value="Unity.Resolution.ParameterOverrides" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{98AD6E18-A191-33BC-986D-647E5D5F7DC1}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Injection.InjectionConstructor" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32" Name="Class" Value="Unity.Injection.InjectionConstructor" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B1DDCEAD-D9BA-3D9A-BC63-3E506FAA9F88}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.ExternallyControlledLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32" Name="Class" Value="Unity.Lifetime.ExternallyControlledLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B93F6418-98E6-31F2-8630-6807054BDC05}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.TransientLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32" Name="Class" Value="Unity.Lifetime.TransientLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{C823017F-2791-34E6-A463-79B6D4EC8685}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Resolution.DependencyOverrides" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32" Name="Class" Value="Unity.Resolution.DependencyOverrides" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CE2558ED-D4DA-3F62-B4BF-AC01A36FC2F6}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.SingletonLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32" Name="Class" Value="Unity.Lifetime.SingletonLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{CF38CE31-4370-340B-B8AC-3D1E1F6B0D54}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Attributes.OptionalDependencyAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32" Name="Class" Value="Unity.Attributes.OptionalDependencyAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DBCD1A7A-041B-3298-A137-CF01D5CB2BC6}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Policy.OverriddenBuildPlanMarkerPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32" Name="Class" Value="Unity.Policy.OverriddenBuildPlanMarkerPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E252A71F-01C4-3770-8390-B1355AA23714}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Lifetime.ContainerControlledLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32" Name="Class" Value="Unity.Lifetime.ContainerControlledLifetimeManager" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E86F4652-F0AC-38B3-987E-D2EB602C2AD5}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Exceptions.IllegalInjectionMethodException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32" Name="Class" Value="Unity.Exceptions.IllegalInjectionMethodException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{EB5BE41E-65B7-38A0-B09C-92EF0216A452}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Attributes.DependencyAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32" Name="Class" Value="Unity.Attributes.DependencyAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F11A76AB-AC93-33F6-9287-F24B88E4F86F}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Exceptions.DependencyMissingException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32" Name="Class" Value="Unity.Exceptions.DependencyMissingException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FD03CF45-4E9B-3059-8EAB-BDB1EC60E8D4}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32\3.3.1.0" Name="Class" Value="Unity.Attributes.InjectionMethodAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32" Name="Class" Value="Unity.Attributes.InjectionMethodAttribute" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FF2B8BBA-5529-3C1F-9E5C-CFE5D6979D07}\InprocServer32" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{4D12007C-B0FA-38AB-903D-689757A537FF}\3.3.1.0" Name="Class" Value="Unity.Builder.BuilderStage" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{4D12007C-B0FA-38AB-903D-689757A537FF}\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{4D12007C-B0FA-38AB-903D-689757A537FF}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{4D12007C-B0FA-38AB-903D-689757A537FF}\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{957D45C4-599F-3442-B29D-594000BAC5C2}\3.3.1.0" Name="Class" Value="Unity.Builder.UnityBuildStage" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{957D45C4-599F-3442-B29D-594000BAC5C2}\3.3.1.0" Name="Assembly" Value="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{957D45C4-599F-3442-B29D-594000BAC5C2}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{957D45C4-599F-3442-B29D-594000BAC5C2}\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
+            </Component>
+            <Component Id="cmpD524E359AC22836C93AB018D17C3F4C5" Directory="INSTALLDIR" Guid="{B6E2D691-C4C6-4FD5-8436-2F765D50EA25}">
+                <File Id="fil54FC33B2E4703B580CD9507B6BA9D844" KeyPath="yes" Source="$(var.SourcePath)\Unity.Abstractions.pdb" />
+            </Component>
+            <Component Id="cmp487594CE5755237A84EBB5CAB64C7DBE" Directory="INSTALLDIR" Guid="{50A1E905-C1A1-4501-993C-1F2B438527A2}">
+                <Class Id="{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" Description="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" />
+                </Class>
+                <Class Id="{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ContainerExtensionElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ContainerExtensionElementCollection" Description="Microsoft.Practices.Unity.Configuration.ContainerExtensionElementCollection" />
+                </Class>
+                <Class Id="{1B64AAD6-6DA1-366A-8563-3D75AF19919D}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.OptionalElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.OptionalElement" Description="Microsoft.Practices.Unity.Configuration.OptionalElement" />
+                </Class>
+                <Class Id="{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ParameterElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ParameterElementCollection" Description="Microsoft.Practices.Unity.Configuration.ParameterElementCollection" />
+                </Class>
+                <Class Id="{2E339819-FF25-3602-922A-8DD196578525}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ExtensionConfigurationElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ExtensionConfigurationElementCollection" Description="Microsoft.Practices.Unity.Configuration.ExtensionConfigurationElementCollection" />
+                </Class>
+                <Class Id="{31730A06-A5D0-3795-975C-E169AB54DE55}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.LifetimeElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.LifetimeElement" Description="Microsoft.Practices.Unity.Configuration.LifetimeElement" />
+                </Class>
+                <Class Id="{3699867B-45F0-3E6E-B73E-3ED8741B67B1}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.SectionExtensionElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.SectionExtensionElementCollection" Description="Microsoft.Practices.Unity.Configuration.SectionExtensionElementCollection" />
+                </Class>
+                <Class Id="{4095C980-98B5-35B3-89D6-31C2208EF14A}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ParameterElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ParameterElement" Description="Microsoft.Practices.Unity.Configuration.ParameterElement" />
+                </Class>
+                <Class Id="{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ArrayElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ArrayElement" Description="Microsoft.Practices.Unity.Configuration.ArrayElement" />
+                </Class>
+                <Class Id="{4CC60095-2CEB-3999-BDC9-304FB029BF02}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.PropertyElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.PropertyElement" Description="Microsoft.Practices.Unity.Configuration.PropertyElement" />
+                </Class>
+                <Class Id="{5D47BFFD-B940-3494-A410-D0B636CCD88F}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.SectionExtensionElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.SectionExtensionElement" Description="Microsoft.Practices.Unity.Configuration.SectionExtensionElement" />
+                </Class>
+                <Class Id="{70246AC4-B89D-3700-A562-E0F054BB4BB0}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.AliasElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.AliasElementCollection" Description="Microsoft.Practices.Unity.Configuration.AliasElementCollection" />
+                </Class>
+                <Class Id="{7500CA32-9E50-3573-9527-97DAE7377F62}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection" Description="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection" />
+                </Class>
+                <Class Id="{7B890319-93D3-3AB2-999B-7E49AF5A06B8}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.InstanceElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.InstanceElement" Description="Microsoft.Practices.Unity.Configuration.InstanceElement" />
+                </Class>
+                <Class Id="{8A056A98-89C8-306F-A970-7D55216FD190}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.AssemblyElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.AssemblyElementCollection" Description="Microsoft.Practices.Unity.Configuration.AssemblyElementCollection" />
+                </Class>
+                <Class Id="{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ValueElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ValueElement" Description="Microsoft.Practices.Unity.Configuration.ValueElement" />
+                </Class>
+                <Class Id="{94496983-10FF-335B-BE96-AEDAE525DD30}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ParameterValueElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ParameterValueElementCollection" Description="Microsoft.Practices.Unity.Configuration.ParameterValueElementCollection" />
+                </Class>
+                <Class Id="{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ContainerElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ContainerElement" Description="Microsoft.Practices.Unity.Configuration.ContainerElement" />
+                </Class>
+                <Class Id="{A598B6B2-4F70-361B-AF26-10E68917E255}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.AssemblyElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.AssemblyElement" Description="Microsoft.Practices.Unity.Configuration.AssemblyElement" />
+                </Class>
+                <Class Id="{A839C857-8A15-394F-B446-8FB0870BCE73}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.RegisterElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.RegisterElement" Description="Microsoft.Practices.Unity.Configuration.RegisterElement" />
+                </Class>
+                <Class Id="{AE97959F-52E9-3092-A730-A262E5892BC7}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ContainerExtensionElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ContainerExtensionElement" Description="Microsoft.Practices.Unity.Configuration.ContainerExtensionElement" />
+                </Class>
+                <Class Id="{B8A9B38E-C503-3581-929C-699A0DDBFFEF}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.InjectionMemberElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.InjectionMemberElementCollection" Description="Microsoft.Practices.Unity.Configuration.InjectionMemberElementCollection" />
+                </Class>
+                <Class Id="{B8C5D70E-2801-3FEF-86F9-4D69C2726611}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ConstructorElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ConstructorElement" Description="Microsoft.Practices.Unity.Configuration.ConstructorElement" />
+                </Class>
+                <Class Id="{BACAE89B-77F5-36F9-9402-84FC582CCD6C}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.AliasElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.AliasElement" Description="Microsoft.Practices.Unity.Configuration.AliasElement" />
+                </Class>
+                <Class Id="{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.NamespaceElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.NamespaceElement" Description="Microsoft.Practices.Unity.Configuration.NamespaceElement" />
+                </Class>
+                <Class Id="{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.MethodElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.MethodElement" Description="Microsoft.Practices.Unity.Configuration.MethodElement" />
+                </Class>
+                <Class Id="{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ContainerElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ContainerElementCollection" Description="Microsoft.Practices.Unity.Configuration.ContainerElementCollection" />
+                </Class>
+                <Class Id="{E4C40065-66AA-3D9E-B695-597F141B5BEC}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.RegisterElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.RegisterElementCollection" Description="Microsoft.Practices.Unity.Configuration.RegisterElementCollection" />
+                </Class>
+                <Class Id="{F5515F95-97C2-3FCC-9920-1E4B08A820BD}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.DependencyElement" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.DependencyElement" Description="Microsoft.Practices.Unity.Configuration.DependencyElement" />
+                </Class>
+                <Class Id="{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.InstanceElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.InstanceElementCollection" Description="Microsoft.Practices.Unity.Configuration.InstanceElementCollection" />
+                </Class>
+                <Class Id="{FB90C64F-4EEB-32C4-8293-1CC081B080A6}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.ContainerConfiguringElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Microsoft.Practices.Unity.Configuration.ContainerConfiguringElementCollection" Description="Microsoft.Practices.Unity.Configuration.ContainerConfiguringElementCollection" />
+                </Class>
+                <File Id="fil4FA44E56A38498E859B27907FCF5318F" KeyPath="yes" Source="$(var.SourcePath)\Unity.Configuration.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerExtensionElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerExtensionElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0E7ABCB7-E2C6-36F5-8E74-3F5C735E26D2}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.OptionalElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.OptionalElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1B64AAD6-6DA1-366A-8563-3D75AF19919D}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ParameterElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ParameterElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1EB0F646-01AF-3074-BDB6-C12ABDDE4FFD}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ExtensionConfigurationElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ExtensionConfigurationElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2E339819-FF25-3602-922A-8DD196578525}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.LifetimeElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.LifetimeElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31730A06-A5D0-3795-975C-E169AB54DE55}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.SectionExtensionElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.SectionExtensionElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3699867B-45F0-3E6E-B73E-3ED8741B67B1}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ParameterElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ParameterElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4095C980-98B5-35B3-89D6-31C2208EF14A}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ArrayElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ArrayElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4853BEAA-5305-3C2D-A5E1-202BABAD0F9E}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.PropertyElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.PropertyElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4CC60095-2CEB-3999-BDC9-304FB029BF02}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.SectionExtensionElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.SectionExtensionElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D47BFFD-B940-3494-A410-D0B636CCD88F}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AliasElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AliasElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{70246AC4-B89D-3700-A562-E0F054BB4BB0}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7500CA32-9E50-3573-9527-97DAE7377F62}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.InstanceElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.InstanceElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{7B890319-93D3-3AB2-999B-7E49AF5A06B8}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AssemblyElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AssemblyElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8A056A98-89C8-306F-A970-7D55216FD190}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ValueElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ValueElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8ACC799E-3979-3B10-B9A3-6BABE3A555C5}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ParameterValueElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ParameterValueElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{94496983-10FF-335B-BE96-AEDAE525DD30}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A44A1338-BFBA-3DF2-B449-4DBE4DEF35F8}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AssemblyElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AssemblyElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A598B6B2-4F70-361B-AF26-10E68917E255}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.RegisterElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.RegisterElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A839C857-8A15-394F-B446-8FB0870BCE73}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerExtensionElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerExtensionElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{AE97959F-52E9-3092-A730-A262E5892BC7}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.InjectionMemberElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.InjectionMemberElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8A9B38E-C503-3581-929C-699A0DDBFFEF}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ConstructorElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ConstructorElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{B8C5D70E-2801-3FEF-86F9-4D69C2726611}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AliasElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.AliasElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BACAE89B-77F5-36F9-9402-84FC582CCD6C}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.NamespaceElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.NamespaceElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{BE5D001A-D8BA-3D94-BB55-44AC7AB11E9B}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.MethodElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.MethodElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DA8C5A53-534C-36C7-A65A-CCFAC19F8334}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{DDD5AA27-128B-36D6-AD03-6BD9390BCAC3}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.RegisterElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.RegisterElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4C40065-66AA-3D9E-B695-597F141B5BEC}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.DependencyElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.DependencyElement" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F5515F95-97C2-3FCC-9920-1E4B08A820BD}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.InstanceElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.InstanceElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F81AADE7-D473-3932-B2B8-7BD0AFF537FB}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32\5.2.4.0" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerConfiguringElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32\5.2.4.0" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32\5.2.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32\5.2.4.0" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32" Name="Class" Value="Microsoft.Practices.Unity.Configuration.ContainerConfiguringElementCollection" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32" Name="Assembly" Value="Unity.Configuration, Version=5.2.4.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
+            </Component>
+            <Component Id="cmp0D92CC56259520AD8A05068D7D987097" Directory="INSTALLDIR" Guid="{C26234E9-D377-4EAD-976C-F3192EB3A2F1}">
+                <File Id="filF4FB347D8C4295ED99EBEE0419B97675" KeyPath="yes" Source="$(var.SourcePath)\Unity.Configuration.pdb" />
+            </Component>
+            <Component Id="cmp3656D61E22ED08EE342302F769800354" Directory="INSTALLDIR" Guid="{8F71B148-6456-48D5-BEA3-A751256FE081}">
+                <Class Id="{0D42AA65-40DD-3447-9ACF-F4F0030691AB}" Context="InprocServer32" Description="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" Description="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" />
+                </Class>
+                <Class Id="{15684F46-6CD4-3F43-96C4-F549AEFD2D34}" Context="InprocServer32" Description="Unity.Strategies.BuildKeyMappingStrategy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Strategies.BuildKeyMappingStrategy" Description="Unity.Strategies.BuildKeyMappingStrategy" />
+                </Class>
+                <Class Id="{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}" Context="InprocServer32" Description="Unity.Strategies.LifetimeStrategy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Strategies.LifetimeStrategy" Description="Unity.Strategies.LifetimeStrategy" />
+                </Class>
+                <Class Id="{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}" Context="InprocServer32" Description="Unity.Utility.RecoveryStack" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Utility.RecoveryStack" Description="Unity.Utility.RecoveryStack" />
+                </Class>
+                <Class Id="{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}" Context="InprocServer32" Description="Unity.ObjectBuilder.Policies.DefaultUnityMethodSelectorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.Policies.DefaultUnityMethodSelectorPolicy" Description="Unity.ObjectBuilder.Policies.DefaultUnityMethodSelectorPolicy" />
+                </Class>
+                <Class Id="{8B913430-D41F-3007-965F-7DA6E63CE14A}" Context="InprocServer32" Description="Unity.Storage.PolicyList" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Storage.PolicyList" Description="Unity.Storage.PolicyList" />
+                </Class>
+                <Class Id="{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}" Context="InprocServer32" Description="Unity.ObjectBuilder.BuildPlan.Selection.DefaultUnityConstructorSelectorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.BuildPlan.Selection.DefaultUnityConstructorSelectorPolicy" Description="Unity.ObjectBuilder.BuildPlan.Selection.DefaultUnityConstructorSelectorPolicy" />
+                </Class>
+                <Class Id="{A8B77C9C-F301-3068-B21C-24093203A5B5}" Context="InprocServer32" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy+InvalidRegistrationException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy+InvalidRegistrationException" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy+InvalidRegistrationException" />
+                </Class>
+                <Class Id="{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}" Context="InprocServer32" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy" />
+                </Class>
+                <Class Id="{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}" Context="InprocServer32" Description="Unity.Strategies.BuildPlanStrategy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Strategies.BuildPlanStrategy" Description="Unity.Strategies.BuildPlanStrategy" />
+                </Class>
+                <Class Id="{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}" Context="InprocServer32" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Property.DynamicMethodPropertySetterStrategy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Property.DynamicMethodPropertySetterStrategy" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Property.DynamicMethodPropertySetterStrategy" />
+                </Class>
+                <Class Id="{ED0A7566-4646-381B-94F2-ED61C6467080}" Context="InprocServer32" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Method.DynamicMethodCallStrategy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Method.DynamicMethodCallStrategy" Description="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Method.DynamicMethodCallStrategy" />
+                </Class>
+                <Class Id="{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}" Context="InprocServer32" Description="Unity.UnityContainer" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.UnityContainer" Description="Unity.UnityContainer" />
+                </Class>
+                <Class Id="{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}" Context="InprocServer32" Description="Unity.Policy.BuildPlanCreator.GenericLazyBuildPlanCreatorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Unity.Policy.BuildPlanCreator.GenericLazyBuildPlanCreatorPolicy" Description="Unity.Policy.BuildPlanCreator.GenericLazyBuildPlanCreatorPolicy" />
+                </Class>
+                <File Id="fil9BE66553809B1CD4576BCF3D728A3477" KeyPath="yes" Source="$(var.SourcePath)\Unity.Container.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0D42AA65-40DD-3447-9ACF-F4F0030691AB}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.Strategies.BuildKeyMappingStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32" Name="Class" Value="Unity.Strategies.BuildKeyMappingStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{15684F46-6CD4-3F43-96C4-F549AEFD2D34}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.Strategies.LifetimeStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32" Name="Class" Value="Unity.Strategies.LifetimeStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{4AEC64F1-D7F5-3112-AA4F-DE41238BA310}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.Utility.RecoveryStack" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32" Name="Class" Value="Unity.Utility.RecoveryStack" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{5D37FACC-CFCA-3281-9CF3-6CA12D032F84}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.Policies.DefaultUnityMethodSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.Policies.DefaultUnityMethodSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{6C4BE7D6-A547-322F-B675-FD361FD2AEDE}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.Storage.PolicyList" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32" Name="Class" Value="Unity.Storage.PolicyList" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{8B913430-D41F-3007-965F-7DA6E63CE14A}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.Selection.DefaultUnityConstructorSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.Selection.DefaultUnityConstructorSelectorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A4BA0543-D89C-35D3-85E7-AE297EBBFBA7}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy+InvalidRegistrationException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy+InvalidRegistrationException" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A8B77C9C-F301-3068-B21C-24093203A5B5}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Creation.DynamicMethodConstructorStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{A95FF62F-79DB-38DA-91FC-AC2728FFBCD1}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.Strategies.BuildPlanStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32" Name="Class" Value="Unity.Strategies.BuildPlanStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E2F81D0A-9953-3D90-A1AD-7A2FC2008EF5}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Property.DynamicMethodPropertySetterStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Property.DynamicMethodPropertySetterStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E9B43ABB-F0F1-321C-A9C1-6A4660D6F5D7}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Method.DynamicMethodCallStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32" Name="Class" Value="Unity.ObjectBuilder.BuildPlan.DynamicMethod.Method.DynamicMethodCallStrategy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{ED0A7566-4646-381B-94F2-ED61C6467080}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.UnityContainer" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32" Name="Class" Value="Unity.UnityContainer" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F2EDBA2B-0FD9-39A7-B55D-B8FFAB998EDF}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32\5.8.10.0" Name="Class" Value="Unity.Policy.BuildPlanCreator.GenericLazyBuildPlanCreatorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32" Name="Class" Value="Unity.Policy.BuildPlanCreator.GenericLazyBuildPlanCreatorPolicy" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6F7BF29-56EE-3F9A-9CE0-DC70F27771AA}\InprocServer32" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FA47AC3-1724-38EB-844D-A0B953F4154E}\5.8.10.0" Name="Class" Value="Unity.Resolution.TypeSelectStage" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FA47AC3-1724-38EB-844D-A0B953F4154E}\5.8.10.0" Name="Assembly" Value="Unity.Container, Version=5.8.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FA47AC3-1724-38EB-844D-A0B953F4154E}\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{5FA47AC3-1724-38EB-844D-A0B953F4154E}\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
+            </Component>
+            <Component Id="cmp9C1655B0BB45050F30DE5E4BE8828E1E" Directory="INSTALLDIR" Guid="{714B8158-1E79-49AE-8DDD-E9E2AD4549A8}">
+                <File Id="fil275EB7067A589CBF7C96A4180CD3B51F" KeyPath="yes" Source="$(var.SourcePath)\Unity.Container.pdb" />
+            </Component>
+            <Component Id="cmp9D023EB3EB549CB403D84A67AC132EF6" Directory="INSTALLDIR" Guid="{89C9ADCC-EB05-428C-A995-F57F9E144E6D}">
+                <File Id="fil899CD2E8D6DB2462C0E2203E559B9C17" KeyPath="yes" Source="$(var.SourcePath)\Unity.ServiceLocation.dll" />
+            </Component>
+            <Component Id="cmp2AABC74B3161E5D2B2D55E61C517536C" Directory="INSTALLDIR" Guid="{E509262F-9B96-43C5-AFEC-A9493684770F}">
+                <File Id="filF9A2490A241CE7248D1BCD8E0668DD05" KeyPath="yes" Source="$(var.SourcePath)\Unity.ServiceLocation.pdb" />
+            </Component>
+            <Component Id="cmpD45C7DE7CE65D3DF660D0AE565833541" Directory="INSTALLDIR" Guid="{C587E22B-6B3D-4C96-9220-3FA394818E1C}">
+                <File Id="fil6221BB4D48C90203A9380DE46F8BEBE5" KeyPath="yes" Source="$(var.SourcePath)\WpfAnimatedGif.dll" />
+            </Component>
+            <Component Id="cmp6768C68760227A7A2E22AA50FCDFEA78" Directory="INSTALLDIR" Guid="{A0EDD898-9EEE-4BC3-8CDF-01C48E9D9DBC}">
+                <File Id="fil4D7C86A967B9E53C40527DAF4B1E8DE4" KeyPath="yes" Source="$(var.SourcePath)\WpfAnimatedGif.xml" />
+            </Component>
+            <Component Id="cmpEEA9ECD33CB1438961D25458941611E5" Directory="dir5A10D01FB847007B5517A50CB592C011" Guid="{00661FDF-93CF-4612-9A1D-5ECC8BF6E09F}">
+                <File Id="fil5FF32F4ED419D5C0BBB0C1A728E0017C" KeyPath="yes" Source="$(var.SourcePath)\app.publish\R-173.exe" />
+            </Component>
+            <Component Id="cmpFFCDBFB3E73F0498C65E308C0C9AA99C" Directory="dir5FD5B93CE6DC308CC0CAC3042BE2A51D" Guid="{0A7009D6-4AE5-433A-9DCD-8771AE1BCE29}">
+                <File Id="filAFA6A9189A9A4242C48526560810456D" KeyPath="yes" Source="$(var.SourcePath)\Files\DS Crystal.ttf" />
+            </Component>
+            <Component Id="cmp694868CF950FEBE3FF5D055266CB8F82" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{DF5B90B2-C2E5-4068-8CC6-7FA0450D89ED}">
+                <File Id="fil575FF873FB13AF8665D102A7D7CD788A" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning1_1.gif" />
+            </Component>
+            <Component Id="cmp9B2ABD6AF071CD875B681A426B4B4B41" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{C6A12316-06B2-40BA-A1E7-9F5EA0CC09FE}">
+                <File Id="fil1F325FDD7D95139062C029E257373737" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning1_2.gif" />
+            </Component>
+            <Component Id="cmp1686CC1FE10BD61AEC873585FDBBA1FA" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{694F2DB9-A293-4BA0-8AD3-F335C62F2C34}">
+                <File Id="fil729D9090EB4F3BF9BADA1692951C1EF4" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning1_4.gif" />
+            </Component>
+            <Component Id="cmp6AC5658261027DC99A37FF93BA668D0E" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{A38F0D08-9F46-44DF-AE9E-3EEC0BFAE04B}">
+                <File Id="filEE66D08D32C8EC4E9FF1D59ECE73838A" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_1.gif" />
+            </Component>
+            <Component Id="cmpEBA74A955223CE32EBEE4D00BDE7AB0B" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{D2684C7B-E116-4EB6-96B5-098CCC058B08}">
+                <File Id="fil33016C980AC2D94FE770AFBCA93CFED4" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_2.gif" />
+            </Component>
+            <Component Id="cmpD7699B61E9DD28078CC0CD365E711C4C" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{1DDFC7A0-F3E2-486B-95AB-82F674E174EE}">
+                <File Id="fil4D5566AF67388D36F7DC0350D4E112CA" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_3.gif" />
+            </Component>
+            <Component Id="cmpD1B09AC6B64AE52B7F6E10D90DF80CDF" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{538770C3-4D42-429E-9440-C2881C275BB5}">
+                <File Id="filCFDC9391BCCD0A7ACC663610140F4A19" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_4.gif" />
+            </Component>
+            <Component Id="cmp022F617D94CE483688C69DB749B4F969" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{A896D7C1-3E42-4D6E-ABDC-5A5850033B0C}">
+                <File Id="fil76533BD91E2DDB41BBDA38B17B55A84D" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_1.gif" />
+            </Component>
+            <Component Id="cmpC5D9FD2CAB41AC27A9C7DD96E2535350" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{347425AD-96CB-4456-B1BD-4B3DCA5503DF}">
+                <File Id="filA454326BB3C9230585B47C0EBB17BEBF" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_2.gif" />
+            </Component>
+            <Component Id="cmpC0DABA99FB69B720642E41EEB15E1490" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{EA946A01-A15A-496D-9924-24717DBDF3EC}">
+                <File Id="fil50582B598B635A073C3FE9B438338F76" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_3.gif" />
+            </Component>
+            <Component Id="cmp8FC006868B711B89D0782F83E31AE468" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{47372921-9D0A-4937-9D91-B0D962E33273}">
+                <File Id="fil91EC5A0857C8FD84367B19223B071729" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_4.gif" />
+            </Component>
+            <Component Id="cmp547EF59A413549CD2657E0394704073D" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{D5330F3D-8C56-4746-87B5-F221F9E45928}">
+                <File Id="fil830F4D0DD661185CFC4AB9A3F859EA26" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_5.gif" />
+            </Component>
+            <Component Id="cmp72663D57E6669B208C4DD89EBA30A9B1" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{805FEE37-26C3-4A08-94F9-BB7C44B72AB1}">
+                <File Id="fil0D5B6FA5EA18F93693E4CD1E4D8418AE" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\leatning1_3.gif" />
+            </Component>
+            <Component Id="cmp01831F21FCFD4322C9F33BD77D44D02D" Directory="dir61B122782F2749F187324C134F6498C1" Guid="{98FA2E26-9B1D-476B-B1D5-A53D9B553B36}">
+                <File Id="filC51CAEB903F8C34A474441D36664B06C" KeyPath="yes" Source="$(var.SourcePath)\Resources\RadioStationText.json" />
+            </Component>
+            <Component Id="cmpB1E79DA3BB5F937DB909768BD01EC4F6" Directory="dir61B122782F2749F187324C134F6498C1" Guid="{AD033B69-74E0-4AF3-B180-B018189DC7DB}">
+                <File Id="fil85AC4C122627272F8C51FA39EDE5C384" KeyPath="yes" Source="$(var.SourcePath)\Resources\Р173.xps" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir5FD5B93CE6DC308CC0CAC3042BE2A51D">
+            <Directory Id="dir8519E4F12EC2F1976CF7934ACC89EA95" Name="gif" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

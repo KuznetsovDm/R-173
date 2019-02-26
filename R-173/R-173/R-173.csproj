@@ -414,7 +414,6 @@
     <None Include="Files\gif\leatning1_3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Properties\app.manifest" />
     <None Include="Resources\Р173.xps">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
