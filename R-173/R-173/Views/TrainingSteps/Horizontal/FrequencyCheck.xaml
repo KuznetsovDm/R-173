@@ -17,13 +17,13 @@
 
         <StackPanel Margin="20, 10, 0, 0">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Style="{StaticResource 1frequencyCheck}" Width="130" Height="60" />
+                <CheckBox Style="{StaticResource 1frequencyCheck}" Width="80" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-                <CheckBox Style="{StaticResource 2frequencyCheck}" Width="130" Height="60" />
+                <CheckBox Style="{StaticResource 2frequencyCheck}" Width="120" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-                <CheckBox Style="{StaticResource 3frequencyCheck}" Width="130" Height="60" />
+                <CheckBox Style="{StaticResource 3frequencyCheck}" Width="195" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
-                <CheckBox Style="{StaticResource 4frequencyCheck}" Width="130" Height="60" />
+                <CheckBox Style="{StaticResource 4frequencyCheck}" Width="125" Height="60" />
                 <Control Template="{StaticResource ArrowRight}" />
             </StackPanel>
 

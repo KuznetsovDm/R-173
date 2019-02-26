@@ -32,14 +32,10 @@ namespace R_173.Views
         {
             if (!int.TryParse(e.Uri.Host, out var number))
                 return;
-
-            MainWindow.Cursor = Cursors.Wait;
-
             DocViewer.Visibility = System.Windows.Visibility.Collapsed;
             Radio.Visibility = System.Windows.Visibility.Visible;
             RadioView.SetBlackouts(number - 1);
-
-            MainWindow.Cursor = Cursors.Arrow;
+            MainWindow.Cursor = null;
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)

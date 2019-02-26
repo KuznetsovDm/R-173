@@ -8,9 +8,11 @@
                       xmlns:views="clr-namespace:R_173.Views"
                       xmlns:viewModels="clr-namespace:R_173.ViewModels"
                       xmlns:trainingSteps="clr-namespace:R_173.Views.TrainingSteps"
+                      xmlns:res="clr-namespace:R_173.SharedResources"
                       mc:Ignorable="d" d:DesignWidth="1050" d:DesignHeight="1024"
                       MinWidth="1050" MinHeight="600"
-                      Title="Р-173" WindowState="Maximized" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana">
+                      Title="Р-173" WindowState="Maximized" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana"
+                      res:MessageBehavior.IsEnabled="True">
     <Grid>
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
@@ -19,7 +21,7 @@
         <DockPanel>
             <UniformGrid x:Name="buttons" DockPanel.Dock="Top" Columns="4">
                 <UniformGrid.Resources>
-                    <Style TargetType="RadioButton">
+                    <!--<Style TargetType="RadioButton">
                         <Setter Property="GroupName" Value="Tabs" />
                         <Setter Property="Template">
                             <Setter.Value>
@@ -43,7 +45,7 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-                    </Style>
+                    </Style>-->
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                         <Setter Property="Background" Value="#FFF7F7" />
                         <Setter Property="Focusable" Value="False" />
@@ -130,10 +132,12 @@
                         <Setter Property="Padding" Value="5" />
                     </Style>
                 </DockPanel.Resources>
+                <!--Background="DarkSeaGreen"-->
                 <TextBlock DockPanel.Dock="Top" Text="Обучающая программа-симулятор радиостанци Р-173" />
-                <Button DockPanel.Dock="Top" Width="350" Click="CloseWelcome" IsDefault="True"
-                        Background="DarkSeaGreen" Cursor="Hand">
-                    <TextBlock Text="Приступить к работе" Background="Transparent" Padding="2" />
+                <Button DockPanel.Dock="Top" Padding="10" HorizontalAlignment="Center" FontSize="30" Click="CloseWelcome" IsDefault="True"
+                        Cursor="Hand">
+                    <!--<TextBlock Text="Приступить к работе" Background="Transparent" Padding="2" />-->
+                    Приступить к работе
                 </Button>
                 <TextBlock DockPanel.Dock="Bottom" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ" />
             </DockPanel>

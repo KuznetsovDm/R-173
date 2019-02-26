@@ -1,4 +1,5 @@
-﻿using R_173.Models;
+﻿using MahApps.Metro.Controls.Dialogs;
+using R_173.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace R_173.Handlers
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
         public event Action<Key> OnKeyDown;
+        public Action OnEnterPressed;
+        public Action OnEscPressed;
 
         public KeyboardHandler()
         {
@@ -23,6 +26,17 @@ namespace R_173.Handlers
                 { Key.Tab, value => _currentRadioModel.Board.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.C, value => _currentRadioModel.Reset.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.N, value => _currentRadioModel.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
+                { Key.X, value =>
+                {
+                    if (value)
+                        return;
+                    App.ServiceCollection.Resolve<MainWindow>().ShowMessageAsync("title", "message", 
+                        settings: new MetroDialogSettings()
+                        {
+
+                        });
+                    //var w = new MahApps.Metro.Controls.MetroWindow().ShowMEssage();
+                } }
             };
 
             Enumerable.Range(0, 10)
@@ -44,8 +58,18 @@ namespace R_173.Handlers
 
         public void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            OnKeyDown?.Invoke(e.Key);
             e.Handled = true;
+            if (e.Key == Key.Enter && OnEnterPressed != null)
+            {
+                OnEnterPressed();
+                return;
+            }
+            if (e.Key == Key.Escape && OnEscPressed != null)
+            {
+                OnEscPressed();
+                return;
+            }
+            OnKeyDown?.Invoke(e.Key);
             //if (e.Key == _lastPressedKey)
             //    return;
             //_lastPressedKey = e.Key;
