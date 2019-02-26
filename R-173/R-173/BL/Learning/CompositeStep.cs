@@ -8,13 +8,13 @@ using R_173.BE;
 
 namespace R_173.BL.Learning
 {
-    public class CompositeStep : IStep<RadioModel>, IDisposable
+    public class CompositeStep : IStep<RadioModel>
     {
-        IList<IStep<RadioModel>> _steps;
-        private int _current = 0;
+        private readonly IList<IStep<RadioModel>> _steps;
+        private int _current;
         private RadioModel _model;
 
-        public string StepName { get; private set; }
+        public string StepName { get; }
 
         public event EventHandler<StepChangedEventArgs> StepChanged = (e, args) => { };
 

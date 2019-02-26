@@ -63,7 +63,6 @@ namespace R_173
 
         public void GoToTaskTab()
         {
-            //((RadioButton) buttons.Children[2]).IsChecked = true;
             MainContent.Content = _pages[typeof(Tasks)];
             SelectButton(buttons.Children[2] as Button);
         }
