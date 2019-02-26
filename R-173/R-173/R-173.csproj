@@ -407,7 +407,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\app.manifest" />
-    <None Include="R-173_TemporaryKey.pfx" />
     <None Include="Resources\Р173.xps">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
