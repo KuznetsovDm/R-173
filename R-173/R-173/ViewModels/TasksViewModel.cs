@@ -1,19 +1,22 @@
-﻿using R_173.BL.Tasks;
-using R_173.SharedResources;
-using System;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using R_173.BE;
+using R_173.BL.Tasks;
+using R_173.Helpers;
+using R_173.Interfaces;
+using R_173.SharedResources;
+using Unity;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
 using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
 using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
-using R_173.BE;
-using R_173.Interfaces;
-using Unity;
-using System.Windows.Controls;
-using System.Linq;
-using System.Collections.Generic;
-using System.Windows.Media;
 
 namespace R_173.ViewModels
 {
@@ -23,10 +26,10 @@ namespace R_173.ViewModels
         private readonly TaskViewModel[] _tasks;
         private readonly SimpleCommand _stopTaskCommand;
         private bool _taskIsRunning;
-        private RadioViewModel _radioViewModel;
-        private TasksBl _tasksBl;
-        private TaskTypes? _runningTaskType = null;
-        private Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
+        private readonly RadioViewModel _radioViewModel;
+        private readonly TasksBl _tasksBl;
+        private TaskTypes? _runningTaskType;
+        private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
         public RadioViewModel RadioViewModel => _radioViewModel;
 
@@ -37,13 +40,13 @@ namespace R_173.ViewModels
             {
                 { TaskTypes.PreparationToWork, new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork))},
                 { TaskTypes.PerformanceTest, new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(TaskTypes.PerformanceTest))},
-                { TaskTypes.FrequencyTask, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask))},
+                { TaskTypes.FrequencyTask, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask))}
             };
             _tasks = new[]
             {
                 _taskViewModels[TaskTypes.PreparationToWork],
                 _taskViewModels[TaskTypes.PerformanceTest],
-                _taskViewModels[TaskTypes.FrequencyTask],
+                _taskViewModels[TaskTypes.FrequencyTask]
             };
             _stopTaskCommand = new SimpleCommand(StopTask);
             _radioViewModel = new RadioViewModel();
@@ -113,22 +116,16 @@ namespace R_173.ViewModels
 
         private void ShowDialog(string type)
         {
-            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
             var parameters = GetMessageBoxParameters(type);
-            messageBox.ShowDialog(parameters);
+            ShowDialog(parameters);
         }
 
         private void ShowDialog(MessageBoxParameters parameters)
         {
-            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            messageBox.ShowDialog(parameters);
-        }
-
-        private void ShowSuccessDialog()
-        {
-            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
-            var parameters = GetMessageBoxParameters("EndSuccess");
-            messageBox.ShowDialog(parameters);
+            System.Threading.Tasks.Task.Factory.StartNew(async () => await MetroMessageBoxHelper.ShowDialog(parameters),
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void ShowErrorDialog(Message message)
@@ -137,7 +134,7 @@ namespace R_173.ViewModels
             var messageBoxParameters = GetMessageBoxParameters("EndFail");
             var item = FormatMessage(message);
             var panel = new StackPanel();
-            var text = new TextBlock()
+            var text = new TextBlock
             {
                 FontSize = 20,
                 TextWrapping = TextWrapping.Wrap,
@@ -145,11 +142,11 @@ namespace R_173.ViewModels
             };
 
             panel.Children.Add(text);
-            var tree = new TreeView()
+            var tree = new TreeView
             {
                 BorderThickness = new Thickness(0),
                 Focusable = false,
-                IsManipulationEnabled = false,
+                IsManipulationEnabled = false
             };
             tree.Items.Add(item);
 
@@ -163,16 +160,22 @@ namespace R_173.ViewModels
             var message = _tasksBl.Stop();
             _radioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
-            _taskViewModels[_runningTaskType.Value].NumberOfAttempts++;
 
-            if (message == null)
+            if (_runningTaskType != null)
             {
-                ShowDialog("EndSuccess");
-                _taskViewModels[_runningTaskType.Value].NumberOfSuccessfulAttempts++;
-            }
-            else
-            {
-                ShowErrorDialog(message);
+                var taskType = _runningTaskType.Value;
+
+                _taskViewModels[taskType].NumberOfAttempts++;
+
+                if (message == null)
+                {
+                    ShowDialog("EndSuccess");
+                    _taskViewModels[taskType].NumberOfSuccessfulAttempts++;
+                }
+                else
+                {
+                    ShowErrorDialog(message);
+                }
             }
 
             _runningTaskType = null;
@@ -211,7 +214,7 @@ namespace R_173.ViewModels
                 Message = description.Body
             };
 
-            if(type == "Begin" || type == "EndSuccess" || type == "EndFail")
+            if (type == "Begin" || type == "EndSuccess" || type == "EndFail")
             {
                 parameters.OkText = description.Buttons[0];
             }
@@ -226,12 +229,12 @@ namespace R_173.ViewModels
 
         private TreeViewItem FormatMessage(Message message)
         {
-            if(string.IsNullOrEmpty(message.Header) && message.Messages.Count() == 1)
+            if (string.IsNullOrEmpty(message.Header) && message.Messages.Count() == 1)
             {
                 return FormatMessage(message.Messages.First());
             }
 
-            var item = new TreeViewItem()
+            var item = new TreeViewItem
             {
                 IsExpanded = true,
                 Foreground = new SolidColorBrush(Colors.Red),

@@ -2,6 +2,8 @@
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
@@ -12,9 +14,8 @@ using VPerformanceTest = R_173.Views.TrainingSteps.Vertical.PerformanceTest;
 using VFrequencyCheck = R_173.Views.TrainingSteps.Vertical.FrequencyCheck;
 using Unity;
 using System.Windows;
-using System.Windows.Threading;
-using MahApps.Metro.Controls.Dialogs;
 using R_173.BE;
+using R_173.Helpers;
 
 namespace R_173.ViewModels
 {
@@ -105,7 +106,10 @@ namespace R_173.ViewModels
 
                 var type = ConvertStepNumberToString(_currentStep) + ".Begin";
                 var parameters = GetMessageBoxParameters(type);
-                ShowDialog(parameters);
+                Task.Factory.StartNew(async () => await ShowDialog(parameters),
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
 
@@ -186,7 +190,11 @@ namespace R_173.ViewModels
             var parameters = GetMessageBoxParameters(type);
             parameters.Cancel = StartOver;
             parameters.Ok = GetMessageBoxOkAction(CurrentStep);
-            ShowDialog(parameters);
+            Task.Factory.StartNew(async () => await ShowDialog(parameters),
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                TaskScheduler.FromCurrentSynchronizationContext()
+            );
         }
 
         private static string ConvertStepNumberToString(int stepNumber)
@@ -204,62 +212,9 @@ namespace R_173.ViewModels
             }
         }
 
-        private void ShowDialog(MessageBoxParameters parameters)
+        private async Task ShowDialog(MessageBoxParameters parameters)
         {
-            var dispatcher = Dispatcher.CurrentDispatcher;
-            var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
-
-            var dialogStyle = string.IsNullOrEmpty(parameters.CancelText)
-                ? MessageDialogStyle.Affirmative
-                : MessageDialogStyle.AffirmativeAndNegative;
-
-            mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, dialogStyle,
-                new MetroDialogSettings
-                {
-                    AffirmativeButtonText = string.IsNullOrEmpty(parameters.CancelText) ? parameters.OkText : parameters.CancelText,
-                    ColorScheme = MetroDialogColorScheme.Theme,
-                    AnimateShow = true,
-                    NegativeButtonText = parameters.OkText,
-                    AnimateHide = false,
-                    DefaultButtonFocus = MessageDialogResult.Affirmative,
-                    DialogResultOnCancel = MessageDialogResult.Canceled,
-
-                })
-                .ContinueWith(task =>
-                {
-                    dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            var result = task.Result;
-                            if (dialogStyle == MessageDialogStyle.Affirmative)
-                            {
-                                if (result == MessageDialogResult.Affirmative)
-                                {
-                                    parameters.Ok?.Invoke();
-                                }
-
-                                return;
-                            }
-
-                            switch (result)
-                            {
-                                case MessageDialogResult.Negative:
-                                    parameters.Ok?.Invoke();
-                                    break;
-                                case MessageDialogResult.Affirmative:
-                                    parameters.Cancel?.Invoke();
-                                    break;
-                                case MessageDialogResult.Canceled:
-                                    break;
-                                case MessageDialogResult.FirstAuxiliary:
-                                    break;
-                                case MessageDialogResult.SecondAuxiliary:
-                                    break;
-                                default:
-                                    throw new ArgumentOutOfRangeException();
-                            }
-                        })
-                    );
-                });
+            await MetroMessageBoxHelper.ShowDialog(parameters);
         }
 
         private Action GetMessageBoxOkAction(int stepNumber)

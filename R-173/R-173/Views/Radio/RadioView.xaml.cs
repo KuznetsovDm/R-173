@@ -142,14 +142,12 @@ namespace R_173.Views.Radio
             viewModel.BlackoutDescription = BlackoutBehaviour.GetDescription(ellipse);
             if (_canvases == null || !_canvases.TryGetValue(number + 1, out _lastControl))
                 return;
-            _lastControl.Background = Brushes.Blue;
+            _lastControl.Background = new SolidColorBrush(Color.FromRgb(65, 177, 225));
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
-            //return;
-            var viewModel = DataContext as RadioViewModel;
-            viewModel.BlackoutIsVisible = false;
+            if (DataContext is RadioViewModel viewModel) viewModel.BlackoutIsVisible = false;
         }
     }
 

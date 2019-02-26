@@ -325,8 +325,8 @@
                         </Path>
 
                         <TextBlock Canvas.Left="2489" Canvas.Top="572" Width="995"
-                               FontSize="120" TextWrapping="Wrap" TextAlignment="Center"
-                               Background="White"
+                               FontSize="80" TextWrapping="Wrap" TextAlignment="Center"
+                               Background="White" Padding="25"
                                Text="{Binding Path=BlackoutDescription}" />
                     </Canvas>
 

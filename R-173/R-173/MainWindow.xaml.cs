@@ -10,8 +10,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 using Unity;
-using System.Linq;
-using Unity;
 
 namespace R_173
 {
@@ -54,14 +52,14 @@ namespace R_173
             MainContent.Content = _pages[typeof(Appointment)];
 
             //this.ShowMetroDialogAsync(new Dialog(this, new MetroDialogSettings()));
-            _lastButton = buttons.Children[0] as Button;
-            _lastButton.Background = _selectedBrush;
+            _lastButton = Buttons.Children[0] as Button;
+            if (_lastButton != null) _lastButton.Background = _selectedBrush;
         }
 
         public void GoToTaskTab()
         {
             MainContent.Content = _pages[typeof(Tasks)];
-            SelectButton(buttons.Children[2] as Button);
+            SelectButton(Buttons.Children[2] as Button);
         }
 
         private void SelectButton(Button button)

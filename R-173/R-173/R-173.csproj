@@ -189,6 +189,7 @@
     <Compile Include="BL\Tasks\Task.cs" />
     <Compile Include="BL\Tasks\TasksBl.cs" />
     <Compile Include="BL\Tasks\TaskFactory.cs" />
+    <Compile Include="Helpers\MetroMessageBoxHelper.cs" />
     <Compile Include="Interfaces\IMessageBox.cs" />
     <Compile Include="Extensions\IEnumirableExtentions.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />

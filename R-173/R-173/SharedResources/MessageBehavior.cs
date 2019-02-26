@@ -1,7 +1,7 @@
-﻿using R_173.Handlers;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using R_173.Handlers;
 using Unity;
 
 namespace R_173.SharedResources
@@ -16,7 +16,7 @@ namespace R_173.SharedResources
                 new FrameworkPropertyMetadata(
                     false, 
                     FrameworkPropertyMetadataOptions.Inherits, 
-                    new PropertyChangedCallback(OnIsEnabledChanged)));
+                    OnIsEnabledChanged));
 
 
         public static bool GetIsEnabled(DependencyObject obj)

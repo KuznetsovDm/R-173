@@ -1,10 +1,9 @@
-﻿<Controls:MetroWindow x:Class="R_173.MainWindow"
-                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+﻿<controls:MetroWindow x:Class="R_173.MainWindow"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:local="clr-namespace:R_173"
                       xmlns:views="clr-namespace:R_173.Views"
                       xmlns:viewModels="clr-namespace:R_173.ViewModels"
                       xmlns:trainingSteps="clr-namespace:R_173.Views.TrainingSteps"
@@ -19,33 +18,8 @@
         </Grid.Resources>
 
         <DockPanel>
-            <UniformGrid x:Name="buttons" DockPanel.Dock="Top" Columns="4">
+            <UniformGrid x:Name="Buttons" DockPanel.Dock="Top" Columns="4">
                 <UniformGrid.Resources>
-                    <!--<Style TargetType="RadioButton">
-                        <Setter Property="GroupName" Value="Tabs" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="RadioButton">
-                                    <Border x:Name="border" Margin="2" CornerRadius="3, 3, 0, 0"
-                                            Background="WhiteSmoke" ToolTip="{TemplateBinding Content}">
-                                        <TextBlock Margin="3"
-                                                   Text="{TemplateBinding Content}"
-                                                   FontSize="18" FontWeight="Bold"
-                                                   TextAlignment="Center"
-                                                   Cursor="Hand" />
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="Khaki" />
-                                        </Trigger>
-                                        <Trigger Property="IsChecked" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="OliveDrab" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>-->
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                         <Setter Property="Background" Value="#FFF7F7" />
                         <Setter Property="Focusable" Value="False" />
@@ -92,10 +66,12 @@
                                                              NotNullValue="Visible" />
                     </DockPanel.Resources>
                     <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-                        <Button Style="{StaticResource AccentedSquareButtonStyle}" DockPanel.Dock="Right" Content="{Binding Path=OkText}"
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}"
                                 Command="{Binding Path=OkCommand}"
-                                IsDefault="True" />
-                        <Button Style="{StaticResource AccentedSquareButtonStyle}" DockPanel.Dock="Right" Content="{Binding Path=CancelText}"
+                                IsDefault="True"
+                                FontSize="14"
+                                Padding="15,10"/>
+                        <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}"
                                 Command="{Binding Path=CancelCommand}"
                                 IsCancel="True"
                                 Visibility="{Binding Path=CancelText, Converter={StaticResource NotNullToVis}}" />
@@ -132,15 +108,17 @@
                         <Setter Property="Padding" Value="5" />
                     </Style>
                 </DockPanel.Resources>
-                <!--Background="DarkSeaGreen"-->
                 <TextBlock DockPanel.Dock="Top" Text="Обучающая программа-симулятор радиостанци Р-173" />
-                <Button DockPanel.Dock="Top" Padding="10" HorizontalAlignment="Center" FontSize="30" Click="CloseWelcome" IsDefault="True"
-                        Cursor="Hand">
-                    <!--<TextBlock Text="Приступить к работе" Background="Transparent" Padding="2" />-->
-                    Приступить к работе
+                <Button DockPanel.Dock="Top" Margin="200" 
+                        Padding="40, 20" HorizontalAlignment="Center" FontSize="24" 
+                        Cursor="Hand"
+                        FontStretch="Expanded"
+                        Click="CloseWelcome" IsDefault="True"
+                        >
+                    Начать
                 </Button>
                 <TextBlock DockPanel.Dock="Bottom" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ" />
             </DockPanel>
         </Grid>
     </Grid>
-</Controls:MetroWindow>
+</controls:MetroWindow>

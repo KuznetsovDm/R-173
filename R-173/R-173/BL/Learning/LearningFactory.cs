@@ -10,7 +10,7 @@ namespace R_173.BL.Learning
 {
     public class LearningFactory
     {
-        private KeyboardHandler _keyboardHandler;
+        private readonly KeyboardHandler _keyboardHandler;
 
         public LearningFactory()
         {
@@ -107,17 +107,6 @@ namespace R_173.BL.Learning
                     checkInputConditions: SettingFrequenciesLearning.CheckRecordState,
                     checkInternalState: SettingFrequenciesLearning.CheckRecordState))
                 .Add(new RecordWorkToWorkStep())
-                .Build();
-        }
-
-        private static CompositeStep CreateFiveButtonsStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
-        {
-            return new CompositeStepBuilder()
-                .Add(new ButtonStep(checkInputConditions, checkInternalState))
-                .Add(new ButtonStep(checkInputConditions, checkInternalState))
-                .Add(new ButtonStep(checkInputConditions, checkInternalState))
-                .Add(new ButtonStep(checkInputConditions, checkInternalState))
-                .Add(new ButtonStep(checkInputConditions, checkInternalState))
                 .Build();
         }
 

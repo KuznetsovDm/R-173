@@ -72,8 +72,8 @@
 
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" 
                     Content="Вернуться к документу"
-                    FontSize="15"
-                    Padding="10" 
+                    FontSize="14"
+                    Padding="30,15" 
                     Click="Button_Click"/>
         </Grid>
     </Grid>
