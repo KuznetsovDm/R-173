@@ -19,7 +19,7 @@
                                                TextAlignment="Center"
                                                TextWrapping="Wrap" 
                                                FontWeight="SemiBold" 
-                                               FontSize="10"
+                                               FontSize="9"
                                                ToolTip="{TemplateBinding ToolTip}" />
                         </ContentControl>
                     </Border>
@@ -47,7 +47,7 @@
     <ControlTemplate x:Key="ArrowLeft">
         <Grid VerticalAlignment="Center">
             <Line X1="9" X2="1" Y1="0" Y2="5" StrokeThickness="3" Stroke="Black" />
-            <Line X1="0" X2="26" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
+            <Line X1="0" X2="20" Y1="5" Y2="5" StrokeThickness="3" Stroke="Black" />
             <Line X1="9" X2="1" Y1="10" Y2="5" StrokeThickness="3" Stroke="Black" />
         </Grid>
     </ControlTemplate>

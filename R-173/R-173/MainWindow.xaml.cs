@@ -1,4 +1,5 @@
 ﻿//using R_173.BE;
+using MahApps.Metro.Controls.Dialogs;
 using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.ViewModels;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using Unity;
 
 namespace R_173
@@ -21,6 +23,7 @@ namespace R_173
     public partial class MainWindow
     {
         private readonly Dictionary<Type, ITabView> _pages;
+        private ButtonBase _lastButton;
 
         public MainWindow(KeyboardHandler keyboardHandler)
         {
@@ -48,17 +51,30 @@ namespace R_173
             Message.DataContext = App.ServiceCollection.Resolve<IMessageBox>();
 
             MainContent.Content = _pages[typeof(Appointment)];
+
+            //this.ShowMetroDialogAsync(new Dialog(this, new MetroDialogSettings()));
+            _lastButton = buttons.Children[0] as Button;
         }
 
         public void GoToTaskTab()
         {
-            ((RadioButton) buttons.Children[2]).IsChecked = true;
+            //((RadioButton) buttons.Children[2]).IsChecked = true;
             MainContent.Content = _pages[typeof(Tasks)];
+            SelectButton(buttons.Children[2] as Button);
+        }
+
+        private void SelectButton(Button button)
+        {
+            _lastButton.Background = Brushes.RosyBrown;
+            //button.Background = Color.;#FFF7F7F7
+            _lastButton = button;
         }
 
         private void ChangeTab(object sender, RoutedEventArgs e)
         {
-            var page = (sender as ButtonBase)?.CommandParameter as Type;
+            var button = sender as Button;
+            SelectButton(button);
+            var page = button.CommandParameter as Type;
             MainContent.Content = _pages[page ?? throw new InvalidOperationException()];
         }
 
