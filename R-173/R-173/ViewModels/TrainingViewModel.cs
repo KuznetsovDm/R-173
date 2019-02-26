@@ -168,7 +168,7 @@ namespace R_173.ViewModels
                 OnPropertyChanged(nameof(CurrentToolTip));
             }
         }
-        
+
         public MessageBoxParameters Message => _message;
 
         private void Learning_StepChanged(int step)
@@ -208,24 +208,6 @@ namespace R_173.ViewModels
         {
             var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
             messageBox.ShowDialog(parameters);
-
-            //var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
-            //mainWindow.ShowOverlay();
-            //await mainWindow.ShowMessageAsync(parameters.Title, parameters.Message, MessageDialogStyle.AffirmativeAndNegative,
-            //    new MetroDialogSettings()
-            //    {
-            //        AffirmativeButtonText = parameters.OkText,
-            //        ColorScheme = MetroDialogColorScheme.Theme,
-            //        AnimateShow = true,
-            //        NegativeButtonText = parameters.CancelText,
-
-            //    }).ContinueWith(task =>
-            //{
-            //    var result = task.Result;
-            //    if (result == MessageDialogResult.Negative)
-            //        parameters.Cancel();
-            //    else parameters.Ok();
-            //});
         }
 
         private Action GetMessageBoxOkAction(int stepNumber)

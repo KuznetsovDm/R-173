@@ -15,6 +15,7 @@ using System.Windows.Media;
 using MahApps.Metro.Controls.Dialogs;
 using Unity;
 using System.Linq;
+using Unity;
 
 namespace R_173
 {
@@ -32,7 +33,7 @@ namespace R_173
         {
             InitializeComponent();
             _brush = new SolidColorBrush(Color.FromRgb(0xFF, 0xF7, 0xF7));
-            _selectedBrush = new SolidColorBrush(Color.FromRgb(0xBE, 0xE6, 0xFD));
+            _selectedBrush = new SolidColorBrush(Color.FromRgb(0xE0, 0xE0, 0xE0));
             var trainingViewModel = new TrainingViewModel();
             var training = new Training(trainingViewModel);
             training.SizeChanged += (s, e) =>
