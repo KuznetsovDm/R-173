@@ -96,7 +96,7 @@
                 <ImageBrush ImageSource="/Files/radio.jpg" Stretch="UniformToFill" />
             </Grid.Background>
 
-            <DockPanel LastChildFill="False">
+            <DockPanel >
                 <DockPanel.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -108,16 +108,15 @@
                         <Setter Property="Padding" Value="5" />
                     </Style>
                 </DockPanel.Resources>
-                <TextBlock DockPanel.Dock="Top" Text="Обучающая программа-симулятор радиостанци Р-173" />
-                <Button DockPanel.Dock="Top" Margin="200" 
-                        Padding="40, 20" HorizontalAlignment="Center" FontSize="24" 
-                        Cursor="Hand"
-                        FontStretch="Expanded"
-                        Click="CloseWelcome" IsDefault="True"
-                        >
-                    Начать
+                <TextBlock FontFamily="Segoe UI, Lucida Sans Unicode, Verdana" FontWeight="Bold" DockPanel.Dock="Top" Margin="50" Text="Обучающая программа-симулятор радиостанци Р-173" Padding="60,20" />
+                <TextBlock FontFamily="Segoe UI, Lucida Sans Unicode, Verdana" DockPanel.Dock="Bottom" Margin="50" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ" Padding="60,20" />
+                <Button
+                    Padding="50, 20" HorizontalAlignment="Center" FontSize="24"
+                    Cursor="Hand"
+                    FontStretch="Expanded" VerticalAlignment="Center"
+                    Click="CloseWelcome" IsDefault="True"
+                >Начать
                 </Button>
-                <TextBlock DockPanel.Dock="Bottom" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ" />
             </DockPanel>
         </Grid>
     </Grid>
