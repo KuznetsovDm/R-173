@@ -247,7 +247,7 @@
 Надеть и подготовить шлемофон. 
 Подключить шлемофон к нагрудному переключателю.
 Установить переключатель на приборе БВ-34 в положение РС-1.
-Снять чехол с приемоперечатчика.
+Снять чехол с приемопередатчика.
 (Нажмите Enter для продолжения)" />
         <Setter Property="IsChecked" Value="{Binding Path=CurrentStep, Mode=OneWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}" />
         <Setter Property="ToolTip">
