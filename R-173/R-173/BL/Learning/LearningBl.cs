@@ -91,9 +91,7 @@ namespace R_173.BL.Learning
             {
                 learning.Reset();
                 learning.StartIfInputConditionsAreRight(_model, out var errors);
-                learning.Completed += Completed;
-                learning.StepChanged += StepChanged;
-            }
+			}
         }
     }
 }
