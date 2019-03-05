@@ -19,7 +19,7 @@
                                                TextAlignment="Center"
                                                TextWrapping="Wrap" 
                                                FontWeight="SemiBold" 
-                                               FontSize="9"
+                                               FontSize="8"
                                                ToolTip="{TemplateBinding ToolTip}" />
                         </ContentControl>
                     </Border>
