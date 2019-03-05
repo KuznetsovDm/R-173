@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_173.Views"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterScreen"
         Title="Preloader" Height="300" Width="500" ResizeMode="NoResize"
         FontSize="20">
@@ -22,7 +23,7 @@
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0" TextAlignment="Center" Text="Р-173" Foreground="White" FontSize="70" FontWeight="Bold" />
-            <Image Grid.Row="1" Width="120" Source="/Files/radio/loading2.png" RenderTransformOrigin="0.5, 0.5">
+            <!--<Image Grid.Row="1" Width="120" Source="/Files/radio/loading2.png" RenderTransformOrigin="0.5, 0.5">
                 <Image.RenderTransform>
                     <RotateTransform Angle="0" />
                 </Image.RenderTransform>
@@ -36,7 +37,8 @@
                         </BeginStoryboard>
                     </EventTrigger>
                 </Image.Triggers>
-            </Image>
+            </Image>-->
+            <mah:ProgressRing Grid.Row="1" Foreground="White" />
         </Grid>
     </Grid>
 </Window>

@@ -26,53 +26,43 @@ namespace R_173
     {
         public static IUnityContainer ServiceCollection;
         private MainWindow _mainWindow;
-        private readonly object _mainWindowLock = new object();
         private Preloader _preloader;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            lock (_mainWindowLock)
+            var preloaderThread = new Thread(() =>
             {
-                var preloaderThread = new Thread(() =>
-                {
-                    _preloader = new Preloader();
-                    _preloader.ContentRendered += Preloader_ContentRendered;
-                    _preloader.Closed += delegate
-                    {
-                        _preloader.Dispatcher.BeginInvokeShutdown(DispatcherPriority.Normal);
-                    };
-                    _preloader.ShowDialog();
-                    Dispatcher.Run();
-                });
+                _preloader = new Preloader();
+                _preloader.ContentRendered += Preloader_ContentRendered;
+                _preloader.ShowDialog();
+                Dispatcher.Run();
+            });
 
-                preloaderThread.SetApartmentState(ApartmentState.STA);
-                preloaderThread.IsBackground = true;
-                preloaderThread.Start();
+            preloaderThread.SetApartmentState(ApartmentState.STA);
+            preloaderThread.IsBackground = true;
+            preloaderThread.Start();
 
-                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-                ConfigureIOC();
-                base.OnStartup(e);
-                _mainWindow = ServiceCollection.Resolve<MainWindow>();
-            }
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            base.OnStartup(e);
         }
 
         private void Preloader_ContentRendered(object sender, EventArgs ev)
         {
-            lock (_mainWindowLock)
+            Dispatcher.BeginInvoke((Action)(() =>
             {
-                _mainWindow.Dispatcher.BeginInvoke((Action)(() =>
+                ConfigureIOC();
+                _mainWindow = ServiceCollection.Resolve<MainWindow>();
+                _mainWindow.ContentRendered += delegate
                 {
-                    _mainWindow.ContentRendered += delegate
+                    _mainWindow.Activate();
+                    _preloader.Dispatcher.BeginInvoke((Action)(() =>
                     {
-                        _mainWindow.Activate();
-                        _preloader.Dispatcher.BeginInvoke((Action)(() =>
-                        {
-                            _preloader.Close();
-                        }));
-                    };
-                    _mainWindow.Show();
-                }));
-            }
+                        _preloader.Close();
+                        _preloader.Dispatcher.BeginInvokeShutdown(DispatcherPriority.Normal);
+                    }));
+                };
+                _mainWindow.Show();
+            }));
         }
 
 
