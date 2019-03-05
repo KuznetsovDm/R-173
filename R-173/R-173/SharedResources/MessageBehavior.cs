@@ -32,36 +32,50 @@ namespace R_173.SharedResources
 
         private static void OnIsEnabledChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
+            //if (obj is Button affirmativeButton && affirmativeButton.Name == "PART_AffirmativeButton")
+            //{
+            //    var keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
+            //    if (args.NewValue is true)
+            //    {
+            //        keyboardHandler.OnEnterPressed = () =>
+            //        {
+            //            affirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //        };
+            //    }
+            //    else
+            //    {
+            //        keyboardHandler.OnEnterPressed = null;
+            //    }
+            //}
+
+            //if (obj is Button negativeButton && negativeButton.Name == "PART_NegativeButton")
+            //{
+            //    var keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
+            //    if (args.NewValue is true)
+            //    {
+            //        keyboardHandler.OnEnterPressed = () =>
+            //        {
+            //            negativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //        };
+            //    }
+            //    else
+            //    {
+            //        keyboardHandler.OnEnterPressed = null;
+            //    }
+            //}
             if (obj is Button affirmativeButton && affirmativeButton.Name == "PART_AffirmativeButton")
             {
-                var keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
                 if (args.NewValue is true)
-                {
-                    keyboardHandler.OnEnterPressed = () =>
-                    {
-                        affirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                    };
-                }
+                    App.ServiceCollection.Resolve<KeyboardHandler>().AffirmativeButton = affirmativeButton;
                 else
-                {
-                    keyboardHandler.OnEnterPressed = null;
-                }
+                    App.ServiceCollection.Resolve<KeyboardHandler>().AffirmativeButton = null;
             }
-
-            if (obj is Button negativeButton && negativeButton.Name == "PART_NegativeButton")
+            else if (obj is Button negativeButton && negativeButton.Name == "PART_NegativeButton")
             {
-                var keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
                 if (args.NewValue is true)
-                {
-                    keyboardHandler.OnEnterPressed = () =>
-                    {
-                        negativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                    };
-                }
+                    App.ServiceCollection.Resolve<KeyboardHandler>().NegativeButton = negativeButton;
                 else
-                {
-                    keyboardHandler.OnEnterPressed = null;
-                }
+                    App.ServiceCollection.Resolve<KeyboardHandler>().NegativeButton = null;
             }
         }
     }

@@ -3,6 +3,9 @@ using R_173.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Unity;
 
@@ -14,8 +17,8 @@ namespace R_173.Handlers
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
         public event Action<Key> OnKeyDown;
-        public Action OnEnterPressed;
-        public Action OnEscPressed;
+        public Button AffirmativeButton;
+        public Button NegativeButton;
 
         public KeyboardHandler()
         {
@@ -26,17 +29,6 @@ namespace R_173.Handlers
                 { Key.Tab, value => _currentRadioModel.Board.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.C, value => _currentRadioModel.Reset.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
                 { Key.N, value => _currentRadioModel.Tone.Value = value ? SwitcherState.Enabled : SwitcherState.Disabled },
-                { Key.X, value =>
-                {
-                    if (value)
-                        return;
-                    App.ServiceCollection.Resolve<MainWindow>().ShowMessageAsync("title", "message", 
-                        settings: new MetroDialogSettings()
-                        {
-
-                        });
-                    //var w = new MahApps.Metro.Controls.MetroWindow().ShowMEssage();
-                } }
             };
 
             Enumerable.Range(0, 10)
@@ -59,15 +51,21 @@ namespace R_173.Handlers
         public void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-            if (e.Key == Key.Enter && OnEnterPressed != null)
+            if (e.Key == Key.Enter)
             {
-                OnEnterPressed();
-                return;
+                if (AffirmativeButton?.Visibility == Visibility.Visible)
+                {
+                    AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    return;
+                }
             }
-            if (e.Key == Key.Escape && OnEscPressed != null)
+            else if (e.Key == Key.Escape)
             {
-                OnEscPressed();
-                return;
+                if (NegativeButton?.Visibility == Visibility.Visible)
+                {
+                    NegativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    return;
+                }
             }
             OnKeyDown?.Invoke(e.Key);
             //if (e.Key == _lastPressedKey)
