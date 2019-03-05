@@ -62,6 +62,21 @@ namespace R_173
             SelectButton(Buttons.Children[2] as Button);
         }
 
+        public void GoToTrainingTab()
+        {
+            MainContent.Content = _pages[typeof(Training)];
+            SelectButton(Buttons.Children[1] as Button);
+        }
+
+        public void GoToAppointment(int pageNumber)
+        {
+            var page = (Appointment)_pages[typeof(Appointment)];
+            MainContent.Content = page;
+            SelectButton(Buttons.Children[0] as Button);
+            if (page.DocViewer.CanGoToPage(pageNumber))
+                page.DocViewer.GoToPage(pageNumber);
+        }
+
         private void SelectButton(Button button)
         {
             button.Background = _selectedBrush;

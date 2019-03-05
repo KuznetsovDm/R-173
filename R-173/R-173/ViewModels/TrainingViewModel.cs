@@ -60,8 +60,10 @@ namespace R_173.ViewModels
 				new VFrequencyCheck { DataContext = _viewModels[2] }
 			};
 			_message = GetMessageBoxParameters("Preparation.Begin");
+            _message.Cancel = () => App.ServiceCollection.Resolve<MainWindow>().GoToAppointment(2);
 
-			_openNextStepCommand = new SimpleCommand(() => CurrentStep++,
+
+            _openNextStepCommand = new SimpleCommand(() => CurrentStep++,
 				() => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
 			_openPrevStepCommand = new SimpleCommand(() => CurrentStep--, () => _currentStep > 1);
 			_changeOrientationCommand = new SimpleCommand(() => Orientation =
@@ -280,11 +282,11 @@ namespace R_173.ViewModels
 				Message = description.Body
 			};
 
-			if (type.EndsWith("Begin"))
-			{
-				parameters.OkText = description.Buttons[0];
-			}
-			else
+			//if (type.EndsWith("Begin"))
+			//{
+			//	parameters.OkText = description.Buttons[0];
+			//}
+			//else
 			{
 				parameters.CancelText = description.Buttons[0];
 				parameters.OkText = description.Buttons[1];

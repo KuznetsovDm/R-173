@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using System.Windows.Xps.Packaging;
 using Unity;
 using System.Windows;
+using System.Linq;
 
 namespace R_173.Views
 {
@@ -47,6 +48,24 @@ namespace R_173.Views
             DocViewer.Visibility = Visibility.Visible;
             Radio.Visibility = Visibility.Collapsed;
             RadioView.RadioIsEnabled = false;
+        }
+
+        private void ToNextStep_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.GoToTrainingTab();
+        }
+
+        private void DocViewer_PageViewsChanged(object sender, EventArgs e)
+        {
+            var lastPageNumber = DocViewer.PageCount - 1;
+
+        }
+
+        private void ToNextStep_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            ToNextStep.Visibility = e.VerticalOffset > e.ExtentHeight * 0.85
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
     }
 
