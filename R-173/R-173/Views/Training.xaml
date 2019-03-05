@@ -34,9 +34,9 @@
             </Grid.ColumnDefinitions>
 
             <!--<Button Grid.Column="0" Content="Предыдущий шаг" Command="{Binding Path=OpenPrevStepCommand}" />-->
-            <Button Grid.Column="0" Content="Начать заново" ToolTip="Начать обучение заново" Command="{Binding Path=StartOverCommand}" />
+            <Button Grid.Column="0" Content="Начать заново" ToolTip="Начать обучение заново" Command="{Binding Path=StartOverCommand}" Focusable="False" />
             <!--<Button Grid.Column="4" Content="Следующий шаг" Command="{Binding Path=OpenNextStepCommand}" />-->
-            <Button Grid.Column="2" Content="Изменить положение задач" Command="{Binding Path=ChangeOrientationCommand}" />
+            <Button Grid.Column="2" Content="Изменить положение задач" Command="{Binding Path=ChangeOrientationCommand}" Focusable="False" />
 
             <!--<Viewbox Grid.Column="1" Stretch="Uniform" MaxHeight="50" >-->
             <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="30">

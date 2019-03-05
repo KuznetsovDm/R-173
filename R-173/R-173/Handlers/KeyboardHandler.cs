@@ -17,8 +17,6 @@ namespace R_173.Handlers
         private RadioModel _currentRadioModel;
         private Key? _lastPressedKey;
         public event Action<Key> OnKeyDown;
-        public Action OnEnterPressed;
-        public Action OnEscPressed;
         public Button AffirmativeButton;
         public Button NegativeButton;
 
@@ -57,11 +55,6 @@ namespace R_173.Handlers
             {
                 if (AffirmativeButton?.Visibility == Visibility.Visible)
                 {
-                    if (NegativeButton?.Visibility == Visibility.Visible)
-                    {
-                        NegativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                        return;
-                    }
                     AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                     return;
                 }
@@ -70,25 +63,10 @@ namespace R_173.Handlers
             {
                 if (NegativeButton?.Visibility == Visibility.Visible)
                 {
-                    if (AffirmativeButton?.Visibility == Visibility.Visible)
-                    {
-                        AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                        return;
-                    }
                     NegativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                     return;
                 }
             }
-            //if (e.Key == Key.Enter && OnEnterPressed != null)
-            //{
-            //    OnEnterPressed();
-            //    return;
-            //}
-            //if (e.Key == Key.Escape && OnEscPressed != null)
-            //{
-            //    OnEscPressed();
-            //    return;
-            //}
             OnKeyDown?.Invoke(e.Key);
             //if (e.Key == _lastPressedKey)
             //    return;
