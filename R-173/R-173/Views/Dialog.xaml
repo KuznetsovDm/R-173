@@ -37,7 +37,7 @@
                                                              NotNullValue="Visible" />
                 </DockPanel.Resources>
                 <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-                    <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}"
+                    <Button x:Name="PART_AffirmativeButton" DockPanel.Dock="Right" Content="{Binding Path=OkText}"
                                 Command="{Binding Path=OkCommand}"
                                 IsDefault="True"
                                 FontSize="14" Padding="15,10">

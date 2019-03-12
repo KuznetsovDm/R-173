@@ -56,6 +56,7 @@ namespace R_173.Handlers
                 if (AffirmativeButton?.Visibility == Visibility.Visible)
                 {
                     AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    AffirmativeButton.Command?.Execute(null);
                     return;
                 }
             }

@@ -25,10 +25,12 @@ namespace R_173
         private ButtonBase _lastButton;
         private readonly Brush _brush;
         private readonly Brush _selectedBrush;
+        private readonly KeyboardHandler _keyboardHandler;
 
         public MainWindow(KeyboardHandler keyboardHandler)
         {
             InitializeComponent();
+            _keyboardHandler = keyboardHandler;
             _brush = new SolidColorBrush(Color.FromRgb(0xFF, 0xF7, 0xF7));
             _selectedBrush = new SolidColorBrush(Color.FromRgb(0xE0, 0xE0, 0xE0));
             var trainingViewModel = new TrainingViewModel();
