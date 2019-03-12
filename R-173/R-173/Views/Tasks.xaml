@@ -83,6 +83,10 @@
                             </Style>
                         </ListBox.Resources>
                     </ListBox>
+                    <TextBlock FontWeight="Bold" FontSize="24" Margin="10, 20" HorizontalAlignment="Right">
+                        <Run>Оценка: </Run>
+                        <Run Text="{Binding Path=Assessment, Mode=OneWay}"></Run>
+                    </TextBlock>
                 </StackPanel>
             </Border>
         </Grid>

@@ -17,7 +17,6 @@ using Unity;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
 using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
 using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
-using R_173.Views;
 
 namespace R_173.ViewModels
 {
@@ -69,7 +68,21 @@ namespace R_173.ViewModels
             }
         }
 
-        public MessageBoxParameters Message => _message;
+	    public int Assessment
+	    {
+		    get
+		    {
+			    int result = 0;
+			    foreach (var task in _tasks)
+			    {
+				    result += task.NumberOfSuccessfulAttempts;
+			    }
+
+			    return result;
+		    }
+	    }
+
+	    public MessageBoxParameters Message => _message;
 
         private void StartTask(TaskTypes taskType)
         {
@@ -121,7 +134,7 @@ namespace R_173.ViewModels
             ShowDialog(parameters);
         }
 
-        private void ShowDialog(MessageBoxParameters parameters)
+        private static void ShowDialog(MessageBoxParameters parameters)
         {
             System.Threading.Tasks.Task.Factory.StartNew(async () => await MetroMessageBoxHelper.ShowDialog(parameters),
                 CancellationToken.None,
@@ -178,7 +191,7 @@ namespace R_173.ViewModels
                     ShowErrorDialog(message);
                 }
             }
-
+			OnPropertyChanged(nameof(Assessment));
             _runningTaskType = null;
         }
 

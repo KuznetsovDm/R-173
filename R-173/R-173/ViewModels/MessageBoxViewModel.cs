@@ -1,12 +1,8 @@
-﻿using R_173.Handlers;
-using R_173.Interfaces;
+﻿using R_173.Interfaces;
 using R_173.SharedResources;
-using R_173.Views;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using Unity;
 
 namespace R_173.ViewModels
 {
@@ -109,7 +105,7 @@ namespace R_173.ViewModels
             get => _content;
             set
             {
-                if (value == _content)
+                if (Equals(value, _content))
                     return;
                 _content = value;
                 OnPropertyChanged(nameof(Content));

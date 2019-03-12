@@ -1,14 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
-using MahApps.Metro.Controls;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BE;
 using R_173.BL;
-using R_173.BL.Learning;
 using R_173.Extensions;
 using R_173.Handlers;
 using R_173.Interfaces;
@@ -22,7 +19,7 @@ namespace R_173
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         public static IUnityContainer ServiceCollection;
         private MainWindow _mainWindow;
@@ -66,17 +63,12 @@ namespace R_173
         }
 
 
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             SimpleLogger.Log((Exception)e.ExceptionObject);
         }
 
-        protected override void OnExit(ExitEventArgs e)
-        {
-            base.OnExit(e);
-        }
-
-        private void ConfigureIOC()
+	    private void ConfigureIOC()
         {
             IUnityContainer container = new UnityContainer();
             container.AddCommunicationServices()
@@ -86,7 +78,7 @@ namespace R_173
             //R_173.Resources.RadioStationText.json
             var option = binder.BindFromAssemblyResources(R_173.Properties.Resources.JsonRadioStationAssemblyName);
 
-            container.RegisterInstance<ActionDescriptionOption>(option, new SingletonLifetimeManager());
+            container.RegisterInstance(option, new SingletonLifetimeManager());
             container.RegisterType<IRadioManager, RadioManager>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReaderAndSender<SendableRadioModel>, AudioReaderAndSender>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
