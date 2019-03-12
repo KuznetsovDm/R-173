@@ -3,7 +3,7 @@
     class TrainingStepViewModel : ViewModelBase
     {
         private int _currentStep;
-        private int _stepCount;
+        private readonly int _stepCount;
 
         public TrainingStepViewModel(int stepCount)
         {

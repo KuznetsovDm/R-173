@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace R_173.Models
 {
@@ -98,10 +97,7 @@ namespace R_173.Models
             Sending = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Sending));
             Reset = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Reset), OnResetChange);
             Board = new Property<SwitcherState>(
-                (oldValue, newValue) =>
-                {
-                    return RecordWork.Value == RecordWorkState.Record ? SwitcherState.Enabled : newValue;
-                },
+                (oldValue, newValue) => RecordWork.Value == RecordWorkState.Record ? SwitcherState.Enabled : newValue,
                 nameof(Board),
                 OnBoardChange
             );
@@ -113,7 +109,7 @@ namespace R_173.Models
             {
                 var num = i;
                 Numpad[i] = new Property<SwitcherState>((oldValue, newValue) => newValue,
-                    nameof(Numpad) + num.ToString(),
+                    nameof(Numpad) + num,
                     value =>
                     {
                         if (value == SwitcherState.Enabled)
@@ -205,10 +201,11 @@ namespace R_173.Models
             Volume.Value = 0.0;
             RecordWork.Value = RecordWorkState.Work;
             Power.Value = PowerState.Small;
-            Interference.Value = SwitcherState.Disabled;
-            Noise.Value = NoiseState.Minimum;
-            VolumePRM.Value = 0.0;
-            for (int i = 0; i < WorkingFrequenciesCount; i++)
+            Interference.Value = SwitcherState.Enabled;
+            Noise.Value = NoiseState.Maximum;
+	        TurningOn.Value = SwitcherState.Enabled;
+            VolumePRM.Value = 1.0;
+            for (var i = 0; i < WorkingFrequenciesCount; i++)
             {
                 WorkingFrequencies[i] = 0;
             }

@@ -17,9 +17,9 @@ namespace R_173.Views.Radio
     /// <summary>
     /// Логика взаимодействия для View.xaml
     /// </summary>
-    public partial class RadioView : UserControl
+    public partial class RadioView
     {
-        bool isDrawing;
+	    private bool _isDrawing;
         private Dictionary<int, Control> _canvases;
 
         private static IRadioManager _radioManager;
@@ -67,40 +67,40 @@ namespace R_173.Views.Radio
             }
         }
 
-        void DrawingMouseDown(object sender, MouseButtonEventArgs e)
+	    private void DrawingMouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(DrawingTarget);
-            isDrawing = true;
+            _isDrawing = true;
             StartFigure(e.GetPosition(DrawingTarget));
         }
 
-        void DrawingMouseMove(object sender, MouseEventArgs e)
+	    private void DrawingMouseMove(object sender, MouseEventArgs e)
         {
-            if (!isDrawing)
+            if (!_isDrawing)
                 return;
             AddFigurePoint(e.GetPosition(DrawingTarget));
         }
 
-        PathFigure currentFigure;
+	    private PathFigure _currentFigure;
 
-        void DrawingMouseUp(object sender, MouseButtonEventArgs e)
+	    private void DrawingMouseUp(object sender, MouseButtonEventArgs e)
         {
             AddFigurePoint(e.GetPosition(DrawingTarget));
             EndFigure();
-            isDrawing = false;
+            _isDrawing = false;
             Mouse.Capture(null);
         }
 
-        void StartFigure(Point start)
+	    private void StartFigure(Point start)
         {
-            currentFigure = new PathFigure() { StartPoint = start };
+            _currentFigure = new PathFigure() { StartPoint = start };
             
             var currentPath =
                 new Path()
                 {
                     Stroke = Brushes.Black,
                     StrokeThickness = 5,
-                    Data = new PathGeometry() { Figures = { currentFigure } }
+                    Data = new PathGeometry() { Figures = { _currentFigure } }
                 };
             currentPath.MouseMove += CurrentPath_MouseMove;
             DrawingTarget.Children.Add(currentPath);
@@ -112,24 +112,23 @@ namespace R_173.Views.Radio
                 return;
             var path = (Path)sender;
             var canvas = path.Parent as Canvas;
-            canvas.Children.Remove(path);
+	        canvas?.Children.Remove(path);
         }
 
-        void AddFigurePoint(Point point)
+	    private void AddFigurePoint(Point point)
         {
-            currentFigure?.Segments.Add(new LineSegment(point, isStroked: true));
+            _currentFigure?.Segments.Add(new LineSegment(point, isStroked: true));
         }
 
-        void EndFigure()
+	    private void EndFigure()
         {
-            currentFigure = null;
+            _currentFigure = null;
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
-            //return;
             var border = sender as Border;
-            SetBlackouts(int.Parse(border.DataContext as string) - 1);
+            SetBlackouts(int.Parse(border?.DataContext as string ?? throw new InvalidOperationException()) - 1);
         }
 
         private Control _lastControl;
@@ -187,7 +186,6 @@ namespace R_173.Views.Radio
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //return;
             var ellipse = d as FrameworkElement;
             var width = ellipse.Width / 2;
             var height = ellipse.Height / 2;

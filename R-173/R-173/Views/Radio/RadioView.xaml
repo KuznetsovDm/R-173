@@ -435,7 +435,7 @@
                         <Ellipse Width="224" Height="274" Canvas.Left="1369" Canvas.Top="1045" 
                              radio:BlackoutBehaviour.Description="Тумблер ПОДАВИТЕЛЬ ПОМЕХ" />
                         <Ellipse Width="622" Height="548" Canvas.Left="1419" Canvas.Top="199" 
-                             radio:BlackoutBehaviour.Description="Планка для карандашных пометок" />
+                             radio:BlackoutBehaviour.Description="Планка для карандашных пометок. Чтобы написать что-ниудь зажмите левую клавишу мыши и пишите. Чтобы стереть - зажмите правую клавишу мыши" />
                         <Ellipse Width="299" Height="348" Canvas.Left="1349" Canvas.Top="697" 
                              radio:BlackoutBehaviour.Description="Тумблер МОЩНОСТЬ" />
                         <Ellipse Width="174" Height="274" Canvas.Left="1598" Canvas.Top="722" 

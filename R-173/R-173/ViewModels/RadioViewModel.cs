@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using R_173.SharedResources;
 using R_173.Models;
 using R_173.Views.Radio;
@@ -17,7 +18,7 @@ namespace R_173.ViewModels
         private bool _power;
         private bool _tone;
         private bool _noise;
-        private double _volumePRM;
+        private double _volumePrm;
         private bool _turningOn;
         private double _volume;
         private bool _recordWork;
@@ -26,9 +27,8 @@ namespace R_173.ViewModels
         private bool _reset;
         private Color _callColor;
         private Color _broadcastColor;
-        private bool[] _numpad;
-        private bool _blackoutIsEnabled;
-        private bool _blackoutIsVisible;
+        private readonly bool[] _numpad;
+	    private bool _blackoutIsVisible;
         private double _blackoutWidth;
         private double _blackoutHeight;
         private Point _blackoutCenter;
@@ -36,7 +36,7 @@ namespace R_173.ViewModels
 
         public RadioViewModel(bool blackoutIdEnabled = false)
         {
-            _blackoutIsEnabled = blackoutIdEnabled;
+            BlackoutIsEnabled = blackoutIdEnabled;
 
             Model = new RadioModel();
             _numpad = new bool[10];
@@ -107,7 +107,7 @@ namespace R_173.ViewModels
             };
             Model.VolumePRM.ValueChanged += (s, e) =>
             {
-                _volumePRM = e.NewValue;
+                _volumePrm = e.NewValue;
                 OnPropertyChanged(nameof(VolumePRM));
             };
             Model.Sending.ValueChanged += (s, e) =>
@@ -140,7 +140,7 @@ namespace R_173.ViewModels
             for (var i = 0; i < 10; i++)
             {
                 var num = i;
-                var propName = "Numpad" + num.ToString();
+                var propName = "Numpad" + num;
                 Model.Numpad[i].ValueChanged += (s, e) =>
                 {
                     _numpad[num] = e.NewValue == SwitcherState.Enabled;
@@ -175,19 +175,13 @@ namespace R_173.ViewModels
         public int FrequencyNumber
         {
             get => _frequencyNumber;
-            set
-            {
-                Model.FrequencyNumber.Value = value;
-            }
+            set => Model.FrequencyNumber.Value = value;
         }
 
         public string Frequency
         {
             get => _frequency;
-            set
-            {
-                Model.Frequency.Value = value;
-            }
+            set => Model.Frequency.Value = value;
         }
 
         public bool Interference
@@ -216,7 +210,7 @@ namespace R_173.ViewModels
 
         public double VolumePRM
         {
-            get => _volumePRM;
+            get => _volumePrm;
             set => Model.VolumePRM.Value = value;
         }
 
@@ -328,9 +322,9 @@ namespace R_173.ViewModels
 
         public Color BroadcastColor => _broadcastColor;
 
-        public bool BlackoutIsEnabled => _blackoutIsEnabled;
+        public bool BlackoutIsEnabled { get; }
 
-        public bool BlackoutIsVisible
+	    public bool BlackoutIsVisible
         {
             get => _blackoutIsVisible;
             set
@@ -347,7 +341,7 @@ namespace R_173.ViewModels
             get => _blackoutWidth;
             set
             {
-                if (value == _blackoutWidth)
+                if (Math.Abs(value - _blackoutWidth) < 0.001)
                     return;
                 _blackoutWidth = value;
                 OnPropertyChanged(nameof(BlackoutWidth));
@@ -359,7 +353,7 @@ namespace R_173.ViewModels
             get => _blackoutHeight;
             set
             {
-                if (value == _blackoutHeight)
+                if (Math.Abs(value - _blackoutHeight) < 0.001)
                     return;
                 _blackoutHeight = value;
                 OnPropertyChanged(nameof(BlackoutHeight));
