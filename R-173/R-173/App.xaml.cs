@@ -91,11 +91,10 @@ namespace R_173
             container.RegisterType<IAudioReaderAndSender<SendableRadioModel>, AudioReaderAndSender>(new SingletonLifetimeManager());
             container.RegisterType<IAudioReceiverAndPlayer<ReceivableRadioModel>, AudioReceiverAndPlayer>(new SingletonLifetimeManager());
             container.RegisterType<IMicrophone, Microphone>(new SingletonLifetimeManager());
-            container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
             container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
             container.RegisterType<MainWindow>(new SingletonLifetimeManager());
+            container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
             ServiceCollection = container;
-
         }
     }
 }

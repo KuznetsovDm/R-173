@@ -1,19 +1,23 @@
 ﻿using R_173.Handlers;
 using R_173.Interfaces;
 using R_173.SharedResources;
+using R_173.Views;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Unity;
 
 namespace R_173.ViewModels
 {
-    class MessageBoxViewModel : ViewModelBase, IMessageBox
+    public class MessageBoxViewModel : ViewModelBase, IMessageBox
     {
         private readonly SimpleCommand _okCommand;
         private readonly SimpleCommand _cancelCommand;
+        private readonly MainWindow _mainWindow;
         private Action _ok;
         private Action _cancel;
+        private Action _close;
         private string _title;
         private string _message;
         private string _okText;
@@ -21,18 +25,19 @@ namespace R_173.ViewModels
         private bool _visible;
         private UIElement _content;
 
-        public MessageBoxViewModel()
+        public MessageBoxViewModel(MainWindow mainWindow)
         {
             _okCommand = new SimpleCommand(Ok);
             _cancelCommand = new SimpleCommand(Cancel);
+            _mainWindow = mainWindow;
 
-            App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
-            {
-                if (key == Key.Enter)
-                    Ok();
-                else if (key == Key.Escape)
-                    Cancel();
-            };
+            //App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
+            //{
+            //    if (key == Key.Enter)
+            //        Ok();
+            //    else if (key == Key.Escape)
+            //        Cancel();
+            //};
         }
 
 
@@ -121,25 +126,28 @@ namespace R_173.ViewModels
             OkText = parameters.OkText;
             CancelText = parameters.CancelText;
             Visible = true;
+            _close = _mainWindow.ShowDialog(this);
         }
 
         private void Ok()
         {
+            _close?.Invoke();
             if (OkText == null)
                 return;
-            OkText = null;
-            CancelText = null;
-            Visible = false;
+            //OkText = null;
+            //CancelText = null;
+            //Visible = false;
             _ok?.Invoke();
         }
 
         private void Cancel()
         {
+            _close?.Invoke();
             if (CancelText == null)
                 return;
-            OkText = null;
-            CancelText = null;
-            Visible = false;
+            //OkText = null;
+            //CancelText = null;
+            //Visible = false;
             _cancel?.Invoke();
         }
 
@@ -153,6 +161,7 @@ namespace R_173.ViewModels
             OkText = parameters.OkText;
             CancelText = parameters.CancelText;
             Visible = true;
+            _close = _mainWindow.ShowDialog(this);
         }
     }
 }
