@@ -4,11 +4,78 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:R_173.Views"
+             xmlns:viewModels="clr-namespace:R_173.ViewModels"
+             xmlns:trainingSteps="clr-namespace:R_173.Views.TrainingSteps"
              xmlns:mahApps="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-             Title="Hello"
+             Title="{Binding Path=Title}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ComboBox />
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}">
+    <Grid x:Name="Message">
+        <Grid.Background>
+            <SolidColorBrush Color="White" Opacity="0.5" />
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="0"
+                    Background="White" Padding="10" CornerRadius="2" SnapsToDevicePixels="True"
+                    UseLayoutRounding="True">
+            <!--<Border.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
+            </Border.Effect>-->
+            <DockPanel>
+                <DockPanel.Resources>
+                    <trainingSteps:NullableToVisibilityConverter x:Key="NullToVis" NullValue="Visible"
+                                                             NotNullValue="Collapsed" />
+                    <trainingSteps:NullableToVisibilityConverter x:Key="NotNullToVis" NullValue="Collapsed"
+                                                             NotNullValue="Visible" />
+                </DockPanel.Resources>
+                <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+                    <Button DockPanel.Dock="Right" Content="{Binding Path=OkText}"
+                                Command="{Binding Path=OkCommand}"
+                                IsDefault="True"
+                                FontSize="14" Padding="15,10">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="Border" Background="#CC119EDA" Height="35" BorderBrush="Black" BorderThickness="2">
+                                    <TextBlock x:Name="Text" VerticalAlignment="Center" Foreground="White" Margin="5" Text="{TemplateBinding Content}" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#FFE0E0E0" />
+                                        <Setter TargetName="Text" Property="Foreground" Value="Black" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="Black" />
+                                        <Setter TargetName="Text" Property="Foreground" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button DockPanel.Dock="Right" Content="{Binding Path=CancelText}"
+                                Command="{Binding Path=CancelCommand}"
+                                IsCancel="True"
+                                Visibility="{Binding Path=CancelText, Converter={StaticResource NotNullToVis}}" />
+                </DockPanel>
+                <StackPanel>
+                    <!--<TextBlock VerticalAlignment="Center" Margin="5"
+                                   Text="{Binding Path=Title}"
+                                   FontSize="20" TextWrapping="Wrap" FontWeight="Bold" />-->
+                    <TextBlock VerticalAlignment="Center" Margin="5"
+                                   Text="{Binding Path=Message}"
+                                   FontSize="20" TextWrapping="Wrap"
+                                   Visibility="{Binding Path=Content, Converter={StaticResource NullToVis}}" />
+                    <ContentControl Content="{Binding Path=Content}" Margin="0, 10"
+                                        Visibility="{Binding Path=Content, Converter={StaticResource NotNullToVis}}" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
     </Grid>
 </mahApps:BaseMetroDialog>

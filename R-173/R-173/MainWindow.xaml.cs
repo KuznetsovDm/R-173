@@ -1,9 +1,12 @@
-﻿using R_173.Handlers;
+﻿using MahApps.Metro.Controls.Dialogs;
+using R_173.Handlers;
 using R_173.Interfaces;
+using R_173.SharedResources;
 using R_173.ViewModels;
 using R_173.Views;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -47,13 +50,26 @@ namespace R_173
                 {typeof(Training), training},
                 {typeof(Work), new Work() {DataContext = new WorkViewModel()}},
             };
-            Message.DataContext = App.ServiceCollection.Resolve<IMessageBox>();
-
             MainContent.Content = _pages[typeof(Appointment)];
 
             //this.ShowMetroDialogAsync(new Dialog(this, new MetroDialogSettings()));
             _lastButton = Buttons.Children[0] as Button;
             if (_lastButton != null) _lastButton.Background = _selectedBrush;
+        }
+
+        public Action ShowDialog(MessageBoxViewModel viewModel)
+        {
+            Dialog dialog = null;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                dialog = new Dialog(this, null)
+                {
+                    DataContext = viewModel,
+                };
+                this.ShowMetroDialogAsync(dialog);
+            }));
+
+            return () => this.HideMetroDialogAsync(dialog);
         }
 
         public void GoToTaskTab()

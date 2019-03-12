@@ -40,7 +40,8 @@
         </DockPanel>
 
         <Grid x:Name="Message" d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}"
-              Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">
+              Visibility="Collapsed">
+            <!--Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">-->
             <Grid.Background>
                 <SolidColorBrush Color="White" Opacity="0.5" />
             </Grid.Background>
@@ -110,12 +111,11 @@
                 </DockPanel.Resources>
                 <TextBlock FontFamily="Segoe UI, Lucida Sans Unicode, Verdana" FontWeight="Bold" DockPanel.Dock="Top" Margin="50" Text="Обучающая программа-симулятор радиостанци Р-173" Padding="60,20" />
                 <TextBlock FontFamily="Segoe UI, Lucida Sans Unicode, Verdana" DockPanel.Dock="Bottom" Margin="50" Text="Р-173 — бортовая радиостанция диапазона 30.0 — 76 МГЦ" Padding="60,20" />
-                <Button
-                    Padding="50, 20" HorizontalAlignment="Center" FontSize="24"
-                    Cursor="Hand"
-                    FontStretch="Expanded" VerticalAlignment="Center"
-                    Click="CloseWelcome" IsDefault="True"
-                >Начать
+                <Button Padding="50, 20" HorizontalAlignment="Center" FontSize="24"
+                        Cursor="Hand"
+                        FontStretch="Expanded" VerticalAlignment="Center"
+                        Click="CloseWelcome" IsDefault="True">  
+                    Начать
                 </Button>
             </DockPanel>
         </Grid>

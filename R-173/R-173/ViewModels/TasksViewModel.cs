@@ -17,6 +17,7 @@ using Unity;
 using HPreparation = R_173.Views.TrainingSteps.Horizontal.Preparation;
 using HPerformanceTest = R_173.Views.TrainingSteps.Horizontal.PerformanceTest;
 using HFrequencyCheck = R_173.Views.TrainingSteps.Horizontal.FrequencyCheck;
+using R_173.Views;
 
 namespace R_173.ViewModels
 {
@@ -130,7 +131,6 @@ namespace R_173.ViewModels
 
         private void ShowErrorDialog(Message message)
         {
-            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
             var messageBoxParameters = GetMessageBoxParameters("EndFail");
             var item = FormatMessage(message);
             var panel = new StackPanel();
@@ -152,6 +152,7 @@ namespace R_173.ViewModels
 
             panel.Children.Add(tree);
 
+            var messageBox = App.ServiceCollection.Resolve<IMessageBox>();
             messageBox.InsertBody(messageBoxParameters, panel);
         }
 
