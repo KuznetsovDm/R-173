@@ -154,12 +154,16 @@ namespace R_173.BL
 
         private static ReceivableRadioModel GetReceivableRadioModelFromRadioModel(RadioModel radioModel)
         {
+            var frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value];
             return new ReceivableRadioModel
             {
-                Frequency = radioModel.WorkingFrequencies[radioModel.FrequencyNumber.Value],
+                Frequency = frequency,
                 Noise = radioModel.Noise.Value == NoiseState.Minimum,
                 Volume = radioModel.Volume.Value,
-                Power = radioModel.Power.Value == PowerState.Full ? PowerLevel.Hight : PowerLevel.Low
+                Power = radioModel.Power.Value == PowerState.Full ? PowerLevel.Hight : PowerLevel.Low,
+                FrequencyListeningRange = radioModel.FrequencyListeningRange,
+                MinFrequency = radioModel.MinRadiostationFrequency,
+                MaxFrequency = radioModel.MaxRadiostationFrequency
             };
         }
 

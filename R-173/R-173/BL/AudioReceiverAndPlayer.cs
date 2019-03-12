@@ -14,7 +14,6 @@ namespace R_173.BL
 {
     public class AudioReceiverAndPlayer : IAudioReceiverAndPlayer<ReceivableRadioModel>
     {
-        public const int FrequencyRange = 100;
         public const float LowPowerLevelVolume = 0.5f;
         private ReceivableRadioModel _model;
         private IDataProvider _provider;
@@ -59,7 +58,9 @@ namespace R_173.BL
         {
             _pipeline = _builder.Use(async (model, next) =>
                                 {
-                                    if (Math.Abs(model.RadioModel.Frequency - _model.Frequency) < FrequencyRange)
+                                    bool isInListeningRange = Math.Abs(model.RadioModel.Frequency - _model.Frequency) < _model.FrequencyListeningRange;
+                                    bool isInValidRadioRange = _model.MinFrequency <= model.RadioModel.Frequency && model.RadioModel.Frequency <= _model.MaxFrequency;
+                                    if (isInValidRadioRange && isInListeningRange)
                                         await next.Invoke(model);
                                 })
                                 .Use(async (model, next) =>
@@ -73,7 +74,7 @@ namespace R_173.BL
                                 })
                                 .Use(async (model, next) =>
                                 {
-                                    float deltaAbs = 1 - (float)Math.Abs(model.RadioModel.Frequency - _model.Frequency) / FrequencyRange;
+                                    float deltaAbs = 1 - (float)Math.Abs(model.RadioModel.Frequency - _model.Frequency) / _model.FrequencyListeningRange;
                                     float volume = VolumeSamplesHelper.LogVolumeApproximation(deltaAbs);
                                     VolumeSamplesHelper.SetVolume(model.RawAudioSample, volume);
                                     await next.Invoke(model);

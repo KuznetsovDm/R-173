@@ -83,6 +83,15 @@ namespace R_173.Models
         /// </summary>
         public readonly int[] WorkingFrequencies;
 
+        /// <summary>
+        /// Frequency range for audio playing.
+        /// </summary>
+        public readonly int FrequencyListeningRange = 100;
+
+        public readonly int MinRadiostationFrequency = 30000;
+
+        public readonly int MaxRadiostationFrequency = 75999;
+
         public RadioModel()
         {
             FrequencyNumber = new Property<int>((oldValue, newValue) => newValue, nameof(FrequencyNumber), OnFrequnecyNumberChange);

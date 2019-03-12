@@ -479,10 +479,6 @@
       <Project>{dc232498-6fb2-4562-b888-e32fec97bbf5}</Project>
       <Name>P2PMulticastNetwork</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\RadioPipeline\RadioPipeline.csproj">
-      <Project>{62bd5b17-25b1-4024-891c-5398644b6dfc}</Project>
-      <Name>RadioPipeline</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

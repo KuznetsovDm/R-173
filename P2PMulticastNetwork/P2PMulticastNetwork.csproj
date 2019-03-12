@@ -99,18 +99,13 @@
     <Compile Include="Network\IPiplineProcessingInput.cs" />
     <Compile Include="Network\MulticastConnectionOptions.cs" />
     <Compile Include="Network\P2PMulticastNetwork.cs" />
+    <Compile Include="Pipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\UdpMulticastConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RadioPipeline\RadioPipeline.csproj">
-      <Project>{62BD5B17-25B1-4024-891C-5398644B6DFC}</Project>
-      <Name>RadioPipeline</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
