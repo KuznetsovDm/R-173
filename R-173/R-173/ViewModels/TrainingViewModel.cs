@@ -220,24 +220,22 @@ namespace R_173.ViewModels
 			}
 		}
 
-		private async Task ShowDialog(MessageBoxParameters parameters)
+		private static async Task ShowDialog(MessageBoxParameters parameters)
 		{
 			await MetroMessageBoxHelper.ShowDialog(parameters);
 		}
 
 		private Action GetMessageBoxOkAction(int stepNumber)
 		{
-			if (stepNumber == 3)
-			{
-				var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
-				return mainWindow.GoToTaskTab;
-			}
+			if (stepNumber != 3)
+				return () =>
+				{
+					_openNextStepCommand.OnCanExecuteChanged();
+					CurrentStep++;
+				};
 
-			return () =>
-			{
-				_openNextStepCommand.OnCanExecuteChanged();
-				CurrentStep++;
-			};
+			var mainWindow = App.ServiceCollection.Resolve<MainWindow>();
+			return mainWindow.GoToTaskTab;
 		}
 
 		private void StartOver()
@@ -246,8 +244,6 @@ namespace R_173.ViewModels
 			CurrentStep = 1;
 			_learning.Restart();
 		}
-
-
 
 		private static ControlDescription GetControlDescription(string type)
 		{
@@ -284,6 +280,10 @@ namespace R_173.ViewModels
 				OkText = description.Buttons[1]
 			};
 
+			if (type.Contains("Begin"))
+			{
+				parameters.Cancel = () => App.ServiceCollection.Resolve<MainWindow>().GoToAppointment(2);
+			}
 
 			return parameters;
 		}

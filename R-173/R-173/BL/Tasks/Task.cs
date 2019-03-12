@@ -19,20 +19,19 @@ namespace R_173.BL.Tasks
 
         public void Start()
         {
-            if (_step.StartIfInputConditionsAreRight(_model, out var _))
-            {
-                _taskCompleted = false;
-                _step.StepChanged += _step_StepChanged;
-                _step.Completed += _step_Completed;
-            }
+	        if (!_step.StartIfInputConditionsAreRight(_model, out var _)) return;
+
+	        _taskCompleted = false;
+	        _step.StepChanged += Step_StepChanged;
+	        _step.Completed += Step_Completed;
         }
 
-        private void _step_Completed(object sender, EventArgs e)
+        private void Step_Completed(object sender, EventArgs e)
         {
             _taskCompleted = true;
         }
 
-        private void _step_StepChanged(object sender, SharedResources.StepChangedEventArgs e)
+        private static void Step_StepChanged(object sender, SharedResources.StepChangedEventArgs e)
         {
         }
 
@@ -65,7 +64,12 @@ namespace R_173.BL.Tasks
             return GeneratNumberInRange(0, MaxR173NumpadNumber + 1);
         }
 
-        public static int GeneratNumberInRange(int min, int max)
+	    public static int GenerateComputerNumber()
+	    {
+		    return GeneratNumberInRange(1, 21);
+	    }
+
+		private static int GeneratNumberInRange(int min, int max)
         {
             return Rand.Next(min, max);
         }

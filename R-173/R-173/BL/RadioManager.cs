@@ -177,7 +177,7 @@ namespace R_173.BL
             radioModel.Tone.ValueChanged += Tone_ValueChanged;
             radioModel.TurningOn.ValueChanged += TurningOn_ValueChanged;
             radioModel.Volume.ValueChanged += Volume_ValueChanged;
-            radioModel.VolumePRM.ValueChanged += VolumePRM_ValueChanged;
+            radioModel.VolumePrm.ValueChanged += VolumePRM_ValueChanged;
             radioModel.Sending.ValueChanged += Sending_ValueChanged;
         }
 
@@ -196,7 +196,7 @@ namespace R_173.BL
             radioModel.Tone.ValueChanged -= Tone_ValueChanged;
             radioModel.TurningOn.ValueChanged -= TurningOn_ValueChanged;
             radioModel.Volume.ValueChanged -= Volume_ValueChanged;
-            radioModel.VolumePRM.ValueChanged -= VolumePRM_ValueChanged;
+            radioModel.VolumePrm.ValueChanged -= VolumePRM_ValueChanged;
             radioModel.Sending.ValueChanged -= Sending_ValueChanged;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 
 namespace R_173.Models
 {
@@ -40,7 +41,7 @@ namespace R_173.Models
         /// <summary>
         /// Ручка "Громкость ПРМ"
         /// </summary>
-        public readonly Property<double> VolumePRM;
+        public readonly Property<double> VolumePrm;
         /// <summary>
         /// Тумблер включения питания радиостанции
         /// </summary>
@@ -99,7 +100,7 @@ namespace R_173.Models
             Power = new Property<PowerState>((oldValue, newValue) => newValue, nameof(Power));
             Tone = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(Tone));
             Noise = new Property<NoiseState>((oldValue, newValue) => newValue, nameof(Noise));
-            VolumePRM = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, nameof(VolumePRM));
+            VolumePrm = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, nameof(VolumePrm));
             TurningOn = new Property<SwitcherState>((oldValue, newValue) => newValue, nameof(TurningOn), OnTurningOnChange);
             Volume = new Property<double>((oldValue, newValue) => newValue < 0 ? 0 : newValue > 1 ? 1 : newValue, nameof(Volume));
             RecordWork = new Property<RecordWorkState>((oldValue, newValue) => newValue, nameof(RecordWork), OnRecordWorkChange);
@@ -207,17 +208,45 @@ namespace R_173.Models
         public void SetInitialState()
         {
             TurningOn.Value = SwitcherState.Disabled;
-            Volume.Value = 0.0;
+	        Power.Value = PowerState.Full;
+			Volume.Value = 0.5;
             RecordWork.Value = RecordWorkState.Work;
-            Power.Value = PowerState.Small;
-            Interference.Value = SwitcherState.Enabled;
-            Noise.Value = NoiseState.Maximum;
-	        TurningOn.Value = SwitcherState.Enabled;
-            VolumePRM.Value = 1.0;
+            Interference.Value = SwitcherState.Disabled;
+            Noise.Value = NoiseState.Minimum;
             for (var i = 0; i < WorkingFrequenciesCount; i++)
             {
-                WorkingFrequencies[i] = 0;
+                WorkingFrequencies[i] = 30000;
             }
         }
+
+	    public void SetWrongInitialState()
+	    {
+		    TurningOn.Value = SwitcherState.Enabled;
+		    VolumePrm.Value = 1.0;
+		    Power.Value = PowerState.Small;
+		    Interference.Value = SwitcherState.Enabled;
+		    Noise.Value = NoiseState.Maximum;
+		}
+
+		public void SetRandomState()
+		{
+		    TurningOn.Value = GetRandomBool() ? SwitcherState.Enabled : SwitcherState.Disabled;
+		    Power.Value = GetRandomBool() ? PowerState.Full : PowerState.Small;
+		    Volume.Value = Random.NextDouble();
+		    RecordWork.Value = GetRandomBool() ? RecordWorkState.Work : RecordWorkState.Record;
+		    Interference.Value = GetRandomBool() ? SwitcherState.Enabled : SwitcherState.Disabled;
+			Noise.Value = GetRandomBool() ? NoiseState.Maximum : NoiseState.Minimum;
+		    for (var i = 0; i < WorkingFrequenciesCount; i++)
+		    {
+			    WorkingFrequencies[i] = Random.Next(30000, 76000);
+		    }
+		}
+
+	    private static readonly Random Random = new Random();
+
+	    private static bool GetRandomBool()
+	    {
+		    return Random.Next(2) > 0;
+	    }
     }
 }

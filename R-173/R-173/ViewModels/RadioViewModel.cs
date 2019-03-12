@@ -105,7 +105,7 @@ namespace R_173.ViewModels
                 _volume = e.NewValue;
                 OnPropertyChanged(nameof(Volume));
             };
-            Model.VolumePRM.ValueChanged += (s, e) =>
+            Model.VolumePrm.ValueChanged += (s, e) =>
             {
                 _volumePrm = e.NewValue;
                 OnPropertyChanged(nameof(VolumePRM));
@@ -211,7 +211,7 @@ namespace R_173.ViewModels
         public double VolumePRM
         {
             get => _volumePrm;
-            set => Model.VolumePRM.Value = value;
+            set => Model.VolumePrm.Value = value;
         }
 
         public bool TurningOn

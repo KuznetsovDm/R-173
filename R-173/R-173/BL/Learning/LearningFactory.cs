@@ -135,7 +135,7 @@ namespace R_173.BL.Learning
             { "Power", new Check(model => model.Power.Value == PowerState.Full, "Переключатель МОЩНОСТЬ должен быть в положении ПОЛНАЯ") },
             { "RecordWork", new Check(model => model.RecordWork.Value == RecordWorkState.Work, "Переключатель ЗАПИСЬ-РАБОТА должен быть в положении РАБОТА") },
             { "Volume", new Check(model => Math.Abs(model.Volume.Value - 0.5) < 0.1, "Ручка ГРОМКОСТЬ должна быть в среднем положении") },
-            { "VolumePRM", new Check(model => model.VolumePRM.Value < 0.01, "Ручка ГРОМКОСТЬ ПРМ должна быть в крайнем левом положении") },
+            { "VolumePRM", new Check(model => model.VolumePrm.Value < 0.01, "Ручка ГРОМКОСТЬ ПРМ должна быть в крайнем левом положении") },
             { "TurningOn", new Check(model => model.TurningOn.Value == SwitcherState.Disabled, "Переключатель ПИТАНИЕ должен быть в положении ВЫКЛ") },
         };
 

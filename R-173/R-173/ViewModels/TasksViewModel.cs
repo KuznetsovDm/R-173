@@ -22,37 +22,40 @@ namespace R_173.ViewModels
 {
     class TasksViewModel : ViewModelBase, ITabWithMessage
     {
-        private readonly MessageBoxParameters _message;
-        private readonly TaskViewModel[] _tasks;
+	    private readonly TaskViewModel[] _tasks;
         private readonly SimpleCommand _stopTaskCommand;
         private bool _taskIsRunning;
-        private readonly RadioViewModel _radioViewModel;
-        private readonly TasksBl _tasksBl;
+	    private readonly TasksBl _tasksBl;
         private TaskTypes? _runningTaskType;
         private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
-        public RadioViewModel RadioViewModel => _radioViewModel;
+        public RadioViewModel RadioViewModel { get; }
 
-        public TasksViewModel()
+	    public TasksViewModel()
         {
-            _message = GetMessageBoxParameters("Begin");
-            _taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
+            Message = GetMessageBoxParameters("Begin");
+
+	        var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
+
+			_taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
             {
-                { TaskTypes.PreparationToWork, new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork))},
-                { TaskTypes.PerformanceTest, new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(TaskTypes.PerformanceTest))},
-                { TaskTypes.FrequencyTask, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask))},
-                { TaskTypes.ConnectionEasy, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.ConnectionEasy))},
-                { TaskTypes.ConnectionHard, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.ConnectionHard))},
+                { TaskTypes.PreparationToWork, new TaskViewModel(option.Tasks.PreparationToWork.Title, () => StartTask(TaskTypes.PreparationToWork))},
+                { TaskTypes.PerformanceTest, new TaskViewModel(option.Tasks.HealthCheck.Title, () => StartTask(TaskTypes.PerformanceTest))},
+                { TaskTypes.FrequencyTask, new TaskViewModel(option.Tasks.WorkingFrequencyPreparation.Title, () => StartTask(TaskTypes.FrequencyTask))},
+                { TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, () => StartTask(TaskTypes.ConnectionEasy))},
+                { TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, () => StartTask(TaskTypes.ConnectionHard))},
             };
             _tasks = new[]
             {
                 _taskViewModels[TaskTypes.PreparationToWork],
                 _taskViewModels[TaskTypes.PerformanceTest],
-                _taskViewModels[TaskTypes.FrequencyTask]
-            };
+                _taskViewModels[TaskTypes.FrequencyTask],
+                _taskViewModels[TaskTypes.ConnectionEasy],
+                _taskViewModels[TaskTypes.ConnectionHard],
+			};
             _stopTaskCommand = new SimpleCommand(StopTask);
-            _radioViewModel = new RadioViewModel();
-            _tasksBl = new TasksBl(_radioViewModel.Model);
+            RadioViewModel = new RadioViewModel();
+            _tasksBl = new TasksBl(RadioViewModel.Model);
         }
 
         public IEnumerable Tasks => _tasks;
@@ -72,28 +75,33 @@ namespace R_173.ViewModels
 
 	    public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0);
 
-	    public MessageBoxParameters Message => _message;
+	    public MessageBoxParameters Message { get; }
 
-        private void StartTask(TaskTypes taskType)
+	    private void StartTask(TaskTypes taskType)
         {
             var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(taskType));
+
             var frequency = TaskHelper.GenerateValidR173Frequency();
             var number = TaskHelper.GenerateValidR173NumpadValue();
+            var computerNumber = TaskHelper.GenerateComputerNumber();
 
-            if (taskType == TaskTypes.FrequencyTask)
+			if (taskType == TaskTypes.FrequencyTask ||
+			    taskType == TaskTypes.ConnectionEasy ||
+			    taskType == TaskTypes.ConnectionHard)
             {
-                parameters.Message = string.Format(parameters.Message, frequency, number);
+                parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
             }
 
             parameters.Ok = () =>
             {
                 TaskIsRunning = true;
-                _radioViewModel.Model.SetInitialState();
+                RadioViewModel.Model.SetInitialState();
 
                 _tasksBl.DataContext
                     .Configure()
                     .SetFrequency(frequency)
-                    .SetNumpad(number);
+                    .SetNumpad(number)
+		            .SetComputerNumber(computerNumber);
 
                 _runningTaskType = taskType;
 
@@ -166,7 +174,7 @@ namespace R_173.ViewModels
         private void StopTask()
         {
             var message = _tasksBl.Stop();
-            _radioViewModel.Model.SetInitialState();
+            RadioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
 
             if (_runningTaskType != null)
