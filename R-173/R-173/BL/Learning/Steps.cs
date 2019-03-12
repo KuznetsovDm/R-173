@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using R_173.BE;
@@ -19,7 +18,7 @@ namespace R_173.BL.Learning
         public override Message GetErrorDescription()
         {
             var innerMessages = new List<Message>();
-            if (!LearningFactory.CheckInitialState(Model, out IList<string> errors))
+            if (!LearningFactory.CheckInitialState(Model, out var errors))
             {
                 errors.ForEach(x => innerMessages.Add(new Message { Header = x }));
             }
@@ -31,7 +30,7 @@ namespace R_173.BL.Learning
         {
             base.SomethingChanged();
 
-            if (LearningFactory.CheckInitialState(Model, out IList<string> errors))
+            if (LearningFactory.CheckInitialState(Model, out var _))
             {
                 OnStepCompleted();
             }
@@ -83,7 +82,7 @@ namespace R_173.BL.Learning
 
     public class FiveButtonsStep : Step
     {
-        private int _counter = 0;
+        private int _counter;
         public FiveButtonsStep(CheckState checkInputConditions = null, CheckState checkInternalState = null)
             : base(checkInputConditions, checkInternalState)
         {
@@ -225,7 +224,7 @@ namespace R_173.BL.Learning
 
         public override Message GetErrorDescription()
         {
-            throw new NotImplementedException();
+	        return new Message();
         }
 
         public override void Subscribe(RadioModel radioModel)
@@ -346,8 +345,8 @@ namespace R_173.BL.Learning
         {
             var error = Model.WorkingFrequencies
                 .Select((index, x) => new { index, x })
-                .Where(x => x.x == 0)
-                .First();
+                .First(x => x.x == 0);
+
             return new Message { Header = $"Для ЧАСТОТЫ под номером {error.index} не установлено значение." };
         }
     }
@@ -375,7 +374,7 @@ namespace R_173.BL.Learning
 
         public override Message GetErrorDescription()
         {
-            return new Message { Header = $"Не установлена заданная частота." };
+            return new Message { Header = "Не установлена заданная частота." };
         }
     }
 }

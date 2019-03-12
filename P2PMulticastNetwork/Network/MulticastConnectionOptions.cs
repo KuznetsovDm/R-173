@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace P2PMulticastNetwork
+namespace P2PMulticastNetwork.Network
 {
     public class MulticastConnectionOptions
     {

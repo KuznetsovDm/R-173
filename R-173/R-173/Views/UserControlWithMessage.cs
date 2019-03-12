@@ -1,10 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using R_173.Interfaces;
 using R_173.SharedResources;
 using System.Windows.Controls;
 using R_173.Helpers;
-using Unity;
 
 namespace R_173.Views
 {

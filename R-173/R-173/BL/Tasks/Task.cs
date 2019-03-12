@@ -8,11 +8,10 @@ namespace R_173.BL.Tasks
     public class Task
     {
         private readonly RadioModel _model;
-        private CompositeStep _step;
-        private bool _taskCompleted = false;
-        private int _currentStep = 0;
+        private readonly CompositeStep _step;
+        private bool _taskCompleted;
 
-        public Task(RadioModel model, CompositeStep step)
+	    public Task(RadioModel model, CompositeStep step)
         {
             _model = model;
             _step = step;
@@ -20,7 +19,7 @@ namespace R_173.BL.Tasks
 
         public void Start()
         {
-            if (_step.StartIfInputConditionsAreRight(_model, out var errors))
+            if (_step.StartIfInputConditionsAreRight(_model, out var _))
             {
                 _taskCompleted = false;
                 _step.StepChanged += _step_StepChanged;
@@ -35,7 +34,6 @@ namespace R_173.BL.Tasks
 
         private void _step_StepChanged(object sender, SharedResources.StepChangedEventArgs e)
         {
-            _currentStep = e.Step;
         }
 
         public Message Stop()
@@ -52,24 +50,24 @@ namespace R_173.BL.Tasks
 
     public static class TaskHelper
     {
-        private static Random _rand = new Random();
-        private static int _minR173Frequency = 30000;
-        private static int _maxR173Frequency = 75999;
-        private static int _maxR173NumpadNumber = 9;
+        private static readonly Random Rand = new Random();
+	    private const int MinR173Frequency = 30000;
+	    private const int MaxR173Frequency = 75999;
+	    private const int MaxR173NumpadNumber = 9;
 
-        public static int GenerateValidR173Frequency()
+	    public static int GenerateValidR173Frequency()
         {
-            return GeneratNumberInRange(_minR173Frequency, _maxR173Frequency + 1);
+            return GeneratNumberInRange(MinR173Frequency, MaxR173Frequency + 1);
         }
 
         public static int GenerateValidR173NumpadValue()
         {
-            return GeneratNumberInRange(0, _maxR173NumpadNumber + 1);
+            return GeneratNumberInRange(0, MaxR173NumpadNumber + 1);
         }
 
         public static int GeneratNumberInRange(int min, int max)
         {
-            return _rand.Next(min, max);
+            return Rand.Next(min, max);
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using P2PMulticastNetwork;
 using P2PMulticastNetwork.Model;
-using RadioPipeline;
+using R_173.Interfaces;
 using Unity;
 
-namespace R_173.Interfaces
+namespace R_173.BL
 {
     public class DataModelProcessingBuilder : IDataProcessingBuilder
     {
-        private PipelineBuilder<DataModel> _builder;
-        private IUnityContainer _container;
+        private readonly PipelineBuilder<DataModel> _builder;
+        private readonly IUnityContainer _container;
 
         public DataModelProcessingBuilder(IUnityContainer container, PipelineBuilder<DataModel> builder)
         {

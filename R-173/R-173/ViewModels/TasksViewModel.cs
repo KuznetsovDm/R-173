@@ -40,7 +40,9 @@ namespace R_173.ViewModels
             {
                 { TaskTypes.PreparationToWork, new TaskViewModel(HPreparation.StepCaption, () => StartTask(TaskTypes.PreparationToWork))},
                 { TaskTypes.PerformanceTest, new TaskViewModel(HPerformanceTest.StepCaption, () => StartTask(TaskTypes.PerformanceTest))},
-                { TaskTypes.FrequencyTask, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask))}
+                { TaskTypes.FrequencyTask, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.FrequencyTask))},
+                { TaskTypes.ConnectionEasy, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.ConnectionEasy))},
+                { TaskTypes.ConnectionHard, new TaskViewModel(HFrequencyCheck.StepCaption, () => StartTask(TaskTypes.ConnectionHard))},
             };
             _tasks = new[]
             {
@@ -68,19 +70,7 @@ namespace R_173.ViewModels
             }
         }
 
-	    public int Assessment
-	    {
-		    get
-		    {
-			    int result = 0;
-			    foreach (var task in _tasks)
-			    {
-				    result += task.NumberOfSuccessfulAttempts;
-			    }
-
-			    return result;
-		    }
-	    }
+	    public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0);
 
 	    public MessageBoxParameters Message => _message;
 
@@ -123,12 +113,16 @@ namespace R_173.ViewModels
                     return "Perfomance";
                 case TaskTypes.FrequencyTask:
                     return "WorkingFrequency";
-                default:
+	            case TaskTypes.ConnectionEasy:
+		            return "ConnectionEasy";
+	            case TaskTypes.ConnectionHard:
+		            return "ConnectionHard";
+				default:
                     throw new Exception("Unknown TaskType");
             }
         }
 
-        private void ShowDialog(string type)
+        private static void ShowDialog(string type)
         {
             var parameters = GetMessageBoxParameters(type);
             ShowDialog(parameters);
@@ -209,7 +203,11 @@ namespace R_173.ViewModels
                     return option.Tasks.HealthCheck;
                 case "WorkingFrequency":
                     return option.Tasks.WorkingFrequencyPreparation;
-                case "EndSuccess":
+	            case "ConnectionEasy":
+		            return option.Tasks.ConnectionEasy;
+	            case "ConnectionHard":
+		            return option.Tasks.ConnectionHard;
+				case "EndSuccess":
                     return option.Tasks.EndSuccesseful;
                 case "EndFail":
                     return option.Tasks.EndFail;

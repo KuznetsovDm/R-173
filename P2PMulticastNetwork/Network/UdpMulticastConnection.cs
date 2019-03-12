@@ -1,32 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using System.Diagnostics;
 using P2PMulticastNetwork.Interfaces;
 
-namespace P2PMulticastNetwork
+namespace P2PMulticastNetwork.Network
 {
     public class UdpMulticastConnection : IDataReceiver, IDataTransmitter
     {
-        private IPEndPoint _sendTo;
-        private MulticastConnectionOptions _options;
-        private UdpClient _client;
+        private readonly IPEndPoint _sendTo;
+        private readonly MulticastConnectionOptions _options;
+        private readonly UdpClient _client;
         private bool _wasClose;
-        private CancellationTokenSource _cancellToken;
+        private readonly CancellationTokenSource _cancellToken;
 
         public UdpMulticastConnection(MulticastConnectionOptions options)
         {
             _sendTo = new IPEndPoint(options.MulticastAddress, options.Port);
             _options = options;
-            _client = new UdpClient();
-            _client.ExclusiveAddressUse = options.ExclusiveAddressUse;
-            _cancellToken = new CancellationTokenSource();
+	        _client = new UdpClient {ExclusiveAddressUse = options.ExclusiveAddressUse};
+	        _cancellToken = new CancellationTokenSource();
             if (options.UseBind)
             {
                 try
@@ -72,7 +68,7 @@ namespace P2PMulticastNetwork
 
         public async Task<Result<byte[]>> Receive()
         {
-            return await TaskEx.Run<Result<byte[]>>(() =>
+            return await TaskEx.Run(() =>
             {
                 try
                 {

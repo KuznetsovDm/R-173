@@ -4,6 +4,8 @@
     {
         PreparationToWork,
         PerformanceTest,
-        FrequencyTask
-    }
+        FrequencyTask,
+		ConnectionEasy,
+		ConnectionHard,
+	}
 }

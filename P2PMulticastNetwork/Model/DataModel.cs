@@ -18,7 +18,7 @@ namespace P2PMulticastNetwork.Model
 
     public class DataModelConverter : IDataAsByteConverter<DataModel>
     {
-        private BinaryFormatter _formatter;
+        private readonly BinaryFormatter _formatter;
 
         public DataModelConverter()
         {
@@ -27,7 +27,7 @@ namespace P2PMulticastNetwork.Model
 
         public DataModel ConvertFrom(byte[] data)
         {
-            DataModel model = null;
+            DataModel model;
             using(var ms = new MemoryStream(data))
             {
                 model = (DataModel)_formatter.Deserialize(ms);
@@ -37,7 +37,7 @@ namespace P2PMulticastNetwork.Model
 
         public byte[] ConvertToBytes(DataModel data)
         {
-            byte[] bytes = null;
+            byte[] bytes;
             using(var ms = new MemoryStream())
             {
                 _formatter.Serialize(ms, data);

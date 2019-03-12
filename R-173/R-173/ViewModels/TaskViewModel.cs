@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace R_173.ViewModels
 {
-    class TaskViewModel : ViewModelBase
+    public class TaskViewModel : ViewModelBase
     {
         private int _numberOfAttempts;
         private int _numberOfSuccessfulAttempts;

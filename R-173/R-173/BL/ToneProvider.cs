@@ -1,5 +1,4 @@
 ﻿using NAudio.Wave;
-using R_173.BE;
 using System.IO;
 
 namespace R_173.BL
@@ -7,9 +6,9 @@ namespace R_173.BL
     public class ToneProvider
     {
         private byte[] _rawTone;
-        private EmptySampleProvider _emptyProvider;
+        private readonly EmptySampleProvider _emptyProvider;
 
-        public ToneProvider(WaveFormat format, ActionDescriptionOption option)
+        public ToneProvider(WaveFormat format)
         {
             _rawTone = Properties.Resources.RawTone;
             _emptyProvider = new EmptySampleProvider(format);
@@ -22,24 +21,21 @@ namespace R_173.BL
 
         public ISampleProvider CreateSampleProvider()
         {
-            if (_rawTone != null)
-            {
-                var stream = new MemoryStream(_rawTone);
-                var reader = new Mp3FileReader(stream);
-                return reader.ToSampleProvider();
-            }
-            else return _emptyProvider;
+	        if (_rawTone == null) return _emptyProvider;
+
+	        var stream = new MemoryStream(_rawTone);
+	        var reader = new Mp3FileReader(stream);
+	        return reader.ToSampleProvider();
+
         }
 
         public InfiniteWaveStream CreateInfiniteWaveStream()
         {
-            if (_rawTone != null)
-            {
-                var stream = new MemoryStream(_rawTone);
-                var reader = new Mp3FileReader(stream);
-                return new InfiniteWaveStream(reader);
-            }
-            return null;
+	        if (_rawTone == null) return null;
+
+	        var stream = new MemoryStream(_rawTone);
+	        var reader = new Mp3FileReader(stream);
+	        return new InfiniteWaveStream(reader);
         }
     }
 }

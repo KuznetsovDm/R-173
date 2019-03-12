@@ -1,6 +1,4 @@
-﻿using NAudio.Wave;
-using P2PMulticastNetwork.Model;
-using R_173.SharedResources;
+﻿using P2PMulticastNetwork.Model;
 using System;
 
 namespace R_173.Interfaces

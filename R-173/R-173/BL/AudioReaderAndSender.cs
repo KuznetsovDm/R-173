@@ -1,32 +1,29 @@
-﻿using P2PMulticastNetwork.Interfaces;
+﻿using System;
+using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
-using System;
 
 namespace R_173.BL
 {
     public class AudioReaderAndSender : IAudioReaderAndSender<SendableRadioModel>
     {
-        private IMicrophone _microphone;
+        private readonly IMicrophone _microphone;
         private SendableRadioModel _model;
-        private IDataTransmitter _transmitter;
-        private IDataAsByteConverter<DataModel> _converter;
-        private DataCompressor _compressor;
-        private LocalToneController _localToneController;
-        private bool _isMicrophoneStarted = false;
-        private bool _isToneStarted = false;
-        private ToneProvider _tone;
-        private Guid _SenderId = Guid.NewGuid();
+        private readonly IDataTransmitter _transmitter;
+        private readonly IDataAsByteConverter<DataModel> _converter;
+        private readonly DataCompressor _compressor;
+        private readonly LocalToneController _localToneController;
+        private bool _isMicrophoneStarted;
+        private bool _isToneStarted;
+	    private readonly Guid _senderId = Guid.NewGuid();
 
         public AudioReaderAndSender(IMicrophone microphone,
             IDataTransmitter transmitter,
             IDataAsByteConverter<DataModel> converter,
-            ToneProvider tone,
             DataCompressor compressor,
             LocalToneController localToneController)
         {
-            _tone = tone;
-            _microphone = microphone;
+	        _microphone = microphone;
             _microphone.OnDataAvailable += OnSendDataAvailable;
             _transmitter = transmitter;
             _converter = converter;
@@ -36,11 +33,11 @@ namespace R_173.BL
 
         private void OnSendDataAvailable(object sender, DataEventArgs e)
         {
-            var dataModel = new DataModel()
+            var dataModel = new DataModel
             {
-                Guid = _SenderId,
+                Guid = _senderId,
                 RadioModel = _model,
-                RawAudioSample = e.Data,
+                RawAudioSample = e.Data
             };
 
             var bytes = _converter.ConvertToBytes(dataModel);
@@ -69,9 +66,10 @@ namespace R_173.BL
                 _isMicrophoneStarted = true;
                 _microphone.StartListen();
             }
-            catch (Exception)
-            {
-            }
+	        catch (Exception)
+	        {
+		        // ignored
+	        }
         }
 
         public void StopListenMicrophone()
@@ -93,9 +91,10 @@ namespace R_173.BL
                 _isToneStarted = true;
                 _localToneController.StartPlayTone();
             }
-            catch (Exception)
-            {
-            }
+	        catch (Exception)
+	        {
+		        // ignored
+	        }
         }
 
         public void StopListenTone()

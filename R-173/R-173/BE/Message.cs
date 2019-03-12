@@ -13,9 +13,9 @@ namespace R_173.BE
             return string.Join(Environment.NewLine, FormatMessage(0));
         }
 
-        private static readonly string _tab = "\t";
+	    private const string Tab = "\t";
 
-        private IEnumerable<string> FormatMessage(int level)
+	    private IEnumerable<string> FormatMessage(int level)
         {
             if(!string.IsNullOrEmpty(Header))
                 yield return GetTabs(level++) + Header;
@@ -37,9 +37,9 @@ namespace R_173.BE
         private static string GetTabs(int tabCount)
         {
             var result = string.Empty;
-            for (int i = 0; i < tabCount; i++)
+            for (var i = 0; i < tabCount; i++)
             {
-                result += _tab;
+                result += Tab;
             }
             return result;
         }

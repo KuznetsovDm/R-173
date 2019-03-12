@@ -6,7 +6,7 @@ namespace R_173.BL.Learning
 {
     public class CompositeStepBuilder
     {
-        private List<IStep<RadioModel>> _steps = new List<IStep<RadioModel>>();
+        private readonly List<IStep<RadioModel>> _steps = new List<IStep<RadioModel>>();
 
         public CompositeStepBuilder Add(IStep<RadioModel> step)
         {
@@ -19,6 +19,4 @@ namespace R_173.BL.Learning
             return new CompositeStep(_steps, stepName);
         }
     }
-
-
 }

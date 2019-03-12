@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace RadioPipeline
+namespace P2PMulticastNetwork
 {
-    public delegate Task PipelineDelegate<T>(T context);
+    public delegate Task PipelineDelegate<in T>(T context);
 
     public class PipelineBuilder<T>
     {
-        private LinkedList<Func<T, PipelineDelegate<T>, Task>> _actions;
+        private readonly LinkedList<Func<T, PipelineDelegate<T>, Task>> _actions;
 
         public PipelineBuilder()
         {

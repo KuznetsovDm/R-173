@@ -8,18 +8,16 @@ namespace R_173.BL
 {
     public class SamplePlayer : ISamplePlayer
     {
-        private IWavePlayer _player;
-        private MixingSampleProvider _mixer;
-        private VolumeSampleProvider _volumeFilter;
-        private WaveFormat _format;
+        private readonly IWavePlayer _player;
+        private readonly MixingSampleProvider _mixer;
+        private readonly VolumeSampleProvider _volumeFilter;
 
-        public SamplePlayer(WaveFormat format, IWavePlayer player)
+	    public SamplePlayer(WaveFormat format, IWavePlayer player)
         {
             _mixer = new MixingSampleProvider(format);
             _volumeFilter = new VolumeSampleProvider(_mixer);
-            _format = format;
 
-            _player = player;
+	        _player = player;
             _player.Init(_volumeFilter);
         }
 

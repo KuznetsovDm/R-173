@@ -7,7 +7,7 @@ namespace R_173.BL
 {
     public class Microphone : IMicrophone
     {
-        private IWaveIn _audioListener;
+        private readonly IWaveIn _audioListener;
 
         public Microphone(WaveFormat format, IWaveIn waveIn)
         {

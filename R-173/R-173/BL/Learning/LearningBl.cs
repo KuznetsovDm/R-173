@@ -1,5 +1,4 @@
-﻿using R_173.Handlers;
-using R_173.Models;
+﻿using R_173.Models;
 using R_173.SharedResources;
 using R_173.Views.TrainingSteps;
 using System;
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 
 namespace R_173.BL.Learning
 {
-    public class LearningBL
+    public class LearningBl
     {
         private readonly Action _completed;
         private readonly Action<int> _stepChanged;
@@ -15,7 +14,7 @@ namespace R_173.BL.Learning
         private int _currentLearning;
         private readonly RadioModel _model;
 
-        public LearningBL(RadioModel model, Action completed, Action<int> stepChanged, StepsTypes learningType)
+        public LearningBl(RadioModel model, Action completed, Action<int> stepChanged, StepsTypes learningType)
         {
             var learningFactory = new LearningFactory();
             _completed = completed;
@@ -43,17 +42,20 @@ namespace R_173.BL.Learning
 
         public void SetCurrentLearning(StepsTypes learningType)
         {
-            if (learningType == StepsTypes.Preparation)
+            switch (learningType)
             {
-                _currentLearning = 0;
-            }
-            else if (learningType == StepsTypes.PerformanceTest)
-            {
-                _currentLearning = 1;
-            }
-            else
-            {
-                _currentLearning = 2;
+	            case StepsTypes.Preparation:
+		            _currentLearning = 0;
+		            break;
+	            case StepsTypes.PerformanceTest:
+		            _currentLearning = 1;
+		            break;
+	            case StepsTypes.FrequencyCheck:
+		            _currentLearning = 2;
+					break;
+	            default:
+		            _currentLearning = 0;
+		            break;
             }
 
             FreezeAll();
@@ -72,7 +74,7 @@ namespace R_173.BL.Learning
         {
             foreach (var learning in _learnings)
             {
-                learning.StartIfInputConditionsAreRight(_model, out var errors);
+                learning.StartIfInputConditionsAreRight(_model, out var _);
                 learning.Completed += Completed;
                 learning.StepChanged += StepChanged;
             }
@@ -90,7 +92,7 @@ namespace R_173.BL.Learning
             foreach (var learning in _learnings)
             {
                 learning.Reset();
-                learning.StartIfInputConditionsAreRight(_model, out var errors);
+                learning.StartIfInputConditionsAreRight(_model, out var _);
 			}
         }
     }

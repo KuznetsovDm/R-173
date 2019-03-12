@@ -5,8 +5,8 @@ namespace R_173.BL.Tasks
 {
     public class TaskFactory
     {
-        private LearningFactory _learningFactory;
-        private RadioModel _model;
+        private readonly LearningFactory _learningFactory;
+        private readonly RadioModel _model;
 
         public TaskFactory(RadioModel radioModel, LearningFactory learningFactory)
         {
@@ -37,7 +37,32 @@ namespace R_173.BL.Tasks
             return new Task(_model, step);
         }
 
-        private CompositeStep CreatePerformanceTestStep()
+	    public Task CreateConnectionEasyTask(int notepadNumber, int computerNumber)
+	    {
+		    var builder = new CompositeStepBuilder();
+		    var step = builder.Add(_learningFactory.CreatePreparationToWorkLearning(1, 3))
+			    .Add(new RecordWorkToRecordStep(
+				    checkInputConditions: PerformanceTestLearning.CheckWorkingState))
+
+			    .Build();
+
+		    return new Task(_model, step);
+	    }
+
+	    public Task CreateConnectionHardTask(int notepadNumber, int frequency, int computerNumber)
+	    {
+		    var builder = new CompositeStepBuilder();
+		    var step = builder.Add(_learningFactory.CreatePreparationToWorkLearning(1, 3))
+			    .Add(new RecordWorkToRecordStep(
+				    checkInputConditions: PerformanceTestLearning.CheckWorkingState))
+			    .Add(new FrequencySetStep(notepadNumber, frequency))
+			    .Add(new RecordWorkToWorkStep())
+			    .Build();
+
+		    return new Task(_model, step);
+	    }
+
+		private CompositeStep CreatePerformanceTestStep()
         {
             return new CompositeStepBuilder()
                 .Add(_learningFactory.CreatePreparationToWorkLearning(1, 3))

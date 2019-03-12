@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using P2PMulticastNetwork.Model;
-using RadioPipeline;
 
-namespace P2PMulticastNetwork
+namespace P2PMulticastNetwork.Network
 {
     public interface IPiplineProcessingInput
     {
@@ -11,7 +10,7 @@ namespace P2PMulticastNetwork
 
     public class PiplineProcessingInput : IPiplineProcessingInput
     {
-        private PipelineDelegate<DataModel> _pipline;
+        private readonly PipelineDelegate<DataModel> _pipline;
 
         public PiplineProcessingInput(PipelineDelegate<DataModel> pipeline)
         {

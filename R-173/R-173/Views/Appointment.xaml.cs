@@ -3,12 +3,10 @@ using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Xps.Packaging;
 using Unity;
 using System.Windows;
-using System.Linq;
 
 namespace R_173.Views
 {

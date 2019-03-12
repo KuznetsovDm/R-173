@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace R_173
 {
     public static class SimpleLogger
     {
-        private static object lockobj = new object();
+        private static readonly object Lockobj = new object();
 
         public static void Log(string info)
         {
-            lock (lockobj)
+            lock (Lockobj)
             {
                 File.AppendAllText("log.log", $"{DateTime.Now} {info}{Environment.NewLine}");
             }
@@ -20,9 +17,9 @@ namespace R_173
 
         public static void Log(Exception e)
         {
-            lock (lockobj)
+            lock (Lockobj)
             {
-                File.AppendAllText("log.log", $"{DateTime.Now} {e.ToString()}{Environment.NewLine}");
+                File.AppendAllText("log.log", $"{DateTime.Now} {e}{Environment.NewLine}");
             }
         }
     }

@@ -13,13 +13,13 @@ namespace R_173.BE
             {
                 var assembly = Assembly.GetExecutingAssembly();
                 using (var stream = assembly.GetManifestResourceStream(path))
-                using (var reader = new StreamReader(stream))
+                using (var reader = new StreamReader(stream ?? throw new InvalidOperationException()))
                 {
                     var obj = reader.ReadToEnd();
                     return Bind(obj);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return default(T);
             }
@@ -59,7 +59,9 @@ namespace R_173.BE
         public ControlDescription PreparationToWork { get; set; }
         public ControlDescription HealthCheck { get; set; }
         public ControlDescription WorkingFrequencyPreparation { get; set; }
-        public ControlDescription EndSuccesseful { get; set; }
+        public ControlDescription ConnectionEasy { get; set; }
+        public ControlDescription ConnectionHard { get; set; }
+		public ControlDescription EndSuccesseful { get; set; }
         public ControlDescription EndFail { get; set; }
     }
 }

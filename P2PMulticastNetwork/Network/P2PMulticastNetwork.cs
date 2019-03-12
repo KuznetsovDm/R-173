@@ -1,15 +1,14 @@
-﻿using CSharpFunctionalExtensions;
-using RadioPipeline;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 
 //It's should be faultless network
-namespace P2PMulticastNetwork
+namespace P2PMulticastNetwork.Network
 {
     public class DataEngineMiner : IDataProvider
     {
@@ -62,15 +61,14 @@ namespace P2PMulticastNetwork
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error in ReceiveCycle {ex.ToString()}");
+                Debug.WriteLine($"Error in ReceiveCycle {ex}");
             }
         }
     }
 
     public class ActionEngine : IDisposable
     {
-        private Task _task;
-        private CancellationTokenSource _cancellToken;
+	    private CancellationTokenSource _cancellToken;
 
         public bool IsWork { get; private set; }
 
@@ -89,7 +87,7 @@ namespace P2PMulticastNetwork
         public void Start(Func<CancellationToken, Task> action)
         {
             _cancellToken = new CancellationTokenSource();
-            _task = TaskEx.Run(() => action(_cancellToken.Token), _cancellToken.Token);
+            TaskEx.Run(() => action(_cancellToken.Token), _cancellToken.Token);
             IsWork = true;
         }
 
@@ -97,21 +95,17 @@ namespace P2PMulticastNetwork
         {
             _cancellToken.Cancel();
             _cancellToken = null;
-            _task = null;
-            IsWork = false;
+	        IsWork = false;
         }
     }
 
     public class PipelineDataModelProcessingBeginPoint
     {
-        private IPiplineProcessingInput _pipline;
+	    private readonly IDataProvider _miner;
 
-        private IDataProvider _miner;
-
-        public PipelineDataModelProcessingBeginPoint(IDataProvider miner, IPiplineProcessingInput pipline)
+        public PipelineDataModelProcessingBeginPoint(IDataProvider miner)
         {
             _miner = miner;
-            _pipline = pipline;
         }
 
         public void Start()
@@ -119,7 +113,7 @@ namespace P2PMulticastNetwork
             _miner.Start();
         }
 
-        public void Stot()
+        public void Stop()
         {
             _miner.Stop();
         }

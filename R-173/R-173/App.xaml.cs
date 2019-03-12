@@ -75,7 +75,6 @@ namespace R_173
                      .AddAudioServices();
 
             var binder = new JsonBinder<ActionDescriptionOption>();
-            //R_173.Resources.RadioStationText.json
             var option = binder.BindFromAssemblyResources(R_173.Properties.Resources.JsonRadioStationAssemblyName);
 
             container.RegisterInstance(option, new SingletonLifetimeManager());

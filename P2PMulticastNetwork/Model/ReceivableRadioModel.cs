@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace P2PMulticastNetwork.Model
+﻿namespace P2PMulticastNetwork.Model
 {
     public struct ReceivableRadioModel
     {

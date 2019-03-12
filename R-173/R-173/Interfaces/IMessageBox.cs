@@ -1,5 +1,4 @@
 ﻿using R_173.SharedResources;
-using System;
 using System.Windows;
 
 namespace R_173.Interfaces

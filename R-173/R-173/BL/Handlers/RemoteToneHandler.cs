@@ -2,25 +2,23 @@
 using NAudio.Wave.SampleProviders;
 using P2PMulticastNetwork.Model;
 using R_173.Interfaces;
-using RadioPipeline;
 using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using P2PMulticastNetwork;
 
 namespace R_173.BL.Handlers
 {
     public class RemoteToneHandler : IInvoker
     {
-        private WaveFormat _format;
-        private ToneProvider _toneProvider;
-        private MixingSampleProvider _mixer;
+	    private readonly ToneProvider _toneProvider;
+        private readonly MixingSampleProvider _mixer;
         private static ConcurrentDictionary<Guid, PlayerSampleToken> _providers;
-        private static TimeSpan timeDifferencePlaying = TimeSpan.FromMilliseconds(1500);
+        private static readonly TimeSpan TimeDifferencePlaying = TimeSpan.FromMilliseconds(1500);
 
-        public RemoteToneHandler(WaveFormat format, ToneProvider provider, MixingSampleProvider mixer)
+        public RemoteToneHandler(ToneProvider provider, MixingSampleProvider mixer)
         {
-            _format = format;
-            _toneProvider = provider;
+	        _toneProvider = provider;
             _mixer = mixer;
             if (_providers == null)
                 _providers = new ConcurrentDictionary<Guid, PlayerSampleToken>();
@@ -32,7 +30,7 @@ namespace R_173.BL.Handlers
             {
                 var token = _providers[model.Guid];
                 var current = DateTime.UtcNow.TimeOfDay;
-                if ((current - token.TimeStamp) > timeDifferencePlaying)
+                if ((current - token.TimeStamp) > TimeDifferencePlaying)
                 {
                     _mixer.RemoveMixerInput(token.Provider);
 
