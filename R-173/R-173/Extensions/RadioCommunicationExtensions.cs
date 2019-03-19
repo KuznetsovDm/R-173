@@ -8,6 +8,9 @@ using NAudio.Wave.SampleProviders;
 using R_173.Interfaces;
 using R_173.BL;
 using Unity.Injection;
+using System.Net;
+using static P2PMulticastNetwork.RedistLocalConnectionTable;
+using R_173.BE;
 
 namespace R_173.Extensions
 {
@@ -27,12 +30,28 @@ namespace R_173.Extensions
             var listenConnection = new UdpMulticastConnection(listenOptions);
             var senderConnection = new UdpMulticastConnection(senderOptions);
 
+            services.AddLocalConnectionTable();
             services.RegisterInstance<IDataReceiver>(listenConnection);
             services.RegisterInstance<IDataTransmitter>(senderConnection);
             IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
             services.RegisterInstance<IDataProvider>(miner, new SingletonLifetimeManager());
             services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
             services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
+            return services;
+        }
+
+        public static IUnityContainer AddLocalConnectionTable(this IUnityContainer services)
+        {
+            //use default
+            var redistributableOption = new RedistributableTableOption();
+            var searchTableOption = new UdpConnectionOption { Address = IPAddress.Any, Port = 33100 };
+            IRedistributableLocalConnectionTable table = new RedistLocalConnectionTable(searchTableOption, redistributableOption);
+            var settings = services.Resolve<RadioSettings>();
+
+            var localEp = new IPEndPoint(settings.LocalIp, searchTableOption.Port);
+            var notificationData = new NotificationData { Id = settings.NetworkToken, Endpoint = localEp };
+            table.Register(notificationData);
+            services.RegisterInstance(table, new SingletonLifetimeManager());
             return services;
         }
 

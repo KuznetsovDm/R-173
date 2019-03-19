@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\BinaryCovertorExtensions.cs" />
     <Compile Include="Interfaces\IAudioReaderAndSender.cs" />
     <Compile Include="Interfaces\IAudioReceiverAndPlayer.cs" />
     <Compile Include="Model\DataEventArgs.cs" />
@@ -99,6 +100,8 @@
     <Compile Include="Network\IPiplineProcessingInput.cs" />
     <Compile Include="Network\MulticastConnectionOptions.cs" />
     <Compile Include="Network\P2PMulticastNetwork.cs" />
+    <Compile Include="Network\IRedistributableLocalConnectionTable.cs" />
+    <Compile Include="Network\UdpConnectionOption.cs" />
     <Compile Include="Pipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\UdpMulticastConnection.cs" />
