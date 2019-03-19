@@ -59,9 +59,8 @@ namespace R_173.ViewModels
 				new VPerformanceTest { DataContext = _viewModels[1] },
 				new VFrequencyCheck { DataContext = _viewModels[2] }
 			};
-			_message = GetMessageBoxParameters("Preparation.Begin");
-			_message.Cancel = () => App.ServiceCollection.Resolve<MainWindow>().GoToAppointment(2);
 
+			_message = GetMessageBoxParameters("Preparation.Begin");
 
 			_openNextStepCommand = new SimpleCommand(() => CurrentStep++,
 				() => _currentStep < _horizontalControls.Length && _currentStep < _maxStep);
@@ -70,10 +69,13 @@ namespace R_173.ViewModels
 				Orientation == Orientation.Horizontal
 				? Orientation.Vertical
 				: Orientation.Horizontal);
+
 			_radioViewModel = new RadioViewModel();
-			_radioViewModel.Model.SetInitialState();
+			_radioViewModel.Model.SetWrongInitialState();
+
 			_learning = new LearningBl(_radioViewModel.Model, Learning_Completed, Learning_StepChanged, _horizontalControls[0].Type);
 			_startOverCommand = new SimpleCommand(StartOver);
+
 			_maxStep = 1;
 			CurrentStep = 1;
 			Orientation = Orientation.Horizontal;
@@ -93,10 +95,12 @@ namespace R_173.ViewModels
 
 				_openNextStepCommand.OnCanExecuteChanged();
 				_openPrevStepCommand.OnCanExecuteChanged();
+
 				OnPropertyChanged(nameof(CurrentHorizontalControl));
 				OnPropertyChanged(nameof(CurrentVerticalControl));
 				OnPropertyChanged(nameof(Caption));
 				OnPropertyChanged(nameof(CurrentStep));
+
 				_learning.SetCurrentLearning(CurrentHorizontalControl.Type);
 				_viewModels[_currentStep - 1].CurrentStep = 0;
 
@@ -240,7 +244,7 @@ namespace R_173.ViewModels
 
 		private void StartOver()
 		{
-			_radioViewModel.Model.SetInitialState();
+			_radioViewModel.Model.SetWrongInitialState();
 			CurrentStep = 1;
 			_learning.Restart();
 		}
@@ -280,10 +284,8 @@ namespace R_173.ViewModels
 				OkText = description.Buttons[1]
 			};
 
-			if (type.Contains("Begin"))
-			{
-				parameters.Cancel = () => App.ServiceCollection.Resolve<MainWindow>().GoToAppointment(2);
-			}
+			if (type.Contains("Begin")) 
+				parameters.Cancel = () => App.ServiceCollection.Resolve<MainWindow>().GoToTrainingDocumentation(type);
 
 			return parameters;
 		}

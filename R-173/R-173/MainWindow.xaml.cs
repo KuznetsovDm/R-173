@@ -96,13 +96,12 @@ namespace R_173
 			SelectButton(Buttons.Children[1] as Button);
 		}
 
-		public void GoToAppointment(int pageNumber)
+		public void GoToTrainingDocumentation(string type)
 		{
 			var page = (Appointment)_pages[typeof(Appointment)];
 			MainContent.Content = page;
 			SelectButton(Buttons.Children[0] as Button);
-			if (page.DocViewer.CanGoToPage(pageNumber))
-				page.DocViewer.GoToPage(pageNumber);
+			page.GoToTraining(type);
 		}
 
 		private void SelectButton(Button button)
@@ -118,6 +117,8 @@ namespace R_173
 			SelectButton(button);
 			var page = button?.CommandParameter as Type;
 			MainContent.Content = _pages[page ?? throw new InvalidOperationException()];
+			if(_pages[page] is Appointment appointment)
+				appointment.ResetComingFromTraining();
 		}
 
 		private void CloseWelcome(object sender, RoutedEventArgs e)

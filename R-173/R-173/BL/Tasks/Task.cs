@@ -19,6 +19,7 @@ namespace R_173.BL.Tasks
 
         public void Start()
         {
+			_model.SetRandomState();
 	        if (!_step.StartIfInputConditionsAreRight(_model, out var _)) return;
 
 	        _taskCompleted = false;
@@ -42,7 +43,8 @@ namespace R_173.BL.Tasks
             {
                 message = new Message { Header = null, Messages = new[] { _step.GetErrorDescription() } };
             }
-            _step.Reset();
+	        _model.SetRandomState();
+			_step.Reset();
             return message;
         }
     }

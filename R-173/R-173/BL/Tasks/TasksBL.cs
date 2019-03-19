@@ -27,14 +27,18 @@ namespace R_173.BL.Tasks
                 case TaskTypes.PerformanceTest: _activeTask = _taskFactory.CreatePerfomanceTestTask(); break;
                 case TaskTypes.FrequencyTask:
                     _activeTask = _taskFactory.CreateFrequencyTask(DataContext.NumpadNumber, DataContext.Frequency); break;
-                default: throw new Exception($"Invalid state {taskType}.");
+	            case TaskTypes.ConnectionEasy:
+		            break;
+	            case TaskTypes.ConnectionHard:
+		            break;
+	            default: throw new Exception($"Invalid state {taskType}.");
             }
             _activeTask.Start();
         }
 		
         public Message Stop()
         {
-            return _activeTask.Stop();
+	        return _activeTask.Stop();
         }
     }
 

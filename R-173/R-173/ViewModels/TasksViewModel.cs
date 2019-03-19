@@ -95,7 +95,7 @@ namespace R_173.ViewModels
             parameters.Ok = () =>
             {
                 TaskIsRunning = true;
-                RadioViewModel.Model.SetInitialState();
+                RadioViewModel.Model.SetRandomState();
 
                 _tasksBl.DataContext
                     .Configure()
@@ -144,7 +144,7 @@ namespace R_173.ViewModels
                 TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private void ShowErrorDialog(Message message)
+        private static void ShowErrorDialog(Message message)
         {
             var messageBoxParameters = GetMessageBoxParameters("EndFail");
             var item = FormatMessage(message);
@@ -174,7 +174,6 @@ namespace R_173.ViewModels
         private void StopTask()
         {
             var message = _tasksBl.Stop();
-            RadioViewModel.Model.SetInitialState();
             TaskIsRunning = false;
 
             if (_runningTaskType != null)
@@ -247,7 +246,7 @@ namespace R_173.ViewModels
             return parameters;
         }
 
-        private TreeViewItem FormatMessage(Message message)
+        private static TreeViewItem FormatMessage(Message message)
         {
             if (string.IsNullOrEmpty(message.Header) && message.Messages.Count() == 1)
             {
