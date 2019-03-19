@@ -1,16 +1,14 @@
-﻿using P2PMulticastNetwork;
-using P2PMulticastNetwork.Extensions;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using P2PMulticastNetwork.Extensions;
 
-namespace P2PMulticastNetwork
+namespace P2PMulticastNetwork.Network
 {
     public interface IRedistributableLocalConnectionTable : IDisposable
     {
@@ -33,10 +31,10 @@ namespace P2PMulticastNetwork
     public class RedistLocalConnectionTable : IRedistributableLocalConnectionTable
     {
         private UdpClient _listener = new UdpClient();
-        private AsyncLoopTimer _timer;
-        private ConcurrentDictionary<Guid, InternalTokenized> _table = new ConcurrentDictionary<Guid, InternalTokenized>();
+        private readonly AsyncLoopTimer _timer;
+        private readonly ConcurrentDictionary<Guid, InternalTokenized> _table = new ConcurrentDictionary<Guid, InternalTokenized>();
         private IPEndPoint _connection;
-        private RedistLocalConnectionTableRegistrator _registrator;
+        private readonly RedistLocalConnectionTableRegistrator _registrator;
 
         public RedistLocalConnectionTable(UdpConnectionOption options, RedistributableTableOption tableOption)
         {
@@ -48,12 +46,11 @@ namespace P2PMulticastNetwork
             {
                 foreach (var value in _table)
                 {
-                    if (DateTime.UtcNow.TimeOfDay.Subtract(value.Value.TimeStamp) > tableOption.ExpirationTime)
-                    {
-                        _table.TryRemove(value.Key, out var info);
-                        var args = new ConnectionArgs(info.Data);
-                        OnDisconnected(this, args);
-                    }
+	                if (DateTime.UtcNow.TimeOfDay.Subtract(value.Value.TimeStamp) <= tableOption.ExpirationTime) continue;
+
+	                _table.TryRemove(value.Key, out var info);
+	                var args = new ConnectionArgs(info.Data);
+	                OnDisconnected?.Invoke(this, args);
                 }
             });
         }
@@ -84,15 +81,15 @@ namespace P2PMulticastNetwork
             var token = _table.GetOrAdd(notifyObject.Id, (_) =>
             {
                 var args = new ConnectionArgs(notifyObject);
-                OnConnected(this, args);
+                OnConnected?.Invoke(this, args);
                 return new InternalTokenized { Data = notifyObject };
             });
             token.TimeStamp = DateTime.UtcNow.TimeOfDay;
         }
 
-        public IEnumerable<NotificationData> AvaliableDevices { get => _table.Values.Select(x => x.Data); }
+        public IEnumerable<NotificationData> AvaliableDevices => _table.Values.Select(x => x.Data);
 
-        public event EventHandler<ConnectionArgs> OnConnected;
+	    public event EventHandler<ConnectionArgs> OnConnected;
 
         public event EventHandler<ConnectionArgs> OnDisconnected;
 
@@ -126,8 +123,8 @@ namespace P2PMulticastNetwork
 
         private class AsyncLoopTimer : IDisposable
         {
-            private TimeSpan _delay;
-            private Action _todo;
+            private readonly TimeSpan _delay;
+            private readonly Action _todo;
             private CancellationTokenSource _cancelToken;
 
             public AsyncLoopTimer(TimeSpan delay, Action todo)
@@ -144,26 +141,27 @@ namespace P2PMulticastNetwork
                 {
                     while (true)
                     {
-                        await TaskEx.Delay(_delay);
+						if(_cancelToken.Token.IsCancellationRequested)
+							return;
+
+                        await TaskEx.Delay(_delay, _cancelToken.Token);
                         _todo();
                     }
-                },
-                _cancelToken.Token);
+                }, _cancelToken.Token);
             }
 
 
             public void Dispose()
             {
-                if (_cancelToken != null)
-                    _cancelToken.Cancel();
-                _cancelToken = null;
+	            _cancelToken?.Cancel();
+	            _cancelToken = null;
             }
         }
         public class RedistLocalConnectionTableRegistrator : IDisposable
         {
             private UdpClient _client;
-            private AsyncLoopTimer _timer;
-            private ConcurrentBag<byte[]> _registedConnections = new ConcurrentBag<byte[]>();
+            private readonly AsyncLoopTimer _timer;
+            private readonly ConcurrentBag<byte[]> _registedConnections = new ConcurrentBag<byte[]>();
 
             public RedistLocalConnectionTableRegistrator(int port, TimeSpan sendDelay)
             {
