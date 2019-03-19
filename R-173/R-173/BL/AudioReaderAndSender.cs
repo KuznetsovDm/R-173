@@ -1,7 +1,6 @@
 ﻿using System;
 using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
-using R_173.BE;
 using R_173.Interfaces;
 
 namespace R_173.BL
@@ -10,25 +9,21 @@ namespace R_173.BL
     {
         private readonly IMicrophone _microphone;
         private SendableRadioModel _model;
-        private IDataTransmitter _transmitter;
-        private IDataAsByteConverter<DataModel> _converter;
-        private DataCompressor _compressor;
-        private LocalToneController _localToneController;
-        private bool _isMicrophoneStarted = false;
-        private bool _isToneStarted = false;
-        private ToneProvider _tone;
-        private Guid _SenderId;
+        private readonly IDataTransmitter _transmitter;
+        private readonly IDataAsByteConverter<DataModel> _converter;
+        private readonly DataCompressor _compressor;
+        private readonly LocalToneController _localToneController;
+        private bool _isMicrophoneStarted;
+        private bool _isToneStarted;
+	    private readonly Guid _senderId = Guid.NewGuid();
 
         public AudioReaderAndSender(IMicrophone microphone,
             IDataTransmitter transmitter,
             IDataAsByteConverter<DataModel> converter,
             DataCompressor compressor,
-            LocalToneController localToneController,
-            RadioSettings settings)
+            LocalToneController localToneController)
         {
-            _SenderId = settings.NetworkToken;
-            _tone = tone;
-            _microphone = microphone;
+	        _microphone = microphone;
             _microphone.OnDataAvailable += OnSendDataAvailable;
             _transmitter = transmitter;
             _converter = converter;
