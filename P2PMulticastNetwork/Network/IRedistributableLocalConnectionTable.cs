@@ -14,8 +14,6 @@ namespace P2PMulticastNetwork.Network
     {
         IEnumerable<NotificationData> AvaliableDevices { get; }
 
-        void Register(NotificationData notification);
-
         event EventHandler<ConnectionArgs> OnConnected;
 
         event EventHandler<ConnectionArgs> OnDisconnected;

@@ -44,13 +44,13 @@ namespace R_173.Extensions
 			//use default
 			var redistributableOption = new RedistributableTableOption();
 			var searchTableOption = new UdpConnectionOption { Address = IPAddress.Any, Port = 33100 };
-			IRedistributableLocalConnectionTable table = new RedistLocalConnectionTable(searchTableOption, redistributableOption);
+			var table = new RedistLocalConnectionTable(searchTableOption, redistributableOption);
 			var settings = services.Resolve<RadioSettings>();
 
 			var localEp = new IPEndPoint(settings.LocalIp, searchTableOption.Port);
 			var notificationData = new NotificationData { Id = settings.NetworkToken, Endpoint = localEp };
 			table.Register(notificationData);
-			services.RegisterInstance(table, new SingletonLifetimeManager());
+			services.RegisterInstance<IRedistributableLocalConnectionTable>(table, new SingletonLifetimeManager());
 			return services;
 		}
 

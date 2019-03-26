@@ -83,6 +83,15 @@
                             </Style>
                         </ListBox.Resources>
                     </ListBox>
+                    
+                    <TextBlock FontWeight="Bold" FontSize="24" Margin="10, 20" HorizontalAlignment="Center">
+                        <Run Text="{Binding Path=WaitingForConnectionState, Mode=OneWay}"></Run>
+                    </TextBlock>
+
+                    <TextBlock FontWeight="DemiBold" FontSize="18" Margin="10, 20" HorizontalAlignment="Left">
+                        <Run Text="{Binding Path=Connections, Mode=OneWay}"></Run>
+                    </TextBlock>
+
                     <TextBlock FontWeight="Bold" FontSize="24" Margin="10, 20" HorizontalAlignment="Right">
                         <Run>Оценка: </Run>
                         <Run Text="{Binding Path=Assessment, Mode=OneWay}"></Run>
