@@ -75,6 +75,7 @@ namespace R_173.Extensions
 
 		public static IUnityContainer RegisterWavePlayer(this IUnityContainer services)
 		{
+            //регистрируем пустышки для машин на которых нет устройства с выводом.
 			if (WaveOut.DeviceCount > 0)
 				services.RegisterType<IWavePlayer, WaveOut>(new InjectionConstructor());
 			else

@@ -10,6 +10,9 @@ using P2PMulticastNetwork.Extensions;
 
 namespace P2PMulticastNetwork.Network
 {
+    /// <summary>
+    /// Интерфейс для распознавания машин в сети.
+    /// </summary>
     public interface IRedistributableLocalConnectionTable : IDisposable
     {
         IEnumerable<NotificationData> AvaliableDevices { get; }
@@ -44,11 +47,11 @@ namespace P2PMulticastNetwork.Network
             {
                 foreach (var value in _table)
                 {
-	                if (DateTime.UtcNow.TimeOfDay.Subtract(value.Value.TimeStamp) <= tableOption.ExpirationTime) continue;
+                    if (DateTime.UtcNow.TimeOfDay.Subtract(value.Value.TimeStamp) <= tableOption.ExpirationTime) continue;
 
-	                _table.TryRemove(value.Key, out var info);
-	                var args = new ConnectionArgs(info.Data);
-	                OnDisconnected?.Invoke(this, args);
+                    _table.TryRemove(value.Key, out var info);
+                    var args = new ConnectionArgs(info.Data);
+                    OnDisconnected?.Invoke(this, args);
                 }
             });
         }
@@ -87,7 +90,7 @@ namespace P2PMulticastNetwork.Network
 
         public IEnumerable<NotificationData> AvaliableDevices => _table.Values.Select(x => x.Data);
 
-	    public event EventHandler<ConnectionArgs> OnConnected;
+        public event EventHandler<ConnectionArgs> OnConnected;
 
         public event EventHandler<ConnectionArgs> OnDisconnected;
 
@@ -139,8 +142,8 @@ namespace P2PMulticastNetwork.Network
                 {
                     while (true)
                     {
-						if(_cancelToken.Token.IsCancellationRequested)
-							return;
+                        if (_cancelToken.Token.IsCancellationRequested)
+                            return;
 
                         await TaskEx.Delay(_delay, _cancelToken.Token);
                         _todo();
@@ -151,8 +154,8 @@ namespace P2PMulticastNetwork.Network
 
             public void Dispose()
             {
-	            _cancelToken?.Cancel();
-	            _cancelToken = null;
+                _cancelToken?.Cancel();
+                _cancelToken = null;
             }
         }
         public class RedistLocalConnectionTableRegistrator : IDisposable
