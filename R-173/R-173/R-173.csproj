@@ -197,6 +197,8 @@
     <Compile Include="Helpers\MetroMessageBoxHelper.cs" />
     <Compile Include="Interfaces\IMessageBox.cs" />
     <Compile Include="Extensions\IEnumirableExtentions.cs" />
+    <Compile Include="Interfaces\INetworkTaskResolver.cs" />
+    <Compile Include="BL\LearningState.cs" />
     <Compile Include="SharedResources\CrashedEventArgs.cs" />
     <Compile Include="BL\Handlers\RemoteToneHandler.cs" />
     <Compile Include="SharedResources\ITabWithMessage.cs" />

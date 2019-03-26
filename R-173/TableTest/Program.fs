@@ -7,6 +7,7 @@ open System.Net.Sockets
 open P2PMulticastNetwork.Extensions
 open System.Net
 open System.Threading
+open P2PMulticastNetwork.Network
 
 let showLocalEp() = 
     use socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.IP)
@@ -17,7 +18,7 @@ showLocalEp()
 
 let table =
     let udpOption = new UdpConnectionOption()
-    let t = new RedistLocalConnectionTable(udpOption, new P2PMulticastNetwork.RedistLocalConnectionTable.RedistributableTableOption())
+    let t = new RedistLocalConnectionTable(udpOption, new RedistLocalConnectionTable.RedistributableTableOption())
     t
 
 let connectionHandler = new EventHandler<ConnectionArgs>((fun sender args -> printfn "connect %A" args.Info.Endpoint))
