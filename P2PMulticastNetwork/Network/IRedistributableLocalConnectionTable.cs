@@ -97,7 +97,7 @@ namespace P2PMulticastNetwork.Network
 
         private void HandleConnection(NotificationData notifyObject)
         {
-            var token = _table.GetOrAdd(notifyObject.Id, (_) =>
+            var token = _table.GetOrAdd(notifyObject.Id, _ =>
             {
                 var args = new ConnectionArgs(notifyObject);
                 OnConnected?.Invoke(this, args);

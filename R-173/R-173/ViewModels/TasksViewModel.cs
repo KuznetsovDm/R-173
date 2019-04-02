@@ -18,7 +18,7 @@ using Unity;
 
 namespace R_173.ViewModels
 {
-	class TasksViewModel : ViewModelBase, ITabWithMessage
+	public class TasksViewModel : ViewModelBase, ITabWithMessage
 	{
 		private readonly TaskViewModel[] _tasks;
 		private readonly SimpleCommand _stopTaskCommand;
@@ -26,7 +26,7 @@ namespace R_173.ViewModels
 		private readonly TasksBl _tasksBl;
 		private TaskTypes? _runningTaskType;
 		private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
-		private IRedistributableLocalConnectionTable _table;
+		private readonly IRedistributableLocalConnectionTable _table;
 
 		public RadioViewModel RadioViewModel { get; }
 

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace R_173.BL.Tasks
+namespace R_173.Interfaces
 {
-	public interface INetworkTaskSheduler
+	public interface INetworkTaskScheduler
 	{
 		event EventHandler TaskCreated;
 		event EventHandler TaskStarted;

@@ -179,6 +179,7 @@
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\BufferedWaveCompressor.cs" />
     <Compile Include="BL\InfiniteWaveStream.cs" />
+    <Compile Include="Interfaces\INetworkTaskScheduler.cs" />
     <Compile Include="BL\Utils\EmptySampleProvider.cs" />
     <Compile Include="BL\Learning\CompositeStep.cs" />
     <Compile Include="BL\Learning\CompositeStepBuilder.cs" />
