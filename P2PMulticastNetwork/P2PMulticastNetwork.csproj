@@ -104,6 +104,7 @@
     <Compile Include="Model\SendableRadioModel.cs" />
     <Compile Include="Network\IDependencyResolver.cs" />
     <Compile Include="Network\IPiplineProcessingInput.cs" />
+    <Compile Include="Network\LearningSupport.cs" />
     <Compile Include="Network\MulticastConnectionOptions.cs" />
     <Compile Include="Network\P2PMulticastNetwork.cs" />
     <Compile Include="Network\IRedistributableLocalConnectionTable.cs" />

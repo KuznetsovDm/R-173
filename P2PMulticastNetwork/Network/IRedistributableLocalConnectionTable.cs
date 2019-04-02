@@ -17,6 +17,10 @@ namespace P2PMulticastNetwork.Network
     {
         IEnumerable<NotificationData> AvaliableDevices { get; }
 
+        void Register(NotificationData notification);
+
+        void AddPayloadHandler(PayloadHandler handler);
+
         event EventHandler<ConnectionArgs> OnConnected;
 
         event EventHandler<ConnectionArgs> OnDisconnected;
@@ -27,6 +31,18 @@ namespace P2PMulticastNetwork.Network
     {
         public Guid Id { get; set; }
         public IPEndPoint Endpoint { get; set; }
+        public Payload Payload { get; set; }
+    }
+
+    [Serializable]
+    public class Payload
+    {
+        public string[] JsonRpc { get; set; }
+    }
+
+    public class PayloadHandler
+    {
+
     }
 
     public class RedistLocalConnectionTable : IRedistributableLocalConnectionTable
@@ -36,6 +52,7 @@ namespace P2PMulticastNetwork.Network
         private readonly ConcurrentDictionary<Guid, InternalTokenized> _table = new ConcurrentDictionary<Guid, InternalTokenized>();
         private IPEndPoint _connection;
         private readonly RedistLocalConnectionTableRegistrator _registrator;
+        private List<PayloadHandler> _handlers = new List<PayloadHandler>();
 
         public RedistLocalConnectionTable(UdpConnectionOption options, RedistributableTableOption tableOption)
         {
@@ -47,7 +64,8 @@ namespace P2PMulticastNetwork.Network
             {
                 foreach (var value in _table)
                 {
-                    if (DateTime.UtcNow.TimeOfDay.Subtract(value.Value.TimeStamp) <= tableOption.ExpirationTime) continue;
+                    if (DateTime.UtcNow.TimeOfDay.Subtract(value.Value.TimeStamp) <= tableOption.ExpirationTime)
+                        continue;
 
                     _table.TryRemove(value.Key, out var info);
                     var args = new ConnectionArgs(info.Data);
@@ -109,6 +127,11 @@ namespace P2PMulticastNetwork.Network
             _registrator.Register(notification);
         }
 
+        public void AddPayloadHandler(PayloadHandler handler)
+        {
+            throw new NotImplementedException();
+        }
+
         public class RedistributableTableOption
         {
             public TimeSpan ExpirationTime { get; set; } = TimeSpan.FromSeconds(5);
@@ -158,6 +181,7 @@ namespace P2PMulticastNetwork.Network
                 _cancelToken = null;
             }
         }
+
         public class RedistLocalConnectionTableRegistrator : IDisposable
         {
             private UdpClient _client;
@@ -192,7 +216,6 @@ namespace P2PMulticastNetwork.Network
             }
         }
     }
-
 
     public class ConnectionArgs : EventArgs
     {
