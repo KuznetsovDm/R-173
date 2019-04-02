@@ -22,36 +22,36 @@ namespace R_173.ViewModels
 {
     class TasksViewModel : ViewModelBase, ITabWithMessage
     {
-	    private readonly TaskViewModel[] _tasks;
+        private readonly TaskViewModel[] _tasks;
         private readonly SimpleCommand _stopTaskCommand;
         private bool _taskIsRunning;
-	    private readonly TasksBl _tasksBl;
+        private readonly TasksBl _tasksBl;
         private TaskTypes? _runningTaskType;
         private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
         public RadioViewModel RadioViewModel { get; }
 
-	    public TasksViewModel()
+        public TasksViewModel()
         {
             Message = GetMessageBoxParameters("Begin");
 
-	        var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
+            var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
 
-			_taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
+            _taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
             {
                 { TaskTypes.PreparationToWork, new TaskViewModel(option.Tasks.PreparationToWork.Title, () => StartTask(TaskTypes.PreparationToWork))},
                 { TaskTypes.PerformanceTest, new TaskViewModel(option.Tasks.HealthCheck.Title, () => StartTask(TaskTypes.PerformanceTest))},
                 { TaskTypes.FrequencyTask, new TaskViewModel(option.Tasks.WorkingFrequencyPreparation.Title, () => StartTask(TaskTypes.FrequencyTask))},
-                { TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, () => StartTask(TaskTypes.ConnectionEasy))},
-                { TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, () => StartTask(TaskTypes.ConnectionHard))},
+                //{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, () => StartTask(TaskTypes.ConnectionEasy))},
+                //{ TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, () => StartTask(TaskTypes.ConnectionHard))},
             };
             _tasks = new[]
             {
                 _taskViewModels[TaskTypes.PreparationToWork],
                 _taskViewModels[TaskTypes.PerformanceTest],
                 _taskViewModels[TaskTypes.FrequencyTask],
-                _taskViewModels[TaskTypes.ConnectionEasy],
-                _taskViewModels[TaskTypes.ConnectionHard],
+                //_taskViewModels[TaskTypes.ConnectionEasy],
+                //_taskViewModels[TaskTypes.ConnectionHard],
 			};
             _stopTaskCommand = new SimpleCommand(StopTask);
             RadioViewModel = new RadioViewModel();
@@ -73,11 +73,11 @@ namespace R_173.ViewModels
             }
         }
 
-	    public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0);
+        public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0) + 2;
 
-	    public MessageBoxParameters Message { get; }
+        public MessageBoxParameters Message { get; }
 
-	    private void StartTask(TaskTypes taskType)
+        private void StartTask(TaskTypes taskType)
         {
             var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(taskType));
 
@@ -85,9 +85,9 @@ namespace R_173.ViewModels
             var number = TaskHelper.GenerateValidR173NumpadValue();
             var computerNumber = TaskHelper.GenerateComputerNumber();
 
-			if (taskType == TaskTypes.FrequencyTask ||
-			    taskType == TaskTypes.ConnectionEasy ||
-			    taskType == TaskTypes.ConnectionHard)
+            if (taskType == TaskTypes.FrequencyTask ||
+                taskType == TaskTypes.ConnectionEasy ||
+                taskType == TaskTypes.ConnectionHard)
             {
                 parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
             }
@@ -101,7 +101,7 @@ namespace R_173.ViewModels
                     .Configure()
                     .SetFrequency(frequency)
                     .SetNumpad(number)
-		            .SetComputerNumber(computerNumber);
+                    .SetComputerNumber(computerNumber);
 
                 _runningTaskType = taskType;
 
@@ -121,11 +121,11 @@ namespace R_173.ViewModels
                     return "Perfomance";
                 case TaskTypes.FrequencyTask:
                     return "WorkingFrequency";
-	            case TaskTypes.ConnectionEasy:
-		            return "ConnectionEasy";
-	            case TaskTypes.ConnectionHard:
-		            return "ConnectionHard";
-				default:
+                case TaskTypes.ConnectionEasy:
+                    return "ConnectionEasy";
+                case TaskTypes.ConnectionHard:
+                    return "ConnectionHard";
+                default:
                     throw new Exception("Unknown TaskType");
             }
         }
@@ -192,7 +192,7 @@ namespace R_173.ViewModels
                     ShowErrorDialog(message);
                 }
             }
-			OnPropertyChanged(nameof(Assessment));
+            OnPropertyChanged(nameof(Assessment));
             _runningTaskType = null;
         }
 
@@ -210,11 +210,11 @@ namespace R_173.ViewModels
                     return option.Tasks.HealthCheck;
                 case "WorkingFrequency":
                     return option.Tasks.WorkingFrequencyPreparation;
-	            case "ConnectionEasy":
-		            return option.Tasks.ConnectionEasy;
-	            case "ConnectionHard":
-		            return option.Tasks.ConnectionHard;
-				case "EndSuccess":
+                case "ConnectionEasy":
+                    return option.Tasks.ConnectionEasy;
+                case "ConnectionHard":
+                    return option.Tasks.ConnectionHard;
+                case "EndSuccess":
                     return option.Tasks.EndSuccesseful;
                 case "EndFail":
                     return option.Tasks.EndFail;
