@@ -26,14 +26,6 @@ namespace R_173.ViewModels
             _okCommand = new SimpleCommand(Ok);
             _cancelCommand = new SimpleCommand(Cancel);
             _mainWindow = mainWindow;
-
-            //App.ServiceCollection.Resolve<KeyboardHandler>().OnKeyDown += key =>
-            //{
-            //    if (key == Key.Enter)
-            //        Ok();
-            //    else if (key == Key.Escape)
-            //        Cancel();
-            //};
         }
 
 
@@ -130,9 +122,6 @@ namespace R_173.ViewModels
             _close?.Invoke();
             if (OkText == null)
                 return;
-            //OkText = null;
-            //CancelText = null;
-            //Visible = false;
             _ok?.Invoke();
         }
 
@@ -141,9 +130,6 @@ namespace R_173.ViewModels
             _close?.Invoke();
             if (CancelText == null)
                 return;
-            //OkText = null;
-            //CancelText = null;
-            //Visible = false;
             _cancel?.Invoke();
         }
 

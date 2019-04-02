@@ -1,12 +1,11 @@
-﻿using CSharpFunctionalExtensions;
-using P2PMulticastNetwork.Network;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net;
-using System.Text;
+using CSharpFunctionalExtensions;
+using P2PMulticastNetwork.Network;
+using R_173.Interfaces;
 
-namespace R_173.Models
+namespace R_173.BL
 {
     public enum NetworkTaskState
     {
@@ -21,7 +20,7 @@ namespace R_173.Models
         InTask
     }
 
-    public class TaskTable
+    public class TaskTable : INetworkTaskScheduler
     {
         private readonly IRedistributableLocalConnectionTable _table;
 
@@ -49,6 +48,37 @@ namespace R_173.Models
         {
             //todo: remove from table.
         }
+
+	    public event EventHandler TaskCreated;
+	    public event EventHandler TaskStarted;
+
+	    public void Start()
+	    {
+			// todo: start scheduler
+			// tcp listener separate task
+			// if no connections
+			// _table.for try to connect
+			// stop if tcplistener.connected
+			// get task definition -> call TaskCreated
+			// wait for Confirm or Cancel, if disconnected, then back to listen and tell TaskDestroyed
+		
+		    throw new NotImplementedException();
+	    }
+
+	    public void Confirm()
+	    {
+			// todo: notify that task were applied
+			// Starting Task
+			// call TaskStarted(task)
+
+		    throw new NotImplementedException();
+		}
+
+		public void Stop()
+	    {
+			// todo: stop scheduler
+		    throw new NotImplementedException();
+	    }
     }
 
     public class NetworkTask
@@ -72,9 +102,22 @@ namespace R_173.Models
         public Result<IPEndPoint> Resolve(Guid id)
         {
             var device = _table.AvaliableDevices.FirstOrDefault(x => x.Id == id);
-            if (device is null)
-                return Result.Fail<IPEndPoint>("Could't find endpoint");
-            return Result.Ok(device.Endpoint);
+            return device is null 
+	            ? Result.Fail<IPEndPoint>("Could't find endpoint") 
+	            : Result.Ok(device.Endpoint);
         }
     }
+
+	public class TaskCreatedEventArgs : EventArgs
+	{
+		/// <summary>
+		/// Номер частоты
+		/// </summary>
+		public int FrequencyNumber { get; set; }
+
+		/// <summary>
+		/// Частота
+		/// </summary>
+		public int Frequency { get; set; }
+	}
 }
