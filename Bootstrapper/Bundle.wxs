@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtensions"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Bundle Name="!(loc.ProductName)" Version="1.1.0.0" Manufacturer="VkMiet" UpgradeCode="{AE6B678C-B15D-4AD8-AF7F-974497D2C3DF}">
+  <Bundle Name="!(loc.ProductName)" Version="1.2.0.0" Manufacturer="VkMiet" UpgradeCode="{AE6B678C-B15D-4AD8-AF7F-974497D2C3DF}">
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
       <bal:WixStandardBootstrapperApplication LocalizationFile="./Ui/WixBUi_ru_ru.wxl"
                                               ThemeFile="./Ui/HyperlinkTheme.xml"
@@ -25,6 +25,14 @@
        Value="Install"
        Result="exists" />
 
+    <util:RegistrySearch Id="KB2468871INSTALL"
+                         Variable="KB2468871INSTALL" 
+                         Root="HKLM"
+                         Key="Software\Microsoft\Updates\Microsoft .NET Framework 4 Extended\KB2468871"
+                         Value="Install"
+                         Result="exists"/>
+
+    <WixVariable Id="IsKB246887Detected" Value="KB2468871INSTALL"/>
     <WixVariable Id="NetFx40ClientDetected" Value="NETFRAMEWORK40FULLINSTALL"/>
 
     <PackageGroup Id="NetFx40ClientRedistFull">
@@ -47,6 +55,7 @@
         Id="NetFxUpdate"
         Vital="no"
         Permanent="yes"
+        DetectCondition="!(wix.IsKB246887Detected)"
         DisplayName="Обновление Windows. Обновление необходимо для правильной работы программы."
         SourceFile=".\Redist\NDP40-KB2468871-v2-x86.exe"
         Compressed="yes"
