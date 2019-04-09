@@ -8,7 +8,13 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="HeatComponents">
-            <Component Id="cmpE5004356FE7CC543DB30277EBA335A30" Directory="INSTALLDIR" Guid="{808317C8-27AD-46B0-947A-8DC3B5793529}">
+            <Component Id="cmpB0378F91434DFE0821F32CC00618E838" Directory="INSTALLDIR" Guid="{195964BB-6A75-428F-A0D2-5EF0023DB48E}">
+                <File Id="fil72D52B2D9017272A0567F3C4A2782AFF" KeyPath="yes" Source="$(var.SourcePath)\AustinHarris.JsonRpc.dll" />
+            </Component>
+            <Component Id="cmp880DDCB87513D563C259CAD849638B4E" Directory="INSTALLDIR" Guid="{9AB01826-5B2E-44F3-8460-9D115DC444C8}">
+                <File Id="fil649F5D8985D1326CDD6040DD1ABF1159" KeyPath="yes" Source="$(var.SourcePath)\AustinHarris.JsonRpc.pdb" />
+            </Component>
+            <Component Id="cmpE5004356FE7CC543DB30277EBA335A30" Directory="INSTALLDIR" Guid="{DAC05FAC-6BAC-4FDF-BEC9-D59104638332}">
                 <Class Id="{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}" Context="InprocServer32" Description="CommonServiceLocator.ActivationException" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="CommonServiceLocator.ActivationException" Description="CommonServiceLocator.ActivationException" />
                 </Class>
@@ -23,28 +29,28 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{8E8485AD-B4A9-3A7D-AD82-74BCD934B283}\InprocServer32" Name="CodeBase" Value="file:///[#fil5159DCE9D857F88BB103745E425061C9]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmpACE8BB4791E97E4648B221C51BB01214" Directory="INSTALLDIR" Guid="{EE79D19F-1DBA-4514-AF26-D1BDCE218974}">
+            <Component Id="cmpACE8BB4791E97E4648B221C51BB01214" Directory="INSTALLDIR" Guid="{E3C6F428-2C75-41B5-8B88-5680D010E8E0}">
                 <File Id="fil20E4F57B869C1ABB0D1CB2E53378F92F" KeyPath="yes" Source="$(var.SourcePath)\CommonServiceLocator.pdb" />
             </Component>
-            <Component Id="cmp669D7BFE3F77F8D3E757F78FE36D1217" Directory="INSTALLDIR" Guid="{B4F3B620-D3ED-4173-98FD-189B555FB1E0}">
+            <Component Id="cmp669D7BFE3F77F8D3E757F78FE36D1217" Directory="INSTALLDIR" Guid="{3481FDAE-8F6A-4124-97ED-8448FE6C78B9}">
                 <File Id="fil01FD9A438453A336BFC7E1C098C52A86" KeyPath="yes" Source="$(var.SourcePath)\ControlzEx.dll" />
             </Component>
-            <Component Id="cmpC5F969B3A325E1E71512166A7084C7A9" Directory="INSTALLDIR" Guid="{864E6D3F-DEC9-4B7F-8234-02D881A7E245}">
+            <Component Id="cmpC5F969B3A325E1E71512166A7084C7A9" Directory="INSTALLDIR" Guid="{E35EE391-AF09-47BF-87E4-A4D08269CF78}">
                 <File Id="filFD6828E2362630921E75BDC73BAA802E" KeyPath="yes" Source="$(var.SourcePath)\ControlzEx.pdb" />
             </Component>
-            <Component Id="cmp5AA67C54786010695636AC936B6DAB6B" Directory="INSTALLDIR" Guid="{5D510C36-446A-4610-87D5-A20F965BB7F1}">
+            <Component Id="cmp5AA67C54786010695636AC936B6DAB6B" Directory="INSTALLDIR" Guid="{B0880C1E-8B26-4BE8-9727-92C3FD5E8D36}">
                 <File Id="fil00D5841010DB1A067ED42F5490017C77" KeyPath="yes" Source="$(var.SourcePath)\CSharpFunctionalExtensions.dll" />
             </Component>
-            <Component Id="cmp2AC41B9A3E9E58C9FAC717C515DD6534" Directory="INSTALLDIR" Guid="{D8C69D40-7AB3-4B03-B2E4-EA5A17678C78}">
+            <Component Id="cmp2AC41B9A3E9E58C9FAC717C515DD6534" Directory="INSTALLDIR" Guid="{32D7950A-11EA-4F38-9C95-658BB10CF6DE}">
                 <File Id="filC48A97D03FAF26C6CB0B00A73EBC747A" KeyPath="yes" Source="$(var.SourcePath)\MahApps.Metro.dll" />
             </Component>
-            <Component Id="cmpBBDC2313992859C5873E1F15DC5731BF" Directory="INSTALLDIR" Guid="{A7621FAB-477D-44E1-AEB7-55822EEB56F3}">
+            <Component Id="cmpBBDC2313992859C5873E1F15DC5731BF" Directory="INSTALLDIR" Guid="{4EEB47CC-F2D8-4D81-B30F-78FAA29B9527}">
                 <File Id="fil1F854C70B64EB7C08E9D4CF3603D8981" KeyPath="yes" Source="$(var.SourcePath)\MahApps.Metro.pdb" />
             </Component>
-            <Component Id="cmp0D35E873877D8F733E33BE324EB6E7DD" Directory="INSTALLDIR" Guid="{DA325EBA-62BE-4F03-A3F9-5F93A78A27C1}">
+            <Component Id="cmp0D35E873877D8F733E33BE324EB6E7DD" Directory="INSTALLDIR" Guid="{D8ABD715-296B-4026-A6EB-82303CC369A3}">
                 <File Id="filEA89C8C631F78E7D57A8BA32C9D3716B" KeyPath="yes" Source="$(var.SourcePath)\MahApps.Metro.xml" />
             </Component>
-            <Component Id="cmp4370A5F473BC7C578FA8C4A674514135" Directory="INSTALLDIR" Guid="{79B70DAF-47AA-4AFF-B026-E4894EB7E395}">
+            <Component Id="cmp4370A5F473BC7C578FA8C4A674514135" Directory="INSTALLDIR" Guid="{D86F1332-33B8-412B-85D0-1F2AB98CFA60}">
                 <File Id="fil44FD26BE5AA3BE512E4A18D3072087AE" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.dll" />
                 <RegistryValue Root="HKCR" Key="Record\{2FAF1D94-0A36-3214-B904-3F98E93A1347}\1.0.12.0" Name="Class" Value="Microsoft.Runtime.CompilerServices.YieldAwaitable" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{2FAF1D94-0A36-3214-B904-3F98E93A1347}\1.0.12.0" Name="Assembly" Value="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
@@ -67,76 +73,76 @@
                 <RegistryValue Root="HKCR" Key="Record\{F973E172-9860-3CC1-B846-723D2F159D0B}\1.0.12.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{F973E172-9860-3CC1-B846-723D2F159D0B}\1.0.12.0" Name="CodeBase" Value="file:///[#fil44FD26BE5AA3BE512E4A18D3072087AE]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmpBF316BAA97EE8CE76D0E2E7D86CB70F5" Directory="INSTALLDIR" Guid="{9F2430BC-2C2E-4EF3-9827-4F0360191B64}">
+            <Component Id="cmpBF316BAA97EE8CE76D0E2E7D86CB70F5" Directory="INSTALLDIR" Guid="{E80BFEE7-04D5-486E-890E-075D7DFE964F}">
                 <File Id="fil3F3FAF9A5D44A074B2AB8FC3101C1A92" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
             </Component>
-            <Component Id="cmpAFEF0EA8DECEAAB8BF79359C00DEA6ED" Directory="INSTALLDIR" Guid="{F296217B-E2AB-46C5-B9B8-B00275D3A091}">
+            <Component Id="cmpAFEF0EA8DECEAAB8BF79359C00DEA6ED" Directory="INSTALLDIR" Guid="{9C99C6C6-AB7B-4605-8847-54FA15D6446D}">
                 <File Id="filACFE12D57A32B2C72BA8E7AE9A49D4E4" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.Desktop.xml" />
             </Component>
-            <Component Id="cmp82951EB65984B52CAC92DE74F90EEE71" Directory="INSTALLDIR" Guid="{77F83A33-C29E-4223-B899-CE487BC27BD9}">
+            <Component Id="cmp82951EB65984B52CAC92DE74F90EEE71" Directory="INSTALLDIR" Guid="{D2B183CB-897B-4079-984D-6DF8CF547B9F}">
                 <File Id="fil4A3914E8BA2E4BD8BB82F62B0967AAFB" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.dll" />
             </Component>
-            <Component Id="cmp94D5FFE5FF6099213A7AC02683C46665" Directory="INSTALLDIR" Guid="{659610CD-9612-481F-B7C2-6C38CC1CD0F6}">
+            <Component Id="cmp94D5FFE5FF6099213A7AC02683C46665" Directory="INSTALLDIR" Guid="{A25505F8-871B-4624-A483-5BEF06A8CDF7}">
                 <File Id="filF2DD242574BAB9F39D668104468E2F2E" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.Extensions.xml" />
             </Component>
-            <Component Id="cmp656AC62D9ECB4E2ED08B76344839B68D" Directory="INSTALLDIR" Guid="{9E403AAD-2FBC-4C86-81C8-F8E645ADA5FE}">
+            <Component Id="cmp656AC62D9ECB4E2ED08B76344839B68D" Directory="INSTALLDIR" Guid="{72678DD2-7612-4DD6-B4BA-1F0A8F2D2BB4}">
                 <File Id="fil83BEB135436C874F9901495AACB76B94" KeyPath="yes" Source="$(var.SourcePath)\Microsoft.Threading.Tasks.xml" />
             </Component>
-            <Component Id="cmpCBAD1189E4A95476F45730EA6D8A3E03" Directory="INSTALLDIR" Guid="{E2056EAA-CA88-44A7-BA94-73507F63A2B5}">
+            <Component Id="cmpCBAD1189E4A95476F45730EA6D8A3E03" Directory="INSTALLDIR" Guid="{351D62D0-4226-443F-BC9F-E6E63E7E9C99}">
                 <File Id="filB5CE7890FC801E39F6B9B8C9FF5E4D0D" KeyPath="yes" Source="$(var.SourcePath)\NAudio.dll" />
             </Component>
-            <Component Id="cmp4BF2CBA69AEA31291ECB2C85E2077879" Directory="INSTALLDIR" Guid="{A8568B60-3DAD-4ECE-A5E2-CADF8AF473D5}">
+            <Component Id="cmp4BF2CBA69AEA31291ECB2C85E2077879" Directory="INSTALLDIR" Guid="{6BD1F865-DF1D-4A5C-B091-12010AE62199}">
                 <File Id="fil30BFD7D8D4EECD19E2477BECA85CC1B4" KeyPath="yes" Source="$(var.SourcePath)\NAudio.xml" />
             </Component>
-            <Component Id="cmp1874AB219070404EED322213C6A1A49E" Directory="INSTALLDIR" Guid="{6729D910-341C-4714-B1E8-62EDA2CE1B3E}">
+            <Component Id="cmp1874AB219070404EED322213C6A1A49E" Directory="INSTALLDIR" Guid="{DCED4BC9-36B4-46A7-B277-49355A460904}">
                 <File Id="fil05FF769999D602AD4FA6A489C44ED290" KeyPath="yes" Source="$(var.SourcePath)\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmp8B12861281018C7705A9A4EF5DE7844D" Directory="INSTALLDIR" Guid="{A616FEE4-8C17-4087-95F0-D126FB8F7B20}">
+            <Component Id="cmp8B12861281018C7705A9A4EF5DE7844D" Directory="INSTALLDIR" Guid="{B6714E4F-1A01-48F6-ABCD-E53060BAFBBE}">
                 <File Id="fil4CEA1250BEA9A8B3AD634680F620CBEA" KeyPath="yes" Source="$(var.SourcePath)\Newtonsoft.Json.pdb" />
             </Component>
-            <Component Id="cmp03F5503D497D187BDDF7D932D5BD55E9" Directory="INSTALLDIR" Guid="{700743FA-5682-4790-B801-7CA19A842C56}">
+            <Component Id="cmp03F5503D497D187BDDF7D932D5BD55E9" Directory="INSTALLDIR" Guid="{96121F59-1272-4C7F-81CD-0D6151AD6354}">
                 <File Id="fil094941A1CF7BE1998B69C59AF0F5D834" KeyPath="yes" Source="$(var.SourcePath)\Newtonsoft.Json.xml" />
             </Component>
-            <Component Id="cmpC79A48D4ACA7A441B3163328F04340E8" Directory="INSTALLDIR" Guid="{F58F9827-9EF0-4042-BC34-CC5F901BC694}">
+            <Component Id="cmpC79A48D4ACA7A441B3163328F04340E8" Directory="INSTALLDIR" Guid="{8F50BA02-7DA2-444D-9993-F19C5CBE51B2}">
                 <File Id="fil6DB5736A2189D570566047EE44A78AE0" KeyPath="yes" Source="$(var.SourcePath)\P2PMulticastNetwork.dll" />
             </Component>
-            <Component Id="cmp04ACE5774772C16F8471F385F0BC833D" Directory="INSTALLDIR" Guid="{D2AC4515-4C7B-4D01-B0A8-3E035A547402}">
+            <Component Id="cmp04ACE5774772C16F8471F385F0BC833D" Directory="INSTALLDIR" Guid="{3EC269DA-295A-4851-B687-8C496B8F2C9B}">
                 <File Id="fil127A01F03EAC2B0D2B706616EC6E714F" KeyPath="yes" Source="$(var.SourcePath)\P2PMulticastNetwork.dll.config" />
             </Component>
-            <Component Id="cmp6AA42DEDDF65B9C6FE5714199C4774C7" Directory="INSTALLDIR" Guid="{5038CA8C-AC45-47C0-9A6E-7E20AFE4D4B1}">
+            <Component Id="cmp6AA42DEDDF65B9C6FE5714199C4774C7" Directory="INSTALLDIR" Guid="{38BABCF4-EBD4-40E4-9333-AB0E61CEA5C6}">
                 <File Id="filF0DEAAE97324D41169763C99929298A3" KeyPath="yes" Source="$(var.SourcePath)\P2PMulticastNetwork.pdb" />
             </Component>
-            <Component Id="cmp13FBE0A9EEC3BA68F9FCCE5C889F9F81" Directory="INSTALLDIR" Guid="{B0D8FEF8-FF98-4C2F-A3AB-DAEED765F457}">
+            <Component Id="cmp13FBE0A9EEC3BA68F9FCCE5C889F9F81" Directory="INSTALLDIR" Guid="{E243173A-0BDB-4887-B5BD-6932478E4DD3}">
                 <File Id="filDF509483E3986C21819DB8442D917FA9" KeyPath="yes" Source="$(var.SourcePath)\R-173.exe" />
             </Component>
-            <Component Id="cmp05DCBC62160D5A4025CF868387CE50D3" Directory="INSTALLDIR" Guid="{D7779EB9-651D-4D2F-8A18-F1F1CB3FA3D8}">
+            <Component Id="cmp05DCBC62160D5A4025CF868387CE50D3" Directory="INSTALLDIR" Guid="{E420DDBA-A1D8-40D7-A333-2C111F8D6CBB}">
                 <File Id="fil11652D5D4D4778B138EE03509C452B9B" KeyPath="yes" Source="$(var.SourcePath)\R-173.exe.config" />
             </Component>
-            <Component Id="cmp065A25BE2C69B070F5A19F6244F59708" Directory="INSTALLDIR" Guid="{A373CFDA-1114-4F1E-A302-5A0606BC9298}">
+            <Component Id="cmp065A25BE2C69B070F5A19F6244F59708" Directory="INSTALLDIR" Guid="{C1699AFB-0884-4212-9C8A-A2FD0CAFC0D5}">
                 <File Id="filE7E27692B6A3D73CDB35250C94164B5C" KeyPath="yes" Source="$(var.SourcePath)\R-173.pdb" />
             </Component>
-            <Component Id="cmp1AB2F694FBE065FEC98E27EC233540D7" Directory="INSTALLDIR" Guid="{E1BC3F7D-1E77-4749-A82C-D542A3ADA9F2}">
+            <Component Id="cmp1AB2F694FBE065FEC98E27EC233540D7" Directory="INSTALLDIR" Guid="{32410FA6-D714-4741-B836-B2CFE7F9281F}">
                 <File Id="filF97298386D9CA5BBFEF3BA1266204948" KeyPath="yes" Source="$(var.SourcePath)\System.IO.dll" />
             </Component>
-            <Component Id="cmpC26FE09E2418625639BAC28CBECA7B73" Directory="INSTALLDIR" Guid="{A67D6DCB-6B4F-4BBD-82BD-78F1B6E55D20}">
+            <Component Id="cmpC26FE09E2418625639BAC28CBECA7B73" Directory="INSTALLDIR" Guid="{4006326D-33CD-4E86-B9C5-0B612672A32A}">
                 <File Id="filB4DF804CDD3C586C17A6F8638B93269C" KeyPath="yes" Source="$(var.SourcePath)\System.IO.xml" />
             </Component>
-            <Component Id="cmpF68CE304EDD0D14A7BFF18236F51BC48" Directory="INSTALLDIR" Guid="{2E3B7AB1-0314-4527-A720-7C446F1E8C3E}">
+            <Component Id="cmpF68CE304EDD0D14A7BFF18236F51BC48" Directory="INSTALLDIR" Guid="{A06B6569-7DCB-4B1E-9A9C-6CAC28F098BD}">
                 <File Id="fil1DF46A3A328CA5A1B3C9E619D2E6B80A" KeyPath="yes" Source="$(var.SourcePath)\System.Runtime.dll" />
             </Component>
-            <Component Id="cmp879AE94D390DB9518768A208B937A77E" Directory="INSTALLDIR" Guid="{70156A85-9DB3-48FB-B89A-358F5BC256DA}">
+            <Component Id="cmp879AE94D390DB9518768A208B937A77E" Directory="INSTALLDIR" Guid="{E197413C-AB89-4B17-82D4-1784B8C713DD}">
                 <File Id="fil39E573962B52B7BC2533E12901AB9F42" KeyPath="yes" Source="$(var.SourcePath)\System.Runtime.xml" />
             </Component>
-            <Component Id="cmp3B63C4A8BD59792FD308ADD749073AE3" Directory="INSTALLDIR" Guid="{D57AC933-248F-446F-83BD-58F17CDD3336}">
+            <Component Id="cmp3B63C4A8BD59792FD308ADD749073AE3" Directory="INSTALLDIR" Guid="{6E23455D-12EC-4FBD-A375-81325C0C9388}">
                 <File Id="filAFB2C8AB9328AAA60E4F1F016E024155" KeyPath="yes" Source="$(var.SourcePath)\System.Threading.Tasks.dll" />
             </Component>
-            <Component Id="cmp7EBCC4CE000A80609A51830EF9AA7AC7" Directory="INSTALLDIR" Guid="{B22A4993-10DC-42A8-9F3A-410FDBEE5228}">
+            <Component Id="cmp7EBCC4CE000A80609A51830EF9AA7AC7" Directory="INSTALLDIR" Guid="{AB624B23-F9C1-44FF-94FF-F00E500E4B9D}">
                 <File Id="fil9F9F5D812A7B2116707473940D2C5E58" KeyPath="yes" Source="$(var.SourcePath)\System.Threading.Tasks.xml" />
             </Component>
-            <Component Id="cmp4FE4E61EC9791201921745B40643CBB8" Directory="INSTALLDIR" Guid="{82C0A6A4-8B31-46C9-8A8E-EB865A0ADCBF}">
+            <Component Id="cmp4FE4E61EC9791201921745B40643CBB8" Directory="INSTALLDIR" Guid="{B0351677-266E-4B16-B919-31B76765EA35}">
                 <File Id="fil6F11DE09547B0AE8405683CDB88F7FC4" KeyPath="yes" Source="$(var.SourcePath)\System.Windows.Interactivity.dll" />
             </Component>
-            <Component Id="cmp72FCE36E5ECB5C2AA4401520340A84DA" Directory="INSTALLDIR" Guid="{BBF9CE0A-3AEB-4B89-8B60-667F77F24A57}">
+            <Component Id="cmp72FCE36E5ECB5C2AA4401520340A84DA" Directory="INSTALLDIR" Guid="{74863EFB-EC2A-457E-8F54-2CDA6E6E6462}">
                 <Class Id="{0C911F2A-2BD9-3B85-92D9-3C98D950ABC4}" Context="InprocServer32" Description="Unity.Lifetime.PerResolveLifetimeManager" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Unity.Lifetime.PerResolveLifetimeManager" Description="Unity.Lifetime.PerResolveLifetimeManager" />
                 </Class>
@@ -435,10 +441,10 @@
                 <RegistryValue Root="HKCR" Key="Record\{957D45C4-599F-3442-B29D-594000BAC5C2}\3.3.1.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{957D45C4-599F-3442-B29D-594000BAC5C2}\3.3.1.0" Name="CodeBase" Value="file:///[#fil633E45EDF94A090D34C6EB14793DEB00]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmpD524E359AC22836C93AB018D17C3F4C5" Directory="INSTALLDIR" Guid="{4E4C1FCF-EC44-4E0B-A902-26EF84163265}">
+            <Component Id="cmpD524E359AC22836C93AB018D17C3F4C5" Directory="INSTALLDIR" Guid="{B2D85DDA-6E7B-41AD-B5F5-9FE7A4F723C7}">
                 <File Id="fil54FC33B2E4703B580CD9507B6BA9D844" KeyPath="yes" Source="$(var.SourcePath)\Unity.Abstractions.pdb" />
             </Component>
-            <Component Id="cmp487594CE5755237A84EBB5CAB64C7DBE" Directory="INSTALLDIR" Guid="{523A62B6-E877-4365-874E-8199277F672E}">
+            <Component Id="cmp487594CE5755237A84EBB5CAB64C7DBE" Directory="INSTALLDIR" Guid="{B361FA97-2F1D-49C3-AC1E-620B7F7AECFE}">
                 <Class Id="{0BD8234F-65AF-3AAE-91C5-72128AB3FADB}" Context="InprocServer32" Description="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" Description="Microsoft.Practices.Unity.Configuration.NamespaceElementCollection" />
                 </Class>
@@ -813,10 +819,10 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{FB90C64F-4EEB-32C4-8293-1CC081B080A6}\InprocServer32" Name="CodeBase" Value="file:///[#fil4FA44E56A38498E859B27907FCF5318F]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp0D92CC56259520AD8A05068D7D987097" Directory="INSTALLDIR" Guid="{55E1E465-7F52-46A3-9755-8FCBE94B7307}">
+            <Component Id="cmp0D92CC56259520AD8A05068D7D987097" Directory="INSTALLDIR" Guid="{66FCEE4C-4112-4C9D-9A74-6F69AEFBF3C1}">
                 <File Id="filF4FB347D8C4295ED99EBEE0419B97675" KeyPath="yes" Source="$(var.SourcePath)\Unity.Configuration.pdb" />
             </Component>
-            <Component Id="cmp3656D61E22ED08EE342302F769800354" Directory="INSTALLDIR" Guid="{12956C69-B586-493A-BFF1-6B4AC282F073}">
+            <Component Id="cmp3656D61E22ED08EE342302F769800354" Directory="INSTALLDIR" Guid="{0EF12DA8-C084-415F-93D3-B0517D5BA3BD}">
                 <Class Id="{0D42AA65-40DD-3447-9ACF-F4F0030691AB}" Context="InprocServer32" Description="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" Description="Unity.ObjectBuilder.Policies.DefaultUnityPropertySelectorPolicy" />
                 </Class>
@@ -991,67 +997,67 @@
                 <RegistryValue Root="HKCR" Key="Record\{5FA47AC3-1724-38EB-844D-A0B953F4154E}\5.8.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{5FA47AC3-1724-38EB-844D-A0B953F4154E}\5.8.10.0" Name="CodeBase" Value="file:///[#fil9BE66553809B1CD4576BCF3D728A3477]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp9C1655B0BB45050F30DE5E4BE8828E1E" Directory="INSTALLDIR" Guid="{193AD3D9-23CB-4059-89C1-258303AAA674}">
+            <Component Id="cmp9C1655B0BB45050F30DE5E4BE8828E1E" Directory="INSTALLDIR" Guid="{0749AA59-7C74-40C2-B5C5-CAF89A72BE0A}">
                 <File Id="fil275EB7067A589CBF7C96A4180CD3B51F" KeyPath="yes" Source="$(var.SourcePath)\Unity.Container.pdb" />
             </Component>
-            <Component Id="cmp9D023EB3EB549CB403D84A67AC132EF6" Directory="INSTALLDIR" Guid="{E0513F6A-61A0-4E5F-8B12-D38F1EF14BBA}">
+            <Component Id="cmp9D023EB3EB549CB403D84A67AC132EF6" Directory="INSTALLDIR" Guid="{0A61488D-2E12-46A9-8936-ADA6B139F558}">
                 <File Id="fil899CD2E8D6DB2462C0E2203E559B9C17" KeyPath="yes" Source="$(var.SourcePath)\Unity.ServiceLocation.dll" />
             </Component>
-            <Component Id="cmp2AABC74B3161E5D2B2D55E61C517536C" Directory="INSTALLDIR" Guid="{08A754CD-5946-4249-8B2A-A54AAC7B3D67}">
+            <Component Id="cmp2AABC74B3161E5D2B2D55E61C517536C" Directory="INSTALLDIR" Guid="{7B2827EF-CD5F-4826-9703-93D2549C0538}">
                 <File Id="filF9A2490A241CE7248D1BCD8E0668DD05" KeyPath="yes" Source="$(var.SourcePath)\Unity.ServiceLocation.pdb" />
             </Component>
-            <Component Id="cmpD45C7DE7CE65D3DF660D0AE565833541" Directory="INSTALLDIR" Guid="{BB6FCC31-7E40-4475-90C0-43D8778349EB}">
+            <Component Id="cmpD45C7DE7CE65D3DF660D0AE565833541" Directory="INSTALLDIR" Guid="{679C64DD-16C4-4B6E-AE76-9D071FB54651}">
                 <File Id="fil6221BB4D48C90203A9380DE46F8BEBE5" KeyPath="yes" Source="$(var.SourcePath)\WpfAnimatedGif.dll" />
             </Component>
-            <Component Id="cmp6768C68760227A7A2E22AA50FCDFEA78" Directory="INSTALLDIR" Guid="{75D021AE-0E14-4180-8D97-2574C1C51A31}">
+            <Component Id="cmp6768C68760227A7A2E22AA50FCDFEA78" Directory="INSTALLDIR" Guid="{717A7302-58E8-47F7-A14B-BC98DA6B1029}">
                 <File Id="fil4D7C86A967B9E53C40527DAF4B1E8DE4" KeyPath="yes" Source="$(var.SourcePath)\WpfAnimatedGif.xml" />
             </Component>
-            <Component Id="cmpFFCDBFB3E73F0498C65E308C0C9AA99C" Directory="dir5FD5B93CE6DC308CC0CAC3042BE2A51D" Guid="{4F13A5DA-ECC8-4E81-95C8-E668DBCEE9B2}">
+            <Component Id="cmpFFCDBFB3E73F0498C65E308C0C9AA99C" Directory="dir5FD5B93CE6DC308CC0CAC3042BE2A51D" Guid="{FACF26D3-DE47-4CAE-B460-8BA9BEBBCC32}">
                 <File Id="filAFA6A9189A9A4242C48526560810456D" KeyPath="yes" Source="$(var.SourcePath)\Files\DS Crystal.ttf" />
             </Component>
-            <Component Id="cmp694868CF950FEBE3FF5D055266CB8F82" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{60F2E447-DF85-4742-9447-8554AE188446}">
+            <Component Id="cmp694868CF950FEBE3FF5D055266CB8F82" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{125A8306-8645-4522-90A7-E903961A2EE9}">
                 <File Id="fil575FF873FB13AF8665D102A7D7CD788A" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning1_1.gif" />
             </Component>
-            <Component Id="cmp9B2ABD6AF071CD875B681A426B4B4B41" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{3EF735E0-BDD2-4D17-A1E6-35F43AEA88B7}">
+            <Component Id="cmp9B2ABD6AF071CD875B681A426B4B4B41" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{6A548A2D-C8BF-421D-8066-1D169C114C00}">
                 <File Id="fil1F325FDD7D95139062C029E257373737" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning1_2.gif" />
             </Component>
-            <Component Id="cmp1686CC1FE10BD61AEC873585FDBBA1FA" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{290A4828-7040-4046-910F-DB7620B446CB}">
+            <Component Id="cmp1686CC1FE10BD61AEC873585FDBBA1FA" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{046A8CB0-0389-4351-BCFA-E5897B75997B}">
                 <File Id="fil729D9090EB4F3BF9BADA1692951C1EF4" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning1_4.gif" />
             </Component>
-            <Component Id="cmp6AC5658261027DC99A37FF93BA668D0E" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{1FD7AD78-8344-4B3C-A1EC-F6653612CE77}">
+            <Component Id="cmp6AC5658261027DC99A37FF93BA668D0E" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{64F944D6-5AF0-4C4B-9C76-3CC0170929E2}">
                 <File Id="filEE66D08D32C8EC4E9FF1D59ECE73838A" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_1.gif" />
             </Component>
-            <Component Id="cmpEBA74A955223CE32EBEE4D00BDE7AB0B" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{EA48A72A-E37B-4AFE-9C55-2ED6F5C78227}">
+            <Component Id="cmpEBA74A955223CE32EBEE4D00BDE7AB0B" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{F3F1F8B3-D3B9-4471-954C-26E8CDD3B61C}">
                 <File Id="fil33016C980AC2D94FE770AFBCA93CFED4" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_2.gif" />
             </Component>
-            <Component Id="cmpD7699B61E9DD28078CC0CD365E711C4C" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{198A18EA-2654-41C4-8A7B-6CBFA62A50DF}">
+            <Component Id="cmpD7699B61E9DD28078CC0CD365E711C4C" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{7C757508-7EA8-4ACB-9E55-CD01107EAA48}">
                 <File Id="fil4D5566AF67388D36F7DC0350D4E112CA" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_3.gif" />
             </Component>
-            <Component Id="cmpD1B09AC6B64AE52B7F6E10D90DF80CDF" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{16945704-98AA-4D64-82EA-8413359F2924}">
+            <Component Id="cmpD1B09AC6B64AE52B7F6E10D90DF80CDF" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{4C6CA476-76FB-4755-BFD7-C489893CCC18}">
                 <File Id="filCFDC9391BCCD0A7ACC663610140F4A19" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning2_4.gif" />
             </Component>
-            <Component Id="cmp022F617D94CE483688C69DB749B4F969" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{45A295AD-67EE-4B24-AD60-AA0BE278D707}">
+            <Component Id="cmp022F617D94CE483688C69DB749B4F969" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{BFAF6134-2CC1-483E-80E1-A05BD578CBD2}">
                 <File Id="fil76533BD91E2DDB41BBDA38B17B55A84D" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_1.gif" />
             </Component>
-            <Component Id="cmpC5D9FD2CAB41AC27A9C7DD96E2535350" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{EA9811A3-6E7B-4069-91A5-06803F5FCD6B}">
+            <Component Id="cmpC5D9FD2CAB41AC27A9C7DD96E2535350" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{88C6F191-DA20-490B-8182-1CB92CA97A31}">
                 <File Id="filA454326BB3C9230585B47C0EBB17BEBF" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_2.gif" />
             </Component>
-            <Component Id="cmpC0DABA99FB69B720642E41EEB15E1490" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{B58914CF-F3DB-4993-B883-D85A9D92FD33}">
+            <Component Id="cmpC0DABA99FB69B720642E41EEB15E1490" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{3D48B852-2E97-428F-B016-03A3F0EEC4F3}">
                 <File Id="fil50582B598B635A073C3FE9B438338F76" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_3.gif" />
             </Component>
-            <Component Id="cmp8FC006868B711B89D0782F83E31AE468" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{569D0C0D-53B6-45B4-81C4-C9C5880CBA77}">
+            <Component Id="cmp8FC006868B711B89D0782F83E31AE468" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{B01A8CCD-DF38-4928-8D49-296F68FCDF1A}">
                 <File Id="fil91EC5A0857C8FD84367B19223B071729" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_4.gif" />
             </Component>
-            <Component Id="cmp547EF59A413549CD2657E0394704073D" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{859A549E-FA58-4AB4-9969-17DF694B5FE7}">
+            <Component Id="cmp547EF59A413549CD2657E0394704073D" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{6CE7703D-1777-49B4-887D-F42BB0EF51B9}">
                 <File Id="fil830F4D0DD661185CFC4AB9A3F859EA26" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\learning3_5.gif" />
             </Component>
-            <Component Id="cmp72663D57E6669B208C4DD89EBA30A9B1" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{143F53A4-3778-4B70-8056-D1549FDD21E3}">
+            <Component Id="cmp72663D57E6669B208C4DD89EBA30A9B1" Directory="dir8519E4F12EC2F1976CF7934ACC89EA95" Guid="{D20C1E39-7E6B-450D-A859-F28ACE56BD59}">
                 <File Id="fil0D5B6FA5EA18F93693E4CD1E4D8418AE" KeyPath="yes" Source="$(var.SourcePath)\Files\gif\leatning1_3.gif" />
             </Component>
-            <Component Id="cmp01831F21FCFD4322C9F33BD77D44D02D" Directory="dir61B122782F2749F187324C134F6498C1" Guid="{C914AECE-C704-4942-82C9-75F45056F6F9}">
+            <Component Id="cmp01831F21FCFD4322C9F33BD77D44D02D" Directory="dir61B122782F2749F187324C134F6498C1" Guid="{55B93A62-145B-40F7-902A-D479B2198DB6}">
                 <File Id="filC51CAEB903F8C34A474441D36664B06C" KeyPath="yes" Source="$(var.SourcePath)\Resources\RadioStationText.json" />
             </Component>
-            <Component Id="cmpB1E79DA3BB5F937DB909768BD01EC4F6" Directory="dir61B122782F2749F187324C134F6498C1" Guid="{24ACD4C1-E44B-484A-8A99-8C3AD2713985}">
+            <Component Id="cmpB1E79DA3BB5F937DB909768BD01EC4F6" Directory="dir61B122782F2749F187324C134F6498C1" Guid="{11ABA588-C561-4D11-AB0B-2F69FDAE2B12}">
                 <File Id="fil85AC4C122627272F8C51FA39EDE5C384" KeyPath="yes" Source="$(var.SourcePath)\Resources\Р173.xps" />
             </Component>
         </ComponentGroup>

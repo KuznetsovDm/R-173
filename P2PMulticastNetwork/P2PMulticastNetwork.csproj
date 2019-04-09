@@ -91,8 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\BinaryCovertorExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Interfaces\IAudioReaderAndSender.cs" />
     <Compile Include="Interfaces\IAudioReceiverAndPlayer.cs" />
+    <Compile Include="Interfaces\INetworkService.cs" />
     <Compile Include="Model\DataEventArgs.cs" />
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Interfaces\IDataAsByteConverter.cs" />
