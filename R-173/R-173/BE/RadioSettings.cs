@@ -1,9 +1,6 @@
 ﻿using R_173.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace R_173.BE
 {
@@ -14,7 +11,15 @@ namespace R_173.BE
 
         public RadioSettings()
         {
-            LocalIp = IpHelper.GetLocalIpAddress();
+	        try
+	        {
+		        LocalIp = IpHelper.GetLocalIpAddress();
+			}
+			catch (Exception)
+	        {
+		        LocalIp = IPAddress.Loopback;
+	        }
+
             NetworkToken = Guid.NewGuid();
         }
     }

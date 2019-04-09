@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace R_173.Interfaces
 {
-    interface IMessageBox
+	public interface IMessageBox
     {
         void InsertBody(MessageBoxParameters parameters, UIElement element);
         void ShowDialog(MessageBoxParameters parameters);

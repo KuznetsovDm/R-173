@@ -34,7 +34,7 @@ namespace R_173.Extensions
 			services.RegisterInstance<IDataTransmitter>(senderConnection);
 			IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
 			services.RegisterInstance(miner, new SingletonLifetimeManager());
-			services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
+			services.RegisterInstance<IDataAsByteConverter<DataModel>>(new Converter<DataModel>());
 			services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
 			return services;
 		}

@@ -41,24 +41,24 @@ namespace R_173.ViewModels
 				{ TaskTypes.PreparationToWork, new TaskViewModel(option.Tasks.PreparationToWork.Title, () => StartTask(TaskTypes.PreparationToWork))},
 				{ TaskTypes.PerformanceTest, new TaskViewModel(option.Tasks.HealthCheck.Title, () => StartTask(TaskTypes.PerformanceTest))},
 				{ TaskTypes.FrequencyTask, new TaskViewModel(option.Tasks.WorkingFrequencyPreparation.Title, () => StartTask(TaskTypes.FrequencyTask))},
-				{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, StartTaskWithNetwork)},
-				{ TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, StartTaskWithNetwork)},
+				//{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, StartTaskWithNetwork)},
+				//{ TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, StartTaskWithNetwork)},
 			};
 			_tasks = new[]
 			{
 				_taskViewModels[TaskTypes.PreparationToWork],
 				_taskViewModels[TaskTypes.PerformanceTest],
 				_taskViewModels[TaskTypes.FrequencyTask],
-				_taskViewModels[TaskTypes.ConnectionEasy],
-				_taskViewModels[TaskTypes.ConnectionHard],
+				//_taskViewModels[TaskTypes.ConnectionEasy],
+				//_taskViewModels[TaskTypes.ConnectionHard],
 			};
 			_stopTaskCommand = new SimpleCommand(StopTask);
 			RadioViewModel = new RadioViewModel();
 			_tasksBl = new TasksBl(RadioViewModel.Model);
 
-			_table = App.ServiceCollection.Resolve<IRedistributableLocalConnectionTable>();
-			_table.OnConnected += Table_OnConnected;
-			_table.OnDisconnected += Table_OnDisconnected;
+			//_table = App.ServiceCollection.Resolve<IRedistributableLocalConnectionTable>();
+			//_table.OnConnected += Table_OnConnected;
+			//_table.OnDisconnected += Table_OnDisconnected;
 		}
 
 		private void Table_OnDisconnected(object sender, ConnectionArgs e)
@@ -91,7 +91,7 @@ namespace R_173.ViewModels
 			}
 		}
 
-		public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0);
+		public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0) + 2;
 
 		private List<NotificationData> _connections = new List<NotificationData>();
 		public string Connections => string.Join(Environment.NewLine,
@@ -206,6 +206,13 @@ namespace R_173.ViewModels
 				TaskScheduler.FromCurrentSynchronizationContext());
 		}
 
+		private static void ShowErrorText(Message message)
+		{
+			var messageBoxParameters = GetMessageBoxParameters("EndFail");
+			messageBoxParameters.Message = "Ошибки:\r\n" + message;
+			ShowDialog(messageBoxParameters);
+		}
+
 		private static void ShowErrorDialog(Message message)
 		{
 			var messageBoxParameters = GetMessageBoxParameters("EndFail");
@@ -251,7 +258,8 @@ namespace R_173.ViewModels
 				}
 				else
 				{
-					ShowErrorDialog(message);
+					//ShowErrorDialog(message);
+					ShowErrorText(message);
 				}
 			}
 			OnPropertyChanged(nameof(Assessment));
