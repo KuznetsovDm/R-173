@@ -14,7 +14,33 @@ namespace P2PMulticastNetwork.Model
 
         public SendableRadioModel RadioModel { get; set; }
     }
-    
+
+	public class Converter<T> : IDataAsByteConverter<T>
+	{
+		private readonly BinaryFormatter _formatter;
+
+		public Converter()
+		{
+			_formatter = new BinaryFormatter();
+		}
+
+		public T ConvertFrom(byte[] data)
+		{
+			using (var ms = new MemoryStream(data))
+			{
+				return (T)_formatter.Deserialize(ms);
+			}
+		}
+
+		public byte[] ConvertToBytes(T data)
+		{
+			using (var ms = new MemoryStream())
+			{
+				_formatter.Serialize(ms, data);
+				return ms.ToArray();
+			}
+		}
+	}
 
     public class DataModelConverter : IDataAsByteConverter<DataModel>
     {

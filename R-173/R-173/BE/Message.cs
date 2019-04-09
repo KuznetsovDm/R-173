@@ -13,12 +13,12 @@ namespace R_173.BE
             return string.Join(Environment.NewLine, FormatMessage(0));
         }
 
-	    private const string Tab = "\t";
+	    private const string Tab = "  ";
 
 	    private IEnumerable<string> FormatMessage(int level)
         {
             if(!string.IsNullOrEmpty(Header))
-                yield return GetTabs(level++) + Header;
+                yield return GetTabs(level++) + "• " + Header;
 
             if (Messages == null)
             {

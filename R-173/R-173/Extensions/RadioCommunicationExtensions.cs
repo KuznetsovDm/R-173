@@ -29,15 +29,15 @@ namespace R_173.Extensions
             var listenConnection = new UdpMulticastConnection(listenOptions);
             var senderConnection = new UdpMulticastConnection(senderOptions);
 
-            services.AddLocalConnectionTable();
-            services.RegisterInstance<IDataReceiver>(listenConnection);
-            services.RegisterInstance<IDataTransmitter>(senderConnection);
-            IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
-            services.RegisterInstance(miner, new SingletonLifetimeManager());
-            services.RegisterInstance<IDataAsByteConverter<DataModel>>(new DataModelConverter());
-            services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
-            return services;
-        }
+			services.AddLocalConnectionTable();
+			services.RegisterInstance<IDataReceiver>(listenConnection);
+			services.RegisterInstance<IDataTransmitter>(senderConnection);
+			IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
+			services.RegisterInstance(miner, new SingletonLifetimeManager());
+			services.RegisterInstance<IDataAsByteConverter<DataModel>>(new Converter<DataModel>());
+			services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
+			return services;
+		}
 
         public static IUnityContainer AddLocalConnectionTable(this IUnityContainer services)
         {
