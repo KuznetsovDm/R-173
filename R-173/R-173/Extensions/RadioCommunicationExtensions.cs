@@ -1,5 +1,4 @@
 ﻿using NAudio.Wave;
-using P2PMulticastNetwork;
 using P2PMulticastNetwork.Model;
 using P2PMulticastNetwork.Interfaces;
 using Unity;
@@ -12,6 +11,7 @@ using Unity.Injection;
 using System.Net;
 using static P2PMulticastNetwork.Network.RedistLocalConnectionTable;
 using R_173.BE;
+using R_173.BL.Utils;
 
 namespace R_173.Extensions
 {
@@ -33,7 +33,7 @@ namespace R_173.Extensions
 			services.AddLocalConnectionTable();
 			services.RegisterInstance<IDataReceiver>(listenConnection);
 			services.RegisterInstance<IDataTransmitter>(senderConnection);
-			IDataProvider miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
+			IDataProvider<byte[]> miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
 			services.RegisterInstance(miner, new SingletonLifetimeManager());
 			services.RegisterInstance<IDataAsByteConverter<DataModel>>(new Converter<DataModel>());
 			services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();

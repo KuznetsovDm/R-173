@@ -34,7 +34,7 @@ namespace R_173.BL
             _localToneController = localToneController;
         }
 
-        private void OnSendDataAvailable(object sender, DataEventArgs e)
+        private void OnSendDataAvailable(object sender, ByteDataEventArgs e)
         {
             var dataModel = new DataModel
             {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace P2PMulticastNetwork.Extensions
 {
     public static class TaskExtensions
     {
-        public async static Task<TResult> HandleCancellation<TResult>(
+        public static async Task<TResult> HandleCancellation<TResult>(
         this Task<TResult> asyncTask,
         CancellationToken cancellationToken)
         {
@@ -28,14 +24,14 @@ namespace P2PMulticastNetwork.Extensions
             // exceptions from the asynchronous operation (once it completes).
             // In .NET 4.0, unobserved task exceptions would terminate the process.
             if (readyTask == cancellationTask)
-                asyncTask.ContinueWith(_ => asyncTask.Exception,
-                    TaskContinuationOptions.OnlyOnFaulted |
-                    TaskContinuationOptions.ExecuteSynchronously);
+                await asyncTask.ContinueWith(_ => asyncTask.Exception,
+		                TaskContinuationOptions.OnlyOnFaulted |
+		                TaskContinuationOptions.ExecuteSynchronously);
 
             return await readyTask;
         }
 
-        public async static Task HandleCancellation(this Task asyncTask, CancellationToken cancellationToken)
+        public static async Task HandleCancellation(this Task asyncTask, CancellationToken cancellationToken)
         {
             var tcs = new TaskCompletionSource<int>();
             cancellationToken.Register(() =>
@@ -45,9 +41,9 @@ namespace P2PMulticastNetwork.Extensions
             var readyTask = await TaskEx.WhenAny(asyncTask, cancellationTask);
 
             if (readyTask == cancellationTask)
-                asyncTask.ContinueWith(_ => asyncTask.Exception,
-                    TaskContinuationOptions.OnlyOnFaulted |
-                    TaskContinuationOptions.ExecuteSynchronously);
+                await asyncTask.ContinueWith(_ => asyncTask.Exception,
+		                TaskContinuationOptions.OnlyOnFaulted |
+		                TaskContinuationOptions.ExecuteSynchronously);
 
             await readyTask;
         }
