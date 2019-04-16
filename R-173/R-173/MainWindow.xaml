@@ -39,9 +39,9 @@
             <ContentControl x:Name="MainContent" />
         </DockPanel>
 
-        <Grid x:Name="Message" d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}"
+        <!--<Grid x:Name="Message" d:DataContext="{d:DesignInstance {x:Type viewModels:MessageBoxViewModel}}"
               Visibility="Collapsed">
-            <!--Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">-->
+            --><!--Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisConverter}}">--><!--
             <Grid.Background>
                 <SolidColorBrush Color="White" Opacity="0.5" />
             </Grid.Background>
@@ -90,7 +90,7 @@
                     </StackPanel>
                 </DockPanel>
             </Border>
-        </Grid>
+        </Grid>-->
 
         <Grid x:Name="Welcome" d:IsHidden="True">
             <Grid.Background>
