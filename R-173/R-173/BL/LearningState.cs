@@ -8,6 +8,7 @@ using R_173.Interfaces;
 using System.Threading.Tasks;
 using System.Threading;
 using P2PMulticastNetwork.Extensions;
+using P2PMulticastNetwork.Model;
 using R_173.BE;
 
 namespace R_173.BL
@@ -25,12 +26,12 @@ namespace R_173.BL
         InTask
     }
 
-    public class TaskService : INetworkTaskScheduler
+    public class NetworkTaskService : ITaskService
     {
         private readonly IRedistributableLocalConnectionTable _table;
-        private NetService _netService;
+        private readonly NetService _netService;
 
-        public TaskService(IRedistributableLocalConnectionTable table, NetService netService)
+        public NetworkTaskService(IRedistributableLocalConnectionTable table, NetService netService)
         {
             _table = table;
             _table.OnConnected += OnConnected;
@@ -46,20 +47,20 @@ namespace R_173.BL
         {
         }
 
-        public void OnAppyTask(NetworkTask task)
+        public void OnAppyTask(NetworkTaskInfo taskInfo)
         {
             //todo: add to table.
         }
 
-        public void DeclineTask(NetworkTask task)
+        public void DeclineTask(NetworkTaskInfo taskInfo)
         {
             //todo: remove from table.
         }
 
-        public event EventHandler TaskCreated;
-        public event EventHandler TaskStarted;
+	    public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskCreated;
+	    public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskStarted;
 
-        public async void Start()
+	    public async void Start()
         {
             var connection = await _netService.WaitForOneConnection();
             // todo: start scheduler
@@ -89,7 +90,7 @@ namespace R_173.BL
 
     public class NetService : IDisposable
     {
-        TcpListener _listener;
+	    private TcpListener _listener;
         private readonly IRedistributableLocalConnectionTable _connectionTable;
         private readonly RadioSettings _settings;
 
@@ -159,7 +160,7 @@ namespace R_173.BL
         }
     }
 
-    public class NetworkTask
+    public class NetworkTaskInfo
     {
         public Guid AcceptorId { get; set; }
         public Guid OwnerId { get; set; }

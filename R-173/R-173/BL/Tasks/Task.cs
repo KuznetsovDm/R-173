@@ -2,11 +2,12 @@
 using R_173.BL.Learning;
 using R_173.Models;
 using System;
+using R_173.Interfaces;
 
 namespace R_173.BL.Tasks
 {
-    public class Task
-    {
+    public class Task : ITask
+	{
         private readonly RadioModel _model;
         private readonly CompositeStep _step;
         private bool _taskCompleted;

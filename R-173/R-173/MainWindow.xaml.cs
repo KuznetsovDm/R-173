@@ -64,11 +64,12 @@ namespace R_173
 				{
 					DataContext = viewModel
 				};
+
 				WrapAsyncActionInTaskAndStart(async () =>
 					await this.ShowMetroDialogAsync(dialog,
 								new MetroDialogSettings()))
-					.GetAwaiter()
-					.GetResult();
+				.GetAwaiter()
+				.GetResult();
 			}));
 
 			return () => WrapAsyncActionInTaskAndStart(async () => await this.HideMetroDialogAsync(dialog))
@@ -117,7 +118,7 @@ namespace R_173
 			SelectButton(button);
 			var page = button?.CommandParameter as Type;
 			MainContent.Content = _pages[page ?? throw new InvalidOperationException()];
-			if(_pages[page] is Appointment appointment)
+			if (_pages[page] is Appointment appointment)
 				appointment.ResetComingFromTraining();
 		}
 

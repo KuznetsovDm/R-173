@@ -78,6 +78,7 @@ namespace R_173.BL
 								})
 								.UseMiddleware<RemoteToneHandler>()
 								.UseMiddleware<AudioMixerHandler>()
+								.UseMiddleware<NetworkTaskPipelineHandler>()
 								.Build();
 		}
 

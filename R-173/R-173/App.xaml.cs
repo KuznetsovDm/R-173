@@ -6,6 +6,7 @@ using P2PMulticastNetwork.Interfaces;
 using P2PMulticastNetwork.Model;
 using R_173.BE;
 using R_173.BL;
+using R_173.BL.Handlers;
 using R_173.Extensions;
 using R_173.Handlers;
 using R_173.Interfaces;
@@ -85,6 +86,10 @@ namespace R_173
             container.RegisterType<KeyboardHandler>(new SingletonLifetimeManager());
             container.RegisterType<MainWindow>(new SingletonLifetimeManager());
             container.RegisterType<IMessageBox, MessageBoxViewModel>(new SingletonLifetimeManager());
+	        var handler = new NetworkTaskPipelineHandler();
+			container.RegisterInstance<INetworkTaskListener>(handler, new SingletonLifetimeManager());
+			container.RegisterInstance(handler, new SingletonLifetimeManager());
+	        container.RegisterType<INetworkTaskManager, NetworkTaskManager>(new SingletonLifetimeManager());
             ServiceCollection = container;
         }
     }

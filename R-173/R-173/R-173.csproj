@@ -178,10 +178,15 @@
     <Compile Include="BL\AudioReaderAndSender.cs" />
     <Compile Include="BL\AudioReceiverAndPlayer.cs" />
     <Compile Include="BL\BufferedWaveCompressor.cs" />
-    <Compile Include="BL\Handlers\NetworkTaskHandler.cs" />
+    <Compile Include="BL\Handlers\NetworkTaskPipelineHandler.cs" />
     <Compile Include="BL\IDataProvider.cs" />
     <Compile Include="BL\InfiniteWaveStream.cs" />
-    <Compile Include="Interfaces\INetworkTaskScheduler.cs" />
+    <Compile Include="BL\NetworkTaskManager.cs" />
+    <Compile Include="BL\Tasks\NetworkTask.cs" />
+    <Compile Include="Interfaces\INetworkTaskManager.cs" />
+    <Compile Include="Interfaces\ITask.cs" />
+    <Compile Include="Interfaces\INetworkTaskListener.cs" />
+    <Compile Include="Interfaces\ITaskService.cs" />
     <Compile Include="BL\Utils\EmptySampleProvider.cs" />
     <Compile Include="BL\Learning\CompositeStep.cs" />
     <Compile Include="BL\Learning\CompositeStepBuilder.cs" />

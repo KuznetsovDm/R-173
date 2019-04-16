@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using P2PMulticastNetwork.Model;
 using P2PMulticastNetwork.Network;
 using R_173.BE;
 using R_173.BL.Tasks;
@@ -26,7 +27,10 @@ namespace R_173.ViewModels
 		private readonly TasksBl _tasksBl;
 		private TaskTypes? _runningTaskType;
 		private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
+
 		private readonly IRedistributableLocalConnectionTable _table;
+
+		private readonly ITaskService _taskService;
 
 		public RadioViewModel RadioViewModel { get; }
 
@@ -41,7 +45,7 @@ namespace R_173.ViewModels
 				{ TaskTypes.PreparationToWork, new TaskViewModel(option.Tasks.PreparationToWork.Title, () => StartTask(TaskTypes.PreparationToWork))},
 				{ TaskTypes.PerformanceTest, new TaskViewModel(option.Tasks.HealthCheck.Title, () => StartTask(TaskTypes.PerformanceTest))},
 				{ TaskTypes.FrequencyTask, new TaskViewModel(option.Tasks.WorkingFrequencyPreparation.Title, () => StartTask(TaskTypes.FrequencyTask))},
-				//{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, StartTaskWithNetwork)},
+				{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, StartTaskWithNetwork)},
 				//{ TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, StartTaskWithNetwork)},
 			};
 			_tasks = new[]
@@ -49,16 +53,26 @@ namespace R_173.ViewModels
 				_taskViewModels[TaskTypes.PreparationToWork],
 				_taskViewModels[TaskTypes.PerformanceTest],
 				_taskViewModels[TaskTypes.FrequencyTask],
-				//_taskViewModels[TaskTypes.ConnectionEasy],
+				_taskViewModels[TaskTypes.ConnectionEasy],
 				//_taskViewModels[TaskTypes.ConnectionHard],
 			};
 			_stopTaskCommand = new SimpleCommand(StopTask);
 			RadioViewModel = new RadioViewModel();
-			_tasksBl = new TasksBl(RadioViewModel.Model);
+
+			var networkTaskManager = App.ServiceCollection.Resolve<INetworkTaskManager>();
+			var networkTaskListener = App.ServiceCollection.Resolve<INetworkTaskListener>();
+
+			_tasksBl = new TasksBl(RadioViewModel.Model, networkTaskManager, networkTaskListener);
+
+			//_taskService = App.ServiceCollection.Resolve<ITaskService>();
+			_taskService = new DummyTaskService();
 
 			//_table = App.ServiceCollection.Resolve<IRedistributableLocalConnectionTable>();
 			//_table.OnConnected += Table_OnConnected;
 			//_table.OnDisconnected += Table_OnDisconnected;
+
+			_taskService.TaskCreated += TaskService_TaskCreated;
+			_taskService.TaskStarted += TaskService_TaskStarted;
 		}
 
 		private void Table_OnDisconnected(object sender, ConnectionArgs e)
@@ -126,9 +140,7 @@ namespace R_173.ViewModels
 			var number = TaskHelper.GenerateValidR173NumpadValue();
 			var computerNumber = TaskHelper.GenerateComputerNumber();
 
-			if (taskType == TaskTypes.FrequencyTask ||
-				taskType == TaskTypes.ConnectionEasy ||
-				taskType == TaskTypes.ConnectionHard)
+			if (taskType == TaskTypes.FrequencyTask)
 			{
 				parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
 			}
@@ -154,8 +166,90 @@ namespace R_173.ViewModels
 
 		private void StartTaskWithNetwork()
 		{
-			_networkTaskIsRunning = true;
-			UpdateConnections();
+			//_networkTaskIsRunning = true;
+			//UpdateConnections();
+			_taskService.Start();
+
+			ShowWaitingTaskServiceModal("Ожидаем подключения...");
+			// show modal with loading
+		}
+
+
+		private void TaskService_TaskCreated(object sender, DataEventArgs<CreatedNetworkTaskData> e)
+		{
+			CloseCurrentMessageDialog();
+
+			// show confirm modal
+			App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(() =>
+			{
+				var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));
+
+				var frequency = e.Data.Frequency;
+				var number = e.Data.FrequencyNumber;
+				var computerNumber = e.Data.ComputerNumber;
+
+				parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
+
+				parameters.Ok = () =>
+				{
+					_taskService.Confirm();
+					// waiting for other confirmation
+					ShowWaitingTaskServiceModal("Ожидаем ответа собеседника...");
+				};
+				parameters.Cancel = () => _taskService.Stop();
+
+				ShowDialog(parameters);
+			}));
+
+		}
+
+		private void TaskService_TaskStarted(object sender, DataEventArgs<CreatedNetworkTaskData> e)
+		{
+			CloseCurrentMessageDialog();
+
+			TaskIsRunning = true;
+			RadioViewModel.Model.SetInitialState();
+
+			_tasksBl.DataContext
+				.Configure()
+				.SetComputerNumber(e.Data.ComputerNumber)
+				.SetNetworkTaskData(new NetworkTaskData
+				{
+					Id = e.Data.Id,
+					Frequency = e.Data.Frequency
+				});
+
+			_runningTaskType = TaskTypes.ConnectionEasy;
+
+			_tasksBl.Start(TaskTypes.ConnectionEasy);
+			_taskService.Stop();
+		}
+
+		private bool _hideMessageBoxFlag;
+		private MessageBoxParameters _currentMessageBoxParameters;
+		private void ShowWaitingTaskServiceModal(string message)
+		{
+			// CloseCurrentMessageDialog(); // закрываем открытое окно, если оно было
+			_currentMessageBoxParameters = new MessageBoxParameters
+			{
+				Message = message,
+				OkText = "Вернуться",
+				Ok = () =>
+				{
+					if(!_hideMessageBoxFlag)
+						_taskService.Stop();
+					_currentMessageBoxParameters = null;
+				}
+			};
+
+			ShowDialog(_currentMessageBoxParameters);
+		}
+
+		private void CloseCurrentMessageDialog()
+		{
+			_hideMessageBoxFlag = true;
+			_currentMessageBoxParameters?.Ok();
+			_currentMessageBoxParameters = null;
 		}
 
 		private void UpdateConnections()
@@ -200,10 +294,15 @@ namespace R_173.ViewModels
 
 		private static void ShowDialog(MessageBoxParameters parameters)
 		{
-			System.Threading.Tasks.Task.Factory.StartNew(async () => await MetroMessageBoxHelper.ShowDialog(parameters),
+			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+
+			System.Threading.Tasks.Task.Factory.StartNew(async () =>
+				{
+					await MetroMessageBoxHelper.ShowDialog(parameters);
+				},
 				CancellationToken.None,
 				TaskCreationOptions.None,
-				TaskScheduler.FromCurrentSynchronizationContext());
+				scheduler);
 		}
 
 		private static void ShowErrorText(Message message)
