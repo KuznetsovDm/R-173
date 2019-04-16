@@ -258,8 +258,8 @@ namespace R_173.ViewModels
 				}
 				else
 				{
-					ShowErrorDialog(message);
-					//ShowErrorText(message);
+					//ShowErrorDialog(message);
+					ShowErrorText(message);
 				}
 			}
 			OnPropertyChanged(nameof(Assessment));
