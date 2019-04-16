@@ -20,6 +20,7 @@ namespace R_173.Extensions
         public static IUnityContainer AddCommunicationServices(this IUnityContainer services)
         {
             var listenOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",
+                multicastLoopback: false,
                 exclusiveAddressUse: false);
 
             var senderOptions = MulticastConnectionOptions.Create(ipAddress: "225.0.0.0",

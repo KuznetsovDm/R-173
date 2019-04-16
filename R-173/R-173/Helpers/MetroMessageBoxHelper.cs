@@ -21,7 +21,7 @@ namespace R_173.Helpers
                 {
                     AffirmativeButtonText = parameters.OkText,
                     ColorScheme = MetroDialogColorScheme.Theme,
-                    AnimateShow = true,
+                    AnimateShow = false,
                     NegativeButtonText = parameters.CancelText,
                     AnimateHide = false,
                     DefaultButtonFocus = MessageDialogResult.Affirmative,
@@ -34,7 +34,6 @@ namespace R_173.Helpers
                 {
                     parameters.Ok?.Invoke();
                 }
-
                 return;
             }
 
