@@ -17,14 +17,14 @@ namespace R_173.BL
             {
                 var bytes = new byte[args.BytesRecorded];
                 Array.Copy(args.Buffer, bytes, args.BytesRecorded);
-                OnDataAvailable?.Invoke(this, new DataEventArgs()
+                OnDataAvailable?.Invoke(this, new ByteDataEventArgs()
                 {
                     Data = bytes
                 });
             };
         }
 
-        public event EventHandler<DataEventArgs> OnDataAvailable;
+        public event EventHandler<ByteDataEventArgs> OnDataAvailable;
 
         public void Dispose()
         {

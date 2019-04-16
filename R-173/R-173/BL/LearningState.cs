@@ -8,7 +8,6 @@ using R_173.Interfaces;
 using System.Threading.Tasks;
 using System.Threading;
 using P2PMulticastNetwork.Extensions;
-using R_173.Helpers;
 using R_173.BE;
 
 namespace R_173.BL
@@ -121,6 +120,8 @@ namespace R_173.BL
                 foreach (var connection in _connectionTable.AvaliableDevices.Select(x => x.Endpoint)
                     .Where(x => !x.Address.Equals(_settings.LocalIp)))
                 {
+	                if (token.IsCancellationRequested) return null;
+
                     var client = new TcpClient();
                     try
                     {
@@ -129,6 +130,7 @@ namespace R_173.BL
                             client.EndConnect, null)
                             .HandleCancellation(token);
                         //await TaskEx.Run(() => client.Connect(connection), token);
+
                         return client;
                     }
                     catch (Exception)
@@ -137,7 +139,7 @@ namespace R_173.BL
                     }
                 }
 
-                await TaskEx.Delay(TimeSpan.FromSeconds(1));
+                await TaskEx.Delay(TimeSpan.FromSeconds(1), token);
             }
 
             return null;
@@ -152,9 +154,8 @@ namespace R_173.BL
 
         public void Dispose()
         {
-            if (_listener != null)
-                _listener.Server.Close();
-            _listener = null;
+	        _listener?.Server.Close();
+	        _listener = null;
         }
     }
 

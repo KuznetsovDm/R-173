@@ -13,7 +13,6 @@ namespace R_173.Handlers
     {
         private readonly Dictionary<Key, Action<bool>> _onKeyDownActions;
         private RadioModel _currentRadioModel;
-        private Key? _lastPressedKey;
         public event Action<Key> OnKeyDown;
         public Button AffirmativeButton;
         public Button NegativeButton;
@@ -81,7 +80,6 @@ namespace R_173.Handlers
         public void OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-            _lastPressedKey = null;
 
             if (_currentRadioModel == null || !_onKeyDownActions.TryGetValue(e.Key, out var action))
                 return;

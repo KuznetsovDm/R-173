@@ -3,9 +3,9 @@ using System;
 
 namespace P2PMulticastNetwork.Interfaces
 {
-    public interface IDataProvider : IDisposable
+    public interface IDataProvider<T> : IDisposable
     {
-        event EventHandler<DataEventArgs> OnDataAvaliable;
+        event EventHandler<DataEventArgs<T>> OnDataAvaliable;
         void Start();
         void Stop();
     }

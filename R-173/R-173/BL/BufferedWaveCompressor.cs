@@ -30,7 +30,7 @@ namespace R_173.BL
             WaveBuffer wb = new WaveBuffer(data);
             int encodedLength = length / 4;
             byte[] outputBuffer = new byte[encodedLength];
-            int encoded = _codec.Encode(_encodeState, outputBuffer, wb.ShortBuffer, length / 2);
+            _codec.Encode(_encodeState, outputBuffer, wb.ShortBuffer, length / 2);
             return outputBuffer;
         }
 
@@ -79,7 +79,7 @@ namespace R_173.BL
 
         public static void CopyTo(Stream src, Stream dest)
         {
-            byte[] bytes = new byte[4096];
+            var bytes = new byte[4096];
             int cnt;
             while ((cnt = src.Read(bytes, 0, bytes.Length)) != 0)
             {

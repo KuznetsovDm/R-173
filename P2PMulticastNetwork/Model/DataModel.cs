@@ -13,7 +13,15 @@ namespace P2PMulticastNetwork.Model
         public Guid Guid { get; set; }
 
         public SendableRadioModel RadioModel { get; set; }
-    }
+
+		public NetworkTaskData NetworkTask { get; set; }
+	}
+
+	[Serializable]
+	public class NetworkTaskData
+	{
+		public Guid Id { get; set; }
+	}
 
 	public class Converter<T> : IDataAsByteConverter<T>
 	{

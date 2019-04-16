@@ -13,7 +13,7 @@ namespace R_173.BL
 	{
 		public const float LowPowerLevelVolume = 0.5f;
 		private ReceivableRadioModel _model;
-		private readonly IDataProvider _provider;
+		private readonly IDataProvider<byte[]> _provider;
 		private readonly ISamplePlayer _player;
 		private readonly IDataAsByteConverter<DataModel> _converter;
 		private readonly IDataProcessingBuilder _builder;
@@ -22,7 +22,7 @@ namespace R_173.BL
 		private readonly IGlobalNoiseController _noise;
 		private readonly DataCompressor _compressor;
 
-		public AudioReceiverAndPlayer(IDataProvider provider, ISamplePlayer player,
+		public AudioReceiverAndPlayer(IDataProvider<byte[]> provider, ISamplePlayer player,
 			IDataAsByteConverter<DataModel> converter, IDataProcessingBuilder builder,
 			IGlobalNoiseController globalNoise,
 			DataCompressor compressor)
@@ -37,7 +37,7 @@ namespace R_173.BL
 			_compressor = compressor;
 		}
 
-		private void Provider_OnDataAvaliable(object sender, DataEventArgs e)
+		private void Provider_OnDataAvaliable(object sender, DataEventArgs<byte[]> e)
 		{
 			try
 			{

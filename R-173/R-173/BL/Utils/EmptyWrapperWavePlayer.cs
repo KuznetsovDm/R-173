@@ -1,7 +1,7 @@
-﻿using NAudio.Wave;
-using System;
+﻿using System;
+using NAudio.Wave;
 
-namespace R_173.BL
+namespace R_173.BL.Utils
 {
     public class EmptyWrapperWavePlayer : IWavePlayer
     {

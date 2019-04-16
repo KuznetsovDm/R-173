@@ -95,6 +95,7 @@
     <Compile Include="Interfaces\IAudioReaderAndSender.cs" />
     <Compile Include="Interfaces\IAudioReceiverAndPlayer.cs" />
     <Compile Include="Interfaces\INetworkService.cs" />
+    <Compile Include="Model\ByteDataEventArgs.cs" />
     <Compile Include="Model\DataEventArgs.cs" />
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Interfaces\IDataAsByteConverter.cs" />
