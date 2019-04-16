@@ -93,6 +93,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AustinHarris.JsonRpc, Version=1.1.70.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.10\lib\net40\CommonServiceLocator.dll</HintPath>
     </Reference>
