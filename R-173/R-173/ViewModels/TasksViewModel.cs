@@ -76,10 +76,6 @@ namespace R_173.ViewModels
 
             _taskService = App.ServiceCollection.Resolve<ITaskService>();
 
-			//_table = App.ServiceCollection.Resolve<IRedistributableLocalConnectionTable>();
-			//_table.OnConnected += Table_OnConnected;
-			//_table.OnDisconnected += Table_OnDisconnected;
-
 			_taskService.TaskCreated += TaskService_TaskCreated;
 			_taskService.TaskStarted += TaskService_TaskStarted;
 		}
@@ -180,6 +176,7 @@ namespace R_173.ViewModels
 			ShowWaitingTaskServiceModal("Ожидаем подключения...");
 		}
 
+		private CreatedNetworkTaskData _taskData;
 
 		private void TaskService_TaskCreated(object sender, DataEventArgs<CreatedNetworkTaskData> e)
 		{
@@ -189,10 +186,12 @@ namespace R_173.ViewModels
 				App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(async () =>
 				{
 					_stopTaskService = false;
-				   _keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+				   //_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 				   await TaskEx.Delay(1);
 
 				   var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));
+
+					_taskData = e.Data;
 
 				   var frequency = e.Data.Frequency;
 				   var number = e.Data.FrequencyNumber;
@@ -224,8 +223,8 @@ namespace R_173.ViewModels
 				.SetComputerNumber(e.Data.ComputerNumber)
 				.SetNetworkTaskData(new NetworkTaskData
 				{
-					Id = e.Data.Id,
-					Frequency = e.Data.Frequency
+					Id = _taskData.Id,
+					Frequency = _taskData.Frequency
 				});
 
 			_runningTaskType = TaskTypes.ConnectionEasy;
@@ -235,7 +234,7 @@ namespace R_173.ViewModels
 			App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(() =>
 			{
 				_stopTaskService = false;
-				_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+				//_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 			}));
 		}
 
