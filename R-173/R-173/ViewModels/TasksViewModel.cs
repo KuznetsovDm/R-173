@@ -189,7 +189,7 @@ namespace R_173.ViewModels
 				App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(async () =>
 				{
 					_stopTaskService = false;
-				   _keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+				   //_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 				   await TaskEx.Delay(1);
 
 				   var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));

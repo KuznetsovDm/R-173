@@ -78,10 +78,11 @@ namespace R_173.BL
                     var result = await _netService.WaitForOneConnection(ct);
                     var connection = result.Key;
                     var commingType = result.Value;
+                    var writer = new BinaryWriter(connection.GetStream());
+                    var reader = new BinaryReader(connection.GetStream());
 
                     if (commingType == ConnectionCommingType.FromListen)
                     {
-                        var reader = new BinaryReader(connection.GetStream());
                         var jsontask = reader.ReadString();
                         var task = JsonConvert.DeserializeObject<CreatedNetworkTaskData>(jsontask);
                         TaskCreated?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>(task));
@@ -89,7 +90,6 @@ namespace R_173.BL
                     else
                     {
                         //todo: generate task...
-                        var writer = new BinaryWriter(connection.GetStream());
                         var task = new CreatedNetworkTaskData()
                         {
                             Frequency = 33100,
@@ -105,7 +105,6 @@ namespace R_173.BL
 
                     var remoteConfirm = TaskEx.Run(() =>
                     {
-                        var reader = new BinaryReader(connection.GetStream());
                         var confirmationResult = reader.ReadString();
                         var isConfirmed = JsonConvert.DeserializeObject<ConfirmationResult>(confirmationResult);
                         return isConfirmed;
@@ -113,7 +112,6 @@ namespace R_173.BL
 
                     var localConfirm = _completationConfirm.Task.ContinueWith(t =>
                     {
-                        var writer = new BinaryWriter(connection.GetStream());
                         var cjs = JsonConvert.SerializeObject(t.Result);
                         writer.Write(cjs);
                         writer.Flush();
@@ -171,18 +169,19 @@ namespace R_173.BL
 
         public NetService(int port, IRedistributableLocalConnectionTable connectionTable, RadioSettings settings)
         {
-            int maxConnectionQueue = 1;
             _listener = new TcpListener(port);
-            _listener.Start();
-            _listener.Server.Listen(maxConnectionQueue);
             _connectionTable = connectionTable;
             _settings = settings;
         }
 
         public async Task<KeyValuePair<TcpClient, ConnectionCommingType>> WaitForOneConnection(CancellationToken token)
         {
+            int maxConnectionQueue = 1;
             var search = SearchOne(token);
+            _listener.Start();
+            _listener.Server.Listen(maxConnectionQueue);
             var listen = ListenOne(token);
+            _listener.Stop();
             var result = await TaskEx.WhenAny(search, listen);
             var commingType = search == result ? ConnectionCommingType.FromConnect : ConnectionCommingType.FromListen;
             return new KeyValuePair<TcpClient, ConnectionCommingType>(result.Result, commingType);
