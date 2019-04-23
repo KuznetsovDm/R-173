@@ -14,6 +14,7 @@ namespace R_173.Interfaces
 		public int FrequencyNumber { get; set; }
 		public double Frequency { get; set; }
 	}
+
 	public interface ITaskService
 	{
 		event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskCreated;
@@ -38,8 +39,15 @@ namespace R_173.Interfaces
 
 			Task.Factory.StartNew(() =>
 			{
-				TaskEx.Delay(3000, _cancellationTokenSource.Token).GetAwaiter().GetResult();
-				if(_cancellationTokenSource.IsCancellationRequested) return;
+				try
+				{
+					TaskEx.Delay(5000, _cancellationTokenSource.Token).GetAwaiter().GetResult();
+					if (_cancellationTokenSource.IsCancellationRequested) return;
+				}
+				catch (TaskCanceledException)
+				{
+					return;
+				}
 
 				_taskData = new CreatedNetworkTaskData
 				{
@@ -57,8 +65,15 @@ namespace R_173.Interfaces
 		{
 			Task.Factory.StartNew(() =>
 			{
-				TaskEx.Delay(3000, _cancellationTokenSource.Token).GetAwaiter().GetResult();
-				if(_cancellationTokenSource.IsCancellationRequested) return;
+				try
+				{
+					TaskEx.Delay(5000, _cancellationTokenSource.Token).GetAwaiter().GetResult();
+					if (_cancellationTokenSource.IsCancellationRequested) return;
+				}
+				catch (TaskCanceledException)
+				{
+					return;
+				}
 
 				TaskStarted?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>(_taskData));
 			});

@@ -6,16 +6,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using P2PMulticastNetwork.Model;
 using P2PMulticastNetwork.Network;
 using R_173.BE;
 using R_173.BL.Tasks;
+using R_173.Handlers;
 using R_173.Helpers;
 using R_173.Interfaces;
 using R_173.SharedResources;
 using Unity;
+using Task = System.Threading.Tasks.Task;
 
 namespace R_173.ViewModels
 {
@@ -28,6 +31,10 @@ namespace R_173.ViewModels
 		private TaskTypes? _runningTaskType;
 		private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
+		private KeyboardHandler _keyboardHandler;
+
+		private const int MaxAssesment = 5;
+
 		private readonly IRedistributableLocalConnectionTable _table;
 
 		private readonly ITaskService _taskService;
@@ -39,6 +46,9 @@ namespace R_173.ViewModels
 			Message = GetMessageBoxParameters("Begin");
 
 			var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
+
+			_keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
+
 
 			_taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
 			{
@@ -105,7 +115,7 @@ namespace R_173.ViewModels
 			}
 		}
 
-		public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0) + 2;
+		public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0) + (MaxAssesment - _tasks.Length);
 
 		private List<NotificationData> _connections = new List<NotificationData>();
 		public string Connections => string.Join(Environment.NewLine,
@@ -166,47 +176,47 @@ namespace R_173.ViewModels
 
 		private void StartTaskWithNetwork()
 		{
-			//_networkTaskIsRunning = true;
-			//UpdateConnections();
 			_taskService.Start();
 
 			ShowWaitingTaskServiceModal("Ожидаем подключения...");
-			// show modal with loading
 		}
 
 
 		private void TaskService_TaskCreated(object sender, DataEventArgs<CreatedNetworkTaskData> e)
 		{
-			CloseCurrentMessageDialog();
-
 			// show confirm modal
-			App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(() =>
+			Task.Factory.StartNew(() =>
 			{
-				var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));
-
-				var frequency = e.Data.Frequency;
-				var number = e.Data.FrequencyNumber;
-				var computerNumber = e.Data.ComputerNumber;
-
-				parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
-
-				parameters.Ok = () =>
+				App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(async () =>
 				{
-					_taskService.Confirm();
-					// waiting for other confirmation
-					ShowWaitingTaskServiceModal("Ожидаем ответа собеседника...");
-				};
-				parameters.Cancel = () => _taskService.Stop();
+					_stopTaskService = false;
+				   _keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+				   await TaskEx.Delay(1);
 
-				ShowDialog(parameters);
-			}));
+				   var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));
 
+				   var frequency = e.Data.Frequency;
+				   var number = e.Data.FrequencyNumber;
+				   var computerNumber = e.Data.ComputerNumber;
+
+				   parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
+
+				   parameters.Ok = () =>
+				   {
+					   _taskService.Confirm();
+						// waiting for other confirmation
+
+						ShowWaitingTaskServiceModal("Ожидаем ответа собеседника...");
+				   };
+				   parameters.Cancel = () => _taskService.Stop();
+
+				   ShowDialog(parameters);
+			   }));
+			});
 		}
 
 		private void TaskService_TaskStarted(object sender, DataEventArgs<CreatedNetworkTaskData> e)
 		{
-			CloseCurrentMessageDialog();
-
 			TaskIsRunning = true;
 			RadioViewModel.Model.SetInitialState();
 
@@ -223,35 +233,31 @@ namespace R_173.ViewModels
 
 			_tasksBl.Start(TaskTypes.ConnectionEasy);
 			_taskService.Stop();
+			App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(() =>
+			{
+				_stopTaskService = false;
+				_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+			}));
 		}
 
-		private bool _hideMessageBoxFlag;
-		private MessageBoxParameters _currentMessageBoxParameters;
+		private bool _stopTaskService = true;
 		private void ShowWaitingTaskServiceModal(string message)
 		{
-			// CloseCurrentMessageDialog(); // закрываем открытое окно, если оно было
-			_currentMessageBoxParameters = new MessageBoxParameters
+			_stopTaskService = true;
+			var parameters = new MessageBoxParameters
 			{
 				Message = message,
 				OkText = "Вернуться",
 				Ok = () =>
 				{
-					if(!_hideMessageBoxFlag)
+					if (_stopTaskService)
 						_taskService.Stop();
-					_currentMessageBoxParameters = null;
 				}
 			};
 
-			ShowDialog(_currentMessageBoxParameters);
+			ShowDialog(parameters);
 		}
-
-		private void CloseCurrentMessageDialog()
-		{
-			_hideMessageBoxFlag = true;
-			_currentMessageBoxParameters?.Ok();
-			_currentMessageBoxParameters = null;
-		}
-
+		
 		private void UpdateConnections()
 		{
 			if (!_networkTaskIsRunning)
@@ -296,7 +302,7 @@ namespace R_173.ViewModels
 		{
 			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-			System.Threading.Tasks.Task.Factory.StartNew(async () =>
+			Task.Factory.StartNew(async () =>
 				{
 					await MetroMessageBoxHelper.ShowDialog(parameters);
 				},
