@@ -10,8 +10,6 @@ using System.Threading;
 using P2PMulticastNetwork.Extensions;
 using P2PMulticastNetwork.Model;
 using R_173.BE;
-using P2PMulticastNetwork.Rpc;
-using AustinHarris.JsonRpc;
 
 namespace R_173.BL
 {

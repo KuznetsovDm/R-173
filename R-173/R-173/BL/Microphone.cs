@@ -17,7 +17,7 @@ namespace R_173.BL
             {
                 var bytes = new byte[args.BytesRecorded];
                 Array.Copy(args.Buffer, bytes, args.BytesRecorded);
-                OnDataAvailable?.Invoke(this, new ByteDataEventArgs()
+                OnDataAvailable?.Invoke(this, new ByteDataEventArgs
                 {
                     Data = bytes
                 });

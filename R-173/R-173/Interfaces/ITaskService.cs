@@ -12,7 +12,7 @@ namespace R_173.Interfaces
 		public Guid Id { get; set; }
 		public int ComputerNumber { get; set; }
 		public int FrequencyNumber { get; set; }
-		public double Frequency { get; set; }
+		public int Frequency { get; set; }
 	}
 
 	public interface ITaskService

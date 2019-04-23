@@ -31,7 +31,7 @@ namespace R_173.ViewModels
 		private TaskTypes? _runningTaskType;
 		private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
 
-		private KeyboardHandler _keyboardHandler;
+		private readonly KeyboardHandler _keyboardHandler;
 
 		private const int MaxAssesment = 5;
 
