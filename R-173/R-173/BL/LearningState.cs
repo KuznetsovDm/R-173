@@ -81,15 +81,15 @@ namespace R_173.BL
 
                     if (commingType == ConnectionCommingType.FromListen)
                     {
-                        var reader = new StreamReader(connection.GetStream());
-                        var jsontask = reader.ReadToEnd();
+                        var reader = new BinaryReader(connection.GetStream());
+                        var jsontask = reader.ReadString();
                         var task = JsonConvert.DeserializeObject<CreatedNetworkTaskData>(jsontask);
                         TaskCreated?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>(task));
                     }
                     else
                     {
                         //todo: generate task...
-                        var writer = new StreamWriter(connection.GetStream());
+                        var writer = new BinaryWriter(connection.GetStream());
                         var task = new CreatedNetworkTaskData()
                         {
                             Frequency = 33100,
@@ -103,19 +103,19 @@ namespace R_173.BL
                     }
                     State = NetworkServiceState.RequestForConfirm;
 
-                    var remoteConfirm = TaskEx.Run(async () =>
+                    var remoteConfirm = TaskEx.Run(() =>
                     {
-                        var reader = new StreamReader(connection.GetStream());
-                        var confirmationResult = reader.ReadToEnd();
+                        var reader = new BinaryReader(connection.GetStream());
+                        var confirmationResult = reader.ReadString();
                         var isConfirmed = JsonConvert.DeserializeObject<ConfirmationResult>(confirmationResult);
                         return isConfirmed;
                     });
 
                     var localConfirm = _completationConfirm.Task.ContinueWith(t =>
                     {
-                        var writer = new StreamWriter(connection.GetStream());
+                        var writer = new BinaryWriter(connection.GetStream());
                         var cjs = JsonConvert.SerializeObject(t.Result);
-                        writer.WriteAsync(cjs);
+                        writer.Write(cjs);
                         writer.Flush();
                         return t.Result;
                     }, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled);
