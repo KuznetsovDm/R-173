@@ -124,6 +124,7 @@ namespace R_173.BL
                     {
                         TaskStarted?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>());
                     }
+					connection.Close();
                 }
             }
             catch (TaskCanceledException) { }
