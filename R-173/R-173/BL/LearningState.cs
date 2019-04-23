@@ -82,7 +82,7 @@ namespace R_173.BL
                     if (commingType == ConnectionCommingType.FromListen)
                     {
                         var reader = new StreamReader(connection.GetStream());
-                        var jsontask = await reader.ReadToEndAsync();
+                        var jsontask = reader.ReadToEnd();
                         var task = JsonConvert.DeserializeObject<CreatedNetworkTaskData>(jsontask);
                         TaskCreated?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>(task));
                     }
@@ -106,7 +106,7 @@ namespace R_173.BL
                     var remoteConfirm = TaskEx.Run(async () =>
                     {
                         var reader = new StreamReader(connection.GetStream());
-                        var confirmationResult = await reader.ReadToEndAsync();
+                        var confirmationResult = reader.ReadToEnd();
                         var isConfirmed = JsonConvert.DeserializeObject<ConfirmationResult>(confirmationResult);
                         return isConfirmed;
                     });
