@@ -21,7 +21,7 @@ namespace P2PMulticastNetwork.Model
 	public class NetworkTaskData
 	{
 		public Guid Id { get; set; }
-		public double Frequency { get; set; }
+		public int Frequency { get; set; }
 	}
 
 	public class Converter<T> : IDataAsByteConverter<T>

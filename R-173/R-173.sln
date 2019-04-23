@@ -23,6 +23,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Bootstrapper", "..\Bootstra
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TableTest", "TableTest\TableTest.fsproj", "{EADE5BA8-CC9B-4391-8F7C-D54B84D85ABD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTaskTest", "NetworkTaskTest\NetworkTaskTest.csproj", "{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,14 @@ Global
 		{EADE5BA8-CC9B-4391-8F7C-D54B84D85ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EADE5BA8-CC9B-4391-8F7C-D54B84D85ABD}.Release|x86.ActiveCfg = Release|Any CPU
 		{EADE5BA8-CC9B-4391-8F7C-D54B84D85ABD}.Release|x86.Build.0 = Release|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Debug|x86.Build.0 = Debug|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Release|x86.ActiveCfg = Release|Any CPU
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +85,7 @@ Global
 		{300E9AE5-1494-4B71-9FC0-5CEB4DC0DACE} = {15394086-B0CC-4795-9A9D-DFDB659DD60E}
 		{6F262958-BAAC-4364-ABCA-4E435CA65E9D} = {15394086-B0CC-4795-9A9D-DFDB659DD60E}
 		{EADE5BA8-CC9B-4391-8F7C-D54B84D85ABD} = {659E5A67-6A20-44B9-B1A3-E61312961137}
+		{E8FA66F0-BF19-43E3-83C8-A3215D4FF08D} = {659E5A67-6A20-44B9-B1A3-E61312961137}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {845744CA-FD34-4BC3-991D-7DFA29F1CE39}
