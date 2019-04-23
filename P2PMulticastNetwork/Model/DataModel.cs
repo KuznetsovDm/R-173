@@ -1,11 +1,11 @@
-﻿using System;
+﻿using P2PMulticastNetwork.Interfaces;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using P2PMulticastNetwork.Interfaces;
 
 namespace P2PMulticastNetwork.Model
 {
-    [Serializable]
+	[Serializable]
     public class DataModel
     {
         public byte[] RawAudioSample { get; set; }
@@ -21,6 +21,7 @@ namespace P2PMulticastNetwork.Model
 	public class NetworkTaskData
 	{
 		public Guid Id { get; set; }
+		public double Frequency { get; set; }
 	}
 
 	public class Converter<T> : IDataAsByteConverter<T>

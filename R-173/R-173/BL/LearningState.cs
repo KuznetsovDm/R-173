@@ -8,6 +8,7 @@ using R_173.Interfaces;
 using System.Threading.Tasks;
 using System.Threading;
 using P2PMulticastNetwork.Extensions;
+using P2PMulticastNetwork.Model;
 using R_173.BE;
 using P2PMulticastNetwork.Rpc;
 using AustinHarris.JsonRpc;
@@ -30,116 +31,43 @@ namespace R_173.BL
         InTask
     }
 
-    public class RemoteService : JsonRpcService
-    {
-        public event EventHandler Confirm;
-
-        public bool IsConfirm { get; private set; }
-
-        [JsonRpcMethod("Confirm")]
-        private void OnConfirm()
-        {
-            IsConfirm = true;
-            Confirm?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void ReloadInitialState()
-        {
-            IsConfirm = false;
-        }
-    }
-
-    public class TaskService : JsonRpcService, INetworkTaskScheduler
+    public class NetworkTaskService : ITaskService
     {
         private readonly IRedistributableLocalConnectionTable _table;
-        private NetService _netService;
-        private NetMode _mode;
-        private TcpRpcHandler _connection;
-        private RemoteService _remoteService;
-        private bool _confirmed;
-        private NetworkTask _currentTask;
+        private readonly NetService _netService;
 
-        public TaskService(NetService netService)
+        public NetworkTaskService(IRedistributableLocalConnectionTable table, NetService netService)
         {
+            _table = table;
+            _table.OnConnected += OnConnected;
+            _table.OnDisconnected += OnDisconnected;
             _netService = netService;
-            _remoteService = new RemoteService();
-            _remoteService.Confirm += OnRemoteConfirm;
         }
 
-        private void SendOfferTaskIfActiveAndConfirmedBoth()
+        private void OnDisconnected(object sender, ConnectionArgs e)
         {
-            if (_confirmed && _mode == NetMode.Active && _remoteService.IsConfirm)
-            {
-                var task = new NetworkTask();
-                _connection?.SendRequest("OfferTask", task);
-            }
         }
 
-        private void OnRemoteConfirm(object sender, EventArgs e)
+        private void OnConnected(object sender, ConnectionArgs e)
         {
-            try
-            {
-                SendOfferTaskIfActiveAndConfirmedBoth();
-            }
-            catch (SocketException)
-            {
-                _connection.Dispose();
-                _connection = null;
-                _remoteService.ReloadInitialState();
-            }
         }
 
-        public void Confirm()
+        public void OnAppyTask(NetworkTaskInfo taskInfo)
         {
-            if (_connection != null)
-            {
-                try
-                {
-                    _connection.SendRequest(nameof(Confirm));
-                    SendOfferTaskIfActiveAndConfirmedBoth();
-                }
-                catch (SocketException)
-                {
-                    _connection.Dispose();
-                    _connection = null;
-                    _remoteService.ReloadInitialState();
-                }
-            }
-            // todo: notify that task were applied
-            // Starting Task
-            // call TaskStarted(task)
+            //todo: add to table.
         }
 
-        [JsonRpcMethod("OfferTask")]
-        private void OnOfferTask(NetworkTask task)
+        public void DeclineTask(NetworkTaskInfo taskInfo)
         {
-            _currentTask = task;
-            TaskStarted?.Invoke(this, EventArgs.Empty);
+            //todo: remove from table.
         }
 
-        public event EventHandler TaskCreated;
-        public event EventHandler TaskStarted;
+	    public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskCreated;
+	    public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskStarted;
 
-        public async void Start()
+	    public async void Start()
         {
-            var tuple = await _netService.WaitForOneConnection();
-            var connection = tuple.Item1;
-            _mode = tuple.Item2;
-
-            _connection = connection;
-
-            TaskEx.Run(() =>
-            {
-                while (true)
-                {
-                    var response = connection.ReceiveString();
-                    Rpc.Handle(response);
-                }
-            }).ContinueWith(x =>
-            {
-                _connection = null;
-            }, TaskContinuationOptions.OnlyOnFaulted);
-
+            var connection = await _netService.WaitForOneConnection();
             // todo: start scheduler
             // tcp listener separate task
             // if no connections
@@ -149,31 +77,25 @@ namespace R_173.BL
             // wait for Confirm or Cancel, if disconnected, then back to listen and tell TaskDestroyed
         }
 
+        public void Confirm()
+        {
+            // todo: notify that task were applied
+            // Starting Task
+            // call TaskStarted(task)
+
+            throw new NotImplementedException();
+        }
+
         public void Stop()
         {
-            try
-            {
-                if (_connection != null)
-                {
-                    _connection.Dispose();
-                    _connection = null;
-                }
-            }
-            catch (Exception)
-            {
-            }
+            // todo: stop scheduler
+            throw new NotImplementedException();
         }
-    }
-
-    public enum NetMode
-    {
-        Passive,
-        Active
     }
 
     public class NetService : IDisposable
     {
-        TcpListener _listener;
+	    private TcpListener _listener;
         private readonly IRedistributableLocalConnectionTable _connectionTable;
         private readonly RadioSettings _settings;
 
@@ -187,16 +109,14 @@ namespace R_173.BL
             _settings = settings;
         }
 
-        public async Task<Tuple<TcpRpcHandler, NetMode>> WaitForOneConnection()
+        public async Task<TcpClient> WaitForOneConnection()
         {
             var cts = new CancellationTokenSource();
             var search = SearchOne(cts.Token);
             var listen = ListenOne(cts.Token);
             var result = await TaskEx.WhenAny(search, listen);
             cts.Cancel();
-            var mode = search == result ? NetMode.Active : NetMode.Passive;
-            var handler = new TcpRpcHandler(result.Result);
-            return Tuple.Create(handler, mode);
+            return result.Result;
         }
 
         public async Task<TcpClient> SearchOne(CancellationToken token)
@@ -206,7 +126,7 @@ namespace R_173.BL
                 foreach (var connection in _connectionTable.AvaliableDevices.Select(x => x.Endpoint)
                     .Where(x => !x.Address.Equals(_settings.LocalIp)))
                 {
-                    if (token.IsCancellationRequested) return null;
+	                if (token.IsCancellationRequested) return null;
 
                     var client = new TcpClient();
                     try
@@ -240,12 +160,12 @@ namespace R_173.BL
 
         public void Dispose()
         {
-            _listener?.Server.Close();
-            _listener = null;
+	        _listener?.Server.Close();
+	        _listener = null;
         }
     }
 
-    public class NetworkTask
+    public class NetworkTaskInfo
     {
         public Guid AcceptorId { get; set; }
         public Guid OwnerId { get; set; }

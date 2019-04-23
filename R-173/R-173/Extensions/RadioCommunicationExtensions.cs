@@ -54,7 +54,7 @@ namespace R_173.Extensions
             services.RegisterInstance<IRedistributableLocalConnectionTable>(table, new SingletonLifetimeManager());
 
             var netService = new NetService(33100, table, settings);
-            var taskTable = new TaskService(netService);
+            var taskTable = new NetworkTaskService(table, netService);
             taskTable.Start();
 
             return services;

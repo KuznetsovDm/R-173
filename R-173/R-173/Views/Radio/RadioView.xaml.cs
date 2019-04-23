@@ -93,14 +93,14 @@ namespace R_173.Views.Radio
 
 	    private void StartFigure(Point start)
         {
-            _currentFigure = new PathFigure() { StartPoint = start };
+            _currentFigure = new PathFigure { StartPoint = start };
             
             var currentPath =
-                new Path()
+                new Path
                 {
                     Stroke = Brushes.Black,
                     StrokeThickness = 5,
-                    Data = new PathGeometry() { Figures = { _currentFigure } }
+                    Data = new PathGeometry { Figures = { _currentFigure } }
                 };
             currentPath.MouseMove += CurrentPath_MouseMove;
             DrawingTarget.Children.Add(currentPath);

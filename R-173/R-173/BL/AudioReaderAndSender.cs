@@ -17,13 +17,15 @@ namespace R_173.BL
         private bool _isMicrophoneStarted;
         private bool _isToneStarted;
         private readonly Guid _senderId;
+	    private readonly INetworkTaskManager _networkTaskManager;
 
         public AudioReaderAndSender(IMicrophone microphone,
             IDataTransmitter transmitter,
             IDataAsByteConverter<DataModel> converter,
             DataCompressor compressor,
             LocalToneController localToneController,
-            RadioSettings settings)
+            RadioSettings settings, 
+	        INetworkTaskManager networkTaskManager)
         {
             _senderId = settings.NetworkToken;
             _microphone = microphone;
@@ -32,6 +34,7 @@ namespace R_173.BL
             _converter = converter;
             _compressor = compressor;
             _localToneController = localToneController;
+	        _networkTaskManager = networkTaskManager;
         }
 
         private void OnSendDataAvailable(object sender, ByteDataEventArgs e)
@@ -40,7 +43,8 @@ namespace R_173.BL
             {
                 Guid = _senderId,
                 RadioModel = _model,
-                RawAudioSample = e.Data
+                RawAudioSample = e.Data,
+				NetworkTask = _networkTaskManager.CurrentNetworkTask
             };
 
             var bytes = _converter.ConvertToBytes(dataModel);

@@ -6,15 +6,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using P2PMulticastNetwork.Model;
 using P2PMulticastNetwork.Network;
 using R_173.BE;
 using R_173.BL.Tasks;
+using R_173.Handlers;
 using R_173.Helpers;
 using R_173.Interfaces;
 using R_173.SharedResources;
 using Unity;
+using Task = System.Threading.Tasks.Task;
 
 namespace R_173.ViewModels
 {
@@ -26,7 +30,14 @@ namespace R_173.ViewModels
 		private readonly TasksBl _tasksBl;
 		private TaskTypes? _runningTaskType;
 		private readonly Dictionary<TaskTypes, TaskViewModel> _taskViewModels;
+
+		private KeyboardHandler _keyboardHandler;
+
+		private const int MaxAssesment = 5;
+
 		private readonly IRedistributableLocalConnectionTable _table;
+
+		private readonly ITaskService _taskService;
 
 		public RadioViewModel RadioViewModel { get; }
 
@@ -36,12 +47,15 @@ namespace R_173.ViewModels
 
 			var option = App.ServiceCollection.Resolve<ActionDescriptionOption>();
 
+			_keyboardHandler = App.ServiceCollection.Resolve<KeyboardHandler>();
+
+
 			_taskViewModels = new Dictionary<TaskTypes, TaskViewModel>
 			{
 				{ TaskTypes.PreparationToWork, new TaskViewModel(option.Tasks.PreparationToWork.Title, () => StartTask(TaskTypes.PreparationToWork))},
 				{ TaskTypes.PerformanceTest, new TaskViewModel(option.Tasks.HealthCheck.Title, () => StartTask(TaskTypes.PerformanceTest))},
 				{ TaskTypes.FrequencyTask, new TaskViewModel(option.Tasks.WorkingFrequencyPreparation.Title, () => StartTask(TaskTypes.FrequencyTask))},
-				//{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, StartTaskWithNetwork)},
+				{ TaskTypes.ConnectionEasy, new TaskViewModel(option.Tasks.ConnectionEasy.Title, StartTaskWithNetwork)},
 				//{ TaskTypes.ConnectionHard, new TaskViewModel(option.Tasks.ConnectionHard.Title, StartTaskWithNetwork)},
 			};
 			_tasks = new[]
@@ -49,16 +63,26 @@ namespace R_173.ViewModels
 				_taskViewModels[TaskTypes.PreparationToWork],
 				_taskViewModels[TaskTypes.PerformanceTest],
 				_taskViewModels[TaskTypes.FrequencyTask],
-				//_taskViewModels[TaskTypes.ConnectionEasy],
+				_taskViewModels[TaskTypes.ConnectionEasy],
 				//_taskViewModels[TaskTypes.ConnectionHard],
 			};
 			_stopTaskCommand = new SimpleCommand(StopTask);
 			RadioViewModel = new RadioViewModel();
-			_tasksBl = new TasksBl(RadioViewModel.Model);
+
+			var networkTaskManager = App.ServiceCollection.Resolve<INetworkTaskManager>();
+			var networkTaskListener = App.ServiceCollection.Resolve<INetworkTaskListener>();
+
+			_tasksBl = new TasksBl(RadioViewModel.Model, networkTaskManager, networkTaskListener);
+
+			//_taskService = App.ServiceCollection.Resolve<ITaskService>();
+			_taskService = new DummyTaskService();
 
 			//_table = App.ServiceCollection.Resolve<IRedistributableLocalConnectionTable>();
 			//_table.OnConnected += Table_OnConnected;
 			//_table.OnDisconnected += Table_OnDisconnected;
+
+			_taskService.TaskCreated += TaskService_TaskCreated;
+			_taskService.TaskStarted += TaskService_TaskStarted;
 		}
 
 		private void Table_OnDisconnected(object sender, ConnectionArgs e)
@@ -91,7 +115,7 @@ namespace R_173.ViewModels
 			}
 		}
 
-		public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0) + 2;
+		public int Assessment => _tasks.Sum(t => t.NumberOfSuccessfulAttempts > 0 ? 1 : 0) + (MaxAssesment - _tasks.Length);
 
 		private List<NotificationData> _connections = new List<NotificationData>();
 		public string Connections => string.Join(Environment.NewLine,
@@ -126,9 +150,7 @@ namespace R_173.ViewModels
 			var number = TaskHelper.GenerateValidR173NumpadValue();
 			var computerNumber = TaskHelper.GenerateComputerNumber();
 
-			if (taskType == TaskTypes.FrequencyTask ||
-				taskType == TaskTypes.ConnectionEasy ||
-				taskType == TaskTypes.ConnectionHard)
+			if (taskType == TaskTypes.FrequencyTask)
 			{
 				parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
 			}
@@ -154,10 +176,88 @@ namespace R_173.ViewModels
 
 		private void StartTaskWithNetwork()
 		{
-			_networkTaskIsRunning = true;
-			UpdateConnections();
+			_taskService.Start();
+
+			ShowWaitingTaskServiceModal("Ожидаем подключения...");
 		}
 
+
+		private void TaskService_TaskCreated(object sender, DataEventArgs<CreatedNetworkTaskData> e)
+		{
+			// show confirm modal
+			Task.Factory.StartNew(() =>
+			{
+				App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(async () =>
+				{
+					_stopTaskService = false;
+				   _keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+				   await TaskEx.Delay(1);
+
+				   var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));
+
+				   var frequency = e.Data.Frequency;
+				   var number = e.Data.FrequencyNumber;
+				   var computerNumber = e.Data.ComputerNumber;
+
+				   parameters.Message = string.Format(parameters.Message, frequency, number, computerNumber);
+
+				   parameters.Ok = () =>
+				   {
+					   _taskService.Confirm();
+						// waiting for other confirmation
+
+						ShowWaitingTaskServiceModal("Ожидаем ответа собеседника...");
+				   };
+				   parameters.Cancel = () => _taskService.Stop();
+
+				   ShowDialog(parameters);
+			   }));
+			});
+		}
+
+		private void TaskService_TaskStarted(object sender, DataEventArgs<CreatedNetworkTaskData> e)
+		{
+			TaskIsRunning = true;
+			RadioViewModel.Model.SetInitialState();
+
+			_tasksBl.DataContext
+				.Configure()
+				.SetComputerNumber(e.Data.ComputerNumber)
+				.SetNetworkTaskData(new NetworkTaskData
+				{
+					Id = e.Data.Id,
+					Frequency = e.Data.Frequency
+				});
+
+			_runningTaskType = TaskTypes.ConnectionEasy;
+
+			_tasksBl.Start(TaskTypes.ConnectionEasy);
+			_taskService.Stop();
+			App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(() =>
+			{
+				_stopTaskService = false;
+				_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+			}));
+		}
+
+		private bool _stopTaskService = true;
+		private void ShowWaitingTaskServiceModal(string message)
+		{
+			_stopTaskService = true;
+			var parameters = new MessageBoxParameters
+			{
+				Message = message,
+				OkText = "Вернуться",
+				Ok = () =>
+				{
+					if (_stopTaskService)
+						_taskService.Stop();
+				}
+			};
+
+			ShowDialog(parameters);
+		}
+		
 		private void UpdateConnections()
 		{
 			if (!_networkTaskIsRunning)
@@ -200,10 +300,15 @@ namespace R_173.ViewModels
 
 		private static void ShowDialog(MessageBoxParameters parameters)
 		{
-			System.Threading.Tasks.Task.Factory.StartNew(async () => await MetroMessageBoxHelper.ShowDialog(parameters),
+			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+
+			Task.Factory.StartNew(async () =>
+				{
+					await MetroMessageBoxHelper.ShowDialog(parameters);
+				},
 				CancellationToken.None,
 				TaskCreationOptions.None,
-				TaskScheduler.FromCurrentSynchronizationContext());
+				scheduler);
 		}
 
 		private static void ShowErrorText(Message message)

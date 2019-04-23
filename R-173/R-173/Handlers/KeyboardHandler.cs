@@ -48,23 +48,26 @@ namespace R_173.Handlers
         public void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-            if (e.Key == Key.Enter)
+            switch (e.Key)
             {
-                if (AffirmativeButton?.Visibility == Visibility.Visible)
-                {
-                    AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                    AffirmativeButton.Command?.Execute(null);
-                    return;
-                }
+	            case Key.Enter:
+		            if (AffirmativeButton?.Visibility == Visibility.Visible)
+		            {
+			            AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+			            AffirmativeButton.Command?.Execute(null);
+			            return;
+		            }
+		            break;
+
+	            case Key.Escape:
+		            if (NegativeButton?.Visibility == Visibility.Visible)
+		            {
+			            NegativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+			            return;
+		            }
+		            break;
             }
-            else if (e.Key == Key.Escape)
-            {
-                if (NegativeButton?.Visibility == Visibility.Visible)
-                {
-                    NegativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                    return;
-                }
-            }
+
             OnKeyDown?.Invoke(e.Key);
             //if (e.Key == _lastPressedKey)
             //    return;
