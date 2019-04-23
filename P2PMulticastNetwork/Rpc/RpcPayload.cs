@@ -1,7 +1,9 @@
 ﻿using AustinHarris.JsonRpc;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace P2PMulticastNetwork.Rpc
@@ -24,33 +26,45 @@ namespace P2PMulticastNetwork.Rpc
         }
     }
 
-    public class TcpRpcHandler
+    public class TcpRpcHandler : IDisposable
     {
-        private readonly TcpClient _client;
+        private TcpClient _client;
 
         public TcpRpcHandler(TcpClient client)
         {
             _client = client;
         }
 
-        public JsonResponse SendAndReceive(JsonRequest request)
+        public void SendRequest(JsonRequest request)
         {
-            var writer = new BinaryWriter(_client.GetStream());
-            var reader = new BinaryReader(_client.GetStream());
+            var writer = new BinaryWriter(_client.GetStream(), Encoding.UTF8);
             var rpc = JsonConvert.SerializeObject(request);
             writer.Write(rpc);
-            var responceString = reader.ReadString();
-            var responce = JsonConvert.DeserializeObject<JsonResponse>(responceString);
-            return responce;
+            writer.Flush();
         }
 
-        public void ReceiveAndSend()
+        public void SendRequest(string method, params object[] args)
         {
-            var writer = new BinaryWriter(_client.GetStream());
+            var req = Rpc.Request(method, args);
+            SendRequest(req);
+        }
+
+        public string ReceiveString()
+        {
+            var stream = _client.GetStream();
             var reader = new BinaryReader(_client.GetStream());
-            var responce = reader.ReadString();
-            var result = Rpc.Handle(responce).Result;
-            writer.Write(result);
+            return reader.ReadString();
+        }
+
+        public void Dispose()
+        {
+            if (_client != null)
+            {
+                if (_client.Connected)
+                    _client.Client.Shutdown(SocketShutdown.Both);
+                _client.Close();
+                _client = null;
+            }
         }
     }
 
