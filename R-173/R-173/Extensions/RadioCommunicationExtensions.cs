@@ -30,15 +30,22 @@ namespace R_173.Extensions
             var listenConnection = new UdpMulticastConnection(listenOptions);
             var senderConnection = new UdpMulticastConnection(senderOptions);
 
-			services.AddLocalConnectionTable();
-			services.RegisterInstance<IDataReceiver>(listenConnection);
-			services.RegisterInstance<IDataTransmitter>(senderConnection);
-			IDataProvider<byte[]> miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
-			services.RegisterInstance(miner, new SingletonLifetimeManager());
-			services.RegisterInstance<IDataAsByteConverter<DataModel>>(new Converter<DataModel>());
-			services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
-			return services;
-		}
+
+            services.AddLocalConnectionTable();
+            var table = services.Resolve<IRedistributableLocalConnectionTable>();
+            var settings = services.Resolve<RadioSettings>();
+            var netService = new NetService(33100, table, settings);
+            var taskService = new NetworkTaskService(netService);
+            services.RegisterInstance<ITaskService>(taskService, new SingletonLifetimeManager());
+
+            services.RegisterInstance<IDataReceiver>(listenConnection);
+            services.RegisterInstance<IDataTransmitter>(senderConnection);
+            IDataProvider<byte[]> miner = new DataEngineMiner(services.Resolve<IDataReceiver>());
+            services.RegisterInstance(miner, new SingletonLifetimeManager());
+            services.RegisterInstance<IDataAsByteConverter<DataModel>>(new Converter<DataModel>());
+            services.RegisterType<IDataProcessingBuilder, DataModelProcessingBuilder>();
+            return services;
+        }
 
         public static IUnityContainer AddLocalConnectionTable(this IUnityContainer services)
         {
@@ -52,10 +59,6 @@ namespace R_173.Extensions
             var notificationData = new NotificationData { Id = settings.NetworkToken, Endpoint = localEp };
             table.Register(notificationData);
             services.RegisterInstance<IRedistributableLocalConnectionTable>(table, new SingletonLifetimeManager());
-
-            var netService = new NetService(33100, table, settings);
-            var taskTable = new NetworkTaskService(table, netService);
-            taskTable.Start();
 
             return services;
         }
