@@ -186,8 +186,8 @@ namespace R_173.ViewModels
 				App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(async () =>
 				{
 					_stopTaskService = false;
-				   //_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-				   await TaskEx.Delay(1);
+                    _keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    await TaskEx.Delay(1);
 
 				   var parameters = GetMessageBoxParameters(ConvertTaskTypeToString(TaskTypes.ConnectionEasy));
 
@@ -220,7 +220,7 @@ namespace R_173.ViewModels
 
 			_tasksBl.DataContext
 				.Configure()
-				.SetComputerNumber(e.Data.ComputerNumber)
+				.SetComputerNumber(_taskData.ComputerNumber)
 				.SetNetworkTaskData(new NetworkTaskData
 				{
 					Id = _taskData.Id,
@@ -234,8 +234,8 @@ namespace R_173.ViewModels
 			App.ServiceCollection.Resolve<MainWindow>().Dispatcher.BeginInvoke((Action)(() =>
 			{
 				_stopTaskService = false;
-				//_keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-			}));
+                _keyboardHandler.AffirmativeButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }));
 		}
 
 		private bool _stopTaskService = true;

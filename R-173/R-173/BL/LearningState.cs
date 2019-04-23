@@ -72,7 +72,7 @@ namespace R_173.BL
         {
             try
             {
-                while (true)
+                while (!ct.IsCancellationRequested)
                 {
                     State = NetworkServiceState.Finding;
                     var result = await _netService.WaitForOneConnection(ct);
@@ -147,7 +147,10 @@ namespace R_173.BL
 
         public void Stop()
         {
-            _completationConfirm?.SetCanceled();
+            if (_completationConfirm.Task.Status == TaskStatus.Running)
+            {
+                _completationConfirm?.SetCanceled();
+            }
             _completationConfirm = null;
             if (_cts == null)
                 throw new InvalidOperationException();
@@ -176,12 +179,8 @@ namespace R_173.BL
 
         public async Task<KeyValuePair<TcpClient, ConnectionCommingType>> WaitForOneConnection(CancellationToken token)
         {
-            int maxConnectionQueue = 1;
             var search = SearchOne(token);
-            _listener.Start();
-            _listener.Server.Listen(maxConnectionQueue);
             var listen = ListenOne(token);
-            _listener.Stop();
             var result = await TaskEx.WhenAny(search, listen);
             var commingType = search == result ? ConnectionCommingType.FromConnect : ConnectionCommingType.FromListen;
             return new KeyValuePair<TcpClient, ConnectionCommingType>(result.Result, commingType);
@@ -219,10 +218,17 @@ namespace R_173.BL
             return null;
         }
 
-        public async Task<TcpClient> ListenOne(CancellationToken token)
+        public Task<TcpClient> ListenOne(CancellationToken token)
         {
-            return await Task.Factory.FromAsync(_listener.BeginAcceptTcpClient, _listener.EndAcceptTcpClient, null)
+            return TaskEx.Run<TcpClient>(async () =>
+            {
+                _listener.Start();
+                _listener.Server.Listen(1);
+                var result = await Task.Factory.FromAsync(_listener.BeginAcceptTcpClient, _listener.EndAcceptTcpClient, null)
                 .HandleCancellation(token);
+                _listener.Stop();
+                return result;
+            });
             //return await TaskEx.Run(() => _listener.AcceptTcpClient(), token);
         }
 
