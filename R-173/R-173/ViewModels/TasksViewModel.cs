@@ -74,8 +74,7 @@ namespace R_173.ViewModels
 
 			_tasksBl = new TasksBl(RadioViewModel.Model, networkTaskManager, networkTaskListener);
 
-			//_taskService = App.ServiceCollection.Resolve<ITaskService>();
-			_taskService = new DummyTaskService();
+            _taskService = App.ServiceCollection.Resolve<ITaskService>();
 
 			//_table = App.ServiceCollection.Resolve<IRedistributableLocalConnectionTable>();
 			//_table.OnConnected += Table_OnConnected;

@@ -10,59 +10,58 @@ using System.Threading;
 using P2PMulticastNetwork.Extensions;
 using P2PMulticastNetwork.Model;
 using R_173.BE;
+using P2PMulticastNetwork.Rpc;
+using AustinHarris.JsonRpc;
+using System.Collections.Concurrent;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace R_173.BL
 {
-    public enum NetworkTaskState
+    public enum NetworkServiceState
     {
-        //не в задаче.
-        NotInTask,
-        //ожидание подключения по tcp.
-        Waiting,
-        //Подключение по tcp.
-        Connecting,
-        Resolving,
-        Applyed,
-        InTask
+        Started,
+        Finding,
+        RequestForConfirm,
+        Confirmed,
+        Stoped,
+        Closed,
+    }
+
+    public class ConfirmationResult
+    {
+        public bool Result { get; set; }
     }
 
     public class NetworkTaskService : ITaskService
     {
-        private readonly IRedistributableLocalConnectionTable _table;
         private readonly NetService _netService;
 
-        public NetworkTaskService(IRedistributableLocalConnectionTable table, NetService netService)
+        public NetworkTaskService(NetService netService)
         {
-            _table = table;
-            _table.OnConnected += OnConnected;
-            _table.OnDisconnected += OnDisconnected;
             _netService = netService;
+            State = NetworkServiceState.Stoped;
         }
 
-        private void OnDisconnected(object sender, ConnectionArgs e)
-        {
-        }
+        public NetworkServiceState State { get; private set; }
 
-        private void OnConnected(object sender, ConnectionArgs e)
-        {
-        }
+        public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskCreated;
+        public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskStarted;
+        private CancellationTokenSource _cts;
+        private TaskCompletionSource<ConfirmationResult> _completationConfirm;
 
-        public void OnAppyTask(NetworkTaskInfo taskInfo)
+        public async void Start()
         {
-            //todo: add to table.
-        }
-
-        public void DeclineTask(NetworkTaskInfo taskInfo)
-        {
-            //todo: remove from table.
-        }
-
-	    public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskCreated;
-	    public event EventHandler<DataEventArgs<CreatedNetworkTaskData>> TaskStarted;
-
-	    public async void Start()
-        {
-            var connection = await _netService.WaitForOneConnection();
+            if (State == NetworkServiceState.Stoped && _cts == null)
+            {
+                _completationConfirm = new TaskCompletionSource<ConfirmationResult>();
+                _cts = new CancellationTokenSource();
+                State = NetworkServiceState.Started;
+                await TaskLoop(_cts.Token);
+            }
+            else
+                throw new InvalidOperationException();
             // todo: start scheduler
             // tcp listener separate task
             // if no connections
@@ -72,25 +71,104 @@ namespace R_173.BL
             // wait for Confirm or Cancel, if disconnected, then back to listen and tell TaskDestroyed
         }
 
+        private async Task TaskLoop(CancellationToken ct)
+        {
+            try
+            {
+                while (true)
+                {
+                    State = NetworkServiceState.Finding;
+                    var result = await _netService.WaitForOneConnection(ct);
+                    var connection = result.Key;
+                    var commingType = result.Value;
+
+                    if (commingType == ConnectionCommingType.FromListen)
+                    {
+                        var reader = new StreamReader(connection.GetStream());
+                        var jsontask = await reader.ReadToEndAsync();
+                        var task = JsonConvert.DeserializeObject<CreatedNetworkTaskData>(jsontask);
+                        TaskCreated?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>(task));
+                    }
+                    else
+                    {
+                        //todo: generate task...
+                        var writer = new StreamWriter(connection.GetStream());
+                        var task = new CreatedNetworkTaskData()
+                        {
+                            Frequency = 33100,
+                            FrequencyNumber = new Random().Next(0, 10),
+                            Id = Guid.NewGuid()
+                        };
+                        var jsontask = JsonConvert.SerializeObject(task);
+                        writer.Write(jsontask);
+                        writer.Flush();
+                        TaskCreated?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>(task));
+                    }
+                    State = NetworkServiceState.RequestForConfirm;
+
+                    var remoteConfirm = TaskEx.Run(async () =>
+                    {
+                        var reader = new StreamReader(connection.GetStream());
+                        var confirmationResult = await reader.ReadToEndAsync();
+                        var isConfirmed = JsonConvert.DeserializeObject<ConfirmationResult>(confirmationResult);
+                        return isConfirmed;
+                    });
+
+                    var localConfirm = _completationConfirm.Task.ContinueWith(t =>
+                    {
+                        var writer = new StreamWriter(connection.GetStream());
+                        var cjs = JsonConvert.SerializeObject(t.Result);
+                        writer.WriteAsync(cjs);
+                        writer.Flush();
+                        return t.Result;
+                    }, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled);
+
+                    var bothConfirmation = await TaskEx.WhenAll(remoteConfirm, localConfirm);
+                    bool isBothConfimed = bothConfirmation.All(x => x.Result);
+                    if (isBothConfimed)
+                    {
+                        TaskStarted?.Invoke(this, new DataEventArgs<CreatedNetworkTaskData>());
+                    }
+                }
+            }
+            catch (TaskCanceledException) { }
+            catch (Exception ex)
+            {
+                SimpleLogger.Log(ex);
+            }
+        }
+
         public void Confirm()
         {
-            // todo: notify that task were applied
-            // Starting Task
-            // call TaskStarted(task)
-
-            throw new NotImplementedException();
+            if (State == NetworkServiceState.RequestForConfirm)
+            {
+                _completationConfirm.SetResult(new ConfirmationResult() { Result = true });
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public void Stop()
         {
-            // todo: stop scheduler
-            throw new NotImplementedException();
+            _completationConfirm?.SetCanceled();
+            _completationConfirm = null;
+            if (_cts == null)
+                throw new InvalidOperationException();
+
+            if (State != NetworkServiceState.Stoped)
+            {
+                State = NetworkServiceState.Stoped;
+                _cts.Cancel();
+                _cts = null;
+            }
         }
     }
 
     public class NetService : IDisposable
     {
-	    private TcpListener _listener;
+        private TcpListener _listener;
         private readonly IRedistributableLocalConnectionTable _connectionTable;
         private readonly RadioSettings _settings;
 
@@ -104,14 +182,13 @@ namespace R_173.BL
             _settings = settings;
         }
 
-        public async Task<TcpClient> WaitForOneConnection()
+        public async Task<KeyValuePair<TcpClient, ConnectionCommingType>> WaitForOneConnection(CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var search = SearchOne(cts.Token);
-            var listen = ListenOne(cts.Token);
+            var search = SearchOne(token);
+            var listen = ListenOne(token);
             var result = await TaskEx.WhenAny(search, listen);
-            cts.Cancel();
-            return result.Result;
+            var commingType = search == result ? ConnectionCommingType.FromConnect : ConnectionCommingType.FromListen;
+            return new KeyValuePair<TcpClient, ConnectionCommingType>(result.Result, commingType);
         }
 
         public async Task<TcpClient> SearchOne(CancellationToken token)
@@ -121,7 +198,7 @@ namespace R_173.BL
                 foreach (var connection in _connectionTable.AvaliableDevices.Select(x => x.Endpoint)
                     .Where(x => !x.Address.Equals(_settings.LocalIp)))
                 {
-	                if (token.IsCancellationRequested) return null;
+                    if (token.IsCancellationRequested) return null;
 
                     var client = new TcpClient();
                     try
@@ -155,18 +232,16 @@ namespace R_173.BL
 
         public void Dispose()
         {
-	        _listener?.Server.Close();
-	        _listener = null;
+            _listener?.Server.Close();
+            _listener = null;
         }
     }
 
-    public class NetworkTaskInfo
+    public enum ConnectionCommingType
     {
-        public Guid AcceptorId { get; set; }
-        public Guid OwnerId { get; set; }
-        public string Description { get; set; }
-        public int Frequency { get; set; }
-        public NetworkTaskState State { get; set; }
+        Undefined,
+        FromListen,
+        FromConnect
     }
 
     public class NetworkTaskIpResolver
